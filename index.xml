@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jiby&#39;s selfhosted effort</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Jiby&#39;s selfhosted effort</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Sep 2019 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About me</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Thu, 19 Sep 2019 00:00:00 +0100</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>Who am I?
+I&amp;rsquo;m Jean-Baptiste Doyon, but everyone calls me Jb.
+My background is in Computer Science, with a major in medical image processing. I&amp;rsquo;m working on backend software development on Linux, and am happy doing a lot of systems administration and build automation (some call it devops).
+I am on a lifelong journey to get away from cloud systems (think of it as &amp;ldquo;de-google-ification&amp;rdquo;), both for learning purposes and due to personal beliefs about Free Software.</description>
+    </item>
+    
+    <item>
+      <title>First post</title>
+      <link>http://localhost:1313/post/hello-world/</link>
+      <pubDate>Wed, 18 Sep 2019 00:00:00 +0100</pubDate>
+      
+      <guid>http://localhost:1313/post/hello-world/</guid>
+      <description>Welcome to my website!
+This blog is meant to record some of the thoughts I keep coming back to, or discussions I&amp;rsquo;ve had over and over again with different people. My rule of thumb for inclusion here is &amp;ldquo;if you&amp;rsquo;ve had to say it more than twice, it&amp;rsquo;s time to write it down&amp;rdquo;.
+See the About page for my background and motivations.
+Look forward more posts as I try to condense my thoughts in written form.</description>
+    </item>
+    
+  </channel>
+</rss>
