@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jiby&#39;s selfhosted effort</title>
-    <link>http://localhost:1313/</link>
+    <link>https://jiby.tech/</link>
     <description>Recent content on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 19 Sep 2019 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About me</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://jiby.tech/about/</link>
       <pubDate>Thu, 19 Sep 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://jiby.tech/about/</guid>
       <description>Who am I?
 I&amp;rsquo;m Jean-Baptiste Doyon, but everyone calls me Jb (sounds like &amp;ldquo;G-Bay&amp;rdquo; in French). Across many misinterpretations, it evolved into the online handle Jiby (my French friends make it sound like the English initialism for Great Britain), giving the domain name of this website.
 While I&amp;rsquo;m natively French, originally from a town near Nice, I moved across Europe a few times for my studies before settling in Edinburgh, Scotland.</description>
@@ -24,10 +24,10 @@ While I&amp;rsquo;m natively French, originally from a town near Nice, I moved a
     
     <item>
       <title>First post</title>
-      <link>http://localhost:1313/post/hello-world/</link>
+      <link>https://jiby.tech/post/hello-world/</link>
       <pubDate>Wed, 18 Sep 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://localhost:1313/post/hello-world/</guid>
+      <guid>https://jiby.tech/post/hello-world/</guid>
       <description>Welcome to my website!
 This blog is meant to record some of the thoughts I keep coming back to, or discussions I&amp;rsquo;ve had over and over again with different people. My rule of thumb for inclusion here is &amp;ldquo;if you&amp;rsquo;ve had to say it more than twice, it&amp;rsquo;s time to write it down&amp;rdquo;.
 See the About page for my background and motivations.

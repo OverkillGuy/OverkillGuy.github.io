@@ -3,32 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://jiby.tech/about/</loc>
     <lastmod>2019-09-19T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://jiby.tech/</loc>
     <lastmod>2019-09-19T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/blog/</loc>
+    <loc>https://jiby.tech/tags/blog/</loc>
     <lastmod>2019-09-18T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hello-world/</loc>
+    <loc>https://jiby.tech/post/hello-world/</loc>
     <lastmod>2019-09-18T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://jiby.tech/post/</loc>
     <lastmod>2019-09-18T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2019-09-18T00:00:00+01:00</lastmod>
   </url>
   

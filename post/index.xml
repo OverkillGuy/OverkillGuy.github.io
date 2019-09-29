@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jiby&#39;s selfhosted effort</title>
-    <link>http://localhost:1313/post/</link>
+    <link>https://jiby.tech/post/</link>
     <description>Recent content in Posts on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 18 Sep 2019 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>First post</title>
-      <link>http://localhost:1313/post/hello-world/</link>
+      <link>https://jiby.tech/post/hello-world/</link>
       <pubDate>Wed, 18 Sep 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://localhost:1313/post/hello-world/</guid>
+      <guid>https://jiby.tech/post/hello-world/</guid>
       <description>Welcome to my website!
 This blog is meant to record some of the thoughts I keep coming back to, or discussions I&amp;rsquo;ve had over and over again with different people. My rule of thumb for inclusion here is &amp;ldquo;if you&amp;rsquo;ve had to say it more than twice, it&amp;rsquo;s time to write it down&amp;rdquo;.
 See the About page for my background and motivations.
