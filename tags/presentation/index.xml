@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>presentation on Jiby&#39;s selfhosted effort</title>
+    <link>https://jiby.tech/tags/presentation/</link>
+    <description>Recent content in presentation on Jiby&#39;s selfhosted effort</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://jiby.tech/tags/presentation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Presenting Android terminal with Termux (EdLug)</title>
+      <link>https://jiby.tech/post/android-terminal-with-termux/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
+      <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
+  Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
+    </item>
+    
+  </channel>
+</rss>

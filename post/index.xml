@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Sep 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Presenting Android terminal with Termux (EdLug)</title>
+      <link>https://jiby.tech/post/android-terminal-with-termux/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
+      <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
+  Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
+    </item>
     
     <item>
       <title>First post</title>

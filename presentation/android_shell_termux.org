@@ -1,0 +1,734 @@
+#+title: Termux
+#+subtitle: The freedom of shelling out on Android
+#+author: Jb Doyon
+
+#+REVEAL_TALK_URL: https://jiby.tech/
+
+#+OPTIONS: toc:nil
+
+# This presentation is written for Org-mode (https://orgmode.org) in
+# Emacs generating reveal.js slides (https://revealjs.com)
+
+# Enabling this means no speaker notes
+#+OPTIONS: reveal_single_file:nil
+
+#+REVEAL_THEME: blood
+
+* COMMENT Orga
+Three points:
+
+- Full-featured shell
+- Full dev packages
+- Bash to/from Android API
+
+By
+
+*using Termux on Android*
+
+you
+
+*get back control of your phone*
+
+** Colors
+[[https://github.com/termux/termux-app/issues/92#issuecomment-244711045][24 bit supported since 0.40 (2016)]].
+Try with [[https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh][24bit_color_test.sh]] as given by [[https://www.linuxquestions.org/questions/slackware-14/tip-24-bit-true-color-terminal-tmux-vim-4175582631/][linux forum post]].
+
+See [[https://gist.github.com/XVilka/8346728][gist on 24bit colors support in terminal emulators]].
+
+** Mirroring screen
+:PROPERTIES:
+:CREATED:  [2019-09-23 Mon 21:04]
+:ID:       6ec92858-d63e-4595-8487-ab43a74f42ad
+:END:
+See [[https://osauthority.com/2018/10/26/mirror-android-device-screen-ubuntu-linux-18-04/][Adb screen mirroring article]].
+
+#+begin_src shell
+adb shell screenrecord --output-format=h264 - | ffplay -
+adb shell screenrecord --output-format=h264 /storage/emulated/0/Movies/somefile.mp4
+alias rec="adb shell screenrecord --output-format=h264"
+adb pull /storage/emulated/0/Movies/somefile.mp4
+#+end_src
+
+* Press =S= for speaker notes
+
+#+begin_notes
+Here go the super cool speaker notes.
+
+Note that there are "backup slides" after the Questions at the end,
+these might be of interest to advanced users with weird questions.
+#+end_notes
+
+
+* What is it
+:PROPERTIES:
+:CREATED:  [2019-09-17 Tue 21:12]
+:ID:       dac87b05-ba12-4363-a1ee-ee191759df76
+:END:
+
+#+REVEAL: split
+Termux — Terminal emulator for Android
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 40vh;
+[[file:pictures/basic-cropped.png]]
+
+
+
+* In a nutshell
+
+#+begin_notes
+My goals for this presentation, stated clearly.
+#+end_notes
+
+** For newbies
+
+Termux is an easy way into the linux world
+
+#+ATTR_REVEAL: :frag roll-in
+/Experiment with the command line without installing Linux!/
+
+#+begin_notes
+Not everyone's a guru. A good terminal can help beginners learn!
+#+end_notes
+** For power users
+
+Termux unlocks the power of the terminal on your Android
+
+#+ATTR_REVEAL: :frag roll-in
+/Script your phone/tablet!/
+#+ATTR_REVEAL: :frag roll-in
+/+Break+ Automate things!/
+
+#+begin_notes
+Obviously talk is mostly aimed at newbies, ask me later about weird details!
+#+end_notes
+
+** Specifically
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Capable shell
+- Full dev environment
+- Interop with Android
+
+#+begin_notes
+The fuller version:
+- Capable shell (bash/zsh, coreutils, 256colors curses)
+- Full dev environment (editors, compilers, ssh, git)
+- Interop with Android (storage, share, dialogs)
+#+end_notes
+
+
+* Installation
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style width: 20vw; float: left
+[[file:pictures/fdroid-badge.png]]
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style width: 20vw; float: right
+[[file:pictures/google-play-badge.png]]
+
+#+begin_notes
+From [[https://wiki.termux.com/wiki/FAQ#What_is_a_Termux_.3F][Termux FAQ]]: Termux is a terminal emulator for Android. The key
+difference from other terminal emulators is its own package repository
+with huge set of various utilities.
+
+Can be downloaded from [[https://f-droid.org/packages/com.termux/][F-Droid]] or [[https://play.google.com/store/apps/details?id=com.termux][Google Play]].
+#+end_notes
+
+* What can it do?
+:PROPERTIES:
+:CREATED:  [2019-09-17 Tue 21:49]
+:ID:       a1614f8a-c7b2-42fc-9025-b1269944f3c9
+:END:
+
+#+begin_notes
+- bash/zsh
+- coreutils (ls, tar, find...)
+- curses & colors ("graphics")
+#+end_notes
+
+** bash (busybox)
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+[[file:pictures/ls-cropped.png]]
+
+#+begin_notes
+Zsh available, if that's your thing.
+#+end_notes
+
+** coreutils
+#+ATTR_ORG: :width 200
+[[file:pictures/utils.png]]
+
+#+begin_notes
+Full GNU tools available. dd, and all!
+#+end_notes
+
+** 
+
+#+begin_notes
+UTF-8 support! Type weird letters, make dialog-style boxes! Math!
+#+end_notes
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh; float: left
+[[file:pictures/utf8-1.png]]
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+[[file:pictures/utf8-3.png]]
+
+
+
+
+** 
+#+begin_notes
+Colors support!
+
+256 colors for sure via =xterm-256color=.
+
+Termux claims 24 bit is supported too, but I cannot prove that: it's
+surprisingly hard to get an application to use it, and 256 colors was
+already good enough for me
+#+end_notes
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+[[file:pictures/24bit-cropped.png]]
+
+
+
+** curses
+
+#+begin_notes
+Curses is a library that enables taking over the terminal to make a
+full canvas (as opposed to purely request and response).
+
+Mouse support! htop is famous for the support of mouse.
+#+end_notes
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+[[file:pictures/htop-termux.png]]
+
+
+** SSH
+server & client
+#+ATTR_REVEAL: :frag (roll-in)
+- Wifi
+- USB
+- Bluetooth
+
+
+#+begin_notes
+Connect to your desktop/server from phone, or get them to connect to
+you!
+
+Works (tested) over wifi, bluetooth, USB...
+#+end_notes
+
+** Separate apps
+#+ATTR_REVEAL: :frag (roll-in)
+- Termux:Boot :: Run script(s) when your device boots
+- Termux:Widget :: Start scripts from the home screen
+- Termux:Float :: Run Termux in a floating window
+- Termux:Styling :: Customize color & fonts
+- Termux:Task :: Call Termux executables from Tasker
+
+* Package manager
+:PROPERTIES:
+:CREATED:  [2019-09-17 Tue 22:09]
+:ID:       5895b061-6926-4400-855b-2e4825795a16
+:END:
+
+#+ATTR_REVEAL: :frag roll-in
+=apt= based, Debian repos
+
+#+ATTR_REVEAL: :frag roll-in
+/"This APT has Super Cow Powers"/
+#+ATTR_REVEAL: :frag roll-in
+#+begin_src shell
+$ apt moo
+                 (__)
+                 (oo)
+           /------\/
+          / |    ||
+         *  /\---/\
+            ~~   ~~
+..."Have you mooed today?"...
+#+end_src
+
+#+begin_notes
+Packages make a terminal a home.
+
+These are recompiled/patched debian packages for Android.
+
+apt moo is an easter egg of the apt command, which is a nice way to show off it's apt
+#+end_notes
+
+#+REVEAL: split
+
+
+#+begin_src shell
+$ pkg list-all | wc -l
+975
+$ pkg list-installed
+# heavily redacted for relevance (skipped libs + termux internals)
+#+end_src
+
+#+begin_example
+apt bash binutils busybox bzip2 ca-certificates clang coreutils curl
+dash diffutils dnsutils dos2unix dpkg ed emacs ffmpeg file findutils
+fontconfig freetype gawk gdbm git glib gnupg gnutls gpgv grep
+gzip harfbuzz htop hugo inetutils jq krb5 ldc ldns lesslinux-man-pages
+man ncurses ncurses-ui-libs ndk-sysroot net-tools netcat nmap oathtool
+openssh openssl pass pass-otp patch pcre pcre2 perl pinentry procps
+psmisc python readline resolv-conf rsync science-repo sed
+silversearcher-ag stow strace tar texinfo tmux tree unzip util-linux
+vim vim-runtime xmlsec xz-utils zlib
+#+end_example
+
+#+begin_notes
+Lots of packages, a short list of what I have is shown here.
+
+Don't bother reading all these, but if some of the words here trigger
+some excitement, yey.
+#+end_notes
+
+* Dev environment
+:PROPERTIES:
+:CREATED:  [2019-09-17 Tue 22:17]
+:ID:       b108f37f-7237-4277-8289-7ad33c519b71
+:END:
+
+#+ATTR_REVEAL: :frag roll-in
+Write code on the go
+
+
+#+begin_notes
+Turn your phone or tablet into a workstation for your commute.
+Or debug something on a late night out.
+#+end_notes
+** Editors
+
+#+REVEAL: split
+
+#+begin_notes
+Vim, editing a C file with syntax highlighting, using Powerline UI
+#+end_notes
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+[[file:pictures/vim-main_framed.png]]
+
+
+#+REVEAL: split
+
+#+begin_src shell
+$ pkg search editor
+vi 1.4.0-1
+ed 1.15 [installed,automatic]
+emacs 26.3-1 [installed]
+hexcurse 1.60.0-2
+ired 0.6
+joe 4.6-1
+jupp 3.1jupp38-1
+kakoune 2019.07.01-1
+mg 20180927-1
+micro 1.4.1-3
+nano 4.4
+ne 3.1.2-1
+radare2 3.9.0-1
+sed 4.7-1 [installed,automatic]
+vim 8.1.2050 [upgradable from: 8.1.2000]
+vis 0.5-4
+zile 2.4.14-2
+#+end_src
+
+#+begin_notes
+Support for vim, emacs, nano ... ed...
+#+end_notes
+
+** Programming languages
+#+begin_src shell
+$ apt search programming  # redacted for compactness
+clang 8.0.1 [installed,automatic]
+dart 2.4.1
+ecj 1:4.6.2
+erlang 21.3.8-1
+gawk 5.0.1-4 [installed,automatic]
+gdb 8.3-3
+golang 2:1.13
+kona 20190226
+ldc 1.17.0 [installed]
+lua 5.3.5-3
+nim 0.20.2
+perl 5.30.0-1 [installed,automatic]
+protobuf 3.9.1 aarch64
+python2 2.7.16-3
+python 3.7.4-1 [installed]
+ruby 2.6.4
+rust 1.36.0
+tcl 8.6.9-5
+#+end_src
+
+#+begin_notes
+Your fav language is likely in here. Otherwise you can help out to port it!
+#+end_notes
+
+** More packages
+Language-specific package managers are there too!
+
+#+begin_src shell
+pip install youtube-dl
+#+end_src
+
+#+begin_notes
+Showing off the python pkg manager to get awesome command-line video downloader
+#+end_notes
+
+** Tools
+
+#+begin_src shell
+curl 7.66.0 [installed]
+db 18.1.32-2
+fossil 2.9
+geoip2-database 20190908
+git 2.23.0 [installed]
+git-crypt 0.6.0-1
+git-lfs 2.8.0-1
+gitea 1.9.3
+global 6.6.3
+hub 2.12.4
+jq 1.6-1 [installed]
+libsqlite 3.29.0-1 [installed,automatic]
+postgresql 11.5
+redis 5.0.5
+ripgrep 11.0.2
+screen 4.6.2-1
+silversearcher-ag 2.2.0-1 [installed]
+texlive-full 20190410
+tig 2.4.1-3
+tmux 2.9a-2 [installed]
+#+end_src
+
+#+begin_notes
+Version control: check!
+Search tools: check!
+Databases: check!
+Full LaTeX distribution (can generate PDF)
+#+end_notes
+
+#+REVEAL: split
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+[[file:pictures/tmux-framed.png]]
+
+#+begin_notes
+That's about as complex as I can imagine:
+
+Tmux split showing vim editing a file + other frame compiling, running
+and debugging it. That's a lot of features right there.
+#+end_notes
+
+
+** Got root?
+#+begin_src shell
+$ su
+#+end_src
+
+#+begin_example
+No su program found on this device. Termux
+does not supply tools for rooting, see e.g.
+http://www.androidcentral.com/root for
+information about rooting Android.
+#+end_example
+
+#+begin_notes
+Haven't tried, but for rooted phones, =su= can be used in commands!
+#+end_notes
+* Android interop
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Termux → Android
+- Android → Termux
+
+
+#+begin_notes
+Termux can reach android (share yourfile.pdf to whatsapp), but it can
+also be a "Share target" of Android: Firefox send video's URL to
+=youtube-dl=
+#+end_notes
+
+** Termux → Android
+
+#+begin_src shell
+$ termux-open -h
+#+end_src
+#+begin_example
+Usage: termux-open [options] path-or-url
+Open a file or URL in an external app.
+  --send               if the file should be shared for sending
+  --view               if the file should be shared for viewing (default)
+  --chooser            if an app chooser should always be shown
+  --content-type type  specify the content type to use
+#+end_example
+
+#+begin_src shell
+termux-open my_cool_file.pdf
+termux-open https://www/gnu.org/
+termux-open --send --chooser myfile.c
+# see also termux-share for files
+#+end_src
+
+#+begin_notes
+It works like =xdg-open=: finds default app for that filetype (can
+specify the type of content if not autodetected)
+#+end_notes
+
+** Storage access
+#+begin_src shell
+termux-setup-storage
+#+end_src
+
+#+ATTR_ORG: :width 200
+[[file:pictures/termux-storage.png]]
+
+#+ATTR_REVEAL: :frag roll-in
+Requires Storage permission
+
+#+begin_notes
+Access to sdcard data, not specific apps (by default)
+#+end_notes
+** Termux API
+
+Need pkg + *Termux:API* app
+#+begin_src shell
+pkg install termux-api
+#+end_src
+
+#+REVEAL: split
+
+#+begin_example
+termux-audio-info            termux-open-url              termux-battery-status
+termux-reload-settings       termux-brightness            termux-sensor
+termux-call-log              termux-setup-storage         termux-camera-info
+termux-share                 termux-camera-photo          termux-sms-inbox
+termux-clipboard-get         termux-sms-list              termux-clipboard-set
+termux-sms-send              termux-contact-list          termux-speech-to-text
+termux-dialog                termux-storage-get           termux-download
+termux-telephony-call        termux-file-editor           termux-telephony-cellinfo
+termux-fingerprint           termux-telephony-deviceinfo  termux-fix-shebang
+termux-toast                 termux-info                  termux-torch
+termux-infrared-frequencies  termux-tts-engines           termux-infrared-transmit
+termux-tts-speak             termux-job-scheduler         termux-upgrade-repo
+termux-keystore              termux-url-opener            termux-location
+termux-vibrate               termux-media-player          termux-volume
+termux-media-scan            termux-wake-lock             termux-microphone-record
+termux-wake-unlock           termux-notification          termux-wallpaper
+termux-notification-list     termux-wifi-connectioninfo   termux-notification-remove
+termux-wifi-enable           termux-open                  termux-wifi-scaninfo
+#+end_example
+
+#+begin_notes
+- Clipboard, dialogs, notifications, toasts
+- Sensors (microphone, location, camera, vibration, fingerprint)
+- Connectivity (phonecall, sms, wifi, infrared)
+#+end_notes
+
+#+REVEAL: split
+
+#+begin_src shell
+termux-dialog -l   # widget arguments redacted
+#+end_src
+
+#+begin_example
+Supported widgets:
+
+confirm - Show confirmation dialog
+checkbox - Select multiple values using checkboxes
+counter - Pick a number in specified range
+date - Pick a date
+radio - Pick a single value from radio buttons
+sheet - Pick a value from sliding bottom sheet
+spinner - Pick a single value from a dropdown spinner
+speech - Obtain speech using device microphone
+text - Input text (default if no widget specified)
+time - Pick a time value
+#+end_example
+
+#+begin_notes
+Works like the =dialog= command (or =zenity=).
+#+end_notes
+
+** Start Android activity
+
+#+ATTR_REVEAL: :frag roll-in
+/Have not made it work personally (need root?)/
+
+#+ATTR_REVEAL: :frag roll-in
+#+begin_src shell
+am start --user 0 -n com.package.name/com.package.name.ActivityName
+am start --user 0 -n com.android.chrome/com.google.android.apps.chrome.Main
+am start --user 0 -n com.termux/com.termux.app.TermuxActivity
+#+end_src
+
+#+begin_notes
+[[https://www.reddit.com/r/termux/comments/62zi71/can_i_start_an_app_from_termuxs_command_line_how/][reddit says you can indeed!]]
+
+I haven't got it to work as I get a security error.
+
+But that could open ANY app on ANY activity (page) with content YOU
+provide: a customized "share" button!
+#+end_notes
+
+* Case study
+
+/How much can we do?/
+#+begin_notes
+Examples from my personal Termux use
+#+end_notes
+
+** Wifi-based phone backup
+SSHFS over Wifi to backup phone data
+
+#+begin_notes
+- =sshfs= (fuse) to pretend phone's content is on the other machine
+- your usual backup tool pointed to the folder on your computer
+- profit
+#+end_notes
+
+** Password manager UI
+Using =pass= ([[https://passwordstore.org][passwordstore.org]], GPG-based) listing passwords via Android UI!
+
+#+ATTR_REVEAL: :frag (roll-in)
+- =termux-dialog= to select
+- Password manager invoked
+- Clipboard magic (45s)
+
+#+begin_notes
+- Created a Termux:Widget "shortcut" to my script, to use from Android home.
+- Script lists the files in password manager, asks termux to make a selector dialog.
+- Asks password manager to show password on the chosen file
+- Clipboard command loads password for 45s
+#+end_notes
+
+** Hugo serve
+:PROPERTIES:
+:CREATED:  [2019-07-22 Mon 23:34]
+:ID:       fcce5802-2d34-40a0-a302-7be989c18e39
+:END:
+
+#+ATTR_ORG: :width 600
+[[file:pictures/emacs-hugo.png]]
+
+#+begin_notes
+Hugo (static site generator) used as blog generator.
+Android split screen to show it off.
+
+Left: Emacs editing the "About" page of the blog.
+Right: Firefox viewing the result
+Background command auto-rebuilding the blog on file save.
+#+end_notes
+** Reveal.js presentations
+:PROPERTIES:
+:CREATED:  [2019-07-22 Mon 23:53]
+:ID:       37478b0b-ed8b-477c-8605-3c0174717d8f
+:END:
+
+#+ATTR_ORG: :width 600
+[[file:pictures/emacs-prez.png]]
+
+#+begin_notes
+Similar to hugo, Reveal.js (markdown-to-HTML) presentation.
+
+Actually... this actual presentation (in front of live audience) is
+served from my phone, my PC is just browsing the generated page over
+the USB network connection... I know. Awesome.
+#+end_notes
+** Dotfiles sync
+Bluetooth file exchange to sync git repos work↔phone↔home
+#+ATTR_REVEAL: :frag (roll-in)
+- Git bundle to file
+- Bluetooth send
+- unpack as git remote
+
+#+begin_notes
+I wanted to try syncing my config files without a cloud like Github.
+
+My phone is technically doing the a shuttle between work and home
+every day. I could use it as a USB drive to move git commits
+across and that would be it...
+
+But I kind of want these same config files on my phone, since all my
+dev env is there too!
+
+So instead, I use bluetooth file-sending (OBEX) to exchange git
+commits (git bundles), and unpack them on the other side as a git
+remote I can pull from (read-only).
+
+Overkill, but really fun, and I learned something.
+#+end_notes
+
+* Recap: Termux
+- Capable shell
+- Full dev environment
+- Interop with Android
+
+* Questions?
+#+begin_notes
+Skip to next page for the backup slides with extra material
+#+end_notes
+
+* Backup slides
+#+ATTR_REVEAL: :frag roll-in
+For the advanced users with difficult questions
+
+** Limitations
+Termux is not Linux:
+#+ATTR_REVEAL: :frag (roll-in)
+- Not FHS (no =/usr/=)
+- Root FS is normal data
+- single user (Android app limitation)
+
+#+begin_notes
+[[Https://wiki.termux.com/wiki/Differences_from_Linux][Stolen shamelessly from Termux wiki]].
+Look into =termux-chroot=, which might work for some apps.
+#+end_notes
+
+** X11 apps
+Via =vnc= + =x11-packages=
+
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 40vh;
+[[file:pictures/x11-fluxbox.jpg]]
+
+#+begin_notes
+See [[https://wiki.termux.com/wiki/Graphical_Environment][Termux Wiki on Graphical Environment]].
+
+No hardware acceleration + need third party app to view output.
+#+end_notes
+
+** rooted packages
+Via =root-packages= (separate repo to =apt install=)
+
+#+begin_notes
+Can
+#+end_notes
+
+* EOF
+
+#+begin_notes
+Thank you for letting me tell you more than you needed to know about Android terminals!
+#+end_notes
+
+* COMMENT Local variables                                           :ARCHIVE:
+:PROPERTIES:
+:CREATED:  [2019-07-22 Mon 23:25]
+:ID:       825ad153-e889-4016-b7cd-3d983979199f
+:END:
+For auto-exporting the presentation on saved file in Emacs.
+# Local Variables:
+# eval: (add-hook 'after-save-hook #'org-re-reveal-export-to-html :append :local)
+# End:

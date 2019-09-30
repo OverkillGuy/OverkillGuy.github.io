@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Termux</title>
+<meta name="author" content="Jb Doyon"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/blood.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Termux</h1><h4>The freedom of shelling out on Android</h4><p>Jb Doyon - <a href="https://jiby.tech/">https://jiby.tech/</a><p>
+<p> </p>
+</section>
+
+<section>
+<section id="slide-org88803d0">
+<h2 id="org88803d0">Press <code>S</code> for speaker notes</h2>
+<aside class="notes">
+<p>
+Here go the super cool speaker notes.
+</p>
+
+<p>
+Note that there are "backup slides" after the Questions at the end,
+these might be of interest to advanced users with weird questions.
+</p>
+
+</aside>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb278b90">
+<h2 id="orgb278b90">What is it</h2>
+</section>
+<section>
+<p>
+Termux — Terminal emulator for Android
+</p>
+
+
+<div class="figure">
+<p><img src="pictures/basic-cropped.png" alt="basic-cropped.png" style="height: 40vh;" />
+</p>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org17952a5">
+<h2 id="org17952a5">In a nutshell</h2>
+<aside class="notes">
+<p>
+My goals for this presentation, stated clearly.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org4006c2c">
+<h3 id="org4006c2c">For newbies</h3>
+<p>
+Termux is an easy way into the linux world
+</p>
+
+<p class="fragment roll-in">
+<i>Experiment with the command line without installing Linux!</i>
+</p>
+
+<aside class="notes">
+<p>
+Not everyone's a guru. A good terminal can help beginners learn!
+</p>
+
+</aside>
+</section>
+<section id="slide-org3e6d93d">
+<h3 id="org3e6d93d">For power users</h3>
+<p>
+Termux unlocks the power of the terminal on your Android
+</p>
+
+<p class="fragment roll-in">
+<i>Script your phone/tablet!</i>
+</p>
+<p class="fragment roll-in">
+<i><del>Break</del> Automate things!</i>
+</p>
+
+<aside class="notes">
+<p>
+Obviously talk is mostly aimed at newbies, ask me later about weird details!
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgefa1c08">
+<h3 id="orgefa1c08">Specifically</h3>
+<ul>
+<li class="fragment roll-in">Capable shell</li>
+<li class="fragment roll-in">Full dev environment</li>
+<li class="fragment roll-in">Interop with Android</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+The fuller version:
+</p>
+<ul>
+<li>Capable shell (bash/zsh, coreutils, 256colors curses)</li>
+<li>Full dev environment (editors, compilers, ssh, git)</li>
+<li>Interop with Android (storage, share, dialogs)</li>
+
+</ul>
+
+</aside>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb2d90d9">
+<h2 id="orgb2d90d9">Installation</h2>
+
+<div class="figure">
+<p><img src="pictures/fdroid-badge.png" alt="fdroid-badge.png" style="width: 20vw; float: left" />
+</p>
+</div>
+
+<div class="figure">
+<p><img src="pictures/google-play-badge.png" alt="google-play-badge.png" style="width: 20vw; float: right" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+From <a href="https://wiki.termux.com/wiki/FAQ#What_is_a_Termux_.3F">Termux FAQ</a>: Termux is a terminal emulator for Android. The key
+difference from other terminal emulators is its own package repository
+with huge set of various utilities.
+</p>
+
+<p>
+Can be downloaded from <a href="https://f-droid.org/packages/com.termux/">F-Droid</a> or <a href="https://play.google.com/store/apps/details?id=com.termux">Google Play</a>.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org9e03c3e">
+<h2 id="org9e03c3e">What can it do?</h2>
+<aside class="notes">
+<ul>
+<li>bash/zsh</li>
+<li>coreutils (ls, tar, find&#x2026;)</li>
+<li>curses &amp; colors ("graphics")</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org7b26d88">
+<h3 id="org7b26d88">bash (busybox)</h3>
+
+<div class="figure">
+<p><img src="pictures/ls-cropped.png" alt="ls-cropped.png" style="height: 60vh;" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Zsh available, if that's your thing.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org30e924f">
+<h3 id="org30e924f">coreutils</h3>
+
+<div class="figure">
+<p><img src="pictures/utils.png" alt="utils.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Full GNU tools available. dd, and all!
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgc74fce7">
+<h3 id="orgc74fce7"></h3>
+<aside class="notes">
+<p>
+UTF-8 support! Type weird letters, make dialog-style boxes! Math!
+</p>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="pictures/utf8-1.png" alt="utf8-1.png" style="height: 60vh; float: left" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="pictures/utf8-3.png" alt="utf8-3.png" style="height: 60vh;" />
+</p>
+</div>
+
+
+
+
+</section>
+<section id="slide-org028ceda">
+<h3 id="org028ceda"></h3>
+<aside class="notes">
+<p>
+Colors support!
+</p>
+
+<p>
+256 colors for sure via <code>xterm-256color</code>.
+</p>
+
+<p>
+Termux claims 24 bit is supported too, but I cannot prove that: it's
+surprisingly hard to get an application to use it, and 256 colors was
+already good enough for me
+</p>
+
+</aside>
+
+<div class="figure">
+<p><img src="pictures/24bit-cropped.png" alt="24bit-cropped.png" style="height: 60vh;" />
+</p>
+</div>
+
+
+
+</section>
+<section id="slide-orge69d754">
+<h3 id="orge69d754">curses</h3>
+<aside class="notes">
+<p>
+Curses is a library that enables taking over the terminal to make a
+full canvas (as opposed to purely request and response).
+</p>
+
+<p>
+Mouse support! htop is famous for the support of mouse.
+</p>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="pictures/htop-termux.png" alt="htop-termux.png" style="height: 60vh;" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org68827c2">
+<h3 id="org68827c2">SSH</h3>
+<p>
+server &amp; client
+</p>
+<ul>
+<li class="fragment roll-in">Wifi</li>
+<li class="fragment roll-in">USB</li>
+<li class="fragment roll-in">Bluetooth</li>
+
+</ul>
+
+
+<aside class="notes">
+<p>
+Connect to your desktop/server from phone, or get them to connect to
+you!
+</p>
+
+<p>
+Works (tested) over wifi, bluetooth, USB&#x2026;
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org93ed112">
+<h3 id="org93ed112">Separate apps</h3>
+<dl>
+<dt class="fragment roll-in">Termux:Boot</dt><dd class="fragment roll-in">Run script(s) when your device boots</dd>
+<dt class="fragment roll-in">Termux:Widget</dt><dd class="fragment roll-in">Start scripts from the home screen</dd>
+<dt class="fragment roll-in">Termux:Float</dt><dd class="fragment roll-in">Run Termux in a floating window</dd>
+<dt class="fragment roll-in">Termux:Styling</dt><dd class="fragment roll-in">Customize color &amp; fonts</dd>
+<dt class="fragment roll-in">Termux:Task</dt><dd class="fragment roll-in">Call Termux executables from Tasker</dd>
+
+</dl>
+
+</section>
+</section>
+<section>
+<section id="slide-org3c83a01">
+<h2 id="org3c83a01">Package manager</h2>
+<p class="fragment roll-in">
+<code>apt</code> based, Debian repos
+</p>
+
+<p class="fragment roll-in">
+<i>"This APT has Super Cow Powers"</i>
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment roll-in">$ apt moo
+                 <span style="color: #ff8c00;">(</span>__<span style="color: #ff8c00;">)</span>
+                 <span style="color: #ff8c00;">(</span>oo<span style="color: #ff8c00;">)</span>
+           /------<span style="color: #e9b96e;">\/</span>
+          / |    ||
+         *  /<span style="color: #e9b96e;">\-</span>--/<span style="color: #e9b96e;">\</span>
+            ~~   ~~
+...<span style="color: #e9b96e;">"Have you mooed today?"</span>...
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+Packages make a terminal a home.
+</p>
+
+<p>
+These are recompiled/patched debian packages for Android.
+</p>
+
+<p>
+apt moo is an easter egg of the apt command, which is a nice way to show off it's apt
+</p>
+
+</aside>
+
+</section>
+<section>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-shell">$ pkg list-all | wc -l
+975
+$ pkg list-installed
+<span style="color: #73d216;"># </span><span style="color: #73d216;">heavily redacted for relevance (skipped libs + termux internals)</span>
+</pre>
+</div>
+
+<pre class="example">
+apt bash binutils busybox bzip2 ca-certificates clang coreutils curl
+dash diffutils dnsutils dos2unix dpkg ed emacs ffmpeg file findutils
+fontconfig freetype gawk gdbm git glib gnupg gnutls gpgv grep
+gzip harfbuzz htop hugo inetutils jq krb5 ldc ldns lesslinux-man-pages
+man ncurses ncurses-ui-libs ndk-sysroot net-tools netcat nmap oathtool
+openssh openssl pass pass-otp patch pcre pcre2 perl pinentry procps
+psmisc python readline resolv-conf rsync science-repo sed
+silversearcher-ag stow strace tar texinfo tmux tree unzip util-linux
+vim vim-runtime xmlsec xz-utils zlib
+</pre>
+
+<aside class="notes">
+<p>
+Lots of packages, a short list of what I have is shown here.
+</p>
+
+<p>
+Don't bother reading all these, but if some of the words here trigger
+some excitement, yey.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org175b10c">
+<h2 id="org175b10c">Dev environment</h2>
+<p class="fragment roll-in">
+Write code on the go
+</p>
+
+
+<aside class="notes">
+<p>
+Turn your phone or tablet into a workstation for your commute.
+Or debug something on a late night out.
+</p>
+
+</aside>
+</section>
+<section id="slide-org849fe21">
+<h3 id="org849fe21">Editors</h3>
+</section>
+<section>
+
+<aside class="notes">
+<p>
+Vim, editing a C file with syntax highlighting, using Powerline UI
+</p>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="pictures/vim-main_framed.png" alt="vim-main_framed.png" style="height: 60vh;" />
+</p>
+</div>
+
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre  class="src src-shell">$ pkg search editor
+vi 1.4.0-1
+ed 1.15 <span style="color: #ff8c00;">[</span>installed,automatic<span style="color: #ff8c00;">]</span>
+emacs 26.3-1 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+hexcurse 1.60.0-2
+ired 0.6
+joe 4.6-1
+jupp 3.1jupp38-1
+kakoune 2019.07.01-1
+mg 20180927-1
+micro 1.4.1-3
+nano 4.4
+ne 3.1.2-1
+radare2 3.9.0-1
+sed 4.7-1 <span style="color: #ff8c00;">[</span>installed,automatic<span style="color: #ff8c00;">]</span>
+vim 8.1.2050 <span style="color: #ff8c00;">[</span>upgradable from: 8.1.2000<span style="color: #ff8c00;">]</span>
+vis 0.5-4
+zile 2.4.14-2
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+Support for vim, emacs, nano &#x2026; ed&#x2026;
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org1058007">
+<h3 id="org1058007">Programming languages</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell">$ apt search programming  <span style="color: #73d216;"># </span><span style="color: #73d216;">redacted for compactness</span>
+clang 8.0.1 <span style="color: #ff8c00;">[</span>installed,automatic<span style="color: #ff8c00;">]</span>
+dart 2.4.1
+ecj 1:4.6.2
+erlang 21.3.8-1
+gawk 5.0.1-4 <span style="color: #ff8c00;">[</span>installed,automatic<span style="color: #ff8c00;">]</span>
+gdb 8.3-3
+golang 2:1.13
+kona 20190226
+ldc 1.17.0 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+lua 5.3.5-3
+nim 0.20.2
+perl 5.30.0-1 <span style="color: #ff8c00;">[</span>installed,automatic<span style="color: #ff8c00;">]</span>
+protobuf 3.9.1 aarch64
+python2 2.7.16-3
+python 3.7.4-1 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+ruby 2.6.4
+rust 1.36.0
+tcl 8.6.9-5
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+Your fav language is likely in here. Otherwise you can help out to port it!
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org576e2e9">
+<h3 id="org576e2e9">More packages</h3>
+<p>
+Language-specific package managers are there too!
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-shell">pip install youtube-dl
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+Showing off the python pkg manager to get awesome command-line video downloader
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgee9dfc8">
+<h3 id="orgee9dfc8">Tools</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell">curl 7.66.0 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+db 18.1.32-2
+fossil 2.9
+geoip2-database 20190908
+git 2.23.0 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+git-crypt 0.6.0-1
+git-lfs 2.8.0-1
+gitea 1.9.3
+global 6.6.3
+hub 2.12.4
+jq 1.6-1 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+libsqlite 3.29.0-1 <span style="color: #ff8c00;">[</span>installed,automatic<span style="color: #ff8c00;">]</span>
+postgresql 11.5
+redis 5.0.5
+ripgrep 11.0.2
+screen 4.6.2-1
+silversearcher-ag 2.2.0-1 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+texlive-full 20190410
+tig 2.4.1-3
+tmux 2.9a-2 <span style="color: #ff8c00;">[</span>installed<span style="color: #ff8c00;">]</span>
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+Version control: check!
+Search tools: check!
+Databases: check!
+Full LaTeX distribution (can generate PDF)
+</p>
+
+</aside>
+
+</section>
+<section>
+
+
+<div class="figure">
+<p><img src="pictures/tmux-framed.png" alt="tmux-framed.png" style="height: 60vh;" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+That's about as complex as I can imagine:
+</p>
+
+<p>
+Tmux split showing vim editing a file + other frame compiling, running
+and debugging it. That's a lot of features right there.
+</p>
+
+</aside>
+
+
+</section>
+<section id="slide-org3591ff8">
+<h3 id="org3591ff8">Got root?</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell">$ su
+</pre>
+</div>
+
+<pre class="example">
+No su program found on this device. Termux
+does not supply tools for rooting, see e.g.
+http://www.androidcentral.com/root for
+information about rooting Android.
+</pre>
+
+<aside class="notes">
+<p>
+Haven't tried, but for rooted phones, <code>su</code> can be used in commands!
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-orge97ae0e">
+<h2 id="orge97ae0e">Android interop</h2>
+<ul>
+<li class="fragment roll-in">Termux → Android</li>
+<li class="fragment roll-in">Android → Termux</li>
+
+</ul>
+
+
+<aside class="notes">
+<p>
+Termux can reach android (share yourfile.pdf to whatsapp), but it can
+also be a "Share target" of Android: Firefox send video's URL to
+<code>youtube-dl</code>
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgf8e75ce">
+<h3 id="orgf8e75ce">Termux → Android</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell">$ termux-open -h
+</pre>
+</div>
+<pre class="example">
+Usage: termux-open [options] path-or-url
+Open a file or URL in an external app.
+  --send               if the file should be shared for sending
+  --view               if the file should be shared for viewing (default)
+  --chooser            if an app chooser should always be shown
+  --content-type type  specify the content type to use
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-shell">termux-open my_cool_file.pdf
+termux-open https://www/gnu.org/
+termux-open --send --chooser myfile.c
+<span style="color: #73d216;"># </span><span style="color: #73d216;">see also termux-share for files</span>
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+It works like <code>xdg-open</code>: finds default app for that filetype (can
+specify the type of content if not autodetected)
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orge44afbd">
+<h3 id="orge44afbd">Storage access</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell">termux-setup-storage
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="pictures/termux-storage.png" alt="termux-storage.png" />
+</p>
+</div>
+
+<p class="fragment roll-in">
+Requires Storage permission
+</p>
+
+<aside class="notes">
+<p>
+Access to sdcard data, not specific apps (by default)
+</p>
+
+</aside>
+</section>
+<section id="slide-orgfa8472c">
+<h3 id="orgfa8472c">Termux API</h3>
+<p>
+Need pkg + <b>Termux:API</b> app
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-shell">pkg install termux-api
+</pre>
+</div>
+
+</section>
+<section>
+
+<pre class="example">
+termux-audio-info            termux-open-url              termux-battery-status
+termux-reload-settings       termux-brightness            termux-sensor
+termux-call-log              termux-setup-storage         termux-camera-info
+termux-share                 termux-camera-photo          termux-sms-inbox
+termux-clipboard-get         termux-sms-list              termux-clipboard-set
+termux-sms-send              termux-contact-list          termux-speech-to-text
+termux-dialog                termux-storage-get           termux-download
+termux-telephony-call        termux-file-editor           termux-telephony-cellinfo
+termux-fingerprint           termux-telephony-deviceinfo  termux-fix-shebang
+termux-toast                 termux-info                  termux-torch
+termux-infrared-frequencies  termux-tts-engines           termux-infrared-transmit
+termux-tts-speak             termux-job-scheduler         termux-upgrade-repo
+termux-keystore              termux-url-opener            termux-location
+termux-vibrate               termux-media-player          termux-volume
+termux-media-scan            termux-wake-lock             termux-microphone-record
+termux-wake-unlock           termux-notification          termux-wallpaper
+termux-notification-list     termux-wifi-connectioninfo   termux-notification-remove
+termux-wifi-enable           termux-open                  termux-wifi-scaninfo
+</pre>
+
+<aside class="notes">
+<ul>
+<li>Clipboard, dialogs, notifications, toasts</li>
+<li>Sensors (microphone, location, camera, vibration, fingerprint)</li>
+<li>Connectivity (phonecall, sms, wifi, infrared)</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre  class="src src-shell">termux-dialog -l   <span style="color: #73d216;"># </span><span style="color: #73d216;">widget arguments redacted</span>
+</pre>
+</div>
+
+<pre class="example">
+Supported widgets:
+
+confirm - Show confirmation dialog
+checkbox - Select multiple values using checkboxes
+counter - Pick a number in specified range
+date - Pick a date
+radio - Pick a single value from radio buttons
+sheet - Pick a value from sliding bottom sheet
+spinner - Pick a single value from a dropdown spinner
+speech - Obtain speech using device microphone
+text - Input text (default if no widget specified)
+time - Pick a time value
+</pre>
+
+<aside class="notes">
+<p>
+Works like the <code>dialog</code> command (or <code>zenity</code>).
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orga74115c">
+<h3 id="orga74115c">Start Android activity</h3>
+<p class="fragment roll-in">
+<i>Have not made it work personally (need root?)</i>
+</p>
+
+<div class="org-src-container">
+
+<pre  class="fragment roll-in">am start --user 0 -n com.package.name/com.package.name.ActivityName
+am start --user 0 -n com.android.chrome/com.google.android.apps.chrome.Main
+am start --user 0 -n com.termux/com.termux.app.TermuxActivity
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+<a href="https://www.reddit.com/r/termux/comments/62zi71/can_i_start_an_app_from_termuxs_command_line_how/">reddit says you can indeed!</a>
+</p>
+
+<p>
+I haven't got it to work as I get a security error.
+</p>
+
+<p>
+But that could open ANY app on ANY activity (page) with content YOU
+provide: a customized "share" button!
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb564a47">
+<h2 id="orgb564a47">Case study</h2>
+<p>
+<i>How much can we do?</i>
+</p>
+<aside class="notes">
+<p>
+Examples from my personal Termux use
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orga6a8c5a">
+<h3 id="orga6a8c5a">Wifi-based phone backup</h3>
+<p>
+SSHFS over Wifi to backup phone data
+</p>
+
+<aside class="notes">
+<ul>
+<li><code>sshfs</code> (fuse) to pretend phone's content is on the other machine</li>
+<li>your usual backup tool pointed to the folder on your computer</li>
+<li>profit</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org0a5a46a">
+<h3 id="org0a5a46a">Password manager UI</h3>
+<p>
+Using <code>pass</code> (<a href="https://passwordstore.org">passwordstore.org</a>, GPG-based) listing passwords via Android UI!
+</p>
+
+<ul>
+<li class="fragment roll-in"><code>termux-dialog</code> to select</li>
+<li class="fragment roll-in">Password manager invoked</li>
+<li class="fragment roll-in">Clipboard magic (45s)</li>
+
+</ul>
+
+<aside class="notes">
+<ul>
+<li>Created a Termux:Widget "shortcut" to my script, to use from Android home.</li>
+<li>Script lists the files in password manager, asks termux to make a selector dialog.</li>
+<li>Asks password manager to show password on the chosen file</li>
+<li>Clipboard command loads password for 45s</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org484b454">
+<h3 id="org484b454">Hugo serve</h3>
+
+<div class="figure">
+<p><img src="pictures/emacs-hugo.png" alt="emacs-hugo.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Hugo (static site generator) used as blog generator.
+Android split screen to show it off.
+</p>
+
+<p>
+Left: Emacs editing the "About" page of the blog.
+Right: Firefox viewing the result
+Background command auto-rebuilding the blog on file save.
+</p>
+
+</aside>
+</section>
+<section id="slide-orgd7708ef">
+<h3 id="orgd7708ef">Reveal.js presentations</h3>
+
+<div class="figure">
+<p><img src="pictures/emacs-prez.png" alt="emacs-prez.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Similar to hugo, Reveal.js (markdown-to-HTML) presentation.
+</p>
+
+<p>
+Actually&#x2026; this actual presentation (in front of live audience) is
+served from my phone, my PC is just browsing the generated page over
+the USB network connection&#x2026; I know. Awesome.
+</p>
+
+</aside>
+</section>
+<section id="slide-org9ad2e27">
+<h3 id="org9ad2e27">Dotfiles sync</h3>
+<p>
+Bluetooth file exchange to sync git repos work↔phone↔home
+</p>
+<ul>
+<li class="fragment roll-in">Git bundle to file</li>
+<li class="fragment roll-in">Bluetooth send</li>
+<li class="fragment roll-in">unpack as git remote</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+I wanted to try syncing my config files without a cloud like Github.
+</p>
+
+<p>
+My phone is technically doing the a shuttle between work and home
+every day. I could use it as a USB drive to move git commits
+across and that would be it&#x2026;
+</p>
+
+<p>
+But I kind of want these same config files on my phone, since all my
+dev env is there too!
+</p>
+
+<p>
+So instead, I use bluetooth file-sending (OBEX) to exchange git
+commits (git bundles), and unpack them on the other side as a git
+remote I can pull from (read-only).
+</p>
+
+<p>
+Overkill, but really fun, and I learned something.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org0e28069">
+<h2 id="org0e28069">Recap: Termux</h2>
+<ul>
+<li>Capable shell</li>
+<li>Full dev environment</li>
+<li>Interop with Android</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb0dfd08">
+<h2 id="orgb0dfd08">Questions?</h2>
+<aside class="notes">
+<p>
+Skip to next page for the backup slides with extra material
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org54887ad">
+<h2 id="org54887ad">Backup slides</h2>
+<p class="fragment roll-in">
+For the advanced users with difficult questions
+</p>
+
+</section>
+<section id="slide-orgf43097d">
+<h3 id="orgf43097d">Limitations</h3>
+<p>
+Termux is not Linux:
+</p>
+<ul>
+<li class="fragment roll-in">Not FHS (no <code>/usr/</code>)</li>
+<li class="fragment roll-in">Root FS is normal data</li>
+<li class="fragment roll-in">single user (Android app limitation)</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+<a href="//wiki.termux.com/wiki/Differences_from_Linux">Stolen shamelessly from Termux wiki</a>.
+Look into <code>termux-chroot</code>, which might work for some apps.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgdbf689b">
+<h3 id="orgdbf689b">X11 apps</h3>
+<p>
+Via <code>vnc</code> + <code>x11-packages</code>
+</p>
+
+
+<div class="figure">
+<p><img src="pictures/x11-fluxbox.jpg" alt="x11-fluxbox.jpg" style="height: 40vh;" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+See <a href="https://wiki.termux.com/wiki/Graphical_Environment">Termux Wiki on Graphical Environment</a>.
+</p>
+
+<p>
+No hardware acceleration + need third party app to view output.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org6a15720">
+<h3 id="org6a15720">rooted packages</h3>
+<p>
+Via <code>root-packages</code> (separate repo to <code>apt install</code>)
+</p>
+
+<aside class="notes">
+<p>
+Can
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgef04349">
+<h2 id="orgef04349">EOF</h2>
+<aside class="notes">
+<p>
+Thank you for letting me tell you more than you needed to know about Android terminals!
+</p>
+
+</aside>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/js/reveal.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'convex', // see README of reveal.js for options
+transitionSpeed: 'default',
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+ { src: './reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+</script>
+</body>
+</html>

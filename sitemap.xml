@@ -3,32 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/presentation/</loc>
+    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/android-terminal-with-termux/</loc>
+    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/about/</loc>
     <lastmod>2019-09-19T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2019-09-19T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2019-09-18T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/post/hello-world/</loc>
-    <lastmod>2019-09-18T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/post/</loc>
-    <lastmod>2019-09-18T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2019-09-18T00:00:00+01:00</lastmod>
   </url>
   

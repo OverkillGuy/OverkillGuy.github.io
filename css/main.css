@@ -35,7 +35,8 @@ hr {
 }
 
 audio,canvas,img,video {
-    width: 100%;
+    /* Do not stretch images by default!
+    width: 100%; */
     vertical-align: middle
 }
 
