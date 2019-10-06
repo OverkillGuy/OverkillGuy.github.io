@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Jiby&#39;s selfhosted effort</title>
-    <link>https://jiby.tech/post/</link>
-    <description>Recent content in Posts on Jiby&#39;s selfhosted effort</description>
+    <title>git on Jiby&#39;s selfhosted effort</title>
+    <link>https://jiby.tech/tags/git/</link>
+    <description>Recent content in git on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jiby.tech/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -32,28 +32,6 @@
 git log --decorate --oneline --graph   Figure 1: Git graph of this repository
   This can be made into a git command via an entry your ~/.gitconfig:
 [alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
-    </item>
-    
-    <item>
-      <title>Presenting Android terminal with Termux (EdLug)</title>
-      <link>https://jiby.tech/post/android-terminal-with-termux/</link>
-      <pubDate>Tue, 01 Oct 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
-      <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
-  Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
-    </item>
-    
-    <item>
-      <title>First post</title>
-      <link>https://jiby.tech/post/hello-world/</link>
-      <pubDate>Wed, 18 Sep 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/post/hello-world/</guid>
-      <description>Welcome to my website!
-This blog is meant to record some of the thoughts I keep coming back to, or discussions I&amp;rsquo;ve had over and over again with different people. My rule of thumb for inclusion here is &amp;ldquo;if you&amp;rsquo;ve had to say it more than twice, it&amp;rsquo;s time to write it down&amp;rdquo;.
-See the About page for my background and motivations.
-Look forward more posts as I try to condense my thoughts in written form.</description>
     </item>
     
   </channel>

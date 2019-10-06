@@ -6,10 +6,33 @@
     <description>Recent content on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git diff for prose</title>
+      <link>https://jiby.tech/post/git-diff-lines-prose/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/git-diff-lines-prose/</guid>
+      <description>When writing long sentences in documentation repositories, git tends to show really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken, which hides edits happening towards end of line. A colleague of mine asked me if git couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!
+  Figure 1: Can you spot the edit made in a long line of text?
+  Kaushal Modi&amp;rsquo;s blog post on git diff for minified JS and CSS inspired this idea for all you prose lovers.</description>
+    </item>
+    
+    <item>
+      <title>Git pretty graph</title>
+      <link>https://jiby.tech/post/git-graph/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/git-graph/</guid>
+      <description>Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make understanding git easier.
+git log --decorate --oneline --graph   Figure 1: Git graph of this repository
+  This can be made into a git command via an entry your ~/.gitconfig:
+[alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
+    </item>
     
     <item>
       <title>Presenting Android terminal with Termux (EdLug)</title>

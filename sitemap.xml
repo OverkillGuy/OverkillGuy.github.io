@@ -4,17 +4,37 @@
   
   <url>
     <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/git/</loc>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/git-diff-lines-prose/</loc>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/git-graph/</loc>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/</loc>
-    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/post/</loc>
-    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -24,11 +44,6 @@
   
   <url>
     <loc>https://jiby.tech/post/android-terminal-with-termux/</loc>
-    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2019-10-01T00:00:00+01:00</lastmod>
   </url>
   
