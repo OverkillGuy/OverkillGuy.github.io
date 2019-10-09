@@ -34,5 +34,14 @@ git log --decorate --oneline --graph   Figure 1: Git graph of this repository
 [alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
     </item>
     
+    <item>
+      <title>Git tips</title>
+      <link>https://jiby.tech/standalone/git_tips/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/standalone/git_tips/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

@@ -6,10 +6,20 @@
     <description>Recent content on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 09 Oct 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reverse-engineering webapp APIs with Firefox</title>
+      <link>https://jiby.tech/post/reverse-engineer-api-with-firefox/</link>
+      <pubDate>Wed, 09 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/reverse-engineer-api-with-firefox/</guid>
+      <description>I&amp;rsquo;m writing code to back up my user data off a website that lets me see all of my info (including querying by time, account etc) but doesn&amp;rsquo;t have export features (officially). I am certain there&amp;rsquo;s an API behind the site that I just have to make sense of.
+Since the webapp is requesting data from the API when I click, we should be able to record the web traffic to explore the API.</description>
+    </item>
     
     <item>
       <title>Git diff for prose</title>
@@ -42,6 +52,15 @@ git log --decorate --oneline --graph   Figure 1: Git graph of this repository
       <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
       <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
   Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
+    </item>
+    
+    <item>
+      <title>Git tips</title>
+      <link>https://jiby.tech/standalone/git_tips/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/standalone/git_tips/</guid>
+      <description></description>
     </item>
     
     <item>
