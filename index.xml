@@ -6,10 +6,19 @@
     <description>Recent content on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Oct 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git diff from empty commit</title>
+      <link>https://jiby.tech/post/git-diff-empty-repo/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/git-diff-empty-repo/</guid>
+      <description>In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &amp;ldquo;nothing&amp;rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&amp;rsquo;s a specific commit hash we can use to diff from &amp;ldquo;nothing&amp;rdquo; to the first commit:</description>
+    </item>
     
     <item>
       <title>Reverse-engineering webapp APIs with Firefox</title>
@@ -52,15 +61,6 @@ git log --decorate --oneline --graph   Figure 1: Git graph of this repository
       <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
       <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
   Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
-    </item>
-    
-    <item>
-      <title>Git tips</title>
-      <link>https://jiby.tech/standalone/git_tips/</link>
-      <pubDate>Fri, 20 Sep 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/standalone/git_tips/</guid>
-      <description></description>
     </item>
     
     <item>

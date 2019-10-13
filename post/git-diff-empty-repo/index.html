@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Git diff from empty commit - Jiby&#39;s selfhosted effort</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Git diff from empty commit" />
+<meta property="og:description" content="In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &ldquo;nothing&rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&rsquo;s a specific commit hash we can use to diff from &ldquo;nothing&rdquo; to the first commit:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/git-diff-empty-repo/" />
+<meta property="article:published_time" content="2019-10-13T00:00:00+01:00" />
+<meta property="article:modified_time" content="2019-10-13T00:00:00+01:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git diff from empty commit"/>
+<meta name="twitter:description" content="In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &ldquo;nothing&rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&rsquo;s a specific commit hash we can use to diff from &ldquo;nothing&rdquo; to the first commit:"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title">Jiby&#39;s selfhosted effort</h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/presentation">Presentations</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Git diff from empty commit</h1>
+			<div class="meta">Posted on &mdash; Oct 13, 2019</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>In order to troubleshoot a bug in the very early history of a project
+using git, I needed a way to show the git diff from &ldquo;nothing&rdquo; to the
+first commit. Since git keeps a linked graph of commits, what I wanted
+was a diff from the commit before the first one. Searching the onlines
+dug up <a href="https://stackoverflow.com/a/40884093">this answer on StackOverflow</a>, showing that there&rsquo;s a specific
+commit hash we can use to diff from &ldquo;nothing&rdquo; to the first commit:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git diff 4b825dc642cb6eb9a060e54bf8d69288fbee4904 HEAD</code></pre></div>
+<blockquote>
+<p><code>4b825dc642cb6eb9a060e54bf8d69288fbee4904</code> is the id of the &ldquo;empty
+tree&rdquo; in Git and it&rsquo;s always available in every repository.</p>
+</blockquote>
+
+<p>A <a href="https://stackoverflow.com/questions/40883798/how-to-get-git-diff-of-the-first-commit#comment68984343%5F40884093">comment by CB Bailey</a> on that answer clarifies:</p>
+
+<blockquote>
+<p>The id of the empty tree won&rsquo;t change while git continues to use sha1.
+You can use <code>$(printf '' | git hash-object -t tree --stdin)</code> for better
+readability.</p>
+</blockquote>
+
+<p>I found that answer fascinating: a magic hash that is the daddy of
+all repo hashes? It smells of oddities in the internals of git (git&rsquo;s guts!)
+that made me curious. So to understand why there&rsquo;s a magic string that
+can be used to diff against an empty repo, let&rsquo;s do some spelunking!</p>
+
+<h2 id="git-objects">Git objects</h2>
+
+<p>From basic git usage, we already know git commits have hashes, and commits
+make up chains that usually end with branches or tags. We also know
+that rebasing, changing commit messages, or adding files changes the
+hash of the commit.</p>
+
+<p>Reading the <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects">git internals (git docs)</a>, we learn that before having
+commits, git tracks things as &ldquo;objects&rdquo; by hashing them with SHA-1,
+and using the hash as a path under <code>.git/objects/</code>. We discover that
+the content of files tracked are objects called &ldquo;blobs&rdquo;, and that
+&ldquo;trees&rdquo; are another type of objects that are made up of a list of
+filename + blob hash + file permissions. A single tree object can
+represent the entirety of a folder at a point in time, and a tree can
+link to another tree, typically subfolders. This is summarized well in
+Figure <a href="#org3bf7618">1</a>.</p>
+
+<p><a id="org3bf7618"></a></p>
+
+<figure>
+    <img src="https://git-scm.com/book/en/v2/images/data-model-1.png"
+         alt="Figure 1: View of a git tree. Credit: git docs" width="100%"/> <figcaption>
+            <p>Figure 1: View of a git tree. Credit: git docs</p>
+        </figcaption>
+</figure>
+
+
+<p>The hash of a blob or tree can be computed with <code>git hash-object</code>,
+which brings us one step closer to understanding the command and
+hash.</p>
+
+<h2 id="git-commit-trees">Git commit trees</h2>
+
+<p>A commit is another type of object made up of:</p>
+
+<ul>
+<li>a tree object (of the repo&rsquo;s root folder after the change we&rsquo;re committing)</li>
+<li>a link to previous commit (if any)</li>
+<li>a message</li>
+<li>author info (name + email)</li>
+<li>date</li>
+</ul>
+
+<p>This also explains why when we&rsquo;re changing any of the values above
+(message, date, tree, author, previous commits) the git commit hash
+changes, as the commit hash takes all of these into account.</p>
+
+<p>Armed with our new knowledge, let&rsquo;s revisit the statements made
+by the StackOverflow community!</p>
+
+<p>So contrary to intuition, it&rsquo;s not that there&rsquo;s a commit with no data
+that&rsquo;s the magic source of all data, and that diffing can be done
+against that hypothetical commit, but instead (based on the hash-tree
+command) it is the hash of an empty tree (no files = the content of
+the repo before the first commit), and <code>git diff</code> computes the diff
+between &ldquo;nothing&rdquo; and our first commit.</p>
+
+<p>The magic of it all boils down to SHA-1 hash itself being computed
+with known input (empty blob list) that recomputes to the same value
+every time.</p>
+
+<p>This means as long as git uses SHA-1, this value will stay the same.
+Interestingly, <a href="https://git-scm.com/docs/hash-function-transition/en">git is transitioning away from SHA-1</a>, which means
+sometimes in the future, this magic number won&rsquo;t work anymore (but the
+command that computes it will likely still work, as the concept of
+empty tree object hash is still relevant, just not with the same
+hashing algorithm).</p>
+
+<p>So, we&rsquo;ve just used a little curiosity to transform a surprising
+answer on StackOverflow into knowledge of git internals that can help
+us reason with the tool. Remember to read the manual, and stay
+curious!</p>
+
+		</div>
+
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div><a href="https://github.com/vividvilla/ezhil">Ezhil</a> theme <a href="https://github.com/OverkillGuy/ezhil">fork</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

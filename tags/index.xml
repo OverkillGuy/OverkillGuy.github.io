@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Oct 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Wed, 09 Oct 2019 00:00:00 +0100</pubDate>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://jiby.tech/tags/git/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/git/</guid>
       <description></description>
     </item>
     
@@ -48,29 +57,11 @@
     </item>
     
     <item>
-      <title>git</title>
-      <link>https://jiby.tech/tags/git/</link>
-      <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>presentation</title>
       <link>https://jiby.tech/tags/presentation/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/presentation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>standalone</title>
-      <link>https://jiby.tech/tags/standalone/</link>
-      <pubDate>Fri, 20 Sep 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/standalone/</guid>
       <description></description>
     </item>
     

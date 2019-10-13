@@ -4,7 +4,32 @@
   
   <url>
     <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2019-10-09T00:00:00+01:00</lastmod>
+    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/git/</loc>
+    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/git-diff-empty-repo/</loc>
+    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -18,16 +43,6 @@
   </url>
   
   <url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/post/</loc>
-    <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/tags/reverse-engineering/</loc>
     <lastmod>2019-10-09T00:00:00+01:00</lastmod>
   </url>
@@ -35,16 +50,6 @@
   <url>
     <loc>https://jiby.tech/post/reverse-engineer-api-with-firefox/</loc>
     <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/</loc>
-    <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/git/</loc>
-    <lastmod>2019-10-06T00:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -65,21 +70,6 @@
   <url>
     <loc>https://jiby.tech/post/android-terminal-with-termux/</loc>
     <lastmod>2019-10-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/standalone/git_tips/</loc>
-    <lastmod>2019-09-20T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/standalone/</loc>
-    <lastmod>2019-09-20T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/standalone/</loc>
-    <lastmod>2019-09-20T00:00:00+01:00</lastmod>
   </url>
   
   <url>
