@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data-processing on Jiby&#39;s selfhosted effort</title>
+    <link>https://jiby.tech/tags/data-processing/</link>
+    <description>Recent content in data-processing on Jiby&#39;s selfhosted effort</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jiby.tech/tags/data-processing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using Awk to replace only some lines</title>
+      <link>https://jiby.tech/post/awk-replace-some-lines/</link>
+      <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/awk-replace-some-lines/</guid>
+      <description>I was trying to convert bank-issued CSV files that have a weird data layout, for automatic processing by the excellent ledger. This made me learn a new thing about awk. Follow me down the UNIXy goodness!
+The data I was getting looks like this:
+Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance 29/02/2018,Restaurant,14.5,,1234.2 12/03/2018,ATM withdrawal,50,,1184.2 23/04/2018,Deposited check,,100,1284.2 Note the last line having 100 in a different column: The problem is that, when receiving money, the transaction is logged in a separate entry (&amp;ldquo;Credit Amount&amp;rdquo;) than the (more common) case of debit, which goes to &amp;ldquo;Debit Amount&amp;rdquo; column.</description>
+    </item>
+    
+  </channel>
+</rss>
