@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jiby&#39;s selfhosted effort</title>
@@ -6,10 +6,55 @@
     <description>Recent content in Tags on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 00:32:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ansible</title>
+      <link>https://jiby.tech/tags/ansible/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://jiby.tech/tags/blog/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>infrastructure-as-code</title>
+      <link>https://jiby.tech/tags/infrastructure-as-code/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/infrastructure-as-code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reproducible</title>
+      <link>https://jiby.tech/tags/reproducible/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/reproducible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vagrant</title>
+      <link>https://jiby.tech/tags/vagrant/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/vagrant/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>awk</title>
@@ -17,15 +62,6 @@
       <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jiby.tech/tags/awk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>blog</title>
-      <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/blog/</guid>
       <description></description>
     </item>
     

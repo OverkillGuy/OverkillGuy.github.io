@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jiby&#39;s selfhosted effort</title>
@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 00:32:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reproducible workspace deployment with Ansible and Vagrant</title>
+      <link>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</guid>
+      <description>Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&amp;hellip; Since 2016, I have accumulated over 500 git commits.
+Now the dotfiles are tracked, the next biggest pain is to install packages and folder structures and obscure commands required to set up some subsystems needs which config files.</description>
+    </item>
     
     <item>
       <title>Using Awk to replace only some lines</title>
