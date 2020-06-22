@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Separating Spam from Ham with the shell - Jiby&#39;s selfhosted effort</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Separating Spam from Ham with the shell" />
+<meta property="og:description" content="Here&rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
+The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &ldquo;save as picture&rdquo; context menu. But a couple of images were still deformed beyond recognition." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/image-list-separate-spam-ham-with-shell/" />
+<meta property="article:published_time" content="2020-06-22T00:00:00+01:00" />
+<meta property="article:modified_time" content="2020-06-22T00:00:00+01:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Separating Spam from Ham with the shell"/>
+<meta name="twitter:description" content="Here&rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
+The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &ldquo;save as picture&rdquo; context menu. But a couple of images were still deformed beyond recognition."/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title">Jiby&#39;s selfhosted effort</h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/presentation">Presentations</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Separating Spam from Ham with the shell</h1>
+			<div class="meta">Posted on &mdash; Jun 22, 2020</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>Here&rsquo;s how attempting to export images off a Word Document
+led to a quest for data deduplication and classification using the
+shell.</p>
+
+<p>The images I wanted to export were MS Word diagrams drawn in Word,
+rather than PNG files<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup>.
+Because those doodle-shapes do not export to PNG well, I first
+copy-pasted them into Powerpoint to get the familiar &ldquo;save as picture&rdquo;
+context menu. But a couple of images were still deformed beyond
+recognition.</p>
+
+<p>This led me to the nuclear option, exporting the document as PDF and
+yanking all image snippets off from PDF with <code>pdfimages</code>. This turned
+out to be a problem, as <code>pdfimages</code> includes <em>all</em> images: lots of tiny,
+useless icons, and duplicates (per-pages logos and navigation arrows).
+I needed a way to filter duplicates and separate the real diagrams
+(ham) from the useless tiny ones (spam).</p>
+
+<h2 id="data-deduplication">Data Deduplication</h2>
+
+<p>I got 688 files, but know from visual inspection of thumbnails there&rsquo;s
+about 30% of raw duplicates (same look, same filesize, likely
+identical content byte for byte). We can check that by hashing the
+files. I used <code>md5sum</code><sup class="footnote-ref" id="fnref:fn-2"><a href="#fn:fn-2">2</a></sup> on the file
+list:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">find -name <span style="color:#a31515">&#34;*.ppm&#34;</span> &gt; files
+find -name <span style="color:#a31515">&#34;*.ppm&#34;</span> -exec md5sum {} <span style="color:#a31515">\;</span> | sort &gt;filesums</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1</span>:
+  List files by sorted md5sum output
+</div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">1bf7780ee715d6c6809500f31661133f  ./image-434.ppm
+803b77f41c2febccbaa4ed0115427e80  ./image-255.ppm
+8c913d1951e5a90cfbe9a6440a115cde  ./image-131.ppm
+8c913d1951e5a90cfbe9a6440a115cde  ./image-277.ppm</code></pre></div>
+<p>I thus have a list of files and their checksums separated by spacing.
+We want to find duplicate filenames. The command <a href="http://man.he.net/?topic=uniq&amp;section=all">uniq(1)</a> could do
+this, but I like to mention that <a href="http://man.he.net/?topic=awk&amp;section=all">awk(1)</a> can do this. Inspired by
+<a href="https://stackoverflow.com/a/32085039">StackOverflow</a>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk -F<span style="color:#a31515">&#39; &#39;</span> <span style="color:#a31515">&#39;a[$1]++ {print $NF}&#39;</span> &lt;filesums &gt; duplicates</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2</span>:
+  Spot duplicates by indexing on checksum (first field), printing last entry of line (filename)
+</div>
+
+<p>Now, we want to have the list of unique files, which is list of <code>files</code>
+minus <code>duplicates</code>, that is, files appearing in one file that aren&rsquo;t in
+the other.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">comm -3 &lt;(sort files) &lt;(sort duplicates) &gt;unique
+wc -l files unique duplicates</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3</span>:
+  Get unique files list
+</div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">688 files
+438 unique
+250 duplicates</code></pre></div>
+<p>Fascinating, but let&rsquo;s rewind to the use of <code>comm</code>. &ldquo;<a href="http://man.he.net/?topic=comm&amp;section=all">comm(1)</a> compares
+two sorted files, line by line&rdquo;:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">With  no  options,  produce three-column output.  Column one contains lines
+unique to FILE1, column two contains lines  unique  to  FILE2,  and  column
+three contains lines common to both files.
+
+-1     suppress column 1 (lines unique to FILE1)
+
+-2     suppress column 2 (lines unique to FILE2)
+
+-3     suppress column 3 (lines that appear in both files)</code></pre></div>
+<p>Note that we could have used <code>-2</code> too, but that isn&rsquo;t strictly required
+in this case. Also, our files weren&rsquo;t necessarily sorted before
+comparison, hence the shell redirection of <code>&lt;(sort file)</code>.</p>
+
+<p>This duplicates list gives us something to delete the duplicate files:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs -I % rm <span style="color:#a31515">&#34;%&#34;</span> &lt;duplicates</code></pre></div>
+<p>Even without duplicate files, we still don&rsquo;t know which files are the
+ones we wanted, because many files exported were tiny logos and helper
+symbols like page turn symbol, arrows, horizontal bar separators etc.</p>
+
+<h2 id="classification">Classification</h2>
+
+<p>This is a classic problem of data science: classification. Given an
+item, which label should be used for it? Usually the label is binary.
+Classic examples include given a picture, is this a cat picture, or
+not a cat picture. Another one is given an email, is it Spam (unwanted
+ads etc) or is it Ham (real email). For our cases, given a file, is it
+a real diagram or just a random logo or symbol.</p>
+
+<p>Without going into data science, it&rsquo;s important to highlight that we
+can often get away with an approximation (aka &ldquo;heuristic&rdquo;, an informed
+guess) of the solution: if instead of 450 files to sort, only 50
+remain, that&rsquo;s good enough to manually sift through the rest without
+grumbling.</p>
+
+<p>In this case, an important approximation of file usefulness is by
+using its dimensions as an image. The bigger the width and height, the
+more likely the file is actually interesting. This could be explored
+by using dedicated image CLI tools like <a href="https://imagemagick.org/index.php">imagemagick</a>, but a lower tech
+solution exists: <a href="http://man.he.net/?topic=file&amp;section=all">file(1)</a>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs &lt;unique -I % file % &gt; uniqueimagesize</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4</span>:
+  Show file information for each of the unique images
+</div>
+
+<p>With sample output</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-672.ppm: Netpbm image data, size = 150 x 46, rawbits, pixmap
+./images-674.ppm: Netpbm image data, size = 553 x 399, rawbits, pixmap
+./images-675.ppm: Netpbm image data, size = 239 x 39, rawbits, pixmap
+./images-677.ppm: Netpbm image data, size = 123 x 120, rawbits, pixmap</code></pre></div>
+<p>This is already good enough to get started sorting manually, but I
+thought it more visual to use the image area as metric, again using
+awk, by parsing the above output.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk <span style="color:#a31515">&#39;{print $1, $7, $9, $7 * $9}&#39;</span> &lt;uniqueimagesize | tr -d <span style="color:#a31515">&#39;:,&#39;</span> &gt; uniqueimagesizearea</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5</span>:
+  Show image name, width, height, and area
+</div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-672.ppm 150 46 6900
+./images-674.ppm 553 399 220647
+./images-675.ppm 239 39 9321
+./images-677.ppm 123 120 14760</code></pre></div>
+<p>Now we can sort the result (<a href="http://man.he.net/?topic=sort&amp;section=all">sort(1)</a>) and, for instance, grab the top
+100 (<a href="http://man.he.net/?topic=head&amp;section=all">head(1)</a>).</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sort -n -r -k 4 &lt; uniqueimagesizearea</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6</span>:
+  Sort using 4th field (area), numerically (not alphabetic, in which 11&gt;100), and reverse output (top-down)
+</div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-674.ppm 553 399 220647
+./images-677.ppm 123 120 14760
+./images-675.ppm 239 39 9321
+./images-672.ppm 150 46 6900</code></pre></div>
+<p>This could be plotted to see clustering trends. We would expect the
+histogram of image area to show a long tail: small number of high
+area images, our diagrams, the Ham!</p>
+
+<p>Note that individually, factors like high image width can be good
+indicators too, but could also hide a low height (image being a
+horizontal bar). This is why area can be a better approximation,
+getting a combination of both metrics &ldquo;averaged&rdquo;.</p>
+
+<p>Proper classification research would explore much more than just
+identical filestream and image dimensions, using factors like image
+content to create features like &ldquo;average image color&rdquo;, &ldquo;deviation in
+brightness&rdquo; etc, and other frequential analysis (fourier
+techniques &hellip;) but for a low tech effort, getting rid of 250 duplicate
+pictures and having a sorted list of which pictures to examine first in
+the rest, this was sufficient.</p>
+
+<p>The pleasure for me was in rediscovering good old UNIX toolchain, and how
+it can support even multimedia workflows like image manipulation.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fn-1">MS Office documents like Excel and Word are <a href="https://www.howtogeek.com/50628/easily-extract-images-text-and-embedded-files-from-an-office-2007-document/">actually zip files</a>. If I only wanted to get PNGs off I would just have renamed the file to ZIP, unzipped, and collected the PNG files.
+ <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
+<li id="fn:fn-2">It is well known that the <code>MD5</code> hash is <a href="https://security.stackexchange.com/a/19908">deprecated for security reasons</a>. The use of md5 here is to see if file content matches among assumed-random byte streams, and don&rsquo;t expect maliciously crafted files that would confuse check sums. This also means we actually <em>benefit</em> from the speed of execution of <code>md5sum</code> over its more cryptographically robust cousins like <code>sha256sum</code>.
+ <a class="footnote-return" href="#fnref:fn-2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div><a href="https://github.com/vividvilla/ezhil">Ezhil</a> theme <a href="https://github.com/OverkillGuy/ezhil">fork</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

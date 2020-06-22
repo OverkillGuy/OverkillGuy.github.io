@@ -6,10 +6,20 @@
     <description>Recent content in blog on Jiby&#39;s selfhosted effort</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Jun 2020 00:32:00 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2020 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Separating Spam from Ham with the shell</title>
+      <link>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</link>
+      <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</guid>
+      <description>Here&amp;rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
+The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &amp;ldquo;save as picture&amp;rdquo; context menu. But a couple of images were still deformed beyond recognition.</description>
+    </item>
     
     <item>
       <title>Reproducible workspace deployment with Ansible and Vagrant</title>

@@ -3,27 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jiby.tech/tags/awk/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/classification/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/shell/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/tags/ansible/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/tags/infrastructure-as-code/</loc>
-    <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/post/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
   </url>
   
@@ -38,18 +63,8 @@
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/</loc>
-    <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/tags/vagrant/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/awk/</loc>
-    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
