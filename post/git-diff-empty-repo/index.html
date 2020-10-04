@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Git diff from empty commit - Jiby&#39;s selfhosted effort</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Git diff from empty commit - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Git diff from empty commit" />
 <meta property="og:description" content="In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &ldquo;nothing&rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&rsquo;s a specific commit hash we can use to diff from &ldquo;nothing&rdquo; to the first commit:" />
 <meta property="og:type" content="article" />
@@ -21,7 +21,7 @@
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<h1 class="site-title">Jiby&#39;s selfhosted effort</h1>
+	<h1 class="site-title">Jiby&#39;s toolbox</h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -99,9 +99,9 @@ the content of files tracked are objects called &ldquo;blobs&rdquo;, and that
 filename + blob hash + file permissions. A single tree object can
 represent the entirety of a folder at a point in time, and a tree can
 link to another tree, typically subfolders. This is summarized well in
-Figure <a href="#org3bf7618">1</a>.</p>
+Figure <a href="#orga86fed5">1</a>.</p>
 
-<p><a id="org3bf7618"></a></p>
+<p><a id="orga86fed5"></a></p>
 
 <figure>
     <img src="https://git-scm.com/book/en/v2/images/data-model-1.png"

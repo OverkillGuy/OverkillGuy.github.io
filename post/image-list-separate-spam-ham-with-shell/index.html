@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Separating Spam from Ham with the shell - Jiby&#39;s selfhosted effort</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Separating Spam from Ham with the shell - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Separating Spam from Ham with the shell" />
 <meta property="og:description" content="Here&rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
 The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &ldquo;save as picture&rdquo; context menu. But a couple of images were still deformed beyond recognition." />
@@ -23,7 +23,7 @@ The images I wanted to export were MS Word diagrams drawn in Word, rather than P
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<h1 class="site-title">Jiby&#39;s selfhosted effort</h1>
+	<h1 class="site-title">Jiby&#39;s toolbox</h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -97,8 +97,8 @@ find -name <span style="color:#a31515">&#34;*.ppm&#34;</span> -exec md5sum {} <s
 8c913d1951e5a90cfbe9a6440a115cde  ./image-131.ppm
 8c913d1951e5a90cfbe9a6440a115cde  ./image-277.ppm</code></pre></div>
 <p>I thus have a list of files and their checksums separated by spacing.
-We want to find duplicate filenames. The command <a href="http://man.he.net/?topic=uniq&amp;section=all">uniq(1)</a> could do
-this, but I like to mention that <a href="http://man.he.net/?topic=awk&amp;section=all">awk(1)</a> can do this. Inspired by
+We want to find duplicate filenames. The command <a href="http://man.he.net/?topic=uniq&amp;section=all">http://man.he.net/?topic=uniq&amp;section=all</a> could do
+this, but I like to mention that <a href="http://man.he.net/?topic=awk&amp;section=all">http://man.he.net/?topic=awk&amp;section=all</a> can do this. Inspired by
 <a href="https://stackoverflow.com/a/32085039">StackOverflow</a>:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk -F<span style="color:#a31515">&#39; &#39;</span> <span style="color:#a31515">&#39;a[$1]++ {print $NF}&#39;</span> &lt;filesums &gt; duplicates</code></pre></div>
 <div class="src-block-caption">
@@ -118,7 +118,7 @@ wc -l files unique duplicates</code></pre></div>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">688 files
 438 unique
 250 duplicates</code></pre></div>
-<p>Fascinating, but let&rsquo;s rewind to the use of <code>comm</code>. &ldquo;<a href="http://man.he.net/?topic=comm&amp;section=all">comm(1)</a> compares
+<p>Fascinating, but let&rsquo;s rewind to the use of <code>comm</code>. &ldquo;<a href="http://man.he.net/?topic=comm&amp;section=all">http://man.he.net/?topic=comm&amp;section=all</a> compares
 two sorted files, line by line&rdquo;:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">With  no  options,  produce three-column output.  Column one contains lines
 unique to FILE1, column two contains lines  unique  to  FILE2,  and  column
@@ -158,7 +158,7 @@ grumbling.</p>
 using its dimensions as an image. The bigger the width and height, the
 more likely the file is actually interesting. This could be explored
 by using dedicated image CLI tools like <a href="https://imagemagick.org/index.php">imagemagick</a>, but a lower tech
-solution exists: <a href="http://man.he.net/?topic=file&amp;section=all">file(1)</a>.</p>
+solution exists: <a href="http://man.he.net/?topic=file&amp;section=all">http://man.he.net/?topic=file&amp;section=all</a>.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs &lt;unique -I % file % &gt; uniqueimagesize</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 4</span>:
@@ -182,8 +182,8 @@ awk, by parsing the above output.</p>
 ./images-674.ppm 553 399 220647
 ./images-675.ppm 239 39 9321
 ./images-677.ppm 123 120 14760</code></pre></div>
-<p>Now we can sort the result (<a href="http://man.he.net/?topic=sort&amp;section=all">sort(1)</a>) and, for instance, grab the top
-100 (<a href="http://man.he.net/?topic=head&amp;section=all">head(1)</a>).</p>
+<p>Now we can sort the result (<a href="http://man.he.net/?topic=sort&amp;section=all">http://man.he.net/?topic=sort&amp;section=all</a>) and, for instance, grab the top
+100 (<a href="http://man.he.net/?topic=head&amp;section=all">http://man.he.net/?topic=head&amp;section=all</a>).</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sort -n -r -k 4 &lt; uniqueimagesizearea</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 6</span>:
