@@ -6,11 +6,7 @@
     <description>Recent content in data-processing on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://jiby.tech/tags/data-processing/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/data-processing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using Awk to replace only some lines</title>
       <link>https://jiby.tech/post/awk-replace-some-lines/</link>

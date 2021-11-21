@@ -6,11 +6,7 @@
     <description>Recent content in git on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://jiby.tech/tags/git/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git diff from empty commit</title>
       <link>https://jiby.tech/post/git-diff-empty-repo/</link>

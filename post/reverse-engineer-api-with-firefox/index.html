@@ -14,16 +14,18 @@ Since the webapp is requesting data from the API when I click, we should be able
 <meta name="twitter:title" content="Reverse-engineering webapp APIs with Firefox"/>
 <meta name="twitter:description" content="I&rsquo;m writing code to back up my user data off a website that lets me see all of my info (including querying by time, account etc) but doesn&rsquo;t have export features (officially). I am certain there&rsquo;s an API behind the site that I just have to make sense of.
 Since the webapp is requesting data from the API when I click, we should be able to record the web traffic to explore the API."/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/main.css" /><link rel="stylesheet" type="text/css" href="https://jiby.tech/css/dark.css" media="(prefers-color-scheme: dark)" />
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://jiby.tech/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<h1 class="site-title">Jiby&#39;s toolbox</h1>
+	<base href="https://jiby.tech/">
+	<h1 class="site-title"><a href="https://jiby.tech/">Jiby&#39;s toolbox</a></h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -93,9 +95,9 @@ capture all the variations in calls like different query parameters
 get you going, reviewing the specific URLs, parameters, verbs. But
 that&rsquo;s not the best part: Firefox can export this file for later use.
 It&rsquo;s called <a href="https://w3c.github.io/web-performance/specs/HAR/Overview.html">HAR (Http ARchives)</a>, and is available through the menu on
-the far right of the developer toolbar (see Figure <a href="#org799bf9f">2</a>).</p>
+the far right of the developer toolbar (see Figure <a href="#org89adecc">2</a>).</p>
 
-<p><a id="org799bf9f"></a></p>
+<p><a id="org89adecc"></a></p>
 
 <figure>
     <img src="/ox-hugo/har-save.png"
@@ -111,19 +113,19 @@ can use our friend <a href="https://stedolan.github.io/jq/">jq(1)</a> to run ana
 <p>I can easily<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup> get the path to
 walk through the HAR file to generalize some <code>jq</code> query, letting unix
 tools do the rest.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000"># show all the cookies used in requests</span>
-<span style="color:#008000"># append `| sort | uniq -c | sort -r` to get usage count for each</span>
-jq .log.entries[].request.cookies[] <span style="color:#a31515">&#34;api_recording.har&#34;</span>
-<span style="color:#008000"># show all urls hit (filtering by domain, to skip CDNs)</span>
-jq .log.entries[].request.url <span style="color:#a31515">&#34;api_recording.har&#34;</span> <span style="color:#a31515">\
-</span><span style="color:#a31515"></span>  | grep $MY_DOMAIN | sort | uniq -c | sort -r</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># show all the cookies used in requests</span>
+<span style="color:#586e75"># append `| sort | uniq -c | sort -r` to get usage count for each</span>
+jq .log.entries<span style="color:#719e07">[]</span>.request.cookies<span style="color:#719e07">[]</span> <span style="color:#2aa198">&#34;api_recording.har&#34;</span>
+<span style="color:#586e75"># show all urls hit (filtering by domain, to skip CDNs)</span>
+jq .log.entries<span style="color:#719e07">[]</span>.request.url <span style="color:#2aa198">&#34;api_recording.har&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>  | grep <span style="color:#268bd2">$MY_DOMAIN</span> | sort | uniq -c | sort -r</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1</span>:
   A few interesting queries
 </div>
 
 <p>Here&rsquo;s what it looks like on a <a href="https://github.com/Sterlingg/json-snatcher">Github project</a>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">      5 github.com/Sterlingg/json-snatcher/show_partial
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">      5 github.com/Sterlingg/json-snatcher/show_partial
       4 github.com/Sterlingg/json-snatcher
       3 github.com/Sterlingg/json-snatcher/issues
       2 github.com/Sterlingg/json-snatcher/used_by_count
@@ -146,9 +148,9 @@ jq .log.entries[].request.url <span style="color:#a31515">&#34;api_recording.har
 <p>The best part is to realize that since URLs are tree-structured, we
 can actually view the URLs hit in tree form, which really helps
 understand the structure of the site/API.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jq .log.entries[].request.url <span style="color:#a31515">&#34;api_recording.har&#34;</span> <span style="color:#a31515">\
-</span><span style="color:#a31515"></span>  | grep $MY_DOMAIN  | sed  <span style="color:#a31515">&#34;s;https://;;&#34;</span> | xargs mkdir -p
-tree $MY_DOMAIN</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jq .log.entries<span style="color:#719e07">[]</span>.request.url <span style="color:#2aa198">&#34;api_recording.har&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>  | grep <span style="color:#268bd2">$MY_DOMAIN</span>  | sed  <span style="color:#2aa198">&#34;s;https://;;&#34;</span> | xargs mkdir -p
+tree <span style="color:#268bd2">$MY_DOMAIN</span></code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 2</span>:
   Get a (folder) tree view of URLs hit
@@ -166,6 +168,8 @@ tree $MY_DOMAIN</code></pre></div>
 there we have it: Using Firefox to capture HTTPS traffic for API
 reverse-engineering. No invasive debugging tools needed and our
 standard unix tools are able to dissect this trove of data!</p>
+
+<p>*</p>
 <div class="footnotes">
 
 <hr />
@@ -178,10 +182,29 @@ standard unix tools are able to dissect this trove of data!</p>
 
 		</div>
 
-	</div>
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/firefox">firefox</a></li>
+								
+								<li><a href="/tags/reverse-engineering">reverse-engineering</a></li>
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/https">https</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div><a href="https://github.com/vividvilla/ezhil">Ezhil</a> theme <a href="https://github.com/OverkillGuy/ezhil">fork</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div><script>feather.replace()</script>
 </body>

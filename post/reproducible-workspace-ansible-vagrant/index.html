@@ -14,16 +14,18 @@ Now the dotfiles are tracked, the next biggest pain is to install packages and f
 <meta name="twitter:title" content="Reproducible workspace deployment with Ansible and Vagrant"/>
 <meta name="twitter:description" content="Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&hellip; Since 2016, I have accumulated over 500 git commits.
 Now the dotfiles are tracked, the next biggest pain is to install packages and folder structures and obscure commands required to set up some subsystems needs which config files."/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/main.css" /><link rel="stylesheet" type="text/css" href="https://jiby.tech/css/dark.css" media="(prefers-color-scheme: dark)" />
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://jiby.tech/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<h1 class="site-title">Jiby&#39;s toolbox</h1>
+	<base href="https://jiby.tech/">
+	<h1 class="site-title"><a href="https://jiby.tech/">Jiby&#39;s toolbox</a></h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -117,21 +119,21 @@ machines running in private networks, running different OSes and
 server/client software, exposing network ports. Using Ruby, this can
 be extended far beyond what&rsquo;s reasonable, all the while remaining a
 plain-text file that can be reproduced by other team members.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#008000"># See the online documentation at https://docs.vagrantup.com.</span>
-Vagrant.configure(<span style="color:#a31515">&#34;2&#34;</span>) <span style="color:#00f">do</span> |config|
-  <span style="color:#008000"># Use debian base box: https://app.vagrantup.com/debian/boxes/testing64</span>
-  config.vm.box = <span style="color:#a31515">&#34;debian/testing64&#34;</span>
-  config.vm.hostname = <span style="color:#a31515">&#34;randy&#34;</span>  <span style="color:#008000"># This is randy. Say hello.</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#586e75"># See the online documentation at https://docs.vagrantup.com.</span>
+<span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
+  <span style="color:#586e75"># Use debian base box: https://app.vagrantup.com/debian/boxes/testing64</span>
+  config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>box <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debian/testing64&#34;</span>
+  config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>hostname <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;randy&#34;</span>  <span style="color:#586e75"># This is randy. Say hello.</span>
 
-  <span style="color:#008000"># Expose a port to outside, useful for testing server softwares</span>
-  dev.vm.network <span style="color:#a31515">&#34;forwarded_port&#34;</span>, <span style="color:#a31515">guest</span>: 8080, <span style="color:#a31515">host</span>: 80, id: <span style="color:#a31515">&#34;HTTP&#34;</span>
+  <span style="color:#586e75"># Expose a port to outside, useful for testing server softwares</span>
+  dev<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>network <span style="color:#2aa198">&#34;forwarded_port&#34;</span>, <span style="color:#2aa198">guest</span>: <span style="color:#2aa198">8080</span>, <span style="color:#2aa198">host</span>: <span style="color:#2aa198">80</span>, <span style="color:#b58900">id</span>: <span style="color:#2aa198">&#34;HTTP&#34;</span>
 
-  <span style="color:#008000"># Run these shell commands on first boot</span>
-  config.vm.provision <span style="color:#a31515">&#34;shell&#34;</span>, <span style="color:#a31515">inline</span>: <span style="color:#a31515">&lt;&lt;-SHELL
-</span><span style="color:#a31515"></span>    apt-get update
-    apt-get install -y build-essential git
-  SHELL
-<span style="color:#00f">end</span></code></pre></div>
+  <span style="color:#586e75"># Run these shell commands on first boot</span>
+  config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>provision <span style="color:#2aa198">&#34;shell&#34;</span>, <span style="color:#2aa198">inline</span>: <span style="color:#2aa198">&lt;&lt;-SHELL
+</span><span style="color:#2aa198"></span>    apt<span style="color:#719e07">-</span>get update
+    apt<span style="color:#719e07">-</span>get install <span style="color:#719e07">-</span>y build<span style="color:#719e07">-</span>essential git
+  <span style="color:#cb4b16">SHELL</span>
+<span style="color:#719e07">end</span></code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1</span>:
   A simple Vagrantfile
@@ -179,20 +181,20 @@ playbook (list of tasks) on an inventory. This makes it a good starter
 automation software to test on an old laptop, from which to pick up
 tenets of Infrastructure as code, and start building a tech empire
 with.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#00f">name</span>: Developer documentation  (debian manpages + ~/dev/doc)
-  <span style="color:#00f">hosts</span>: dev
-  <span style="color:#00f">tags</span>: [dev, docs, slow]
-  <span style="color:#00f">tasks</span>:
-    - <span style="color:#00f">name</span>: Ensure ~/dev/docs exists
-      <span style="color:#00f">file</span>:
-        <span style="color:#00f">path</span>: <span style="color:#a31515">&#34;{{ ansible_home }}/dev/doc/&#34;</span>
-        <span style="color:#00f">state</span>: directory
-        <span style="color:#00f">mode</span>: <span style="color:#a31515">&#39;0755&#39;</span>
-    - <span style="color:#00f">name</span>: Install docs packages
-      <span style="color:#00f">become</span>: <span style="color:#00f">true</span>
-      <span style="color:#00f">apt</span>:
-        <span style="color:#00f">pkg</span>:
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#268bd2">name</span>: Developer documentation  (debian manpages + ~/dev/doc)
+  <span style="color:#268bd2">hosts</span>: dev
+  <span style="color:#268bd2">tags</span>: [dev, docs, slow]
+  <span style="color:#268bd2">tasks</span>:
+    - <span style="color:#268bd2">name</span>: Ensure ~/dev/docs exists
+      <span style="color:#268bd2">file</span>:
+        <span style="color:#268bd2">path</span>: <span style="color:#2aa198">&#34;{{ ansible_home }}/dev/doc/&#34;</span>
+        <span style="color:#268bd2">state</span>: directory
+        <span style="color:#268bd2">mode</span>: <span style="color:#2aa198">&#39;0755&#39;</span>
+    - <span style="color:#268bd2">name</span>: Install docs packages
+      <span style="color:#268bd2">become</span>: <span style="color:#cb4b16">true</span>
+      <span style="color:#268bd2">apt</span>:
+        <span style="color:#268bd2">pkg</span>:
           - python3-doc
           - ansible-doc
           - debmake-doc
@@ -213,22 +215,22 @@ Debian machine from a base box, running the playbook on it once before
 handing over control. Once the machine is configured (&ldquo;provisioned&rdquo;),
 I am free to use it via SSH (or remote desktop, or clicking in
 Virtualbox)</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">Vagrant.configure(<span style="color:#a31515">&#34;2&#34;</span>) <span style="color:#00f">do</span> |config|
-  config.vm.define <span style="color:#a31515">&#34;dev&#34;</span>, <span style="color:#a31515">primary</span>: <span style="color:#00f">true</span> <span style="color:#00f">do</span> |dev|
-    dev.vm.box = <span style="color:#a31515">&#34;debian/testing64&#34;</span>
-    dev.vm.hostname = <span style="color:#a31515">&#34;debby&#34;</span>  <span style="color:#008000"># Hey debby</span>
-    <span style="color:#008000"># Runs ansible on host, connecting via SSH (ansible assumed installed on</span>
-    <span style="color:#008000"># host, python on guest. See also Vagrant Provisioner &#34;ansible_local&#34;)</span>
-    dev.vm.provision <span style="color:#a31515">&#34;dev-ansible&#34;</span>, <span style="color:#a31515">type</span>: <span style="color:#a31515">&#34;ansible&#34;</span> <span style="color:#00f">do</span> |ansible|
-      ansible.playbook       = <span style="color:#a31515">&#34;playbook/main.yml&#34;</span>
-      ansible.inventory_path = <span style="color:#a31515">&#34;vagrant_inventory&#34;</span>
-      ansible.skip_tags      = <span style="color:#a31515">&#34;x11, slow&#34;</span>  <span style="color:#008000"># Can exclude tasks via tags</span>
-      ansible.limit          = <span style="color:#a31515">&#34;dev&#34;</span>
-      <span style="color:#008000"># ansible.verbose        = true</span>
-    <span style="color:#00f">end</span>
-  <span style="color:#00f">end</span>
-  <span style="color:#008000"># [...] Other provisioners or machines</span>
-<span style="color:#00f">end</span></code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
+  config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>define <span style="color:#2aa198">&#34;dev&#34;</span>, <span style="color:#2aa198">primary</span>: <span style="color:#719e07">true</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>dev<span style="color:#719e07">|</span>
+    dev<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>box <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debian/testing64&#34;</span>
+    dev<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>hostname <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debby&#34;</span>  <span style="color:#586e75"># Hey debby</span>
+    <span style="color:#586e75"># Runs ansible on host, connecting via SSH (ansible assumed installed on</span>
+    <span style="color:#586e75"># host, python on guest. See also Vagrant Provisioner &#34;ansible_local&#34;)</span>
+    dev<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>provision <span style="color:#2aa198">&#34;dev-ansible&#34;</span>, <span style="color:#2aa198">type</span>: <span style="color:#2aa198">&#34;ansible&#34;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>ansible<span style="color:#719e07">|</span>
+      ansible<span style="color:#719e07">.</span>playbook       <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;playbook/main.yml&#34;</span>
+      ansible<span style="color:#719e07">.</span>inventory_path <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;vagrant_inventory&#34;</span>
+      ansible<span style="color:#719e07">.</span>skip_tags      <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;x11, slow&#34;</span>  <span style="color:#586e75"># Can exclude tasks via tags</span>
+      ansible<span style="color:#719e07">.</span>limit          <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;dev&#34;</span>
+      <span style="color:#586e75"># ansible.verbose        = true</span>
+    <span style="color:#719e07">end</span>
+  <span style="color:#719e07">end</span>
+  <span style="color:#586e75"># [...] Other provisioners or machines</span>
+<span style="color:#719e07">end</span></code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 3</span>:
   Part of my Vagrantfile, describing debby, a debian machine provisioned by ansible
@@ -245,27 +247,27 @@ IPs, and port numbers.</p>
 which is handy when describing a development VM + a test server, or
 front and backend systems. Here&rsquo;s what the server portion of my
 Vagrantfile looks like:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">Vagrant.configure(<span style="color:#a31515">&#34;2&#34;</span>) do |config<span style="color:#a31515">|
-</span><span style="color:#a31515">
-</span><span style="color:#a31515">  # [...] dev machine as seen above</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
 
-  <span style="color:#008000"># A server on which to run the docker stuff</span>
-  config.vm.define <span style="color:#a31515">&#34;server&#34;</span> do |server<span style="color:#a31515">|
-</span><span style="color:#a31515">    server.vm.box = &#34;debian/buster64&#34;</span>
-    server.vm.hostname = <span style="color:#a31515">&#34;sergei&#34;</span>  <span style="color:#008000"># Hey sergei.</span>
-    server.vm.network <span style="color:#a31515">&#34;forwarded_port&#34;</span><span style="color:#00f">, guest: 3000, host: 3000, id</span>: <span style="color:#a31515">&#34;HTTP&#34;</span>
-    server.vm.network <span style="color:#a31515">&#34;forwarded_port&#34;</span><span style="color:#00f">, guest: 222, host: 2224, id</span>: <span style="color:#a31515">&#34;SSH&#34;</span>
+  <span style="color:#586e75"># [...] dev machine as seen above</span>
 
-    server.vm.provision <span style="color:#a31515">&#34;server-ansible&#34;</span><span style="color:#00f">, type</span>: <span style="color:#a31515">&#34;ansible&#34;</span> do |ansible<span style="color:#a31515">|
-</span><span style="color:#a31515">      ansible.playbook       = &#34;playbook/server/main.yml&#34;</span>
-      ansible.inventory_path = <span style="color:#a31515">&#34;vagrant_inventory&#34;</span>
-      ansible.limit          = <span style="color:#a31515">&#34;servers&#34;</span>
-      ansible.galaxy_role_file = <span style="color:#a31515">&#34;requirements.yml&#34;</span>
-      ansible.galaxy_roles_path = <span style="color:#a31515">&#34;playbook/roles/&#34;</span>
-      <span style="color:#008000"># ansible.verbose        = true</span>
-    end
-  end
-end</code></pre></div>
+  <span style="color:#586e75"># A server on which to run the docker stuff</span>
+  config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>define <span style="color:#2aa198">&#34;server&#34;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>server<span style="color:#719e07">|</span>
+    server<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>box <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debian/buster64&#34;</span>
+    server<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>hostname <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;sergei&#34;</span>  <span style="color:#586e75"># Hey sergei.</span>
+    server<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>network <span style="color:#2aa198">&#34;forwarded_port&#34;</span>, <span style="color:#2aa198">guest</span>: <span style="color:#2aa198">3000</span>, <span style="color:#2aa198">host</span>: <span style="color:#2aa198">3000</span>, <span style="color:#b58900">id</span>: <span style="color:#2aa198">&#34;HTTP&#34;</span>
+    server<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>network <span style="color:#2aa198">&#34;forwarded_port&#34;</span>, <span style="color:#2aa198">guest</span>: <span style="color:#2aa198">222</span>, <span style="color:#2aa198">host</span>: <span style="color:#2aa198">2224</span>, <span style="color:#b58900">id</span>: <span style="color:#2aa198">&#34;SSH&#34;</span>
+
+    server<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>provision <span style="color:#2aa198">&#34;server-ansible&#34;</span>, <span style="color:#2aa198">type</span>: <span style="color:#2aa198">&#34;ansible&#34;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>ansible<span style="color:#719e07">|</span>
+      ansible<span style="color:#719e07">.</span>playbook       <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;playbook/server/main.yml&#34;</span>
+      ansible<span style="color:#719e07">.</span>inventory_path <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;vagrant_inventory&#34;</span>
+      ansible<span style="color:#719e07">.</span>limit          <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;servers&#34;</span>
+      ansible<span style="color:#719e07">.</span>galaxy_role_file <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;requirements.yml&#34;</span>
+      ansible<span style="color:#719e07">.</span>galaxy_roles_path <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;playbook/roles/&#34;</span>
+      <span style="color:#586e75"># ansible.verbose        = true</span>
+    <span style="color:#719e07">end</span>
+  <span style="color:#719e07">end</span>
+<span style="color:#719e07">end</span></code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 4</span>:
   Server section of Vagrantfile, Debian stable exposing ports for Gitea
@@ -276,7 +278,7 @@ install of Gitea (a Github clone).</p>
 
 <p>With multiple machines in same Vagrantfile, I can choose which machine
 I need and boot it selectively:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ vagrant status
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ vagrant status
 Current machine states:
 
 dev                       running (virtualbox)
@@ -286,10 +288,10 @@ This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
 VM, run `vagrant status NAME`.</code></pre></div>
 <p>Booting specific machines is a matter of adding a keyword</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant up dev
-<span style="color:#008000"># or</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant up dev
+<span style="color:#586e75"># or</span>
 vagrant up server
-<span style="color:#008000"># why not both?</span>
+<span style="color:#586e75"># why not both?</span>
 vagrant up</code></pre></div>
 <h2 id="towards-infrastructure-as-code">Towards infrastructure as code</h2>
 
@@ -342,10 +344,31 @@ hand-me-down machines</em>, reproducibility is key.</p>
 
 		</div>
 
-	</div>
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/reproducible">reproducible</a></li>
+								
+								<li><a href="/tags/ansible">ansible</a></li>
+								
+								<li><a href="/tags/vagrant">vagrant</a></li>
+								
+								<li><a href="/tags/infrastructure-as-code">infrastructure-as-code</a></li>
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div><a href="https://github.com/vividvilla/ezhil">Ezhil</a> theme <a href="https://github.com/OverkillGuy/ezhil">fork</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div><script>feather.replace()</script>
 </body>

@@ -12,16 +12,18 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git diff from empty commit"/>
 <meta name="twitter:description" content="In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &ldquo;nothing&rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&rsquo;s a specific commit hash we can use to diff from &ldquo;nothing&rdquo; to the first commit:"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/main.css" /><link rel="stylesheet" type="text/css" href="https://jiby.tech/css/dark.css" media="(prefers-color-scheme: dark)" />
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://jiby.tech/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<h1 class="site-title">Jiby&#39;s toolbox</h1>
+	<base href="https://jiby.tech/">
+	<h1 class="site-title"><a href="https://jiby.tech/">Jiby&#39;s toolbox</a></h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -65,7 +67,7 @@ first commit. Since git keeps a linked graph of commits, what I wanted
 was a diff from the commit before the first one. Searching the onlines
 dug up <a href="https://stackoverflow.com/a/40884093">this answer on StackOverflow</a>, showing that there&rsquo;s a specific
 commit hash we can use to diff from &ldquo;nothing&rdquo; to the first commit:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git diff 4b825dc642cb6eb9a060e54bf8d69288fbee4904 HEAD</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git diff 4b825dc642cb6eb9a060e54bf8d69288fbee4904 HEAD</code></pre></div>
 <blockquote>
 <p><code>4b825dc642cb6eb9a060e54bf8d69288fbee4904</code> is the id of the &ldquo;empty
 tree&rdquo; in Git and it&rsquo;s always available in every repository.</p>
@@ -99,9 +101,9 @@ the content of files tracked are objects called &ldquo;blobs&rdquo;, and that
 filename + blob hash + file permissions. A single tree object can
 represent the entirety of a folder at a point in time, and a tree can
 link to another tree, typically subfolders. This is summarized well in
-Figure <a href="#orga86fed5">1</a>.</p>
+Figure <a href="#orgc75efc7">1</a>.</p>
 
-<p><a id="orga86fed5"></a></p>
+<p><a id="orgc75efc7"></a></p>
 
 <figure>
     <img src="https://git-scm.com/book/en/v2/images/data-model-1.png"
@@ -159,10 +161,25 @@ curious!</p>
 
 		</div>
 
-	</div>
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/git">git</a></li>
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div><a href="https://github.com/vividvilla/ezhil">Ezhil</a> theme <a href="https://github.com/OverkillGuy/ezhil">fork</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div><script>feather.replace()</script>
 </body>

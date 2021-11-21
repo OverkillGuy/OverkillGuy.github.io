@@ -6,11 +6,7 @@
     <description>Recent content in classification on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jun 2020 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://jiby.tech/tags/classification/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 22 Jun 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/classification/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Separating Spam from Ham with the shell</title>
       <link>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</link>

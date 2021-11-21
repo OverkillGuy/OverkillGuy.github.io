@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/post/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
   </url>
@@ -124,11 +129,6 @@
   
   <url>
     <loc>https://jiby.tech/about/</loc>
-    <lastmod>2020-10-04T18:07:10+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/</loc>
     <lastmod>2020-10-04T18:07:10+01:00</lastmod>
   </url>
   

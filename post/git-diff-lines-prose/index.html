@@ -20,16 +20,18 @@
 <meta name="twitter:description" content="When writing long sentences in documentation repositories, git tends to show really unhelpful diffs. They are unreadable because long lines aren&rsquo;t broken, which hides edits happening towards end of line. A colleague of mine asked me if git couldn&rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!
   Figure 1: Can you spot the edit made in a long line of text?
   Kaushal Modi&rsquo;s blog post on git diff for minified JS and CSS inspired this idea for all you prose lovers."/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/main.css" /><link rel="stylesheet" type="text/css" href="https://jiby.tech/css/dark.css" media="(prefers-color-scheme: dark)" />
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://jiby.tech/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<h1 class="site-title">Jiby&#39;s toolbox</h1>
+	<base href="https://jiby.tech/">
+	<h1 class="site-title"><a href="https://jiby.tech/">Jiby&#39;s toolbox</a></h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -86,7 +88,7 @@ command that splits text by sentences before running <code>git diff</code>.</p>
 newlines. This is a good enough heuristic to distinguish sentences, but feel
 free to come up with a more appropriate one (fellow Americans, I heard you
 might want two spaces after your full stops).</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sed -r -e <span style="color:#a31515">&#39;s/\. +/.\n/g&#39;</span> $*</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sed -r -e <span style="color:#2aa198">&#39;s/\. +/.\n/g&#39;</span> <span style="color:#268bd2">$*</span></code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1</span>:
   New "breaksentences" script
@@ -97,13 +99,13 @@ script can be added as a &ldquo;diff driver&rdquo; in git config (either globall
 <code>~/.gitconfig</code> or for only a specific repo via <code>.git/config</code>). Once the driver is
 defined, it can be used in a <code>.gitattributes</code> file. All thanks to the magic of
 <a href="https://www.git-scm.com/docs/gitattributes">gitattributes(5)</a> and <a href="https://www.git-scm.com/docs/git-config">git-config(5)</a>, and their concept of &ldquo;diff drivers&rdquo;.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[diff &#34;sentences&#34;]
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[diff &#34;sentences&#34;]
 	textconv = breaksentences</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 2</span>:
   Defining a new diff driver in ~/.gitconfig
 </div>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*.md diff=sentences</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*.md diff=sentences</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 3</span>:
   Using new diff driver in .gitattributes
@@ -135,10 +137,25 @@ but it&rsquo;s still neat to learn about git magic. Powerful stuff.</p>
 
 		</div>
 
-	</div>
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/git">git</a></li>
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div><a href="https://github.com/vividvilla/ezhil">Ezhil</a> theme <a href="https://github.com/OverkillGuy/ezhil">fork</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div><script>feather.replace()</script>
 </body>
