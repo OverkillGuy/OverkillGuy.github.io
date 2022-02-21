@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Gherkin Features for user requirements - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Gherkin Features for user requirements" />
+<meta property="og:description" content="The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/gherkin-features-user-requirements/" />
+<meta property="article:published_time" content="2022-02-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-02-21T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gherkin Features for user requirements"/>
+<meta name="twitter:description" content="The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines."/>
+<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/main.css" /><link rel="stylesheet" type="text/css" href="https://jiby.tech/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://jiby.tech/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://jiby.tech/">
+	<h1 class="site-title"><a href="https://jiby.tech/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/presentation">Presentations</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Gherkin Features for user requirements</h1>
+			<div class="meta">Posted on &mdash; Feb 21, 2022</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p><strong>The most common mistake I see developers make is building the wrong thing</strong>: Not
+tracking exactly what is required from the start, and instead getting excited
+about the cool technical problems ahead. Fast forward a few days, weeks, months,
+showcasing the product near completion, suddenly the rift between what&rsquo;s needed
+and what was built becomes obvious, in a frenzy of last minute changes to reach
+the original goal under pressure from deadlines.</p>
+
+<p>Developers need to get into the habit of questioning every new feature request,
+sort of like the <a href="https://en.wikipedia.org/wiki/Five%5Fwhys">Five Whys</a>:</p>
+
+<ul>
+<li>&ldquo;<em>What</em> are we building?&rdquo;</li>
+<li>&ldquo;<em>Why</em> are we building this?&rdquo;</li>
+<li>&ldquo;Do we <em>need</em> it?&rdquo;</li>
+<li>&ldquo;<em>Who</em> needs it?&rdquo;</li>
+<li>&ldquo;<em>Why</em> do they need it?&rdquo;</li>
+<li>&ldquo;Do they need it <em>now</em>?&rdquo;</li>
+<li>&ldquo;Do they need it built <em>that way</em>?&rdquo;</li>
+</ul>
+
+<p>Often, the answers invalidate the need for the feature, be it because of
+scheduling: &ldquo;Actually, partners won&rsquo;t be able to connect to our platform until
+next year, so we can probably hold off on building the API for now.&rdquo; or more
+aggressively by shouting &ldquo;<a href="https://en.wikipedia.org/wiki/You%5Faren%27t%5Fgonna%5Fneed%5Fit">YAGNI</a>!&rdquo; from rooftops like a ninja out to cut down
+on scope creep.</p>
+
+<p>Either way, the problem is that the user&rsquo;s demands (requirements) aren&rsquo;t clearly
+written down, leading to technical proposals that don&rsquo;t match what&rsquo;s needed.</p>
+
+<p>To bridge that gap of requirements traceability, we need a way to describe what
+features are needed and what value they add to the product. This is often called
+&ldquo;user stories&rdquo;, and can be a fantastic tool to clarify a product.</p>
+
+<p>In this article, the first in a series on Gherkin, I propose that, by <strong>writing
+up user stories in Gherkin</strong>, you get <strong>a clear view of your software&rsquo;s
+requirements and specifications</strong>.</p>
+
+<h2 id="requirements-101">Requirements 101</h2>
+
+<p>Usually a project starts with a customer wanting something built. To build it,
+the customer sends a pile of money, and a list of demands, called the <span class="underline">user
+requirements</span>. Some of these requirements are <span class="underline">functional</span>, when they describe
+actual features, but usually come along with some notes about what a good
+solution looks like: (&ldquo;it must take less than a second to gather all data&rdquo;, or
+&ldquo;it must run locally, not in the cloud&rdquo;), called <span class="underline">non-functional requirements</span>
+because they&rsquo;re not new features, just properties of a valid solution.</p>
+
+<p>Whatever is built needs to tick all the user requirements, which means
+implementing all the requested features, but also validate the non-functional
+aspects.</p>
+
+<p>The exercise of building a system while tracking which built features map to
+which source requirement, in order to build exactly what was needed and no more,
+is usually quite tedious, can involve spreadsheets, traceability matrices, and
+other torture devices. Surely there is a simpler way to get most of that value?</p>
+
+<h2 id="enters-gherkin">Enters Gherkin</h2>
+
+<p><a href="https://cucumber.io/docs/gherkin/reference/">Gherkin</a> is a restricted subset of English that allows plain text specification
+of user stories. We&rsquo;ll limit our interest to Gherkin <code>Features</code> for now, but
+it should be noted there&rsquo;s an entire software movement involving Gherkin for
+traceability from requirement to acceptance tests, called <a href="https://cucumber.io/docs/bdd/">Behaviour-driven
+Development</a>, which I&rsquo;ll cover in more detail another time.</p>
+
+<p><a id="code-snippet--requirement-feature"></a></p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-feature" data-lang="feature"><span style="color:#719e07">Feature:</span><span style="color:#268bd2"> Event signup
+</span><span style="color:#268bd2">  As an event organiser
+</span><span style="color:#268bd2">  I need users to sign up ahead of an event
+</span><span style="color:#268bd2">  In order to approximate event size for booking accomodation</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--requirement-feature">Code Snippet 1</a></span>:
+  A Gherkin Feature file, inspired by a Discord bot I recently dug into
+</div>
+
+<p>In a few specific lines, we captured everything we need to know about this: what
+is needed, who needs it, and why. It&rsquo;s also remarkably close to what a
+conversation with a customer might provide. This simplicity is part of the value
+of Gherkin<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup>. Let&rsquo;s break it down:</p>
+
+<ul>
+<li><code>Feature: ...</code>: the feature&rsquo;s title (as would appear in a bug tracker)</li>
+<li><code>As a ...</code> tells us who <em>cares</em> about this feature (in UML Usecase diagrams, this is called the Actor)</li>
+<li><code>I need ...</code>: a one line description of the feature</li>
+<li><code>In order to ...</code> (or <code>So that ...</code>) explains why is this important (priorization, grouping requirements together)</li>
+</ul>
+
+<p>Imagine if every high level feature request of a project was documented in such
+a way, with simple explanation of what&rsquo;s needed, by whom, and why!</p>
+
+<p>In particular, this format solves a classic issue: sometimes customers know what
+they want (&ldquo;In order to&rdquo;) but their proposed feature (&ldquo;I need&rdquo;) isn&rsquo;t quite the
+best way to achieve this. This is common enough to have a name, the <a href="https://xyproblem.info/">XY problem</a>.</p>
+
+<h2 id="requirements-specification-drilling-down">Requirements, specification: drilling down</h2>
+
+<p>Back to project management: with user requirements in hand, software design can
+proceed, and Specification begins. Specifications are technical
+decisions made in order to achieve the required goal.</p>
+
+<p>Specifications can also be written as Gherkin features, they just also happen to
+encode a design choice about the way to implement the requirement. Remember to
+question &ldquo;is this so-called Feature relying on a design decision?&rdquo;.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-feature" data-lang="feature"><span style="color:#719e07">Feature:</span><span style="color:#268bd2"> Discord emoji-reactions event signup
+</span><span style="color:#268bd2">  As an event organiser
+</span><span style="color:#268bd2">  I need users to respond to event invitation via emoji reactions on discord
+</span><span style="color:#268bd2">  In order to get projected attendance numbers</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2</span>:
+  Note how this feature references Discord, but could have specified "email" instead. This hints it is probably a specification (technical decision), which is a specific strategy to implement a user requirement.
+</div>
+
+<p>Such a common format for both requirements and specification allows one to drill
+down into implementation specifics, just be careful to not mix up abstraction
+levels: Gathering all requirements into one place, where a project overview can
+be kept is still the most valuable application of Gherkin Features, everything
+else is secondary.</p>
+
+<p>And that&rsquo;s it! When you next want to list out all the functional user
+requirements of a project, just start with a blank document, write out &ldquo;Feature:
+&hellip; As a &hellip; I need &hellip; In order to &hellip;&rdquo; and fill in the gaps, adding as many
+features as needed. That&rsquo;s enough to get a lot of value, just by asking
+questions like &ldquo;Who needs this, again? &hellip; Cool, but why?&rdquo;</p>
+
+<p>In the next Gherkin article, I&rsquo;ll show how Behaviour-Driven Development workflow
+provides tracking of the requirements you just wrote all the way to project
+delivery, through the practice of Acceptance Testing, written out as many
+Gherkin Scenarios for each Gherkin Feature.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fn-1">I&rsquo;m taking some liberties as to what the Gherkin syntax defines strictly, for instance the &ldquo;as a &hellip; I need &hellip; In order to&hellip;&rdquo; syntax isn&rsquo;t specified in Gherkin, but it&rsquo;s common enough to show up in some Gherkin snippets/templates.
+ <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/gherkin">gherkin</a></li>
+								
+								<li><a href="/tags/features">features</a></li>
+								
+								<li><a href="/tags/requirements">requirements</a></li>
+								
+								<li><a href="/tags/specifications">specifications</a></li>
+								
+								<li><a href="/tags/documentation">documentation</a></li>
+								
+								<li><a href="/tags/project">project</a></li>
+								
+								<li><a href="/tags/management">management</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

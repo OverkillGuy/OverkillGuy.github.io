@@ -3,27 +3,72 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/documentation/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/features/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/gherkin/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/gherkin-features-user-requirements/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/management/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/project/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/requirements/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/specifications/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/tags/awk/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/tags/classification/</loc>
-    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/post/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
   </url>
   
@@ -34,11 +79,6 @@
   
   <url>
     <loc>https://jiby.tech/tags/shell/</loc>
-    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
   </url>
   
