@@ -6,7 +6,16 @@
     <description>Recent content in gherkin on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/gherkin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/gherkin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BDD Dreams, Cucumber And Gherkin</title>
+      <link>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</link>
+      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</guid>
+      <description>In the previous post in this series on Gherkin, I showed the tools that Gherkin Features provide for requirements tracking, and mentioned ambitious goals for the Behaviour-driven Development (BDD) movement. In this article, I want to expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of traceability led to Cucumber, a tool for automating acceptance test execution, tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on these tools for a future post.</description>
+    </item>
+    
     <item>
       <title>Gherkin Features for user requirements</title>
       <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>

@@ -16,18 +16,17 @@ Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance 29/0
 <meta name="twitter:description" content="I was trying to convert bank-issued CSV files that have a weird data layout, for automatic processing by the excellent ledger. This made me learn a new thing about awk. Follow me down the UNIXy goodness!
 The data I was getting looks like this:
 Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance 29/02/2018,Restaurant,14.5,,1234.2 12/03/2018,ATM withdrawal,50,,1184.2 23/04/2018,Deposited check,,100,1284.2 Note the last line having 100 in a different column: The problem is that, when receiving money, the transaction is logged in a separate entry (&ldquo;Credit Amount&rdquo;) than the (more common) case of debit, which goes to &ldquo;Debit Amount&rdquo; column."/>
-<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://jiby.tech/css/main.css" /><link rel="stylesheet" type="text/css" href="https://jiby.tech/css/dark.css" media="(prefers-color-scheme: dark)" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://jiby.tech/js/main.js"></script>
+	<script src="/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper post">
 		<div class="header">
-	<base href="https://jiby.tech/">
-	<h1 class="site-title"><a href="https://jiby.tech/">Jiby&#39;s toolbox</a></h1>
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
 	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
 		</nav>
@@ -38,10 +37,6 @@ Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance 29/0
 			
 			<li>
 				<a href="/post">All posts</a>
-			</li>
-			
-			<li>
-				<a href="/tags/presentation">Presentations</a>
 			</li>
 			
 			<li>
