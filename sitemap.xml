@@ -4,46 +4,61 @@
   
   <url>
     <loc>https://jiby.tech/tags/bdd/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/tags/cucumber/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/tags/gherkin/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/low-tech-cucumber-replacement/</loc>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/post/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/regex/</loc>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/tags/scenarios/</loc>
-    <lastmod>2022-03-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/scripting/</loc>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</loc>
     <lastmod>2022-03-20T00:00:00+00:00</lastmod>
   </url>
   

@@ -6,11 +6,11 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Apr 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>bdd</title>
       <link>https://jiby.tech/tags/bdd/</link>
-      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/bdd/</guid>
       <description></description>
@@ -19,7 +19,7 @@
     <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/blog/</guid>
       <description></description>
@@ -28,7 +28,7 @@
     <item>
       <title>cucumber</title>
       <link>https://jiby.tech/tags/cucumber/</link>
-      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/cucumber/</guid>
       <description></description>
@@ -37,18 +37,36 @@
     <item>
       <title>gherkin</title>
       <link>https://jiby.tech/tags/gherkin/</link>
-      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/gherkin/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>regex</title>
+      <link>https://jiby.tech/tags/regex/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/regex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>scenarios</title>
       <link>https://jiby.tech/tags/scenarios/</link>
-      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/scenarios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scripting</title>
+      <link>https://jiby.tech/tags/scripting/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/scripting/</guid>
       <description></description>
     </item>
     

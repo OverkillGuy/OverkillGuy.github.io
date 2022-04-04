@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Low-tech Cucumber replacement - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Low-tech Cucumber replacement" />
+<meta property="og:description" content="In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
+In this article, I want to explain my disilusionment towards Cucumber, and show how a low-tech alternative emerged that I believe covers most of the value for none of the effort." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/low-tech-cucumber-replacement/" />
+<meta property="article:published_time" content="2022-04-04T00:00:00+01:00" />
+<meta property="article:modified_time" content="2022-04-04T00:00:00+01:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Low-tech Cucumber replacement"/>
+<meta name="twitter:description" content="In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
+In this article, I want to explain my disilusionment towards Cucumber, and show how a low-tech alternative emerged that I believe covers most of the value for none of the effort."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Low-tech Cucumber replacement</h1>
+			<div class="meta">Posted on &mdash; Apr 4, 2022</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>In the previous post, I showed how Gherkin Scenarios provide a great framework
+for acceptance test definition. I also showed how the dreams of the BDD movement
+extend to automating Gherkin, using a tool called Cucumber, enforcing
+traceability of acceptance tests.</p>
+
+<p>In this article, I want to explain my disilusionment towards Cucumber, and show
+how a low-tech alternative emerged that I believe covers most of the value
+for none of the effort.</p>
+
+<h2 id="cucumber-fatigue">Cucumber fatigue</h2>
+
+<p>Cucumber is originally a Ruby tool, but I primarily write Python these days.
+Though there exists tooling to hook Ruby&rsquo;s Cucumber in other languages, the most
+convenient tooling for me were the Python rewrites: The elderly <a href="https://behave.readthedocs.io/en/stable/">Behave</a>, the
+defunct <a href="https://pypi.org/project/lettuce/">lettuce</a>, and more recently, the nobly-backed <a href="https://pytest-bdd.readthedocs.io/en/latest/">pytest-bdd</a>, of Pytest
+workgroup fame.</p>
+
+<p>At one time or another, I ended up testing all of them on personal projects, to
+experiment with how cool BDD is in practice, I was a big Gherkin fan already. I
+don&rsquo;t remember much about playing with the tools, as this was over ten years ago
+now. But I do remember coming out disappointed, like the tooling didn&rsquo;t deliver
+on the promise of BDD.</p>
+
+<p>I&rsquo;ll try to break down why I felt this.</p>
+
+<h3 id="pytest-framework-is-just-too-good">Pytest framework is just too good</h3>
+
+<p>Having worked with the fantastic <a href="https://pytest.org">pytest</a>, the framework is really natural,
+convenient: Each function is a standalone test, with reusable fixtures providing
+flexibility for setup and teardown.</p>
+
+<p>Compared to that, the Given/When/Then tests in Cucumber force us to split code
+into three or more functions. Tests are thus harder to read, as we need to jump
+between functions to see what trigger ran before this assert error, but there&rsquo;s
+hardly a trace to follow in the execution stack (as steps are run sequentially,
+not recursively. By the time we get to an assert error, the precondition or
+trigger has been executed, and backtrace is empty of it).</p>
+
+<h3 id="cucumber-test-code-reuse-is-hard">Cucumber test code reuse is hard</h3>
+
+<p>Code reuse inside tests is hard enough as it is, but Cucumber encourages reuse
+of Given-s implementation across tests as the most supreme form of BDD. So two
+Gherkin Features that happen to have the same pre-conditional Given, should use
+the same Given setup function in Cucumber&hellip; Except I never managed to do it.</p>
+
+<p>Tests in a typical projects have multiple layers, so a Feature&rsquo;s Given becomes a
+full Scenario below, how do we reuse the fixture code then?</p>
+
+<p>Similarly, a chains of events (say a sequence of 5 message events that must
+happen in order) are very hard to write Gherkin about, because each event in
+the chain is an assert (Then), but also a trigger for the next one (Given).
+Writing Cucumber code to match this becomes tedious.</p>
+
+<p>So Gherkin step code reuse, the &ldquo;pinnacle of BDD&rdquo;, was a bust for me. For most
+of these I ended up writing Pytest-style tests, one test function at a time,
+ditching Cucumber.</p>
+
+<h3 id="too-different-from-normal-workflow">Too different from normal workflow</h3>
+
+<p>The Cucumber technique of writing tests is a major break from conventional test
+practices, so big a change that I don&rsquo;t feel comfortable asking anybody else to
+do so in a team project.</p>
+
+<p>So the tooling didn&rsquo;t impress me, the abstraction level felt wrong, and this big
+break with well established practice didn&rsquo;t seem justified enough to get
+workplaces to adopt it.</p>
+
+<h2 id="where-is-the-value-again">Where is the value, again?</h2>
+
+<p>As a mildly self-aware person, I taught myself to follow a rule: anytime I spend half an
+hour deep-diving in a problem, I must take a step back, and ask &ldquo;Why am I doing
+this?&ldquo;, and followup questions, like &ldquo;Is the problem as stated worth solving?&rdquo;
+&ldquo;What long-term goal is this short-term hell solving?&rdquo;.</p>
+
+<p>Most of the time, the answer is &ldquo;actually I don&rsquo;t need to solve this, not
+exactly&rdquo;, and I find some way to side-step the issue altogether. Or convince
+myself it wasn&rsquo;t worth even trying this and just abandon the line of inquiry.</p>
+
+<p>So, what are we really doing here, trying to crowbar this Cucumber tool inside
+the testing workflow!?</p>
+
+<p>Well, as we saw before, gathering requirements was important enough to write
+nice Gherkin Features about. And now we would like to prove that we indeed have
+100% coverage of the Features via acceptance tests. That&rsquo;s a boolean answer: all
+features covered, or missing tests. And on top of that, we want traceability:
+which test covers which feature.</p>
+
+<p>But is Cucumber necessary for this? Really?</p>
+
+<p>Surveying my thoughts, I still enjoyed weaving Scenarios within conventional
+test functions, I just didn&rsquo;t want to have to do anything drastic to the test
+code. So I evolved a technique that can be seen as a natural middle ground.</p>
+
+<h2 id="low-tech-gherkin-inside-test-comments">Low tech Gherkin inside test comments</h2>
+
+<p>Going back to my Pytest code, I found myself still writing new tests with
+Gherkin Scenarios, but inserting it in code comments. I found the Gherkin helps
+me reason about the tests, but the comments nature avoids any tooling
+interference.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">test_reject_long_words</span>():
+    <span style="color:#2aa198">&#34;&#34;&#34;Scenario: Reject long words&#34;&#34;&#34;</span>
+    <span style="color:#586e75"># When guessing &#34;affable&#34;</span>
+    guess <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;affable&#34;</span>
+    is_valid, reject_reason <span style="color:#719e07">=</span> check_valid_word(guess)
+    <span style="color:#586e75"># Then the guess is rejected</span>
+    <span style="color:#719e07">assert</span> <span style="color:#719e07">not</span> is_valid, <span style="color:#2aa198">&#34;Overly long guess should have been rejected&#34;</span>
+    <span style="color:#586e75"># And reason for rejection is &#34;Guess too long&#34;</span>
+    <span style="color:#719e07">assert</span> reject_reason <span style="color:#719e07">==</span> <span style="color:#2aa198">&#34;Guess too long&#34;</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1</span>:
+  Gherkin in tests, via comments. The seed of an idea.
+</div>
+
+<p>When I noticed myself doing this, I started to do it more and more
+intentionally, down to starting new tests with the Gherkin to direct it:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">test_reject_overly_short_words</span>():
+    <span style="color:#2aa198">&#34;&#34;&#34;Scenario: Reject short words&#34;&#34;&#34;</span>
+    <span style="color:#586e75"># When guessing &#34;baby&#34;</span>
+    <span style="color:#586e75"># Then the guess is rejected</span>
+    <span style="color:#586e75"># And reason for rejection is &#34;Guess too short&#34;</span>
+    <span style="color:#719e07">raise</span> <span style="color:#cb4b16">NotImplementedError</span>(<span style="color:#2aa198">&#34;WIP!&#34;</span>)</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2</span>:
+  New test stub, driven by Gherkin.
+</div>
+
+<p>The Gherkin is purely comments for the reader, and I love it. No tooling in the
+way. But soon my tests grow to multiple pages of code, and I wanted to get a
+bird&rsquo;s eye view of my tests&rsquo; scenarios, to know what test to write next.</p>
+
+<h2 id="accidental-automation">Accidental automation</h2>
+
+<p>I noticed that the markup syntax I had landed on was pretty regular &hellip; like,
+regular-expression kind of regular. So I experimented with a quick grep command
+on a given file, extracting all the Gherkin Keywords.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#b58900">export</span> <span style="color:#268bd2">GHERKIN_KEYWORDS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Given|When|Then|And|But|Scenario|Background|Feature|In order to|As a|I want to|I need to|So that&#34;</span>
+grep -E <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">GHERKIN_KEYWORDS</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> tests/test_something.py</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3</span>:
+  First attempt at extracting Gherkin
+</div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">    &#34;&#34;&#34;Scenario: Reject long words&#34;&#34;&#34;
+    # When guessing &#34;affable&#34;
+    # Then the guess is rejected
+    # And reason for rejection is &#34;Guess too long&#34;
+    &#34;&#34;&#34;Scenario: Reject short words&#34;&#34;&#34;
+    # When guessing &#34;baby&#34;
+    # Then the guess is rejected
+    # And reason for rejection is &#34;Guess too short&#34;</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4</span>:
+  Result of executing it on a test file
+</div>
+
+<p>It works, but I was irrationally irritated at the comment markers and
+whitespace. A few iterations of the script later, I got a shell function called
+<code>show-gherkin</code>:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># Extracts gherkin from file, printing finename/line number.</span>
+<span style="color:#586e75"># show-gherkin tests/*.py</span>
+<span style="color:#586e75"># Specify only one file to show only line number</span>
+show-gherkin <span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+    <span style="color:#b58900">local</span> <span style="color:#268bd2">GHERKIN_KEYWORDS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Given|When|Then|And|But|Scenario|Background|Feature|In order to|As a|I want to|I need to|So that&#34;</span>
+    egrep -osn <span style="color:#2aa198">&#34;^.*(</span><span style="color:#268bd2">$GHERKIN_KEYWORDS</span><span style="color:#2aa198">)(.*)&#34;</span> <span style="color:#268bd2">$@</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>        | sed -E <span style="color:#2aa198">&#34;s/^(.*):.*(</span><span style="color:#268bd2">$GHERKIN_KEYWORDS</span><span style="color:#2aa198">)/\1: \2/&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>        | sed <span style="color:#2aa198">&#39;s/&#34;&#34;&#34;//&#39;</span>
+<span style="color:#719e07">}</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5</span>:
+  Show-gherkin, as it lives now in my dotfiles
+</div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">13: Scenario: Reject long words
+14: When guessing &#34;affable&#34;
+17: Then the guess is rejected
+19: And reason for rejection is &#34;Guess too long&#34;
+24: Scenario: Reject short words
+25: When guessing &#34;baby&#34;
+28: Then the guess is rejected
+30: And reason for rejection is &#34;Guess too short&#34;</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6</span>:
+  Result of executing show-gherkin on a test file. Note the numbers are line numbers where the expression is found!
+</div>
+
+<p>I keep using this script to date, and started encouraging others to adopt the
+pattern of commenting, shared the little script with my team at work.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I explained how the noble Dream of Cucumber tooling seems to fall short, not
+delivering all the value it promised. I showed also how this dream was
+rekindled, by aiming lower: a simple comment-based markup in code. And again,
+such joy at finding that small, incremental amounts of automation add value in a
+low-tech fashion.</p>
+
+<p>I believe this simple solution for Gherkin really captures over 80% of the value of
+Gherkin Scenarios usage in BDD frameworks, while being less than 20% of the effort
+of &ldquo;proper tools&rdquo; like Cucumber, with none the drawbacks outlined above.</p>
+
+<p>I do believe that the markup approach I grew here hasn&rsquo;t reached its full
+potential, and will keep experimenting with this format. I think there&rsquo;s an
+opportunity to build some tooling that leverage the comments for traceability
+like Cucumber does. If I succeed at building tools that still feel
+lightweight, you can be sure to I&rsquo;ll post about it on this blog.</p>
+
+<p>This is the end of my planned series of articles on Gherkin and BDD, join
+me in the next post, where I&rsquo;ll demonstrate all we just talked about through a
+toy project.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/gherkin">gherkin</a></li>
+								
+								<li><a href="/tags/scenarios">scenarios</a></li>
+								
+								<li><a href="/tags/bdd">bdd</a></li>
+								
+								<li><a href="/tags/cucumber">cucumber</a></li>
+								
+								<li><a href="/tags/scripting">scripting</a></li>
+								
+								<li><a href="/tags/regex">regex</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>
