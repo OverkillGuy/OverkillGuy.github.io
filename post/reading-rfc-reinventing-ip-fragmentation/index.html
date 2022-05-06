@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Reinventing IP Fragmentation - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Reinventing IP Fragmentation" />
+<meta property="og:description" content="Let&rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
+Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/" />
+<meta property="article:published_time" content="2022-05-07T00:00:00+01:00" />
+<meta property="article:modified_time" content="2022-05-07T00:00:00+01:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reinventing IP Fragmentation"/>
+<meta name="twitter:description" content="Let&rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
+Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Reinventing IP Fragmentation</h1>
+			<div class="meta">Posted on &mdash; May 7, 2022</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>Let&rsquo;s explore how a file-format design exercise turned into
+reinventing the wheel, and let&rsquo;s all appreciate how lucky we are that
+the protocols that the internet are built on have fantastic public
+documents called <a href="https://en.wikipedia.org/wiki/Request_for_Comments">RFC</a>s.</p>
+
+<h2 id="designing-a-file-format">Designing a file format</h2>
+
+<p>I was idly thinking about designing a good binary file format for a side project
+of mine called <a href="https://github.com/OverkillGuy/qrxfil">qrxfil</a>. The project aims at QR-code-based file export: split a
+file in many pieces (based on content limit of QR codes) before reassembling it
+on the other side.</p>
+
+<p>The more I thought about it, the more I realized that I&rsquo;ve seen this pattern
+before: fragmentation of a &ldquo;message&rdquo; to push it into &ldquo;packets&rdquo; of small,
+limited, size, sent over an unreliable network, for reassembly on the other
+side. That&rsquo;s a foundational feature of the <a href="https://en.wikipedia.org/wiki/Internet_Protocol">Internet Protocol</a>!</p>
+
+<h2 id="the-internet-s-specifications">The internet&rsquo;s specifications</h2>
+
+<p>It turns out the internet&rsquo;s protocols were documented publically,
+with published specifications for protocols called <a href="https://en.wikipedia.org/wiki/Request_for_Comments">RFC</a>s. These are
+organised by a group called the <a href="https://en.wikipedia.org/wiki/Internet_Engineering_Task_Force">Internet Engineering Task Force</a>
+(IETF), since about the 1970s.</p>
+
+<p>RFCs are defined by their number, and are written in plain text<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup>, originally because of relying on typewriters.
+These documents cover a broad number of topics, from recommendations like
+&ldquo;Choosing a Name for Your Computer&rdquo; (<a href="https://www.rfc-editor.org/rfc/rfc1178.txt">RFC 1178</a>), specifications like &ldquo;Date and
+Time on the Internet: Timestamps&rdquo; (<a href="https://www.rfc-editor.org/rfc/rfc3339.txt">RFC 3339</a>), to the downright silly &ldquo;IP
+Datagrams over Avian Carriers&rdquo; April fools&rsquo; jokes (<a href="https://www.rfc-editor.org/rfc/rfc1149.txt">RFC 1149</a>, later extended by
+<a href="https://www.rfc-editor.org/rfc/rfc2549.txt">RFC 2549</a> and <a href="https://www.rfc-editor.org/rfc/rfc6214.txt">RFC 6214</a>).</p>
+
+<p>As technical documents, these are very important, as they are the authoritative
+source specificying many protocols. Surprisingly for such foundational papers,
+though, these are also very accessible explanations, useable by both
+technically-minded users, of course, but also for many curious minds. In fact,
+many times, answers to questions on StackOverflow end up being direct quotes of
+entire sections the RFC of the relevant protocol.</p>
+
+<h2 id="dive-into-fragmentation-in-the-internet-protocol">Dive into Fragmentation in the Internet Protocol</h2>
+
+<p>Back to our file format design, I wanted to look up how the internet (as a
+concept) deals with packet fragmentation, which is covered by the Internet
+Protocol, codified in <a href="https://www.rfc-editor.org/rfc/rfc791.txt">RFC 791</a>, published in September 1981<sup class="footnote-ref" id="fnref:fn-2"><a href="#fn:fn-2">2</a></sup>.</p>
+
+<p>You may notice that being such an old document (like the FTP specification of
+<a href="https://www.rfc-editor.org/rfc/rfc959.txt">RFC 959</a>, from 1985) its layout isn&rsquo;t as clear as the newer RFCs. That&rsquo;s because
+the tooling for writing up RFCs nowadays deals with layout and metadata in a
+standard way, whereas these older protocols are pre-dating the tooling, so these
+pages are forged from digital copies of the original typewriter texts. I
+personally find this amazing: a tangible link to the history of the internet!</p>
+
+<p>Opening <a href="https://www.rfc-editor.org/rfc/rfc791.txt">RFC 791: INTERNET PROTOCOL</a>, the following motivation awaits
+us:</p>
+
+<blockquote>
+<p>The Internet Protocol is designed for use in interconnected systems of
+packet-switched computer communication networks. Such a system has
+been called a &ldquo;catenet&rdquo; [1]. The internet protocol provides for
+transmitting blocks of data called datagrams from sources to
+destinations, where sources and destinations are hosts identified by
+fixed length addresses. The internet protocol also provides for
+fragmentation and reassembly of long datagrams, if necessary, for
+transmission through &ldquo;small packet&rdquo; networks.</p>
+</blockquote>
+
+<p>Indeed, it talks of fragmentation, &ldquo;for transmission through small
+packet networks&rdquo;. That&rsquo;s exactly what I&rsquo;m interested in, only for
+files.</p>
+
+<p>Skimming a bit more, we get to section 2.4: Functional Description, which is
+split into two concerns: Addressing and Fragmentation. Looking exclusively at
+Fragmentation, I learned that IP packet don&rsquo;t use &ldquo;page numbers&rdquo;, like I was
+expecting (where one would send both current page number, and total number of
+pages to expect, with overall content as a book split by page, regardless of
+page size). Instead, the IP datagrams define an &ldquo;identification field&rdquo;. This
+field marks all fragments to be from the same original message (distinguishing
+this overall message from others that may be in the air at the same time. This
+can be seen as a book identifier. Other dedicated fields gives byte offset and
+fragment size combo to mark which byte-ranges of the original message is
+included in current message. This would allow for dynamically sized fragment!
+Fascinating<sup class="footnote-ref" id="fnref:fn-3"><a href="#fn:fn-3">3</a></sup>!</p>
+
+<p>But if we can keep sending more fragments covering new byte ranges, how do we
+know the message is complete?</p>
+
+<p>Turns out, there&rsquo;s a flag called more-fragments, which every subsequent message
+fragments after the first should set, and the last message should re-set,
+marking the end of the datagram.</p>
+
+<p>On receiving the last fragment (determined by unset more-fragments
+flag), the message can be reassembled.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |Version|  IHL  |Type of Service|          Total Length         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         Identification        |Flags|      Fragment Offset    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  Time to Live |    Protocol   |         Header Checksum       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                       Source Address                          |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                    Destination Address                        |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                    Options                    |    Padding    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  Example Internet Datagram Header, from section 3.1 "Internet Header Format". Note Total Length, and Fragment Offset, which contribute to byte-range management
+</div>
+
+<p>For the purposes of a non-networked system, like out-of-order scanning of QR
+codes containing file fragments (my real goal), the idea of a &ldquo;more-fragments
+flag&rdquo; doesn&rsquo;t work out, but it&rsquo;s an interesting idea to consider that, for
+instance, there doesn&rsquo;t seem to be a &ldquo;reassembled datagram size&rdquo; field anywhere
+in the messages, which I expected to find repeated over and over in each fragment. Instead, there&rsquo;s per-fragment field
+called &ldquo;Total Length&rdquo;, a &ldquo;Fragment Offset&rdquo;, and the rest is computed once
+receiving the last fragment, knowing its offset + length. This allows for
+more dynamic messages, good idea!</p>
+
+<p>This document is interesting beyond just fragmentation. I recommend
+the explanation of the concept of TTL (Time To Live), which is
+described helpfully as a sort of &ldquo;self destruct time limit&rdquo;. Tons of fun to find
+in these.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Without going deeper into the design of my pet project&rsquo;s weird file format, I&rsquo;m
+amazed at the tremendous amount of teaching value these &ldquo;old papers&rdquo; can
+provide. Not only they specify the protocols, but they also document
+motivations, reasoning, decisions and tradeoffs that engineers before us
+wrestled with to make a good system.</p>
+
+<p>I feel that to level up our collective software design ability, we must learn
+all we can from existing attempts at building systems, instead of risking
+re-inventing the wheel like I almost did. This way, we can, like in Science,
+&ldquo;Stand on the shoulder of giants&rdquo;. RFCs are an underappreciated piece of our
+field&rsquo;s history, as well as monumental technical achievements on their own, and
+we would all gain from using them more.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fn-1"><p>For modern
+usecases, the RFC documents are also published as HTML and PDF, but I&rsquo;m
+personally very fond of plain-text files. They may be the most long-lasting file
+format we&rsquo;ve ever come up with: Simple characters in a file, perfect for humans.
+In that spirit, all the links to RFCs in this post are to the text file
+renderings. Just note that you can also get them as HTML at
+<a href="https://datatracker.ietf.org/">https://datatracker.ietf.org/</a></p>
+ <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
+
+<li id="fn:fn-2"><p>The specific date
+is muddled, because a lot of these original documents were more of a post-facto
+documentation of already implemented systems, rather than pre-implementation
+proposals, so the date is of publication not invention. The scope of RFCs is
+also usually very constrained, so in case of large specs, there are usually
+multiple documents on each subtopic, covering different aspects, all published
+at different dates, like for extensions to a protocol for new usecases.</p>
+ <a class="footnote-return" href="#fnref:fn-2"><sup>[return]</sup></a></li>
+
+<li id="fn:fn-3"><p>Networking experts may laugh at this being quite obvious,
+but coming from high level programming background, it can sometimes be hard to
+find a handhold in the lower levels of programming, such as protocol design. I
+believe any opportunity to reveal forgotten Knowledge like this one should be
+praised, a chance learn!</p>
+ <a class="footnote-return" href="#fnref:fn-3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/rfc">rfc</a></li>
+								
+								<li><a href="/tags/documentation">documentation</a></li>
+								
+								<li><a href="/tags/qrxfil">qrxfil</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

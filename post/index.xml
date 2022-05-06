@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Apr 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reinventing IP Fragmentation</title>
+      <link>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</guid>
+      <description>Let&amp;rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
+Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side.</description>
+    </item>
+    
     <item>
       <title>Low-tech Cucumber replacement</title>
       <link>https://jiby.tech/post/low-tech-cucumber-replacement/</link>

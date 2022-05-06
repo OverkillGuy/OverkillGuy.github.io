@@ -3,12 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jiby.tech/tags/bdd/</loc>
-    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
+    <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/blog/</loc>
+    <loc>https://jiby.tech/tags/documentation/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/qrxfil/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/rfc/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/bdd/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
@@ -23,17 +58,7 @@
   </url>
   
   <url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/post/low-tech-cucumber-replacement/</loc>
-    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/post/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
@@ -53,18 +78,8 @@
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/</loc>
-    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</loc>
     <lastmod>2022-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/documentation/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
