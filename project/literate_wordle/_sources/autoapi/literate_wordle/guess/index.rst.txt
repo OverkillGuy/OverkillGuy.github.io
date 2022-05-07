@@ -51,6 +51,12 @@ Functions
 
       
 
+   .. py:method:: perfect_score(cls) -> str
+      :property:
+
+      All-good Wordle score for perfect guess
+
+
 
 .. py:function:: score_guess(guess: str, answer: str) -> str
 

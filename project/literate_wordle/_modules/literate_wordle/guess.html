@@ -48,9 +48,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Readme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../wordle.html">Literate programming wordle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_collections/gherkin_feature.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
 </ul>
@@ -70,7 +71,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../literate_wordle.html">literate_wordle</a> &raquo;</li>
       <li>literate_wordle.guess</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -93,7 +93,13 @@
 
 <div class="viewcode-block" id="CharacterScore.OK"><a class="viewcode-back" href="../../autoapi/literate_wordle/guess/index.html#literate_wordle.guess.CharacterScore.OK">[docs]</a>    <span class="n">OK</span> <span class="o">=</span> <span class="s2">&quot;🟩&quot;</span></div>
 <div class="viewcode-block" id="CharacterScore.NO"><a class="viewcode-back" href="../../autoapi/literate_wordle/guess/index.html#literate_wordle.guess.CharacterScore.NO">[docs]</a>    <span class="n">NO</span> <span class="o">=</span> <span class="s2">&quot;⬜&quot;</span></div>
-<div class="viewcode-block" id="CharacterScore.WRONG_PLACE"><a class="viewcode-back" href="../../autoapi/literate_wordle/guess/index.html#literate_wordle.guess.CharacterScore.WRONG_PLACE">[docs]</a>    <span class="n">WRONG_PLACE</span> <span class="o">=</span> <span class="s2">&quot;🟨&quot;</span></div></div>
+<div class="viewcode-block" id="CharacterScore.WRONG_PLACE"><a class="viewcode-back" href="../../autoapi/literate_wordle/guess/index.html#literate_wordle.guess.CharacterScore.WRONG_PLACE">[docs]</a>    <span class="n">WRONG_PLACE</span> <span class="o">=</span> <span class="s2">&quot;🟨&quot;</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="CharacterScore.perfect_score"><a class="viewcode-back" href="../../autoapi/literate_wordle/guess/index.html#literate_wordle.guess.CharacterScore.perfect_score">[docs]</a>    <span class="k">def</span> <span class="nf">perfect_score</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;All-good Wordle score for perfect guess&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">cls</span><span class="o">.</span><span class="n">OK</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="score_guess"><a class="viewcode-back" href="../../autoapi/literate_wordle/guess/index.html#literate_wordle.guess.score_guess">[docs]</a><span class="k">def</span> <span class="nf">score_guess</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

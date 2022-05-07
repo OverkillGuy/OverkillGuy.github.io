@@ -48,9 +48,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Readme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../wordle.html">Literate programming wordle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_collections/gherkin_feature.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
 </ul>
@@ -70,7 +71,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../literate_wordle.html">literate_wordle</a> &raquo;</li>
       <li>literate_wordle.game</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -88,7 +88,7 @@
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">literate_wordle.guess</span> <span class="kn">import</span> <span class="n">score_guess</span>
+<span class="kn">from</span> <span class="nn">literate_wordle.guess</span> <span class="kn">import</span> <span class="n">CharacterScore</span><span class="p">,</span> <span class="n">score_guess</span>
 <span class="kn">from</span> <span class="nn">literate_wordle.words</span> <span class="kn">import</span> <span class="n">check_valid_word</span>
 
 
@@ -132,7 +132,7 @@
     <span class="c1"># Guess now guaranteed to be valid: count it</span>
     <span class="n">game</span><span class="o">.</span><span class="n">guess_number</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="n">score</span> <span class="o">=</span> <span class="n">score_guess</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="o">.</span><span class="n">answer</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">score</span> <span class="o">==</span> <span class="s2">&quot;🟩🟩🟩🟩🟩&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">==</span> <span class="n">CharacterScore</span><span class="o">.</span><span class="n">perfect_score</span><span class="p">:</span>
         <span class="n">outcome</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GAME_WON</span>
         <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Correct! Game won in </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">guess_number</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="s2"> guesses&quot;</span>
         <span class="k">return</span> <span class="n">WordleMove</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">outcome</span><span class="o">=</span><span class="n">outcome</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">score</span><span class="p">)</span>

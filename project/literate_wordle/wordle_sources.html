@@ -30,7 +30,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Requirements" href="_collections/gherkin_feature.html" />
+    <link rel="next" title="Changelog for literate-wordle" href="changelog.html" />
     <link rel="prev" title="Literate programming wordle" href="wordle.html" /> 
 </head>
 
@@ -51,9 +51,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Readme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wordle.html">Literate programming wordle</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_collections/gherkin_feature.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
 </ul>
@@ -113,6 +114,9 @@ Literate programming is the art of writing code as if it was a novel (or blogpos
 
 For more context on the code repository (how to use, etc), please read the project
 readme.
+
+See also the online, pretty rendered version of this document on my personal
+website: https://jiby.tech/project/literate_wordle/wordle.html
 
 * Mise en bouche: picking an answer
 
@@ -1887,7 +1891,7 @@ As before, we reorder the blocks from snippets above to export code in a way
 that keeps proper formatting.
 #+NAME: scoring-impl-tangleweb
 #+CAPTION: Final =guess.py=
-#+begin_src python :tangle src/literate_wordle/guess.py :noweb yes
+#+begin_src python :tangle no :noweb yes
 &lt;&lt;scoring-guessmod-header&gt;&gt;
 
 
@@ -2388,7 +2392,7 @@ if game.guess_number &gt;= 7:
 In order to count a guess, it needs to be a valid word. This means importing
 some of our package&#39;s functions.
 
-#+NAME: track-guess-import-module
+#+NAME: track-guess-import-module-tooshort
 #+begin_src python :tangle no
 from literate_wordle.guess import score_guess
 from literate_wordle.words import check_valid_word
@@ -2437,13 +2441,43 @@ score = score_guess(guess, game.answer)
 
 
 #+CAPTION: Knowing a valid guess, scored, is game won?
-#+NAME: track-guess-impl5
+#+NAME: track-guess-impl5-hardcoded
 #+begin_src python :tangle no
 if score == &quot;🟩🟩🟩🟩🟩&quot;:
     outcome = WordleMoveOutcome.GAME_WON
     message = f&quot;Correct! Game won in {game.guess_number - 1} guesses&quot;
     return WordleMove(game=game, outcome=outcome, message=message, score=score)
 #+end_src
+
+Hmm, but wouldn&#39;t it be nice to avoid this hardcoded blob?
+Let&#39;s extend the =CharacterScore= to give this.
+
+#+CAPTION: A property of the class that returns The Perfect Score
+#+NAME: track-guess-perfectscore
+#+begin_src python :tangle no
+@classmethod
+@property
+def perfect_score(cls) -&gt; str:
+    &quot;&quot;&quot;All-good Wordle score for perfect guess&quot;&quot;&quot;
+    return &quot;&quot;.join([cls.OK] * 5)
+#+end_src
+
+#+CAPTION: Knowing a valid guess, scored, is game won? (Without hardcoded string)
+#+NAME: track-guess-impl5
+#+begin_src python :tangle no
+if score == CharacterScore.perfect_score:
+    outcome = WordleMoveOutcome.GAME_WON
+    message = f&quot;Correct! Game won in {game.guess_number - 1} guesses&quot;
+    return WordleMove(game=game, outcome=outcome, message=message, score=score)
+#+end_src
+
+#+CAPTION: Re-do the imports, because we needed CharacterScore too
+#+NAME: track-guess-import-module
+#+begin_src python :tangle no
+from literate_wordle.guess import CharacterScore, score_guess
+from literate_wordle.words import check_valid_word
+#+end_src
+
 
 #+CAPTION: Last possibility remains: scored, not won/lost, try another guess
 #+NAME: track-guess-impl6
@@ -2634,6 +2668,26 @@ The tests:
     &lt;&lt;track-guess-impl4&gt;&gt;
     &lt;&lt;track-guess-impl5&gt;&gt;
     &lt;&lt;track-guess-impl6&gt;&gt;
+#+end_src
+
+And remember that we had to expand the =CharacterScore=, so we need to re-tangle
+it here:
+
+#+NAME: scoring-impl-tangleweb2
+#+begin_src python :tangle src/literate_wordle/guess.py :noweb yes
+&lt;&lt;scoring-guessmod-header&gt;&gt;
+
+
+&lt;&lt;scoring-guessfunc-import&gt;&gt;
+&lt;&lt;scoring-guess-enum-import&gt;&gt;
+
+
+&lt;&lt;scoring-guess-enum&gt;&gt;
+
+    &lt;&lt;track-guess-perfectscore&gt;&gt;
+
+
+&lt;&lt;scoring-guessfunc-impl2&gt;&gt;
 #+end_src
 
 * Final round: command line interface
@@ -2920,7 +2974,7 @@ my blog: https://jiby.tech.
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="wordle.html" class="btn btn-neutral float-left" title="Literate programming wordle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="_collections/gherkin_feature.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog for literate-wordle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
