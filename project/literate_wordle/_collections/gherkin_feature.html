@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requirements &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/assets/jsonview.bundle.js"></script>
+        <script src="../_static/assets/jsonview_loader.js"></script>
+        <script src="../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Source of Literate Wordle" href="../wordle_sources.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#list-of-requirements">List of requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-entrypoint-feature">command_line_entrypoint.feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#track-guesses-feature">track_guesses.feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-guess-valid-word-feature">checking_guess_valid_word.feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pick-answer-word-feature">pick_answer_word.feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scoring-guess-feature">scoring_guess.feature</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements-summary">Requirements summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Requirements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_collections/gherkin_feature.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h1>
+<p>Each entry below is taken from a file found from the <code class="docutils literal notranslate"><span class="pre">features/</span></code> folder,
+rendered into a a <a class="reference external" href="https://sphinxcontrib-needs.readthedocs.io/en/latest/">sphinxcontrib-needs
+requirement</a>, and lists
+out the file’s content, rendered as Gherkin properly. Adding new files in <code class="docutils literal notranslate"><span class="pre">features/</span></code> will make this page grow on next render.</p>
+<section id="list-of-requirements">
+<h2>List of requirements<a class="headerlink" href="#list-of-requirements" title="Permalink to this headline"></a></h2>
+<section id="command-line-entrypoint-feature">
+<h3>command_line_entrypoint.feature<a class="headerlink" href="#command-line-entrypoint-feature" title="Permalink to this headline"></a></h3>
+<table class="need needs_grid_simple needs_layout_clean rtd-exclude-wy-table no-sphinx-material-strip needs_style_none needs_type_req docutils align-default" id="FEATURE_COMMAND_LINE_ENTRYPOINT">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="need head row-odd"><td class="need head"><div class="needs_head line-block">
+<div class="line"><span><span class="needs_type_name"><span class="needs_data">Requirement</span></span>: </span><strong><span><span class="needs_title"><span class="needs_data">command_line_entrypoint.feature</span></span></span></strong><span> <span class="needs-id"><a class="reference internal" href="#FEATURE_COMMAND_LINE_ENTRYPOINT" title="FEATURE_COMMAND_LINE_ENTRYPOINT">FEATURE_COMMAND_LINE_ENTRYPOINT</a></span>  <span class="needs collapse" id="target__show__meta"><span class="needs collapsed"><a class="no_link reference external" href="#"><img alt="../_images/arrow-down-circle.svg" class="needs_image" src="../_images/arrow-down-circle.svg" width="17px" /></a></span><span class="needs visible"><a class="no_link reference external" href="#"><img alt="../_images/arrow-right-circle.svg" class="needs_image" src="../_images/arrow-right-circle.svg" width="17px" /></a></span></span> </span></div>
+</div>
+</td>
+</tr>
+<tr class="need meta row-even"><td class="need meta"><div class="needs_meta line-block">
+<div class="line"><span><span></span></span></div>
+<div class="line"><span></span></div>
+</div>
+</td>
+</tr>
+<tr class="need content row-odd"><td class="need content" colspan="1"><div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Rendered from file <cite>features/command_line_entrypoint.feature</cite></span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Feature:</span><span class="nf"> Pywordle shell command</span>
+<span class="nf">  As a Wordle game</span>
+<span class="nf">  I need a shell command to launch the game</span>
+<span class="nf">  In order to give convenient entrypoint for players</span>
+</pre></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="track-guesses-feature">
+<h3>track_guesses.feature<a class="headerlink" href="#track-guesses-feature" title="Permalink to this headline"></a></h3>
+<table class="need needs_grid_simple needs_layout_clean rtd-exclude-wy-table no-sphinx-material-strip needs_style_none needs_type_req docutils align-default" id="FEATURE_TRACK_GUESSES">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="need head row-odd"><td class="need head"><div class="needs_head line-block">
+<div class="line"><span><span class="needs_type_name"><span class="needs_data">Requirement</span></span>: </span><strong><span><span class="needs_title"><span class="needs_data">track_guesses.feature</span></span></span></strong><span> <span class="needs-id"><a class="reference internal" href="#FEATURE_TRACK_GUESSES" title="FEATURE_TRACK_GUESSES">FEATURE_TRACK_GUESSES</a></span>  <span class="needs collapse" id="target__show__meta"><span class="needs collapsed"><a class="no_link reference external" href="#"><img alt="../_images/arrow-down-circle.svg" class="needs_image" src="../_images/arrow-down-circle.svg" width="17px" /></a></span><span class="needs visible"><a class="no_link reference external" href="#"><img alt="../_images/arrow-right-circle.svg" class="needs_image" src="../_images/arrow-right-circle.svg" width="17px" /></a></span></span> </span></div>
+</div>
+</td>
+</tr>
+<tr class="need meta row-even"><td class="need meta"><div class="needs_meta line-block">
+<div class="line"><span><span></span></span></div>
+<div class="line"><span></span></div>
+</div>
+</td>
+</tr>
+<tr class="need content row-odd"><td class="need content" colspan="1"><div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Rendered from file <cite>features/track_guesses.feature</cite></span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Feature:</span><span class="nf"> Playing a round</span>
+<span class="nf">  As a Wordle game</span>
+<span class="nf">  I need to track how many guesses were already given, stating wins/losses</span>
+<span class="nf">  In order to play the game</span>
+
+<span class="k">Scenario:</span><span class="nf"> First guess is allowed</span>
+<span class="k">  Given </span><span class="nf">a wordle answer</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I didn&#39;t guess before</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I guess the word</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">my guess is scored</span>
+
+<span class="k">Scenario:</span><span class="nf"> Sixth guess still allowed</span>
+<span class="k">  Given </span><span class="nf">a wordle answer</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I guessed </span><span class="s">5</span><span class="nf"> times</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I guess the word</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">my guess is scored</span>
+
+<span class="k">Scenario:</span><span class="nf"> Six failed guess is game over</span>
+<span class="k">  Given </span><span class="nf">a wordle answer</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I guessed </span><span class="s">6</span><span class="nf"> times already</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I guess the word</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">my guess isn&#39;t the answer</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">my guess is scored</span>
+<span class="nf">  </span><span class="k">But </span><span class="nf">game shows &quot;</span><span class="s">Game Over</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">game shows the real answer</span>
+
+<span class="k">Scenario:</span><span class="nf"> Winning guess</span>
+<span class="k">  Given </span><span class="nf">a wordle answer</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I guessed </span><span class="s">3</span><span class="nf"> times</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I guess the word</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">my guess is the answer</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">my guess is scored</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">score is perfect</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">game shows &quot;</span><span class="s">Game Won</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario:</span><span class="nf"> Invalid guess isn&#39;t counted</span>
+<span class="k">  Given </span><span class="nf">a wordle answer</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I guessed </span><span class="s">3</span><span class="nf"> times</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I guess the word</span>
+<span class="nf">  </span><span class="k">But </span><span class="nf">my guess isn&#39;t a dictionary word</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">my guess is rejected as invalid word</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">my guess is not scored</span>
+</pre></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="checking-guess-valid-word-feature">
+<h3>checking_guess_valid_word.feature<a class="headerlink" href="#checking-guess-valid-word-feature" title="Permalink to this headline"></a></h3>
+<table class="need needs_grid_simple needs_layout_clean rtd-exclude-wy-table no-sphinx-material-strip needs_style_none needs_type_req docutils align-default" id="FEATURE_CHECKING_GUESS_VALID_WORD">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="need head row-odd"><td class="need head"><div class="needs_head line-block">
+<div class="line"><span><span class="needs_type_name"><span class="needs_data">Requirement</span></span>: </span><strong><span><span class="needs_title"><span class="needs_data">checking_guess_valid_word.feature</span></span></span></strong><span> <span class="needs-id"><a class="reference internal" href="#FEATURE_CHECKING_GUESS_VALID_WORD" title="FEATURE_CHECKING_GUESS_VALID_WORD">FEATURE_CHECKING_GUESS_VALID_WORD</a></span>  <span class="needs collapse" id="target__show__meta"><span class="needs collapsed"><a class="no_link reference external" href="#"><img alt="../_images/arrow-down-circle.svg" class="needs_image" src="../_images/arrow-down-circle.svg" width="17px" /></a></span><span class="needs visible"><a class="no_link reference external" href="#"><img alt="../_images/arrow-right-circle.svg" class="needs_image" src="../_images/arrow-right-circle.svg" width="17px" /></a></span></span> </span></div>
+</div>
+</td>
+</tr>
+<tr class="need meta row-even"><td class="need meta"><div class="needs_meta line-block">
+<div class="line"><span><span></span></span></div>
+<div class="line"><span></span></div>
+</div>
+</td>
+</tr>
+<tr class="need content row-odd"><td class="need content" colspan="1"><div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Rendered from file <cite>features/checking_guess_valid_word.feature</cite></span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Feature:</span><span class="nf"> Checking a guess is a valid word</span>
+<span class="nf">  As a Wordle game</span>
+<span class="nf">  I need to confirm each guessed word is valid</span>
+<span class="nf">  So that I only accept real words, no kwyjibo</span>
+
+<span class="k">Scenario:</span><span class="nf"> Reject long words</span>
+<span class="k">  When </span><span class="nf">guessing &quot;</span><span class="s">affable</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the guess is rejected</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">reason for rejection is &quot;</span><span class="s">Guess too long</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario:</span><span class="nf"> Reject short words</span>
+<span class="k">  When </span><span class="nf">guessing &quot;</span><span class="s">baby</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the guess is rejected</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">reason for rejection is &quot;</span><span class="s">Guess too short</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario:</span><span class="nf"> Reject fake words via dictionary</span>
+<span class="k">  When </span><span class="nf">guessing &quot;</span><span class="s">vbpdj</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the guess is rejected</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">reason for rejection is &quot;</span><span class="s">Not a word from the dictionary</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario:</span><span class="nf"> Accept five letter dictionary words</span>
+<span class="k">  When </span><span class="nf">guessing &quot;</span><span class="s">crane</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the guess is accepted</span>
+</pre></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pick-answer-word-feature">
+<h3>pick_answer_word.feature<a class="headerlink" href="#pick-answer-word-feature" title="Permalink to this headline"></a></h3>
+<table class="need needs_grid_simple needs_layout_clean rtd-exclude-wy-table no-sphinx-material-strip needs_style_none needs_type_req docutils align-default" id="FEATURE_PICK_ANSWER_WORD">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="need head row-odd"><td class="need head"><div class="needs_head line-block">
+<div class="line"><span><span class="needs_type_name"><span class="needs_data">Requirement</span></span>: </span><strong><span><span class="needs_title"><span class="needs_data">pick_answer_word.feature</span></span></span></strong><span> <span class="needs-id"><a class="reference internal" href="#FEATURE_PICK_ANSWER_WORD" title="FEATURE_PICK_ANSWER_WORD">FEATURE_PICK_ANSWER_WORD</a></span>  <span class="needs collapse" id="target__show__meta"><span class="needs collapsed"><a class="no_link reference external" href="#"><img alt="../_images/arrow-down-circle.svg" class="needs_image" src="../_images/arrow-down-circle.svg" width="17px" /></a></span><span class="needs visible"><a class="no_link reference external" href="#"><img alt="../_images/arrow-right-circle.svg" class="needs_image" src="../_images/arrow-right-circle.svg" width="17px" /></a></span></span> </span></div>
+</div>
+</td>
+</tr>
+<tr class="need meta row-even"><td class="need meta"><div class="needs_meta line-block">
+<div class="line"><span><span></span></span></div>
+<div class="line"><span></span></div>
+</div>
+</td>
+</tr>
+<tr class="need content row-odd"><td class="need content" colspan="1"><div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">Rendered from file <cite>features/pick_answer_word.feature</cite></span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Feature:</span><span class="nf"> Pick an answer word</span>
+<span class="nf">  As a Wordle game</span>
+<span class="nf">  I need to pick a random 5 letter word</span>
+<span class="nf">  In order to let players guess it</span>
+</pre></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scoring-guess-feature">
+<h3>scoring_guess.feature<a class="headerlink" href="#scoring-guess-feature" title="Permalink to this headline"></a></h3>
+<table class="need needs_grid_simple needs_layout_clean rtd-exclude-wy-table no-sphinx-material-strip needs_style_none needs_type_req docutils align-default" id="FEATURE_SCORING_GUESS">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="need head row-odd"><td class="need head"><div class="needs_head line-block">
+<div class="line"><span><span class="needs_type_name"><span class="needs_data">Requirement</span></span>: </span><strong><span><span class="needs_title"><span class="needs_data">scoring_guess.feature</span></span></span></strong><span> <span class="needs-id"><a class="reference internal" href="#FEATURE_SCORING_GUESS" title="FEATURE_SCORING_GUESS">FEATURE_SCORING_GUESS</a></span>  <span class="needs collapse" id="target__show__meta"><span class="needs collapsed"><a class="no_link reference external" href="#"><img alt="../_images/arrow-down-circle.svg" class="needs_image" src="../_images/arrow-down-circle.svg" width="17px" /></a></span><span class="needs visible"><a class="no_link reference external" href="#"><img alt="../_images/arrow-right-circle.svg" class="needs_image" src="../_images/arrow-right-circle.svg" width="17px" /></a></span></span> </span></div>
+</div>
+</td>
+</tr>
+<tr class="need meta row-even"><td class="need meta"><div class="needs_meta line-block">
+<div class="line"><span><span></span></span></div>
+<div class="line"><span></span></div>
+</div>
+</td>
+</tr>
+<tr class="need content row-odd"><td class="need content" colspan="1"><div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">Rendered from file <cite>features/scoring_guess.feature</cite></span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Feature:</span><span class="nf"> Scoring guesses</span>
+<span class="nf">  As a Wordle game</span>
+<span class="nf">  I need to tell the player how good their guess is</span>
+<span class="nf">  In order to help them find the proper answer</span>
+
+<span class="k">Background:</span><span class="nf"></span>
+<span class="k">  Given </span><span class="nf">a guess that&#39;s a valid dictionary word</span>
+
+<span class="k">Scenario:</span><span class="nf"> Perfect guess gives perfect score</span>
+<span class="k">  Given </span><span class="nf">a wordle answer &quot;</span><span class="s">crane</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">scoring the guess &quot;</span><span class="s">crane</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">score should be &quot;</span><span class="s">🟩🟩🟩🟩🟩</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario:</span><span class="nf"> No character in common</span>
+<span class="k">  Given </span><span class="nf">a wordle answer &quot;</span><span class="s">brave</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">scoring the guess &quot;</span><span class="s">skill</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">score should be &quot;</span><span class="s">⬜⬜⬜⬜⬜</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario:</span><span class="nf"> Character in wrong place</span>
+<span class="k">  Given </span><span class="nf">a wordle answer &quot;</span><span class="s">rebus</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">scoring the guess &quot;</span><span class="s">skull</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">score should be &quot;</span><span class="s">🟨⬜🟨⬜⬜</span><span class="nf">&quot;</span>
+
+<span class="k">Scenario Outline:</span><span class="nf"> Scoring guesses</span>
+<span class="k">  Given </span><span class="nf">a wordle </span><span class="nv">&lt;answer&gt;</span><span class="nf"></span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">scoring </span><span class="nv">&lt;guess&gt;</span><span class="nf"></span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">score should be </span><span class="nv">&lt;score&gt;</span><span class="nf"></span>
+
+<span class="c"># Emoji (Unicode) character rendering is hard:</span><span class="nf"></span>
+<span class="c"># Please forgive the table column alignment issues!</span><span class="nf"></span>
+<span class="nf">  </span><span class="k">Examples:</span><span class="nf"> A few guesses and their score</span><span class="k"></span>
+<span class="k">    |</span><span class="nv"> answer</span><span class="k">  |</span><span class="nv"> guess</span><span class="k">	|</span><span class="nv"> score</span><span class="k">		|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> adage</span><span class="k">   |</span><span class="s"> adobe</span><span class="k">	|</span><span class="s"> 🟩🟩⬜⬜🟩</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> serif</span><span class="k">   |</span><span class="s"> quiet</span><span class="k">	|</span><span class="s"> ⬜⬜🟨🟨⬜</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> raise</span><span class="k">   |</span><span class="s"> radix</span><span class="k">	|</span><span class="s"> 🟩🟩⬜🟨⬜</span><span class="k">	|</span>
+
+<span class="nf">  </span><span class="k">Examples:</span><span class="nf"> Multiple occurences of same character</span><span class="k"></span>
+<span class="k">    |</span><span class="nv"> answer</span><span class="k"> |</span><span class="nv"> guess</span><span class="k">	|</span><span class="nv"> score</span><span class="k">		|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> abbey</span><span class="k">  |</span><span class="s"> kebab</span><span class="k">	|</span><span class="s"> ⬜🟨🟩🟨🟨</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> abbey</span><span class="k">  |</span><span class="s"> babes</span><span class="k">	|</span><span class="s"> 🟨🟨🟩🟩⬜</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> abbey</span><span class="k">  |</span><span class="s"> abyss</span><span class="k">	|</span><span class="s"> 🟩🟩🟨⬜⬜</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> abbey</span><span class="k">  |</span><span class="s"> algae</span><span class="k">	|</span><span class="s"> 🟩⬜⬜⬜🟨</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> abbey</span><span class="k">  |</span><span class="s"> keeps</span><span class="k">	|</span><span class="s"> ⬜🟨⬜⬜⬜</span><span class="k">	|</span><span class="nf"></span>
+<span class="k">    |</span><span class="s"> abbey</span><span class="k">  |</span><span class="s"> abate</span><span class="k">	|</span><span class="s"> 🟩🟩⬜⬜🟨</span><span class="k">	|</span>
+</pre></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="requirements-summary">
+<h2>Requirements summary<a class="headerlink" href="#requirements-summary" title="Permalink to this headline"></a></h2>
+<div class="needstable_wrapper docutils container" id="needtable-_collections/gherkin_feature-0">
+<table class="NEEDS_TABLE docutils align-default">
+<caption><span class="caption-text">Requirements list</span></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 38%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Title</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Outgoing</p></th>
+<th class="head"><p>Tags</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="need row-even"><td class="needs_id"><p><a class="reference external" href="#FEATURE_CHECKING_GUESS_VALID_WORD">FEATURE_CHECKING_GUESS_VALID_WORD</a></p></td>
+<td class="needs_title"><p>checking_guess_valid_word.feature</p></td>
+<td class="needs_status"><p></p></td>
+<td class="needs_type"><p>req</p></td>
+<td class="needs_links"><p></p></td>
+<td class="needs_tags"><p></p></td>
+</tr>
+<tr class="need row-odd"><td class="needs_id"><p><a class="reference external" href="#FEATURE_COMMAND_LINE_ENTRYPOINT">FEATURE_COMMAND_LINE_ENTRYPOINT</a></p></td>
+<td class="needs_title"><p>command_line_entrypoint.feature</p></td>
+<td class="needs_status"><p></p></td>
+<td class="needs_type"><p>req</p></td>
+<td class="needs_links"><p></p></td>
+<td class="needs_tags"><p></p></td>
+</tr>
+<tr class="need row-even"><td class="needs_id"><p><a class="reference external" href="#FEATURE_PICK_ANSWER_WORD">FEATURE_PICK_ANSWER_WORD</a></p></td>
+<td class="needs_title"><p>pick_answer_word.feature</p></td>
+<td class="needs_status"><p></p></td>
+<td class="needs_type"><p>req</p></td>
+<td class="needs_links"><p></p></td>
+<td class="needs_tags"><p></p></td>
+</tr>
+<tr class="need row-odd"><td class="needs_id"><p><a class="reference external" href="#FEATURE_SCORING_GUESS">FEATURE_SCORING_GUESS</a></p></td>
+<td class="needs_title"><p>scoring_guess.feature</p></td>
+<td class="needs_status"><p></p></td>
+<td class="needs_type"><p>req</p></td>
+<td class="needs_links"><p></p></td>
+<td class="needs_tags"><p></p></td>
+</tr>
+<tr class="need row-even"><td class="needs_id"><p><a class="reference external" href="#FEATURE_TRACK_GUESSES">FEATURE_TRACK_GUESSES</a></p></td>
+<td class="needs_title"><p>track_guesses.feature</p></td>
+<td class="needs_status"><p></p></td>
+<td class="needs_type"><p>req</p></td>
+<td class="needs_links"><p></p></td>
+<td class="needs_tags"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../wordle_sources.html" class="btn btn-neutral float-left" title="Source of Literate Wordle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

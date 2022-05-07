@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Literate Wordle in Python &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/assets/jsonview.bundle.js"></script>
+        <script src="_static/assets/jsonview_loader.js"></script>
+        <script src="_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Literate programming wordle" href="wordle.html" />
+    <link rel="prev" title="Literate wordle" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#literate-programming">Literate programming?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#read-the-story">Read the story</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#play-the-game">Play the game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reuse-the-python-module">Reuse the python module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#development">Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-setup">Python setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Literate Wordle in Python</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/readme.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>Below is the rendered version of the project’s <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file, found at the
+root of the code repository.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As mentioned in the README below, the bulk of this project’s value is the “novel” or “blogpost” implementing Wordle as we discuss it. To see that, follow <a class="reference internal" href="wordle.html"><span class="doc std std-doc">Literate programming Wordle</span></a>. For a look at the requirements, have a look at the project’s Gherkin <a class="reference internal" href="_collections/gherkin_feature.html"><span class="doc std std-doc">Features</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alternatively, you may want to see the code and its documentation, please visit the <a class="reference external" href="autoapi/index.html">API Reference</a> section, clicking on the “source” to see the code of each module.</p>
+</div>
+<section id="literate-wordle-in-python">
+<h1>Literate Wordle in Python<a class="headerlink" href="#literate-wordle-in-python" title="Permalink to this headline"></a></h1>
+<p>Writing up a Python implementation of Wordle using literate programming.</p>
+<blockquote>
+<div><p>Follow along on the journey to implement Wordle in Python using Behaviour-driven Development techniques.</p>
+</div></blockquote>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/">Python</a> 3.9 or later (use of typing hints)</p></li>
+<li><p><a class="reference external" href="https://python-poetry.org">Poetry</a> package manager, to install development
+dependencies and generate virtual environment.</p></li>
+</ul>
+<p>Note that the wordle program itself doesn’t use any external dependency, but the
+way to call that executable as command line tool does depend on Poetry.
+Generating project documentation also requires dependencies.</p>
+</section>
+<section id="literate-programming">
+<h2>Literate programming?<a class="headerlink" href="#literate-programming" title="Permalink to this headline"></a></h2>
+<p>Literate programming is the practice of writing a program as if it was a novel
+or a blog post, with each explanation conjoined with a code block. A process
+called “tangling” extracts the code blocks from text, generating the program’s
+source code.</p>
+<p>In this case, the “novel” is the file <code class="docutils literal notranslate"><span class="pre">wordle.org</span></code> (written in
+<a class="reference external" href="https://orgmode.org">org-mode</a>), and “tangles” most of the repository’s source
+code folders (mostly <code class="docutils literal notranslate"><span class="pre">src/</span></code>, <code class="docutils literal notranslate"><span class="pre">features/</span></code>, and <code class="docutils literal notranslate"><span class="pre">tests/</span></code>).</p>
+<p>In terms of code repository, other than the <code class="docutils literal notranslate"><span class="pre">wordle.org</span></code> file and its mix of
+code and prose, and the fact this file can re-generate the project’s source
+code, the rest of the repository is a completely normal python project.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<section id="read-the-story">
+<h3>Read the story<a class="headerlink" href="#read-the-story" title="Permalink to this headline"></a></h3>
+<p>The primary usage of this repository is as a “story” to read along as a webpage.</p>
+<p>To generate that document, use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> to build the project’s website, which contains:</p>
+<ul class="simple">
+<li><p>Pretty HTML render of <code class="docutils literal notranslate"><span class="pre">wordle.org</span></code> to follow along</p></li>
+<li><p>Python module API reference (generated from code tangled out into repo)</p></li>
+<li><p>Project’s requirements list, each a Gherkin feature, mapping to test cases</p></li>
+<li><p>Raw version of <code class="docutils literal notranslate"><span class="pre">wordle.org</span></code> for the curious</p></li>
+</ul>
+<p>If you want to read the generated document, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span> <span class="pre">docs-serve</span></code> to
+generate the document and serve it locally via python’s own local HTTP server.</p>
+<p>The secondary usage of this repository is as example codebase for best practices
+of modern Python development.</p>
+</section>
+<section id="play-the-game">
+<h3>Play the game<a class="headerlink" href="#play-the-game" title="Permalink to this headline"></a></h3>
+<p>Install the module first:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make install
+# or
+poetry install
+</pre></div>
+</div>
+<p>Then inside the virtual environment, launch the game:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Run single game inside virtualenv
+poetry run pywordle
+
+# or
+# Load the virtualenv first
+poetry shell
+# Then launch the game, staying in virtualenv
+pywordle
+</pre></div>
+</div>
+</section>
+<section id="reuse-the-python-module">
+<h3>Reuse the python module<a class="headerlink" href="#reuse-the-python-module" title="Permalink to this headline"></a></h3>
+<p>Use this package as you would any python module:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Get a virtualenv going first, such as via poetry
+poetry shell
+python3
+&gt;&gt;&gt; from literate_wordle import words
+&gt;&gt;&gt; answer = words.pick_answer_word()
+&gt;&gt; print(f&quot;Hello! The secret wordle answer is &#39;{answer}&#39;.&quot;)
+Hello! The secret wordle answer is &#39;blank&#39;.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline"></a></h2>
+<section id="python-setup">
+<h3>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline"></a></h3>
+<p>This repository uses Python 3.9 or above, using
+<a class="reference external" href="https://python-poetry.org">Poetry</a> as package manager to define a Python
+package inside <code class="docutils literal notranslate"><span class="pre">src/literate_wordle/</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">poetry</span></code> will create virtual environments if needed, fetch
+dependencies, and install them for development.</p>
+<p>This codebase uses <a class="reference external" href="https://pre-commit.com">pre-commit</a> to run linting tools
+like <code class="docutils literal notranslate"><span class="pre">flake8</span></code>, formatters like <code class="docutils literal notranslate"><span class="pre">black</span></code>, and type checking via <code class="docutils literal notranslate"><span class="pre">mypy</span></code>.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">install</span></code> to install git pre-commit hooks to force running these
+checks before any code can be committed, use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">lint</span></code> to run these manually.</p>
+<p>Testing is provided by <code class="docutils literal notranslate"><span class="pre">pytest</span></code> separately in <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>.</p>
+<p>Installation of <code class="docutils literal notranslate"><span class="pre">poetry</span></code> and <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> is recommended via
+<a class="reference external" href="https://pypa.github.io/pipx/">pipx</a>.</p>
+<p>For ease of development, a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> is provided, use it like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make  # equivalent to &quot;make all&quot; = install lint docs test build
+# run only specific tasks:
+make install
+make lint
+make test
+# Combine tasks:
+make install test
+</pre></div>
+</div>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h3>
+<p>Documentation is generated via <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>, using the cool <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/">myst_parser</a> plugin to support Markdown files like this one.</p>
+<p>Other Sphinx plugins provide extra documentation features, like the fantastic <a class="reference external" href="https://sphinxcontrib-needs.readthedocs.io/en/latest/index.html">sphinxcontrib-needs</a> used to track project requirements, the recent <a class="reference external" href="https://sphinx-autoapi.readthedocs.io/en/latest/index.html">AutoAPI</a> to generate API reference without headaches, and the experimental <a class="reference external" href="https://sphinx-autoapi.readthedocs.io/en/latest/index.html">sphinx-collections</a> to include automatically generated documentation.</p>
+<p>To build the documentation, run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Requires the project dependencies provided by &quot;make install&quot;
+make docs
+</pre></div>
+</div>
+<p>To browse the website version of the documentation you just built, run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make docs-serve
+</pre></div>
+</div>
+<p>And remember that <code class="docutils literal notranslate"><span class="pre">make</span></code> supports multiple targets, so you can generate the documentation and serve it:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make docs docs-serve
+</pre></div>
+</div>
+</section>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
+<p>This project is released under GPLv3. See <code class="docutils literal notranslate"><span class="pre">COPYING</span></code> file for GPLv3 license
+details.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Literate wordle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="wordle.html" class="btn btn-neutral float-right" title="Literate programming wordle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

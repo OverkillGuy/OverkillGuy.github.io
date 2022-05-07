@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.test_checking_guess_valid_word &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/assets/jsonview.bundle.js"></script>
+        <script src="../../../_static/assets/jsonview_loader.js"></script>
+        <script src="../../../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../../../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">tests.test_checking_guess_valid_word</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/tests/test_checking_guess_valid_word/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tests.test_checking_guess_valid_word">
+<span id="tests-test-checking-guess-valid-word"></span><h1><a class="reference internal" href="#module-tests.test_checking_guess_valid_word" title="tests.test_checking_guess_valid_word"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tests.test_checking_guess_valid_word</span></code></a><a class="headerlink" href="#module-tests.test_checking_guess_valid_word" title="Permalink to this headline"></a></h1>
+<p>Validates the Gherkin file features/checking_guess_valid_word.feature:</p>
+<dl class="simple">
+<dt>Feature: Checking a guess is a valid word</dt><dd><p>As a Wordle game
+I need to confirm each guessed word is valid
+So that I only accept real words, no kwyjibo</p>
+</dd>
+</dl>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tests.test_checking_guess_valid_word.test_reject_long_words" title="tests.test_checking_guess_valid_word.test_reject_long_words"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_reject_long_words</span></code></a>()</p></td>
+<td><p>Scenario: Reject long words</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tests.test_checking_guess_valid_word.test_reject_overly_short_words" title="tests.test_checking_guess_valid_word.test_reject_overly_short_words"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_reject_overly_short_words</span></code></a>()</p></td>
+<td><p>Scenario: Reject short words</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tests.test_checking_guess_valid_word.test_reject_nondict_words" title="tests.test_checking_guess_valid_word.test_reject_nondict_words"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_reject_nondict_words</span></code></a>()</p></td>
+<td><p>Scenario: Reject fake words via dictionary</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tests.test_checking_guess_valid_word.test_accept_dict_words" title="tests.test_checking_guess_valid_word.test_accept_dict_words"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_accept_dict_words</span></code></a>()</p></td>
+<td><p>Scenario: Accept five letter dictionary words</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_checking_guess_valid_word.test_reject_long_words">
+<span class="sig-prename descclassname"><span class="pre">tests.test_checking_guess_valid_word.</span></span><span class="sig-name descname"><span class="pre">test_reject_long_words</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_checking_guess_valid_word.html#test_reject_long_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_checking_guess_valid_word.test_reject_long_words" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Reject long words</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_checking_guess_valid_word.test_reject_overly_short_words">
+<span class="sig-prename descclassname"><span class="pre">tests.test_checking_guess_valid_word.</span></span><span class="sig-name descname"><span class="pre">test_reject_overly_short_words</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_checking_guess_valid_word.html#test_reject_overly_short_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_checking_guess_valid_word.test_reject_overly_short_words" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Reject short words</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_checking_guess_valid_word.test_reject_nondict_words">
+<span class="sig-prename descclassname"><span class="pre">tests.test_checking_guess_valid_word.</span></span><span class="sig-name descname"><span class="pre">test_reject_nondict_words</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_checking_guess_valid_word.html#test_reject_nondict_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_checking_guess_valid_word.test_reject_nondict_words" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Reject fake words via dictionary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_checking_guess_valid_word.test_accept_dict_words">
+<span class="sig-prename descclassname"><span class="pre">tests.test_checking_guess_valid_word.</span></span><span class="sig-name descname"><span class="pre">test_accept_dict_words</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_checking_guess_valid_word.html#test_accept_dict_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_checking_guess_valid_word.test_accept_dict_words" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Accept five letter dictionary words</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

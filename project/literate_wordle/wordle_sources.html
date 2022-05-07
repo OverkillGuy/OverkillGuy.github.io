@@ -1,0 +1,2949 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Source of Literate Wordle &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/assets/jsonview.bundle.js"></script>
+        <script src="_static/assets/jsonview_loader.js"></script>
+        <script src="_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Requirements" href="_collections/gherkin_feature.html" />
+    <link rel="prev" title="Literate programming wordle" href="wordle.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Source of Literate Wordle</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/wordle_sources.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="source-of-literate-wordle">
+<h1>Source of Literate Wordle<a class="headerlink" href="#source-of-literate-wordle" title="Permalink to this headline"></a></h1>
+<p>Below is the raw org-mode file that was rendered to <a class="reference internal" href="wordle.html"><span class="doc std std-doc">Literate Programming
+Wordle</span></a> in the previous documentation page.</p>
+<p>This is intended for people curious about how the plain-text file behind the “novel” looks like. If you just wanted to read the novel comfortably, take a look at the previous page instead.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#+TITLE: Wordle
+
+#+OPTIONS: ^:nil
+
+# Shell steps should show results verbatim (not tables) and don&#39;t rerun on export
+#+PROPERTY: header-args:shell :results verbatim :eval no-export
+
+I&#39;ve recently written [[https://jiby.tech/post/gherkin-features-user-requirements/][a series of blog posts about Gherkin]], the [[https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/][Behaviour-driven
+development movement,]] and how Cucumber (the BDD tool of choice) failed to
+perform to expectations.
+
+I wanted to showcase the BDD-inspired low-tech solution I came up with via a
+toy project, demonstrating a small but significant programming task, broken down
+as series of design-implementation cycles.
+
+Wordle is a perfect target: it&#39;s a small codebase, with a half dozen features to
+string together into a useable game.
+
+In order to document the process, the code is written via literate programming.
+
+#+begin_quote
+Literate programming is the art of writing code as if it was a novel (or blogpost), writing down what&#39;s needed, explaining the reasoning, and weaving in code snippets that add up to the codebase as we grow in understanding. The result is a &quot;story&quot; which can be read, but also &quot;tangled&quot; back into a proper codebase that works normally.
+#+end_quote
+
+For more context on the code repository (how to use, etc), please read the project
+readme.
+
+* Mise en bouche: picking an answer
+
+To get us started, let&#39;s cover the very first behaviour Wordle has to do: pick a
+word that will become our secret answer.
+
+As the first iteration in a test-driven project, it&#39;s important that we set up
+all the components we&#39;ll need going forwards.
+
+First, let&#39;s formalise a little our first requirement, using Gherkin Features.
+For context as to why/how we&#39;re doing this, read [[https://jiby.tech/post/gherkin-features-user-requirements/][my post on gathering
+requirements via Gherkin.]]
+
+#+NAME: feature1
+#+CAPTION: Our first requirement. Tangled (exported) to =features/pick_answer_word.feature=
+#+begin_src feature :tangle features/pick_answer_word.feature
+Feature: Pick an answer word
+  As a Wordle game
+  I need to pick a random 5 letter word
+  In order to let players guess it
+#+end_src
+
+Right. That&#39;s fairly straightforward, but the secret word can&#39;t just be random
+characters, it needs to be a proper word. So we need to find a dictionary to
+pick from.
+
+** TDD for picking word functionality
+
+We want to write a test that validates that we can indeed pick a random word. But &quot;Random&quot; and &quot;test&quot; together should make anybody wince at the idea of
+non-deterministic testing.
+
+We /could/ write a test that picks a word, then confirm the word came
+from the dictionary file, but writing test would mean re-implementing the entirety of the
+feature we&#39;re testing, as well as rely on the internals of the implementation
+being correct. That&#39;s very wrong.
+
+A good alternative would be to pin down the randomness (making the test
+deterministic) by anchoring the randomness seed to known value, allowing
+repeatable testing. But this is just the first test in a new project, so we want a
+simple check to start with, so we compromise by making the assertion &quot;is the
+random word picked of five letter length&quot;?
+
+So we write down a new test file, under =tests/= folder, starting with a
+file-level docstring that references the Gherkin feature this enforces.
+
+#+CAPTION: Test driving the first feature. Note the =pick_answer_word()= function doesn&#39;t exist yet, we&#39;re dreaming it up!
+#+begin_src python :tangle tests/test_pick_word.py
+&quot;&quot;&quot;Validates the Gherkin file features/pick_answer_word.feature:
+
+Feature: Pick an answer word
+  As a Wordle game
+  I need to pick a random 5 letter word
+  In order to let players guess it
+&quot;&quot;&quot;
+
+from literate_wordle.words import pick_answer_word
+
+
+def test_pick_word_ok_length():
+    &quot;&quot;&quot;Confirm a wordle solution is of right size&quot;&quot;&quot;
+    assert len(pick_answer_word()) == 5, &quot;Picked wordle solution is wrong size!&quot;
+#+end_src
+
+Of course, since that feature isn&#39;t implemented (not even the module&#39;s
+skeleton), running tests right now would crash as import errors, rather than
+give a red light.
+
+So let&#39;s implement the barest hint of the =pick_answer_word= function that
+returns the wrong thing, to make the test run and fail:
+
+#+CAPTION: First, the docstring for a new python module =words.py=, under the =literate_wordle= package.
+#+begin_src python :tangle no
+&quot;&quot;&quot;Dictionary features to back wordle solutions&quot;&quot;&quot;
+#+end_src
+
+In that module, let&#39;s add the skeleton for our =pick_answer_word= function, but
+return an invalid result, to make test explicitly fail:
+
+#+begin_src python :tangle no
+def pick_answer_word() -&gt; str:
+    &quot;&quot;&quot;Pick a Wordle solution/answer from wordle dictionary&quot;&quot;&quot;
+    return &quot;&quot;  # Incorrect solution to get RED test
+#+end_src
+
+With our test ready, and a dummy function in place, let&#39;s see the tests go red:
+
+# To avoid crashing org-mode, run these tests via: make test 2&gt;&amp;1 || true
+
+#+CAPTION: Running the tests.
+#+begin_src shell :exports both
+make test
+#+end_src
+
+#+RESULTS:
+#+begin_example
+poetry run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, datadir-1.3.1, clarity-1.0.1
+collecting ... collected 2 items
+
+tests/test_pick_word.py::test_pick_word_ok_length FAILED                 [ 50%]
+tests/test_version.py::test_version PASSED                               [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_pick_word_ok_length ___________________________
+
+    def test_pick_word_ok_length():
+        &quot;&quot;&quot;Confirm a wordle solution is of right size&quot;&quot;&quot;
+&gt;       assert len(pick_answer_word()) == 5, &quot;Picked wordle solution is wrong size!&quot;
+E       AssertionError: Picked wordle solution is wrong size!
+E       assert == failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         0
+E         5
+E
+
+tests/test_pick_word.py:13: AssertionError
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+=========================== short test summary info ============================
+FAILED tests/test_pick_word.py::test_pick_word_ok_length - AssertionError: Pi...
+========================= 1 failed, 1 passed in 0.07s ==========================
+make: *** [Makefile:16: test] Error 1
+#+end_example
+
+As pytest mentions, we should see a wordle solution of 5 letters, not zero.
+So the test indeed failed as expected, we can now make it pass by implementing
+the feature.
+
+Taking a quick step back, think of how conveniently TDD lets us &quot;dream up an
+API&quot;, by describing functions and files that don&#39;t need to exist yet.
+
+** Solutions dictionary file
+
+Since we&#39;re trying to match the Wordle website&#39;s implementation, let&#39;s reuse
+Wordle&#39;s own dictionary. Someone [[https://raw.githubusercontent.com/AllValley/WordleDictionary/main/wordle_solutions_alphabetized.txt][helpfully uploaded it]]. Let&#39;s download it:
+
+#+begin_src shell :tangle no
+wget \
+    --output-document &quot;wordle_answers_dict.txt&quot; \
+    &quot;https://raw.githubusercontent.com/AllValley/WordleDictionary/6f14d2f03d01c36fe66e3ccc0929394251ab139d/wordle_solutions_alphabetized.txt&quot;
+#+end_src
+
+Except an alphabetically sorted text file takes space for no good reason. Let&#39;s
+compress it preventively.
+
+While this can legitimately be seen as a premature optimization, we can see this
+as trying to &quot;flatten&quot; a static text file into a binary &quot;asset&quot; that can be
+packaged into the project&#39;s package, like icons are part of webapps.
+
+#+begin_src shell :tangle no :exports both
+ANSWERS_FILE=&quot;wordle_answers_dict.txt&quot;
+# Get raw file size in kilobytes
+du -k &quot;${ANSWERS_FILE}&quot;
+# Compress the file (removes original)
+gzip &quot;$ANSWERS_FILE&quot;
+# Check size after compression
+du -k &quot;${ANSWERS_FILE}.gz&quot;
+#+end_src
+
+#+RESULTS:
+: 16	wordle_answers_dict.txt
+: 8	wordle_answers_dict.txt.gz
+
+Sweet, we have cut down the filesize by half.
+
+** Importing dictionary: static/packaged asset file read
+
+At first glance, the implementation of the function we want is simple, it looks
+roughly like this:
+
+#+begin_src python :tangle no
+with open(&quot;my_dictionary.txt&quot;, &quot;r&quot;) as fd:
+    my_text = fd.read()
+#+end_src
+
+One just needs to find the right file path to open, just add sprinkles to deal
+with compression. Sure enough, that is fairly easy.
+
+The issue is that we&#39;re trying to write a python package here, which means it could
+be downloaded via =pip install= and installed in an arbitary location on
+someone&#39;s computer. Our code needs to refer to the file as &quot;the file XYZ inside
+the assets folder of our package&quot;. We need to look up how to express that.
+
+From [[https://stackoverflow.com/a/20885799][Stackoverflow on reading static files from inside Python package]], we can
+use the =importlib.resources= module, since our project requires =Python  3.9= onwards.
+
+So we&#39;ll move our dictionary zip file into a new module (folder) called
+=assets=, which will be a proper python module that can be imported from:
+
+#+CAPTION: Moving our dictionary to the new =assets= sub-module.
+#+begin_src shell :tangle no
+mkdir -p src/literate_wordle/assets/
+# A proper python module means an __init__.py: Give it a docstring
+echo &#39;&quot;&quot;&quot;Static binary assets (dictionaries) required to perform Wordle&quot;&quot;&quot;&#39; &gt; src/literate_wordle/assets/__init__.py
+mv wordle_answers_dict.txt.gz src/literate_wordle/
+#+end_src
+
+With the file in correct position, let&#39;s redefine the =words= module we left empty, to provide the =pick_answer_word= function.
+
+#+CAPTION: Defining new python module under =src/literate_wordle/words.py=, starting with docstrings.
+#+NAME: choice-module-docstring
+#+begin_src python :tangle no
+&quot;&quot;&quot;Dictionary features to back wordle solutions&quot;&quot;&quot;
+#+end_src
+
+#+NAME: choice-stdlib
+#+CAPTION: Necessary imports from the standard library.
+#+begin_src python :tangle no
+import gzip
+import importlib.resources as pkg_resources
+#+end_src
+
+#+NAME: choice-locallib
+#+CAPTION: Local import of new =assets/= folder
+#+begin_src python :tangle no
+from . import assets  # Relative import of the assets/ folder
+#+end_src
+
+We need a convenience function to load the zip file into a list of strings.
+
+
+
+#+NAME: choice-func-unzipdict
+#+CAPTION: Actual function to unzip dictionary. Note newline-delimited words now lowercased into a list-of-word strings with no trailing whitespace
+#+begin_src python :tangle no
+def get_words_list() -&gt; list[str]:
+    &quot;&quot;&quot;Decompress the wordle dictionary&quot;&quot;&quot;
+    dict_compressed_bytes = pkg_resources.read_binary(
+        assets, &quot;wordle_answers_dict.txt.gz&quot;
+    )
+    dict_string = gzip.decompress(dict_compressed_bytes).decode(&quot;ascii&quot;)
+    answer_word_list = [word.strip().lower().strip() for word in dict_string.split(&quot;\n&quot;)]
+    return answer_word_list
+#+end_src
+
+Ideally we would make a test dedicated for proving this function, but our
+already-failing acceptance test is pretty much covering this entire feature, so
+it&#39;s not worth it just now. This is one of those tradeoffs we make between toy
+projects and long-term maintainability of code as a team.
+
+With the word list in hand, writing out the pick function is trivial:
+
+#+CAPTION: Import from standard library for randomness
+#+NAME: choice-stdlib2
+#+begin_src python :tangle no
+from random import choice
+#+end_src
+
+#+NAME: choice-func-pickanswer
+#+CAPTION: Pick-a-word! Pretty simple, with all the legwork we did already.
+#+begin_src python :tangle no
+def pick_answer_word() -&gt; str:
+    &quot;&quot;&quot;Pick a single word out of the dictionary of answers&quot;&quot;&quot;
+    return choice(get_words_list())
+#+end_src
+
+With the function implemented, we can try it out in a Python REPL (Read Eval
+Print Loop, also known as an interactive interpreter):
+
+#+CAPTION: Open an interactive python session, ask for a random word twice.
+#+begin_src shell :tangle no :exports both
+poetry run python3
+&gt;&gt; from literate_wordle import words
+&gt;&gt; print(words.pick_answer_word())
+stink
+&gt;&gt; print(words.pick_answer_word())
+blank
+#+end_src
+
+Perfect! So the test should now pass, right?
+
+#+begin_src shell :tangle no :exports both
+make test
+#+end_src
+
+#+RESULTS:
+#+begin_example
+poetry run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, datadir-1.3.1, clarity-1.0.1
+collecting ... collected 2 items
+
+tests/test_pick_word.py::test_pick_word_ok_length PASSED                 [ 50%]
+tests/test_version.py::test_version PASSED                               [100%]
+
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+============================== 2 passed in 0.03s ===============================
+#+end_example
+
+Acceptance tests pass, and linters are happy (not pictured, use =make= to
+check).
+
+Because the acceptance test pass, that means the feature is ready to ship!
+That&#39;s the BDD guarantee.
+
+Of course, keen readers will notice sub-optimal code, like how we&#39;re unzipping
+the entire solutions file on each requested answer. Because &quot;picking a solution
+word&quot; is something done on the order of /once/ over the /entire runtime/ of a
+Wordle session, we choose to leave this performance wart be.
+
+** Debriefing on the method
+
+We just completed our first loop: determine a small component that needs
+implemented to build towards the Wordle goal, spell it out with Gherkin features,
+explicit the feature via acceptance test, and iterate on the new RED test until it becomes
+green, then ship the feature.
+
+Common TDD workflow adds a refactor or &quot;blue&quot; component to the cycle, which is
+indeed necessary for production code, as it lends maintainability (the first
+draft of a codebase is usually taking big shortcuts). But this project is
+meant as entertainment material, and proper refactoring would mean refactoring the =wordle.org=
+source file, which would drown out the nice narrative we&#39;re building here, so
+let&#39;s leave it here.
+
+Along the way, the code blocks spelled out in this narrative-oriented file is
+tangled out into proper code paths, so that the =Makefile= can pick it up and
+validate the proper package-ness. We&#39;ll see as we implement the next feature how
+such a weaving of code snippets works.
+
+
+* Confirming guess is a valid word
+
+Now that we can pick secret words, we need to start processing guesses. The very
+first thing we need is validating guesses are proper words, and of the right
+size. This feature will give us a familiar context (dictionaries), while slowly
+ramping up the details of the Gherkin features:
+
+#+NAME: feature-check-valid-guess
+#+CAPTION: New Gherkin feature file =features/checking_guess_valid_word.feature=
+#+begin_src feature :tangle features/checking_guess_valid_word.feature
+Feature: Checking a guess is a valid word
+  As a Wordle game
+  I need to confirm each guessed word is valid
+  So that I only accept real words, no kwyjibo
+#+end_src
+
+In practice, this means multiple things:
+
+#+NAME: scenario-check-valid-guess
+#+CAPTION: Scenarios to describe the feature in details
+#+begin_src feature :tangle features/checking_guess_valid_word.feature
+Scenario: Reject long words
+  When guessing &quot;affable&quot;
+  Then the guess is rejected
+  And reason for rejection is &quot;Guess too long&quot;
+
+Scenario: Reject short words
+  When guessing &quot;baby&quot;
+  Then the guess is rejected
+  And reason for rejection is &quot;Guess too short&quot;
+
+Scenario: Reject fake words via dictionary
+  When guessing &quot;vbpdj&quot;
+  Then the guess is rejected
+  And reason for rejection is &quot;Not a word from the dictionary&quot;
+
+Scenario: Accept five letter dictionary words
+  When guessing &quot;crane&quot;
+  Then the guess is accepted
+#+end_src
+
+So, with a feature covering these scenarios, we can start laying out acceptance
+tests.
+
+Since I quite like to use the Gherkin feature file inside the
+docstrings of Python tests, I&#39;m going to take advantage of having already
+written the feature above, to reference it, so I can template it out in code snippets:
+
+#+NAME: scenario-check-tangle-noweb
+#+CAPTION: New test file&#39;s module-level docstring, using (invisible during rendering) templating to fill in the gherkin feature from Listing [[feature-check-valid-guess]]
+#+begin_src python :tangle tests/test_checking_guess_valid_word.py :noweb yes
+&quot;&quot;&quot;Validates the Gherkin file features/checking_guess_valid_word.feature:
+
+&lt;&lt;feature-check-valid-guess&gt;&gt;
+&quot;&quot;&quot;
+#+end_src
+
+Just this once, I&#39;ll show how the templating happens behind the scene:
+
+#+NAME: scenario-check-tangle-withoutnoweb
+#+CAPTION: Same code block as Listing [[scenario-check-tangle-noweb]], but without the magic templating enabled: each block with two chevrons around references a code block from above.
+#+begin_src python :tangle no
+&quot;&quot;&quot;Validates the Gherkin file features/checking_guess_valid_word.feature:
+
+&lt;&lt;feature-check-valid-guess&gt;&gt;
+
+&lt;&lt;scenario-check-valid-guess&gt;&gt;
+&quot;&quot;&quot;
+#+end_src
+** Test setup
+With the feature described, let&#39;s import our hypothetical test code
+
+#+NAME: test-valid-import
+#+CAPTION: Import a new function we&#39;ll be defining
+#+begin_src python :tangle no
+from literate_wordle.words import check_valid_word
+#+end_src
+
+#+CAPTION: A simple test using the first scenario
+#+NAME: test-valid-1
+#+begin_src python :tangle no
+def test_reject_long_words():
+    &quot;&quot;&quot;Scenario: Reject long words&quot;&quot;&quot;
+    # When guessing &quot;affable&quot;
+    guess = &quot;affable&quot;
+    is_valid, reject_reason = check_valid_word(guess)
+    # Then the guess is rejected
+    assert not is_valid, &quot;Overly long guess should have been rejected&quot;
+    # And reason for rejection is &quot;Guess too long&quot;
+    assert reject_reason == &quot;Guess too long&quot;
+#+end_src
+
+Notice the pattern of referencing the Gherkin Scenario as comments inside the
+test. This practice is something I came up with on my own after being a bit
+disappointed with Cucumber. You can read more about it in [[https://jiby.tech/post/low-tech-cucumber-replacement/][my post on low-tech
+cucumber replacement]].
+
+#+CAPTION: The opposite test, text too short
+#+NAME: test-valid-2
+#+begin_src python :tangle no
+def test_reject_overly_short_words():
+    &quot;&quot;&quot;Scenario: Reject short words&quot;&quot;&quot;
+    # When guessing &quot;baby&quot;
+    guess = &quot;baby&quot;
+    is_valid, reject_reason = check_valid_word(guess)
+    # Then the guess is rejected
+    assert not is_valid, &quot;Overly short guess should have been rejected&quot;
+    # And reason for rejection is &quot;Guess too short&quot;
+    assert reject_reason == &quot;Guess too short&quot;
+#+end_src
+
+And finally, the dictionary checks:
+
+#+CAPTION: Non-dictionary words test
+#+NAME: test-valid-3
+#+begin_src python :tangle no
+def test_reject_nondict_words():
+    &quot;&quot;&quot;Scenario: Reject fake words via dictionary&quot;&quot;&quot;
+    # When guessing &quot;vbpdj&quot;
+    guess = &quot;vbpdj&quot;
+    is_valid, reject_reason = check_valid_word(guess)
+    # Then the guess is rejected
+    assert not is_valid, &quot;Word not in dictionary should have been rejected&quot;
+    # And reason for rejection is &quot;Not a word from the dictionary&quot;
+    assert reject_reason == &quot;Not a word from the dictionary&quot;
+#+end_src
+
+
+#+CAPTION: Dictionary words test
+#+NAME: test-valid-4
+#+begin_src python :tangle no
+def test_accept_dict_words():
+    &quot;&quot;&quot;Scenario: Accept five letter dictionary words&quot;&quot;&quot;
+    # When guessing &quot;crane&quot;
+    guess = &quot;crane&quot;
+    is_valid, reject_reason = check_valid_word(guess)
+    # Then the guess is accepted
+    assert is_valid, &quot;Correct length word in dictionary should have been accepted&quot;
+#+end_src
+
+One tiny detail regarding this last example, which highlights why separating
+Gherkin from actual code is important: We describe in the positive scenario the
+need to accept a correct word in terms of &quot;not rejecting&quot;, which in code maps to
+the =is_valid= boolean. That&#39;s suffficient to validate the originalGherkin
+scenario, which is what we think of when designing the software.
+
+But as we see in the implementation, there&#39;s also the matter of the
+=reject_reason= component, which we should check for emptiness. That emptiness is an
+implementation detail, which has no reason to be laid out in the original
+scenario, but is still valid to make assertions on as part of the
+implementation&#39;s check. So we add the following line to the test:
+
+#+NAME: reject-reason-none
+#+CAPTION: Appended line to Listing [[test-valid-4]]. Doesn&#39;t map back to Gherkin, because it is an implementation detail, not part of the feature&#39;s requirement itself. Still worth checking, in practice.
+#+begin_src python :tangle no
+    assert reject_reason is None, &quot;Accepted word should have no reason to be rejected&quot;
+#+end_src
+
+With all these (high level) tests in hand, let&#39;s write up some small
+implementation to get RED tests instead of a crash.
+
+First up is defining the function&#39;s signature: Simple enough, we take a string guess
+in, and return a boolean and a string for justification. Except sometimes (as
+seen in Listing [[reject-reason-none]]) the reason is =None=, so that&#39;s more of an
+=Optional= string, which we&#39;ll need to import.
+
+#+CAPTION: Import type hints for function type definition
+#+NAME: valid-stdlib
+#+begin_src python :tangle no
+from typing import Optional
+#+end_src
+
+#+CAPTION: Function signature without its content
+#+NAME: valid-func-proto
+#+begin_src python :tangle no
+def check_valid_word(guess: str) -&gt; tuple[bool, Optional[str]]:
+#+end_src
+
+
+#+CAPTION: Fill the function, to give valid-but-nonsensical output
+#+NAME: valid-func-junk
+#+begin_src python :tangle no
+    &quot;&quot;&quot;Pretends to check if guess is a valid word&quot;&quot;&quot;
+    return False, &quot;Not implemented&quot;
+#+end_src
+
+All right, so we have tests, let&#39;s see them fail!
+
+#+CAPTION: Run the tests. The =2&gt;&amp;1 || true= part is to ensure any failed test&#39;s output goes to stdout (in this document) and bad exit codes don&#39;t get marked as failures of the code block&#39;s execution.
+#+NAME: valid-func-failrun1
+#+begin_src shell :tangle no :exports both :async
+make test 2&gt;&amp;1 || true
+#+end_src
+
+#+RESULTS:
+#+begin_example
+poetry run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, clarity-1.0.1
+collecting ... collected 5 items
+
+tests/test_checking_guess_valid_word.py::test_reject_long_words FAILED   [ 20%]
+tests/test_checking_guess_valid_word.py::test_reject_overly_short_words FAILED [ 40%]
+tests/test_checking_guess_valid_word.py::test_reject_nondict_words FAILED [ 60%]
+tests/test_checking_guess_valid_word.py::test_accept_dict_words FAILED   [ 80%]
+tests/test_pick_word.py::test_pick_word_ok_length PASSED                 [100%]
+
+=================================== FAILURES ===================================
+____________________________ test_reject_long_words ____________________________
+
+    def test_reject_long_words():
+        &quot;&quot;&quot;Scenario: Reject long words&quot;&quot;&quot;
+        # When guessing &quot;affable&quot;
+        guess = &quot;affable&quot;
+        is_valid, reject_reason = check_valid_word(guess)
+        # Then the guess is rejected
+        assert not is_valid, &quot;Overly long guess should have been rejected&quot;
+        # And reason for rejection is &quot;Guess too long&quot;
+&gt;       assert reject_reason == &quot;Guess too long&quot;
+E       assert == failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         Not implemented
+E         Guess too long
+E
+
+tests/test_checking_guess_valid_word.py:39: AssertionError
+________________________ test_reject_overly_short_words ________________________
+
+    def test_reject_overly_short_words():
+        &quot;&quot;&quot;Scenario: Reject short words&quot;&quot;&quot;
+        # When guessing &quot;baby&quot;
+        guess = &quot;baby&quot;
+        is_valid, reject_reason = check_valid_word(guess)
+        # Then the guess is rejected
+        assert not is_valid, &quot;Overly short guess should have been rejected&quot;
+        # And reason for rejection is &quot;Guess too short&quot;
+&gt;       assert reject_reason == &quot;Guess too short&quot;
+E       assert == failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         Not implemented
+E         Guess too short
+E
+
+tests/test_checking_guess_valid_word.py:50: AssertionError
+__________________________ test_reject_nondict_words ___________________________
+
+    def test_reject_nondict_words():
+        &quot;&quot;&quot;Scenario: Reject fake words via dictionary&quot;&quot;&quot;
+        # When guessing &quot;vbpdj&quot;
+        guess = &quot;vbpdj&quot;
+        is_valid, reject_reason = check_valid_word(guess)
+        # Then the guess is rejected
+        assert not is_valid, &quot;Word not in dictionary should have been rejected&quot;
+        # And reason for rejection is &quot;Not a word from the dictionary&quot;
+&gt;       assert reject_reason == &quot;Not a word from the dictionary&quot;
+E       assert == failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         Not implemented
+E         Not a word from the dictionary
+E
+
+tests/test_checking_guess_valid_word.py:61: AssertionError
+____________________________ test_accept_dict_words ____________________________
+
+    def test_accept_dict_words():
+        &quot;&quot;&quot;Scenario: Accept five letter dictionary words&quot;&quot;&quot;
+        # When guessing &quot;crane&quot;
+        guess = &quot;crane&quot;
+        is_valid, reject_reason = check_valid_word(guess)
+        # Then the guess is accepted
+&gt;       assert is_valid, &quot;Correct length word in dictionary should have been accepted&quot;
+E       AssertionError: Correct length word in dictionary should have been accepted
+E       assert False
+
+tests/test_checking_guess_valid_word.py:70: AssertionError
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+
+----------- coverage: platform linux, python 3.9.5-final-0 -----------
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+src/literate_wordle/__init__.py              1      0   100%
+src/literate_wordle/assets/__init__.py       0      0   100%
+src/literate_wordle/words.py                14      0   100%
+------------------------------------------------------------
+TOTAL                                       15      0   100%
+Coverage HTML written to dir test_results/coverage.html
+Coverage XML written to file test_results/coverage.xml
+
+=========================== short test summary info ============================
+FAILED tests/test_checking_guess_valid_word.py::test_reject_long_words - asse...
+FAILED tests/test_checking_guess_valid_word.py::test_reject_overly_short_words
+FAILED tests/test_checking_guess_valid_word.py::test_reject_nondict_words - a...
+FAILED tests/test_checking_guess_valid_word.py::test_accept_dict_words - Asse...
+========================= 4 failed, 1 passed in 0.13s ==========================
+make: *** [Makefile:16: test] Error 1
+#+end_example
+
+Test failure as expected, and enjoy that 100% coverage![fn::Obviously coverage
+metric is a very fuzzy number which doesn&#39;t guarantee much, but most well maintained code has a
+tendency to have good coverage, because the features are well tested. It&#39;s a
+correlation-metric, nothing more. In our case, we&#39;re doing TDD (test goes first
+indeed) and we&#39;re pushing this even more to explicit our user requirements as
+acceptance tests, it should be no surprise the coverage gets good.]
+
+** Implementing the feature, one test at a time
+Let&#39;s implement the proper feature. First of all, we replace the function stub&#39;s
+body to do only guess-length checks, run tests against it. Since we implement
+half the feature (by Scenarios), we should be seeing half as many tests fail as before.
+
+#+NAME: valid-func-lenbody
+#+begin_src python
+&quot;&quot;&quot;Check wordle guess length only, no dict checks&quot;&quot;&quot;
+answer_length = 5
+guess_length = len(guess)
+if guess_length &lt; answer_length:
+    return False, &quot;Guess too short&quot;
+if guess_length &gt; answer_length:
+    return False, &quot;Guess too long&quot;
+return True, None  # No dictionary check
+#+end_src
+
+
+#+NAME: valid-func-failrun2
+#+CAPTION: Similarly to Listing [[valid-func-failrun1]], run test without exiting on failure
+#+begin_src shell :tangle no :exports both :async
+make test 2&gt;&amp;1 || true
+#+end_src
+
+#+RESULTS:
+#+begin_example
+poetry run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, clarity-1.0.1
+collecting ... collected 5 items
+
+tests/test_checking_guess_valid_word.py::test_reject_long_words PASSED   [ 20%]
+tests/test_checking_guess_valid_word.py::test_reject_overly_short_words PASSED [ 40%]
+tests/test_checking_guess_valid_word.py::test_reject_nondict_words FAILED [ 60%]
+tests/test_checking_guess_valid_word.py::test_accept_dict_words PASSED   [ 80%]
+tests/test_pick_word.py::test_pick_word_ok_length PASSED                 [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_reject_nondict_words ___________________________
+
+    def test_reject_nondict_words():
+        &quot;&quot;&quot;Scenario: Reject fake words via dictionary&quot;&quot;&quot;
+        # When guessing &quot;vbpdj&quot;
+        guess = &quot;vbpdj&quot;
+        is_valid, reject_reason = check_valid_word(guess)
+        # Then the guess is rejected
+&gt;       assert not is_valid, &quot;Word not in dictionary should have been rejected&quot;
+E       AssertionError: Word not in dictionary should have been rejected
+E       assert not True
+
+tests/test_checking_guess_valid_word.py:59: AssertionError
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+
+----------- coverage: platform linux, python 3.9.5-final-0 -----------
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+src/literate_wordle/__init__.py              1      0   100%
+src/literate_wordle/assets/__init__.py       0      0   100%
+src/literate_wordle/words.py                19      0   100%
+------------------------------------------------------------
+TOTAL                                       20      0   100%
+Coverage HTML written to dir test_results/coverage.html
+Coverage XML written to file test_results/coverage.xml
+
+=========================== short test summary info ============================
+FAILED tests/test_checking_guess_valid_word.py::test_reject_nondict_words - A...
+========================= 1 failed, 4 passed in 0.11s ==========================
+make: *** [Makefile:16: test] Error 1
+#+end_example
+
+Progress! Four of five tests pass[fn::Since the remaining two tests we didn&#39;t
+implement code for each check one of the =is_valid= boolean, it&#39;s normal that we spuriously pass
+one of the remaining tests, because our dummy function returns the same boolean
+answer always, and a broken clock is right twice a day.], so we now need the dictionary.
+
+
+Note that in Wordle&#39;s original implementation, the list of possible solutions is
+a subset of the word dictionary used for guess validation. We previously loaded
+the answers, now we need the larger set of accepted words. While it does mean
+there will be duplicate entries, we&#39;re talking single-digit kilobytes, we can
+afford that.
+
+We fetch the dictionary like before:
+
+#+begin_src shell :tangle no
+wget \
+    --output-document &quot;src/literate_wordle/assets/wordle_accepted_words_dict.txt&quot; \
+    &quot;https://raw.githubusercontent.com/AllValley/WordleDictionary/6f14d2f03d01c36fe66e3ccc0929394251ab139d/wordle_complete_dictionary.txt&quot;
+#+end_src
+
+#+RESULTS:
+
+And compress it too
+
+#+begin_src shell :tangle no :exports both
+ANSWERS_FILE=&quot;src/literate_wordle/assets/wordle_accepted_words_dict.txt&quot;
+du -k &quot;${ANSWERS_FILE}&quot;
+gzip &quot;$ANSWERS_FILE&quot;
+du -k &quot;${ANSWERS_FILE}.gz&quot;
+#+end_src
+
+#+RESULTS:
+: 92	src/literate_wordle/assets/wordle_accepted_words_dict.txt
+: 36	src/literate_wordle/assets/wordle_accepted_words_dict.txt.gz
+
+This time is more like two thirds shaved off, sweet.
+
+We reach to add a function for decompressing, but realize we wrote all this
+before, except for a different filename. So let&#39;s edit the zip extraction code
+to be more generic.
+
+One way this can be more generic is returning a =set= of strings, instead of the
+previous =list=. This means we assume no ordering and use hash addressing,
+rather than strict string ordering. After all, we will not iterate through the
+list, as much as we want to randomly access entries, so the =set= will provide
+benefits down the line.
+
+#+NAME: choice-func-unzipdict-generic1
+#+CAPTION: Generic &quot;unzip asset&quot; function
+#+begin_src python :tangle no
+def get_asset_zip_as_set(asset_filename: str) -&gt; set[str]:
+    &quot;&quot;&quot;Decompress a file in assets module into a set of words, separated by newline&quot;&quot;&quot;
+    compressed_bytes = pkg_resources.read_binary(assets, asset_filename)
+    string = gzip.decompress(compressed_bytes).decode(&quot;ascii&quot;)
+    string_list = [word.strip().lower().strip() for word in string.split(&quot;\n&quot;)]
+    return set(string_list)
+#+end_src
+
+In order to avoid hardcoded filenames, we yank out the file names and fetching
+of files:
+#+CAPTION: Magic strings defined as module-level constants
+#+NAME: choice-magicstrings
+#+begin_src python :tangle no
+ANSWERS_FILENAME = &quot;wordle_answers_dict.txt.gz&quot;
+ACCEPTED_FILENAME = &quot;wordle_accepted_words_dict.txt.gz&quot;
+#+end_src
+
+#+CAPTION: Wrappers to the specific files to grab
+#+NAME: choice-func-getdicts
+#+begin_src python :tangle no
+def get_answers() -&gt; set[str]:
+    &quot;&quot;&quot;Grab the Wordle answers as a set of string words&quot;&quot;&quot;
+    return get_asset_zip_as_set(ANSWERS_FILENAME)
+
+
+def get_accepted_words() -&gt; set[str]:
+    &quot;&quot;&quot;Grab the Wordle accepted words dictionary as a set of string words&quot;&quot;&quot;
+    return get_asset_zip_as_set(ACCEPTED_FILENAME)
+#+end_src
+
+
+And now we can use the dictionary as a set in our =check_valid_word= function:
+
+#+CAPTION: Use the dictionary as a set to check =if guess in dictionary=
+#+NAME: valid-func-len-dict
+#+begin_src python
+&quot;&quot;&quot;Check a wordle guess is valid: length and in dictionary&quot;&quot;&quot;
+answer_length = 5
+guess_length = len(guess)
+if guess_length &lt; answer_length:
+    return False, &quot;Guess too short&quot;
+if guess_length &gt; answer_length:
+    return False, &quot;Guess too long&quot;
+valid_words_dict = get_accepted_words()
+if guess in valid_words_dict:
+    return True, None
+return False, &quot;Not a word from the dictionary&quot;
+#+end_src
+
+Small performance note: Having a =set= of strings means =guess in answers_set= comparison is
+=O(1)= (instead of =O(n)= on dictionary size for =list=), because the
+hash-addressing of =set= is a =O(1)= operation. On very very long list of words,
+iterating through it could be expensive, hence using =set= for lookup if we
+don&#39;t need sequential access.
+
+
+We changes the invocation of =pick_answer_word= to use the new functions too
+
+#+NAME: choice-func-pickanswer-generic
+#+CAPTION: Pick-a-word, revisited to use generic asset unzipping function. Note that =choice= needs an iterable object, hence convert back to list
+#+begin_src python :tangle no
+def pick_answer_word() -&gt; str:
+    &quot;&quot;&quot;Pick a single word out of the dictionary of answers&quot;&quot;&quot;
+    return choice(list(get_answers()))
+#+end_src
+
+And we&#39;re done! Let&#39;s run our system through =make= again, to spot test failures
+but also to get linters:
+
+#+begin_src shell :tangle no :exports both :async
+make
+#+end_src
+
+#+RESULTS:
+#+begin_example
+poetry install
+Installing dependencies from lock file
+
+No dependencies to install or update
+
+Installing the current project: literate_wordle (0.1.0)
+pre-commit run --all --all-files
+Emacs export org-mode file to static HTML................................Passed
+Trim Trailing Whitespace.................................................Passed
+Fix End of Files.........................................................Passed
+Check for added large files..............................................Passed
+Check that executables have shebangs.................(no files to check)Skipped
+Check for case conflicts.................................................Passed
+Check vcs permalinks.....................................................Passed
+Forbid new submodules....................................................Passed
+Mixed line ending........................................................Passed
+Check for merge conflicts................................................Passed
+Detect Private Key.......................................................Passed
+Check Toml...............................................................Passed
+Check Yaml...............................................................Passed
+Check JSON...........................................(no files to check)Skipped
+black....................................................................Passed
+isort (python)...........................................................Passed
+mypy.....................................................................Passed
+flake8...................................................................Passed
+cd docs &amp;&amp; make html
+make[1]: Entering directory &#39;/home/jiby/dev/ws/short/literate_wordle/docs&#39;
+Running Sphinx v4.4.0
+Read in collections ...
+  wordle_html_export_filecopy: Initialised
+  gherkin_features_foldercopy: Initialised
+  gherkin_features_jinja: Initialised
+Clean collections ...
+  gherkin_features_foldercopy: (CopyFolderDriver) Folder deleted: /home/jiby/dev/ws/short/literate_wordle/docs/source/_collections/gherkin_features/
+  gherkin_features_jinja: (JinjaDriver) Cleaning 1 jinja Based file/s ...
+Executing collections ...
+  wordle_html_export_filecopy: (CopyFileDriver) Copy file...
+  gherkin_features_foldercopy: (CopyFolderDriver) Copy folder...
+  gherkin_features_jinja: (JinjaDriver) Creating 1 file/s from Jinja template...
+loading pickled environment... done
+[autosummary] generating autosummary for: _collections/gherkin_feature.md, index.rst, readme.md, wordle.md, wordle_sources.md
+[AutoAPI] Reading files... [ 33%] /home/jiby/dev/ws/short/literate_wordle/src/literate_wordle/__init__.py
+[AutoAPI] Reading files... [ 66%] /home/jiby/dev/ws/short/literate_wordle/src/literate_wordle/words.py
+[AutoAPI] Reading files... [100%] /home/jiby/dev/ws/short/literate_wordle/src/literate_wordle/assets/__init__.py
+
+[AutoAPI] Mapping Data... [ 33%] /home/jiby/dev/ws/short/literate_wordle/src/literate_wordle/__init__.py
+[AutoAPI] Mapping Data... [ 66%] /home/jiby/dev/ws/short/literate_wordle/src/literate_wordle/words.py
+[AutoAPI] Mapping Data... [100%] /home/jiby/dev/ws/short/literate_wordle/src/literate_wordle/assets/__init__.py
+
+[AutoAPI] Rendering Data... [ 33%] literate_wordle
+[AutoAPI] Rendering Data... [ 66%] literate_wordle.words
+[AutoAPI] Rendering Data... [100%] literate_wordle.assets
+
+myst v0.15.2: MdParserConfig(renderer=&#39;sphinx&#39;, commonmark_only=False, enable_extensions=[&#39;dollarmath&#39;], dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes=&#39;tex2jax_process|mathjax_process|math|output_area&#39;, disable_syntax=[], url_schemes=[&#39;http&#39;, &#39;https&#39;, &#39;mailto&#39;, &#39;ftp&#39;], heading_anchors=2, heading_slug_func=None, html_meta=[], footnote_transition=True, substitutions=[], sub_delimiters=[&#39;{&#39;, &#39;}&#39;], words_per_minute=200)
+building [mo]: targets for 0 po files that are out of date
+building [html]: targets for 5 source files that are out of date
+updating environment: 0 added, 7 changed, 0 removed
+reading sources... [ 14%] _collections/gherkin_feature
+reading sources... [ 28%] autoapi/index
+reading sources... [ 42%] autoapi/literate_wordle/assets/index
+reading sources... [ 57%] autoapi/literate_wordle/index
+reading sources... [ 71%] autoapi/literate_wordle/words/index
+reading sources... [ 85%] wordle
+reading sources... [100%] wordle_sources
+
+Copying static files for sphinx-needs datatables support.../home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/datatables_loader.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/datatables.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/sphinx_needs_collapse.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/datatables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/JSZip-2.5.0/jszip.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/js/buttons.print.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/js/buttons.flash.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/js/buttons.html5.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/js/buttons.colVis.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/js/dataTables.buttons.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/js/buttons.html5.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/css/common.scss /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/css/mixins.scss /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/css/buttons.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Buttons-1.5.1/swf/flashExport.swf /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/js/jquery.dataTables.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/css/jquery.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/images/sort_asc.png /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/images/sort_desc_disabled.png /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/images/sort_asc_disabled.png /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/images/sort_both.png /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/DataTables-1.10.16/images/sort_desc.png /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/ColReorder-1.4.1/js/dataTables.colReorder.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/ColReorder-1.4.1/css/colReorder.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/FixedColumns-3.2.4/js/dataTables.fixedColumns.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/FixedColumns-3.2.4/css/fixedColumns.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Scroller-1.4.4/js/dataTables.scroller.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Scroller-1.4.4/css/scroller.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/FixedHeader-3.1.3/js/dataTables.fixedHeader.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/FixedHeader-3.1.3/css/fixedHeader.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Responsive-2.2.1/js/dataTables.responsive.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/Responsive-2.2.1/css/responsive.dataTables.min.css /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/pdfmake-0.1.32/pdfmake.min.js /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/libs/html/pdfmake-0.1.32/vfs_fonts.js
+Copying static files for sphinx-needs custom style support...[ 25%] common.css
+Copying static files for sphinx-needs custom style support...[ 50%] /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/css/modern/layouts.css
+Copying static files for sphinx-needs custom style support...[ 75%] /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/css/modern/styles.css
+Copying static files for sphinx-needs custom style support...[100%] /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/css/modern/modern.css
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /home/jiby/dev/ws/short/literate_wordle/docs/source/autoapi/index.rst: WARNING: document isn&#39;t included in any toctree
+done
+preparing documents... done
+writing output... [ 12%] _collections/gherkin_feature
+writing output... [ 25%] autoapi/index
+writing output... [ 37%] autoapi/literate_wordle/assets/index
+writing output... [ 50%] autoapi/literate_wordle/index
+writing output... [ 62%] autoapi/literate_wordle/words/index
+writing output... [ 75%] index
+writing output... [ 87%] wordle
+writing output... [100%] wordle_sources
+
+/home/jiby/dev/ws/short/literate_wordle/docs/source/_collections/gherkin_feature.md:34: WARNING: Any IDs not assigned for table node
+generating indices... genindex py-modindex done
+highlighting module code... [ 50%] literate_wordle
+highlighting module code... [100%] literate_wordle.words
+
+writing additional pages... search done
+copying images... [ 50%] /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/images/feather_svg/arrow-down-circle.svg
+copying images... [100%] /home/jiby/dev/ws/short/literate_wordle/.venv/lib/python3.9/site-packages/sphinxcontrib/needs/images/feather_svg/arrow-right-circle.svg
+
+copying static files... done
+copying extra files... done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 2 warnings.
+
+The HTML pages are in build/html.
+Final clean of collections ...
+  wordle_html_export_filecopy: (CopyFileDriver) File deleted: /home/jiby/dev/ws/short/literate_wordle/docs/source/_collections/_static/wordle.html
+  gherkin_features_foldercopy: (CopyFolderDriver) Folder deleted: /home/jiby/dev/ws/short/literate_wordle/docs/source/_collections/gherkin_features/
+  gherkin_features_jinja: (JinjaDriver) Cleaning 1 jinja Based file/s ...
+  gherkin_features_jinja: (JinjaDriver)   File deleted: /home/jiby/dev/ws/short/literate_wordle/docs/source/_collections/gherkin_feature.md
+
+Checking sphinx-needs warnings
+make[1]: Leaving directory &#39;/home/jiby/dev/ws/short/literate_wordle/docs&#39;
+poetry run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, clarity-1.0.1
+collecting ... collected 5 items
+
+tests/test_checking_guess_valid_word.py::test_reject_long_words PASSED   [ 20%]
+tests/test_checking_guess_valid_word.py::test_reject_overly_short_words PASSED [ 40%]
+tests/test_checking_guess_valid_word.py::test_reject_nondict_words PASSED [ 60%]
+tests/test_checking_guess_valid_word.py::test_accept_dict_words PASSED   [ 80%]
+tests/test_pick_word.py::test_pick_word_ok_length PASSED                 [100%]
+
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+
+----------- coverage: platform linux, python 3.9.5-final-0 -----------
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+src/literate_wordle/__init__.py              1      0   100%
+src/literate_wordle/assets/__init__.py       0      0   100%
+src/literate_wordle/words.py                23      0   100%
+------------------------------------------------------------
+TOTAL                                       24      0   100%
+Coverage HTML written to dir test_results/coverage.html
+Coverage XML written to file test_results/coverage.xml
+
+============================== 5 passed in 0.09s ===============================
+poetry build
+Building literate_wordle (0.1.0)
+  - Building sdist
+  - Built literate_wordle-0.1.0.tar.gz
+  - Building wheel
+  - Built literate_wordle-0.1.0-py3-none-any.whl
+#+end_example
+
+Tests pass, coverage stays strong, and linters are quiet, this is great!
+
+** Performance trick
+
+We mentioned before that the whole dictionary would get unzipped on every
+request for assets. Now we&#39;re validating guessed words, we may want to be
+processing guesses quite often, certainly quicker than one would pick secret
+words!
+
+What we want to make all this fast, is to cache the unzipped dictionary,
+so that repeated calls to the function =get_asset_zip_as_set= don&#39;t bother with
+file open and unzip, just serve the few hundred kilobytes content from memory again. There&#39;s a handy python decorator that does the trick! Let&#39;s
+add =functools.cache= on top of our slow function:
+
+
+#+NAME: valid-cache-import
+#+CAPTION: Import the cache function
+#+begin_src python :tangle no
+from functools import cache
+#+end_src
+
+
+
+#+NAME: valid-cache-decorator
+#+CAPTION: Decorator to make a function use cache
+#+begin_src python :tangle no
+@cache
+#+end_src
+
+After rerunning our tests, we now have a (theoretically) faster function, yey!
+
+Remember that we committed a couple of performance/optimization sins just then,
+by both: optimizing prematurely (with no proof of slowness), and by doing
+optimization without using profiling information to optimize, we very likely
+just optimized something that isn&#39;t our bottleneck. I&#39;m fine with that, I just
+wanted to showcase this cool decorator, which functions like an unbounded
+memoizer. Let&#39;s see quick performance numbers of before/after:
+
+#+NAME: valid-perf-before
+#+CAPTION: Before cacheing, running 5 batches of a thousand double-dict-unzip
+#+begin_src shell :exports both
+poetry run python3 -m timeit -v -n 1000 --setup &quot;from literate_wordle.words import pick_answer_word, check_valid_word&quot; &quot;check_valid_word(pick_answer_word())&quot;
+#+end_src
+
+#+RESULTS:
+: raw times: 2.75 sec, 2.72 sec, 2.73 sec, 2.73 sec, 2.72 sec
+:
+: 1000 loops, best of 5: 2.72 msec per loop
+
+And after cacheing:
+
+#+begin_src shell :exports results
+poetry run python3 -m timeit -v -n 1000 --setup &quot;from literate_wordle.words import pick_answer_word, check_valid_word&quot; &quot;check_valid_word(pick_answer_word())&quot;
+#+end_src
+
+#+RESULTS:
+: raw times: 17.1 msec, 12.8 msec, 12.6 msec, 12.8 msec, 12.4 msec
+:
+: 1000 loops, best of 5: 12.4 usec per loop
+
+That&#39;s a two orders of magnitude gain for a single line of code changed. Sweet.
+
+** Bug!
+
+Doing some exploration of the accepted/answer word sets, I noticed an issue:
+
+#+CAPTION: Count word size in each dictionary
+#+begin_src python :tangle no :exports both :eval no-export
+from literate_wordle.words import get_answers, get_accepted_words
+
+answer_lengths = [len(word) for word in list(get_answers())]
+accepted_lengths = [len(word) for word in list(get_accepted_words())]
+
+print(set(answer_lengths))
+print(set(accepted_lengths))
+#+end_src
+
+#+RESULTS:
+: {0, 5}
+: {0, 5}
+
+Each have a 0-length words, in other word, the empty string.
+
+This is likely a classic issue due to DOS line endings, the last line of the
+file is only a carriage return, which is technically whitespace, and the call to
+=strip()= removes it, leaving an empty space item in the list.
+
+If this was a proper production issue we just discovered, we would first turn
+the above snippet into a proper test case (asserting no 0 length word exist,
+seeing it be red), commit that, raise it as bug, and work on a fix. But this
+code hasn&#39;t reached production yet, and the bug itself is minor enough to not
+warrant that during our exploration phase.
+
+We can fix this multiple ways. We /could/ make the =get_accepted_words= and
+=get_answers= functions change their behaviours (either via set operations to
+remove the empty item from the set, returning =set(words) - set([&quot;&quot;])=, or more
+likely removing empty entries during iteration), but that wouldn&#39;t prevent
+future users of the buggy function =get_asset_zip_as_set= to get the same issue.
+
+So let&#39;s fix it at the root, the =get_asset_zip_as_set= function:
+
+#+NAME: choice-func-unzipdict-generic2
+#+CAPTION: Generic &quot;unzip asset&quot; function, filtering the whitespace-only words
+#+begin_src python :tangle no
+def get_asset_zip_as_set(asset_filename: str) -&gt; set[str]:
+    &quot;&quot;&quot;Decompress a file in assets module into a set of words, separated by newline&quot;&quot;&quot;
+    compressed_bytes = pkg_resources.read_binary(assets, asset_filename)
+    string = gzip.decompress(compressed_bytes).decode(&quot;ascii&quot;)
+    string_list = [word.strip().lower().strip() for word in string.split(&quot;\n&quot;)]
+    # Protect against whitespace-only lines during file-read causing empty stripped word
+    non_empty_words = [word for word in string_list if len(word) != 0]
+    return set(non_empty_words)
+#+end_src
+
+This was a good opportunity to play with List Comprehensions with filters, yey.
+
+** Tangle out all the code
+
+The last section of each heading of this document is used for internal purposes.
+The Code snippets defined above are usually out of order, especially the
+imports, or functions defined once as stubs, then re-defined with proper
+implementation.
+
+To avoid having nonsense python file ordering, with import-feature-import-feature
+sequences, which formatters would go crazy over, we define below the reordered
+code blocks as they should be output, using the =noweb= feature of org-mode.
+This lets us reference code blocks above by name, tangle out into the
+proper files with proper ordering and spacing as one would expect a real
+codebase to look like.
+
+This means we need to manually weave the code blocks, instead of pointing them
+all to the same file and rely on code snippet&#39;s top-to-bottom order, we now have
+an explicit code block where we template out &quot;add this bit, now 2 lines below
+add that snippet, and then...&quot;. This isn&#39;t super pretty, but it gives complete
+control over layout like number of lines jumped between functions, which was
+blocking adoption of the formatter &quot;black&quot; in this repository.
+
+First, fix =words.py= imports being out of order in our narrative by tangling
+them via noweb to weave the part 1 imports with the part 2. This means =isort=
+(import sorter[fn::Sorts import-code first by category, then alphabetically.
+Category of imports is in decreasing order: stdlib, then third party packages,
+then local module imports.]) is now happy and won&#39;t thrash these python files.
+Also insert the cache decorator before the assets function, and substitute the
+=check_valid_word= function body with the real implementation instead of the
+dummy function defined initially.
+
+#+CAPTION: The final version of =words.py=. Note that behind the scene this code block has 0 code, just references to other code block named above.
+#+NAME: words-py-tangle
+#+begin_src python :tangle src/literate_wordle/words.py :noweb yes
+&lt;&lt;choice-module-docstring&gt;&gt;
+
+&lt;&lt;choice-stdlib&gt;&gt;
+&lt;&lt;valid-cache-import&gt;&gt;
+&lt;&lt;choice-stdlib2&gt;&gt;
+&lt;&lt;valid-stdlib&gt;&gt;
+
+&lt;&lt;choice-locallib&gt;&gt;
+
+&lt;&lt;choice-magicstrings&gt;&gt;
+
+
+&lt;&lt;choice-func-getdicts&gt;&gt;
+
+
+&lt;&lt;valid-cache-decorator&gt;&gt;
+&lt;&lt;choice-func-unzipdict-generic2&gt;&gt;
+
+
+&lt;&lt;choice-func-pickanswer-generic&gt;&gt;
+
+
+&lt;&lt;valid-func-proto&gt;&gt;
+    &lt;&lt;valid-func-len-dict&gt;&gt;
+#+end_src
+
+Now the same thing with the tests file, which indeed /is/ in proper order
+already, but would benefit from two-lines-between-tests to guarantee formatting:
+
+#+CAPTION: Final version of =tests/test_checking_guess_valid_word.py=
+#+NAME: words-py-tangle
+#+begin_src python :tangle tests/test_checking_guess_valid_word.py :noweb yes
+
+&lt;&lt;test-valid-import&gt;&gt;
+
+
+&lt;&lt;test-valid-1&gt;&gt;
+
+
+&lt;&lt;test-valid-2&gt;&gt;
+
+
+&lt;&lt;test-valid-3&gt;&gt;
+
+
+&lt;&lt;test-valid-4&gt;&gt;
+&lt;&lt;reject-reason-none&gt;&gt;
+#+end_src
+
+* Calculating guessed word&#39;s score
+
+We can pick answer words, and we can check if a guess is a valid word, now we
+have everything we need to score the guess! Let&#39;s first define the overall
+feature:
+
+#+NAME: scoring-feature
+#+begin_src feature :tangle features/scoring_guess.feature
+Feature: Scoring guesses
+  As a Wordle game
+  I need to tell the player how good their guess is
+  In order to help them find the proper answer
+#+end_src
+
+This sounds simple, but implementing this feature is tricky, because of edge
+cases like multiple identical character in the answer, which need colored
+appropriately (What&#39;s the proper way to do that? No clue yet, but we need to pin
+it down in requirements!). So again we&#39;ll define Gherkin Scenarios for that
+Feature, to give examples of how the feature works in practice. So we write out:
+
+#+NAME: scoring-scenario-perfect
+#+CAPTION: The winning guess scenario. The green blocks are Unicode characters, may render differently on your device.
+#+begin_src feature :tangle no
+Scenario: Perfect guess gives perfect score
+  Given a wordle answer &quot;crane&quot;
+  When scoring the guess &quot;crane&quot;
+  Then score should be &quot;🟩🟩🟩🟩🟩&quot;
+#+end_src
+
+This seems easy enough, but we should notice that we&#39;re assuming the
+guess is a valid word! We may want to just add another =Given=, like:
+
+#+begin_src feature :tangle no
+Given a guess that&#39;s a valid dictionary word
+#+end_src
+
+But this isn&#39;t just a hypothesis from the current scenario, it&#39;s valid for all
+scenarios of this feature: every scoring of a guess requires the guess to be a
+valid word. To avoid the tedious copying of that assumption in each Scenario, we
+can use a Gherkin Background for the feature:
+
+#+NAME: scoring-background
+#+CAPTION: Pre-condition that applies to all the scenarios of this feature file
+#+begin_src feature :tangle features/scoring_guess.feature
+Background:
+  Given a guess that&#39;s a valid dictionary word
+#+end_src
+
+Perfect, so now we&#39;re assuming the guess is a valid word, which means a
+dependency on having implemented the previous feature, but we&#39;re not specifying
+the guess word itself, which can still be scenario specific. This makes our
+initial &quot;perfect guess&quot; scenario valid again, so we can use it
+
+# Not-rendered, but since we&#39;re trying to avoid being out of order = having a
+# final weave block at the end, we tangle the scenario for perfect score NOW
+# after avoiding it due to the BACKGROUND step.
+#+begin_src feature :tangle features/scoring_guess.feature :noweb yes :exports none
+&lt;&lt;scoring-scenario-perfect&gt;&gt;
+#+end_src
+
+If we&#39;ve got the perfect answer, let&#39;s have the opposite:
+
+#+NAME: scoring-scenario-nogood
+#+CAPTION: Flunking out scenario
+#+begin_src feature :tangle features/scoring_guess.feature
+Scenario: No character in common
+  Given a wordle answer &quot;brave&quot;
+  When scoring the guess &quot;skill&quot;
+  Then score should be &quot;⬜⬜⬜⬜⬜&quot;
+#+end_src
+
+Note that these scenarios doesn&#39;t make assumption of how many attempts at Wordle
+we&#39;re at, or the fact of winning or losing. This is purely a hypothetical
+example, disjoint from the actual playing of a Wordle game. We can deal with the
+win/lose consequences later, once we have a proper scoring of guesses implemented.
+
+
+** Can we start coding yet?
+At this point, we /can/ conceivably start the implementation work: &quot;let&#39;s go, we
+have work to do!&quot; And we can add the &quot;🟨&quot; scenario later once we have code that
+works.
+
+The problem of &quot;what to do now&quot; is interesting, because we can continue thinking
+up scenarios in Gherkin for a while, or we could make a start writing test code
+to match these claims, fix the red tests, implement towards green tests, and add
+scenarios as we realize that our implementation is lacking compared to the
+original intent of the game. That can certainly be done!
+
+But while it&#39;s tempting to jump into code first, I strongly believe we as
+developers should instead fully scope out the problem-space first. Pin down the
+exact requirements (in that case via Gherkin features and scenarios), before
+starting to touch any code. My reasoning is that [[https://jiby.tech/post/gherkin-features-user-requirements/][it&#39;s very easy to get tunnel
+vision when writing code, getting excited about the programming problems, losing
+track of what the &quot;user&quot; wants. We should instead write down the exact user
+needs first]], and have a proper &quot;ritual&quot; for switching our &quot;User&quot; hat to a
+&quot;Developer&quot; hat.
+
+
+** Finalizing the scoring scenarios
+
+So, back to our gherkin scenarios, let&#39;s add the yellow marker one:
+
+#+NAME: scoring-scenario-wrongplace
+#+CAPTION: Character in the wrong place score
+#+begin_src feature :tangle features/scoring_guess.feature
+Scenario: Character in wrong place
+  Given a wordle answer &quot;rebus&quot;
+  When scoring the guess &quot;skull&quot;
+  Then score should be &quot;🟨⬜🟨⬜⬜&quot;
+#+end_src
+
+And just for having a good sample of tests with which to test, let&#39;s use a table
+of examples to confirm scoring works out in more cases:
+
+#+NAME: scoring-scenario-multi
+#+CAPTION: Many examples via Gherkin Scenario Outlines and Examples
+#+begin_src feature :tangle features/scoring_guess.feature
+Scenario Outline: Scoring guesses
+  Given a wordle &lt;answer&gt;
+  When scoring &lt;guess&gt;
+  Then score should be &lt;score&gt;
+
+# Emoji (Unicode) character rendering is hard:
+# Please forgive the table column alignment issues!
+  Examples: A few guesses and their score
+    | answer  | guess	| score		|
+    | adage   | adobe	| 🟩🟩⬜⬜🟩	|
+    | serif   | quiet	| ⬜⬜🟨🟨⬜	|
+    | raise   | radix	| 🟩🟩⬜🟨⬜	|
+#+end_src
+
+Note how the &quot;outline&quot; system maps really well to the idea of &quot;parametrized
+tests&quot;. We can write the test case /once/, and have a decorator deal with the
+multiple instantiations with different data.
+
+All right, that&#39;s a few, moving on. But here is the most difficult to implement
+corner case, written out as examples of the previous scenario:
+
+#+NAME: scoring-scenario-multi-identicalanswerchar
+#+CAPTION: Edge case: duplicate character in answer or guess
+#+begin_src feature :tangle features/scoring_guess.feature
+  Examples: Multiple occurences of same character
+    | answer | guess	| score		|
+    | abbey  | kebab	| ⬜🟨🟩🟨🟨	|
+    | abbey  | babes	| 🟨🟨🟩🟩⬜	|
+    | abbey  | abyss	| 🟩🟩🟨⬜⬜	|
+    | abbey  | algae	| 🟩⬜⬜⬜🟨	|
+    | abbey  | keeps	| ⬜🟨⬜⬜⬜	|
+    | abbey  | abate	| 🟩🟩⬜⬜🟨	|
+#+end_src
+
+Because this edge case was worrisome for accuracy, these sample answers and
+scores were [[https://nerdschalk.com/wordle-same-letter-twice-rules-explained-how-does-it-work/][taken from online example screenshots]] of the original Wordle
+website, thus considered accurate references.
+
+Thinking about it, with &quot;abbey&quot; as reference, the &quot;kebab&quot; answer seems logical,
+with first &quot;b&quot; occurence matching as green, and the second being in the wrong
+place. The surprise comes from &quot;keeps&quot; where the first &quot;e&quot; counts, but the
+second doesn&#39;t have an equivalent in the answer, hence flagged as &quot;no such
+character&quot;. That makes sense, but that&#39;s not how a naive implementation of the
+game would do it! Hence why it&#39;s worth thinking about the full problem before
+rushing the implementation.
+
+
+# Seems to be that we need to count the answer&#39;s occurences of each character,
+# and while scoring guesses left-to-right, yellows and greens decrease the
+# number of leftover matches, and when the number of matches is zero that&#39;s a non-match.
+
+# That explains why guessing &quot;kebab&quot; for answer gets the first &quot;b&quot; marked green,
+# as expected, and then the second is yellow (still remains values), whereas guessing
+# &quot;keeps&quot; (one &quot;e&quot; in answer, two in guess) marks the first &quot;e&quot; as yellow, and
+# with no more &quot;e&quot; in answer, the second is a bad match.
+
+Out of curiosity, I wonder if there&#39;s any wordle answers that contain three
+identical characters? Let&#39;s see!
+
+#+CAPTION: Regular-expression search for 3 repeated characters in the dictionary of answers
+#+begin_src shell :exports both
+zgrep -i -E &quot;([a-z]).*\1.*\1&quot; \
+    src/literate_wordle/assets/wordle_answers_dict.txt.gz \
+    | wc -l
+#+end_src
+
+#+RESULTS:
+: 20
+
+Really? 20? That&#39;s harsh ... show me one?
+
+#CAPTION: Reval the first answer with 3 identical letters
+#+begin_src shell :exports both
+zgrep -i -E &quot;([a-z]).*\1.*\1&quot; \
+    src/literate_wordle/assets/wordle_answers_dict.txt.gz \
+    | head -n 1 \
+    | sed &#39;s/\r//&#39;  # gets rid of CR characters in CRLF (DOS line endings)
+#+end_src
+
+#+RESULTS:
+: bobby
+
+Interesting. That must be hard to solve I imagine.
+** Writing up acceptance tests
+With no more obvious pathological cases to cover in requirements, it&#39;s time to
+switch to our developer hat, and write some (acceptance) tests!
+
+#+NAME: scoring-test1
+#+CAPTION: First acceptance test using &quot;Perfect guess&quot; scenario
+#+begin_src python :tangle no
+def test_perfect_guess():
+    &quot;&quot;&quot;Scenario: Perfect guess gives perfect score&quot;&quot;&quot;
+    # Given a wordle answer &quot;crane&quot;
+    answer = &quot;crane&quot;
+    # When scoring the guess &quot;crane&quot;
+    our_guess = &quot;crane&quot;
+    score = score_guess(our_guess, answer)
+    # Then score should be &quot;🟩🟩🟩🟩🟩&quot;
+    assert score == &quot;🟩🟩🟩🟩🟩&quot;, &quot;Perfect answer should give Perfect Score&quot;
+#+end_src
+
+A =score_guess= function? sounds reasonable. We&#39;ll need to import it from a module...
+
+#+NAME: scoring-test-import
+#+CAPTION: Importing the newly thought-up function inside the test of Listing [[scoring-test1]]
+#+begin_src python :tangle no
+from literate_wordle.guess import score_guess
+#+end_src
+
+This means we now need to create such a module.
+
+#+NAME: scoring-guessmod-header
+#+CAPTION: New =guess.py= module, starting with docstring
+#+begin_src python :tangle no
+&quot;&quot;&quot;Score guesses of Wordle game&quot;&quot;&quot;
+#+end_src
+
+We already defined most of the function (name, module, output), so let&#39;s just
+write a stub that will make tests go red.
+
+#+NAME: scoring-guessfunc-proto1
+#+CAPTION: =score_guess= stub to see the tests go red
+#+begin_src python :tangle no
+def score_guess(guess: str, answer: str) -&gt; str:
+    &quot;&quot;&quot;Score an individual guess&quot;&quot;&quot;
+    return &quot;⬜&quot;
+#+end_src
+
+
+Now the test should fail appropriately, let&#39;s add a twist: we&#39;ll mark the test
+function as expected to fail, because for now it&#39;s not been implemented. This
+allows the test runner to mark all tests as OK despite known failures, and
+is perfect for known bugs being worked on, or new features being built.
+Imagine if every time we built new features via TDD, the commit that adds the
+test first makes CI go red! No, we would rather have a nice &quot;excuse&quot; for this
+new test to fail, and have the build stay green, &quot;with an expected failure&quot;.
+
+
+#+NAME: scoring-test-xfail
+#+CAPTION: Decorator marking a test as expected to fail, &quot;excusing&quot; assertion failures
+#+begin_src python :tangle no
+@pytest.mark.xfail(reason=&quot;Not implemented yet&quot;)
+#+end_src
+
+In the case of a known bug, the =reason= field would very likely be a bug
+identifier in the organisation&#39;s bug tracker.
+
+#+NAME: scoring-test-import-pytest
+#+CAPTION: Importing the pytest module to get the =pytest.mark.xfail= decorator
+#+begin_src python :tangle no
+import pytest
+#+end_src
+
+Confirm these tests work, marked as xfail (&quot;eXpected FAILure&quot;):
+
+#+begin_src shell :exports both
+make test
+#+end_src
+
+#+RESULTS:
+#+begin_example
+poetry run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, clarity-1.0.1
+collecting ... collected 6 items
+
+tests/test_checking_guess_valid_word.py::test_reject_long_words PASSED   [ 16%]
+tests/test_checking_guess_valid_word.py::test_reject_overly_short_words PASSED [ 33%]
+tests/test_checking_guess_valid_word.py::test_reject_nondict_words PASSED [ 50%]
+tests/test_checking_guess_valid_word.py::test_accept_dict_words PASSED   [ 66%]
+tests/test_pick_word.py::test_pick_word_ok_length PASSED                 [ 83%]
+tests/test_scoring_guess.py::test_perfect_guess XFAIL (Not implement...) [100%]
+
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+
+----------- coverage: platform linux, python 3.9.5-final-0 -----------
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+src/literate_wordle/__init__.py              1      0   100%
+src/literate_wordle/assets/__init__.py       0      0   100%
+src/literate_wordle/guess.py                 2      0   100%
+src/literate_wordle/words.py                25      0   100%
+------------------------------------------------------------
+TOTAL                                       28      0   100%
+Coverage HTML written to dir test_results/coverage.html
+Coverage XML written to file test_results/coverage.xml
+
+========================= 5 passed, 1 xfailed in 0.10s =========================
+#+end_example
+
+Note that we now have regular tests that pass, and this one test that fails as expected, and
+=pytest=, expecting it, doesn&#39;t shout about the failure. Really handy.
+
+Remember that &quot;disabling&quot; (marking as =pytest.mark.skip=) is different from
+marking as =xfail=, because skipping a test avoids running it, while =xfail=
+tests do run, the assertion failure is just not marked as critical. There&#39;s even
+a flag to make =xpass= (expected test failures that ended up being green) become
+an actual fatal testing error, for the cases where it&#39;s important to track the
+failure itself.
+
+** More tests
+
+Let&#39;s implement the rest of the failing tests, so we can make it all red, then
+fix the implementation:
+
+#+NAME: scoring-test2
+#+CAPTION: Second acceptance test using &quot;no character in common&quot; scenario
+#+begin_src python :tangle no
+def test_no_common_character():
+    &quot;&quot;&quot;Scenario: No character in common&quot;&quot;&quot;
+    # Given a wordle answer &quot;brave&quot;
+    answer = &quot;brave&quot;
+    # When scoring the guess &quot;skill&quot;
+    our_guess = &quot;skill&quot;
+    score = score_guess(our_guess, answer)
+    # Then score should be &quot;⬜⬜⬜⬜⬜&quot;
+    assert score == &quot;⬜⬜⬜⬜⬜&quot;, &quot;No character in common with answer should give 0 score&quot;
+#+end_src
+
+
+#+NAME: scoring-test3
+#+CAPTION: Third acceptance test using &quot;Characters in wrong place&quot; scenario
+#+begin_src python :tangle no
+def test_wrong_place():
+    &quot;&quot;&quot;Scenario: Character in wrong place&quot;&quot;&quot;
+    # Given a wordle answer &quot;rebus&quot;
+    answer = &quot;rebus&quot;
+    # When scoring the guess &quot;skull&quot;
+    our_guess = &quot;skull&quot;
+    score = score_guess(our_guess, answer)
+    # Then score should be &quot;🟨⬜🟨⬜⬜&quot;
+    assert score == &quot;🟨⬜🟨⬜⬜&quot;, &quot;Characters are in the wrong place&quot;
+#+end_src
+
+That covers the first three scenarios.
+
+For the Scenario Outline, it&#39;s interesting to notice that a pattern emerged,
+which allows the same test skeleton to be reused with different data. In Pytest,
+this can be done by &quot;parametrizing&quot; the test with multiple data entries.
+
+This is a decorator to flag data, but since
+we&#39;re trying to group some of those tests as part of different groups, we will
+use the =pytest.param.id= flag.
+
+#+NAME: scoring-multi-skeleton
+#+CAPTION: Generic acceptance test, without any data attached
+#+begin_src python :tangle no
+def test_generic_score(answer, our_guess, expected_score):
+    &quot;&quot;&quot;Scenario Outline: Scoring guesses&quot;&quot;&quot;
+    # Given a wordle &lt;answer&gt;
+    # When scoring &lt;guess&gt;
+    score = score_guess(our_guess, answer)
+    # Then score should be &lt;score&gt;
+    assert score == expected_score
+#+end_src
+
+Just need to fill in the parameters:
+#+NAME: scoring-multi-parameters
+#+CAPTION: Parameters for generic test. Notice how =id= is used to cluster test data source, making =multi_occur= tests look separate to =normal_guess= ones.
+#+begin_src python :tangle no
+@pytest.mark.parametrize(
+    &quot;answer,our_guess,expected_score&quot;,
+    [
+        pytest.param(&quot;adage&quot;, &quot;adobe&quot;, &quot;🟩🟩⬜⬜🟩&quot;, id=&quot;normal_guess1&quot;),
+        pytest.param(&quot;serif&quot;, &quot;quiet&quot;, &quot;⬜⬜🟨🟨⬜&quot;, id=&quot;normal_guess2&quot;),
+        pytest.param(&quot;raise&quot;, &quot;radix&quot;, &quot;🟩🟩⬜🟨⬜&quot;, id=&quot;normal_guess3&quot;),
+        pytest.param(&quot;abbey&quot;, &quot;kebab&quot;, &quot;⬜🟨🟩🟨🟨&quot;, id=&quot;multi_occur1&quot;),
+        pytest.param(&quot;abbey&quot;, &quot;babes&quot;, &quot;🟨🟨🟩🟩⬜&quot;, id=&quot;multi_occur2&quot;),
+        pytest.param(&quot;abbey&quot;, &quot;abyss&quot;, &quot;🟩🟩🟨⬜⬜&quot;, id=&quot;multi_occur3&quot;),
+        pytest.param(&quot;abbey&quot;, &quot;algae&quot;, &quot;🟩⬜⬜⬜🟨&quot;, id=&quot;multi_occur4&quot;),
+        pytest.param(&quot;abbey&quot;, &quot;keeps&quot;, &quot;⬜🟨⬜⬜⬜&quot;, id=&quot;multi_occur5&quot;),
+        pytest.param(&quot;abbey&quot;, &quot;abate&quot;, &quot;🟩🟩⬜⬜🟨&quot;, id=&quot;multi_occur6&quot;),
+    ],
+)
+#+end_src
+
+** Implementing the feature
+
+With the strong test harness we have, this scoring function can be done
+conveniently.
+
+Let&#39;s experiment with the solution, iterating over naive solution and seeing how
+close they get to implementing the feature, by number of tests failed. This
+isn&#39;t required, we have already identified edge cases that make naive solutions
+break, but this is the fun experimenting part.
+
+Before any actual code change, first we remove the &quot;xfail&quot; marker, so that test
+failures actually notify us as failures, as we&#39;re actually implementing things now.
+
+#+CAPTION: A simple string matching by iterating over both lists at once
+#+NAME: scoring-guessfunc-naive
+#+begin_src python :tangle no
+def score_guess(guess: str, answer: str) -&gt; str:
+    &quot;&quot;&quot;Score an individual guess naively&quot;&quot;&quot;
+    NO = &quot;⬜&quot;
+    OK = &quot;🟩&quot;
+    response = &quot;&quot;
+    for answer_char, guess_char in zip(answer, guess):
+        if answer_char == guess_char:
+            response += OK
+        else:
+            response += NO
+    return response
+#+end_src
+
+That only passes 3 tests of the 12 we just defined, obviously because we don&#39;t
+deal with incorrect characters at all. So let&#39;s add keeping track of characters
+in the wrong places:
+
+#+NAME: scoring-guessfunc-naive2
+#+CAPTION: Keep track of all answer characters while iterating through both list
+#+begin_src python :tangle no
+def score_guess(guess: str, answer: str) -&gt; str:
+    &quot;&quot;&quot;Score an individual guess a little less naively&quot;&quot;&quot;
+    NO = &quot;⬜&quot;
+    OK = &quot;🟩&quot;
+    WRONG_PLACE = &quot;🟨&quot;
+    answer_chars_set = set(list(answer))
+    response = &quot;&quot;
+    for answer_char, guess_char in zip(answer, guess):
+        if answer_char == guess_char:
+            response += OK
+        elif guess_char in answer_chars_set:
+            response += WRONG_PLACE
+        else:
+            response += NO
+    return response
+#+end_src
+
+That version now passes 8 of 12 tests, with the issue being the multiple
+occurence of the same character in the answer being treated wrong, clearly an
+edge case we were fortunate to identify early.
+
+Looking at the examples, it seems that our scoring function needs to keep track of how
+many occurences of each characters of the answer exists overall, and grade only the
+first occurence of such characters as &quot;wrong place&quot;, reducing the counter.
+
+Fortunately, Python implements a good Counter function which we can import:
+
+#+NAME: scoring-guessfunc-import
+#+CAPTION: Import the =Counter= class, which generates a dictionary of =item= to =count= on whatever it&#39;s given
+#+begin_src python :tangle no
+from collections import Counter
+#+end_src
+
+We want something like this:
+
+#+begin_src python :tangle no
+if guess_char in answer_chars and answer_chars[guess_char] &gt; 0:
+    response += WRONG_PLACE
+    # Reduce occurence since we &quot;used&quot; this one
+    answer_chars[guess_char] -= 1
+    # No more hits = pretend character isn&#39;t even seen (remove from dict)
+    if answer_chars[guess_char] == 0:
+        del answer_chars[guess_char]
+#+end_src
+
+So we try the Counter way
+
+#+NAME: scoring-guessfunc-impl1
+#+CAPTION: Use a =Counter= for character multiple occurences
+#+begin_src python :tangle no
+def score_guess(guess: str, answer: str) -&gt; str:
+    &quot;&quot;&quot;Score an individual guess with Counter&quot;&quot;&quot;
+    NO = &quot;⬜&quot;
+    OK = &quot;🟩&quot;
+    WRONG_PLACE = &quot;🟨&quot;
+    # Counter(&quot;abbey&quot;) = Counter({&#39;b&#39;: 2, &#39;a&#39;: 1, &#39;e&#39;: 1, &#39;y&#39;: 1})
+    answer_chars = Counter(answer)
+    response = &quot;&quot;
+    for answer_char, guess_char in zip(answer, guess):
+        if answer_char == guess_char:
+            response += OK
+        elif guess_char in answer_chars and answer_chars[guess_char] &gt; 0:
+            response += WRONG_PLACE
+            # Reduce occurence since we &quot;used&quot; this one
+            answer_chars[guess_char] -= 1
+            # No more hits = pretend character isn&#39;t even seen (remove from dict)
+            if answer_chars[guess_char] == 0:
+                del answer_chars[guess_char]
+        else:
+            response += NO
+    return response
+#+end_src
+
+But while this improves the score, we are still 3 tests from success! Turns out
+we only did the reduction of counter for yellow, not also greens. This needs a
+bit of reshuffling:
+
+#+NAME: scoring-guessfunc-impl
+#+CAPTION: Use a Counter, keeping track of both Green and Yellow
+#+begin_src python :tangle no
+def score_guess(guess: str, answer: str) -&gt; str:
+    &quot;&quot;&quot;Score an individual guess with Counter&quot;&quot;&quot;
+    NO = &quot;⬜&quot;
+    OK = &quot;🟩&quot;
+    WRONG_PLACE = &quot;🟨&quot;
+    # Counter(&quot;abbey&quot;) = Counter({&#39;b&#39;: 2, &#39;a&#39;: 1, &#39;e&#39;: 1, &#39;y&#39;: 1})
+    answer_chars = Counter(answer)
+    response = &quot;&quot;
+    for guess_char, answer_char in zip(guess, answer):
+        if guess_char not in answer_chars:
+            response += NO
+            continue  # Early exit for this character, skip to next
+        # From here on, we MUST have a char in common, regardless of place
+        if answer_char == guess_char:
+            response += OK
+        elif answer_chars[guess_char] &gt; 0:
+            response += WRONG_PLACE
+        # Either way, reduce occurence counter since we &quot;used&quot; this occurence
+        answer_chars[guess_char] -= 1
+        # No more hits = pretend character isn&#39;t even seen (remove from dict)
+        if answer_chars[guess_char] == 0:
+            del answer_chars[guess_char]
+    return response
+#+end_src
+
+
+Now that we&#39;re happy with this, we can refactor out the ugly hardcoded glyphs:
+
+#+CAPTION: No more hardcoded glyphs
+#+NAME: scoring-guess-enum
+#+begin_src python :tangle no
+class CharacterScore(str, Enum):
+    &quot;&quot;&quot;A single character&#39;s score&quot;&quot;&quot;
+
+    OK = &quot;🟩&quot;
+    NO = &quot;⬜&quot;
+    WRONG_PLACE = &quot;🟨&quot;
+#+end_src
+
+#+CAPTION: Imports for the Enum
+#+NAME: scoring-guess-enum-import
+#+begin_src python :tangle no
+from enum import Enum
+#+end_src
+
+And to use it as part of our scoring function:
+
+#+NAME: scoring-guessfunc-impl2
+#+CAPTION: Refactored function to avoid magic glyphs
+#+begin_src python :tangle no
+def score_guess(guess: str, answer: str) -&gt; str:
+    &quot;&quot;&quot;Score an individual guess with Counter&quot;&quot;&quot;
+    # Counter(&quot;abbey&quot;) = Counter({&#39;b&#39;: 2, &#39;a&#39;: 1, &#39;e&#39;: 1, &#39;y&#39;: 1})
+    answer_chars = Counter(answer)
+    response = &quot;&quot;
+    for guess_char, answer_char in zip(guess, answer):
+        if guess_char not in answer_chars:
+            response += CharacterScore.NO
+            continue  # Early exit for this character, skip to next
+        # From here on, we MUST have a char in common, regardless of place
+        if answer_char == guess_char:
+            response += CharacterScore.OK
+        elif answer_chars[guess_char] &gt; 0:
+            response += CharacterScore.WRONG_PLACE
+        # Either way, reduce occurence counter since we &quot;used&quot; this occurence
+        answer_chars[guess_char] -= 1
+        # No more hits = pretend character isn&#39;t even seen (remove from dict)
+        if answer_chars[guess_char] == 0:
+            del answer_chars[guess_char]
+    return response
+#+end_src
+
+
+
+** Tangle it all out
+
+As before, we reorder the blocks from snippets above to export code in a way
+that keeps proper formatting.
+#+NAME: scoring-impl-tangleweb
+#+CAPTION: Final =guess.py=
+#+begin_src python :tangle src/literate_wordle/guess.py :noweb yes
+&lt;&lt;scoring-guessmod-header&gt;&gt;
+
+
+&lt;&lt;scoring-guessfunc-import&gt;&gt;
+&lt;&lt;scoring-guess-enum-import&gt;&gt;
+
+
+&lt;&lt;scoring-guess-enum&gt;&gt;
+
+
+&lt;&lt;scoring-guessfunc-impl2&gt;&gt;
+#+end_src
+
+#+NAME: scoring-test1-tangleweb
+#+CAPTION: Final =tests/test_scoring_guess.py=
+#+begin_src python :tangle tests/test_scoring_guess.py :noweb yes
+&quot;&quot;&quot;Validates the Gherkin file features/scoring_guess.feature:
+
+&lt;&lt;scoring-feature&gt;&gt;
+&quot;&quot;&quot;
+
+&lt;&lt;scoring-test-import-pytest&gt;&gt;
+
+&lt;&lt;scoring-test-import&gt;&gt;
+
+
+&lt;&lt;scoring-test1&gt;&gt;
+
+
+&lt;&lt;scoring-test2&gt;&gt;
+
+
+&lt;&lt;scoring-test3&gt;&gt;
+
+
+&lt;&lt;scoring-multi-parameters&gt;&gt;
+&lt;&lt;scoring-multi-skeleton&gt;&gt;
+#+end_src
+
+* Playing a round of Wordle
+
+With all the subfeatures we have, we can now play a round of wordle, we&#39;re
+missing only the &quot;state&quot; of the game board, with the interactivity of the game.
+
+#+NAME: track-guess-feat
+#+begin_src feature :tangle no
+Feature: Track number of guesses
+  As a Wordle game
+  I need to track how many guesses were already given
+  In order to announce win or game over
+#+end_src
+
+There are a few obvious cases we want to see:
+
+#+CAPTION: Allow the first guess
+#+NAME: track-guess-scenario1
+#+begin_src feature :tangle no
+Scenario: First guess is allowed
+  Given a wordle answer
+  And I didn&#39;t guess before
+  When I guess the word
+  Then my guess is scored
+#+end_src
+
+#+CAPTION: Still allow the sixth guess (skipping 2 through 5)
+#+NAME: track-guess-scenario2
+#+begin_src feature :tangle no
+Scenario: Sixth guess still allowed
+  Given a wordle answer
+  And I guessed 5 times
+  When I guess the word
+  Then my guess is scored
+#+end_src
+
+#+CAPTION: Sixth guess is last guess (fail on seventh)
+#+NAME: track-guess-scenario3
+#+begin_src feature :tangle no
+Scenario: Six failed guess is game over
+  Given a wordle answer
+  And I guessed 6 times already
+  When I guess the word
+  And my guess isn&#39;t the answer
+  Then my guess is scored
+  But game shows &quot;Game Over&quot;
+  And game shows the real answer
+#+end_src
+
+This feature shows us all the state we need to manage to track a Wordle game:
+- an answer
+- the number of previous guesses
+- the previous guesses themselves? not needed after we print them
+- the previous guesses&#39; scores? not needed after we print it either
+
+So a Wordle Game is the aggregate of &quot;answer&quot; + &quot;number of guesses&quot;, nothing
+else.
+
+Let&#39;s write the test:
+
+#+CAPTION: New =tests/test_track_guess_number.py= file with just feature&#39;s docstring
+#+NAME: track-guess-test-docs
+#+begin_src python :tangle no :noweb yes
+&quot;&quot;&quot;Validates the Gherkin file features/track_guesses.feature
+
+&lt;&lt;track-guess-feat2&gt;&gt;
+&quot;&quot;&quot;
+#+end_src
+
+#+CAPTION: Test to track first guess
+#+NAME: track-guess-test1
+#+begin_src python :tangle no
+def test_first_guess_allowed():
+    &quot;&quot;&quot;Scenario: First guess is allowed&quot;&quot;&quot;
+    # Given a wordle answer
+    answer = &quot;orbit&quot;
+    # And I didn&#39;t guess before
+    guess_number = 0
+    game = WordleGame(answer=answer, guess_number=guess_number)
+    # When I guess the word
+    guess = &quot;kebab&quot;
+    result = play_round(guess, game)
+    # Then my guess is scored
+    OUTCOME_CONTINUE = WordleMoveOutcome.GUESS_SCORED_CONTINUE
+    assert result.outcome == OUTCOME_CONTINUE, &quot;Game shouldn&#39;t be over yet&quot;
+    assert result.score is not None, &quot;No score given as result&quot;
+    assert len(result.score) == 5, &quot;Score of incorrect length&quot;
+    ALLOWED_CHARS = [score.value for score in Score]
+    assert all(
+        char in ALLOWED_CHARS for char in list(result.score)
+    ), &quot;Score doesn&#39;t match score&#39;s characters&quot;
+#+end_src
+
+In the test above, I&#39;ve done quite a bit of world-building:
+- Used a new =WordleGame= structure keeping game state
+- Used a new =WordleMoveOutcome= enumeration to describe outcomes
+- Used a new =play_round= function that takes a game + guess
+- Implied in =result= variable at a structure for new Game state after a move
+
+#+CAPTION: The other imports for the test of Listing [[track-guess-test1]]
+#+NAME: track-guess-test-import
+#+begin_src python :tangle no :noweb yes
+from literate_wordle.game import WordleGame, WordleMoveOutcome, play_round
+from literate_wordle.guess import CharacterScore as Score
+#+end_src
+
+
+This practice of calling an API that doesn&#39;t exist yet is the coolest part of
+TDD, because the tests lend their power to help design what the software should
+feel like, even if we have no idea how to create the backend to that API yet.
+The focus on how the feature is /used/ changes from the usual engineering
+mindset of how we envision the backend, very valuable.
+
+All right, so with that in mind, let&#39;s start actually building these data
+structures.
+
+#+CAPTION: Enum for outcomes of a single move
+#+NAME: track-guess-gamestate1
+#+begin_src python :tangle no
+class WordleMoveOutcome(Enum):
+    &quot;&quot;&quot;Outcome of a single move&quot;&quot;&quot;
+
+    GAME_OVER_LOST = 1
+    GAME_WON = 2
+    GUESS_SCORED_CONTINUE = 3
+#+end_src
+
+#+CAPTION: Objects necessary to keep state of the game
+#+NAME: track-guess-gamestate2
+#+begin_src python :tangle no
+@dataclass
+class WordleGame:
+    &quot;&quot;&quot;A Wordle game&#39;s internal state, before a move is played&quot;&quot;&quot;
+
+    answer: str
+    guess_number: int
+
+
+@dataclass
+class WordleMove:
+    &quot;&quot;&quot;A Wordle game state once a move is played&quot;&quot;&quot;
+
+    game: WordleGame
+    outcome: WordleMoveOutcome
+    message: str
+    score: Optional[str]
+#+end_src
+
+#+CAPTION: Imports for enumeration of state and data-holding classes of Listing [[track-guess-gamestate1]],[[track-guess-gamestate2]]
+#+NAME: track-guess-import-dataclass
+#+begin_src python :tangle no
+from dataclasses import dataclass
+from enum import Enum
+from typing import Optional
+#+end_src
+
+With the datastructures ready, we can define our function&#39;s signature:
+
+#+NAME: track-guess-proto
+#+begin_src python :tangle no
+def play_round(guess: str, game: WordleGame) -&gt; WordleMove:
+    &quot;&quot;&quot;Use guess on the given game, resulting in WordleMove&quot;&quot;&quot;
+#+end_src
+
+
+Before we finish implementing this function, let&#39;s define the rest of the
+acceptance tests we settled on in Gherkin:
+
+#+CAPTION: Second test, for sixth guess still OK
+#+NAME: track-guess-test2
+#+begin_src python :tangle no
+def test_sixth_guess_allowed():
+    &quot;&quot;&quot;Scenario: Fifth guess still allowed&quot;&quot;&quot;
+    # Given a wordle answer
+    answer = &quot;orbit&quot;
+    # And I guessed 5 times
+    guess_number = 6
+    game = WordleGame(answer=answer, guess_number=guess_number)
+    # When I guess the word
+    guess = &quot;kebab&quot;
+    result = play_round(guess, game)
+    # Then my guess is scored
+    OUTCOME_CONTINUE = WordleMoveOutcome.GUESS_SCORED_CONTINUE
+    assert result.outcome == OUTCOME_CONTINUE, &quot;Game shouldn&#39;t be over yet&quot;
+    assert result.score is not None, &quot;No score given as result&quot;
+    assert len(result.score) == 5, &quot;Score of incorrect length&quot;
+    OK_CHARS = [&quot;🟩&quot;, &quot;🟨&quot;, &quot;⬜&quot;]
+    assert all(
+        char in OK_CHARS for char in list(result.score)
+    ), &quot;Score doesn&#39;t match score&#39;s characters&quot;
+#+end_src
+
+#+CAPTION: Actually denying a seventh guess
+#+NAME: track-guess-test3
+#+begin_src python :tangle no
+def test_seventh_guess_fails_game():
+    &quot;&quot;&quot;Scenario: Sixth failed guess is game over&quot;&quot;&quot;
+    # Given a wordle answer
+    answer = &quot;orbit&quot;
+    # And I guessed 6 times already
+    # Guessing 6 times BEFORE, using seventh now:
+    guess_number = 7
+    game = WordleGame(answer, guess_number)
+    # When I guess the word
+    # And my guess isn&#39;t the answer
+    guess = &quot;kebab&quot;
+    result = play_round(guess, game)
+    # Then my guess isn&#39;t scored
+    assert result.outcome == WordleMoveOutcome.GAME_OVER_LOST, &quot;Should have lost game&quot;
+    # But game shows &quot;Game Over&quot;
+    assert &quot;game over&quot; in result.message.lower(), &quot;Should show game over message&quot;
+    # And game shows the real answer
+    assert answer in result.message
+#+end_src
+
+As I write the test in Listing [[track-guess-test3]], I notice there&#39;s one case of
+the =enum= we haven&#39;t covered(=WordleMoveOutcome.GAME_WON=), which means the
+=play_round= scenarios aren&#39;t correct yet. Let&#39;s add the scenario for winning
+the game!
+
+#+CAPTION: Winning scenario
+#+NAME: track-guess-scenario4
+#+begin_src feature :tangle no
+Scenario: Winning guess
+  Given a wordle answer
+  And I guessed 3 times
+  When I guess the word
+  And my guess is the answer
+  Then my guess is scored
+  And score is perfect
+  And game shows &quot;Game Won&quot;
+#+end_src
+
+A little thought later, it seems we mixed up the requirements a little here (it
+happens!). When designing the Gherkin Feature, we wrote about exhausting the
+amounts of guesses, we weren&#39;t thinking of win/lose conditions. But when writing
+a =play_round= function, it&#39;s indeed very relevant, especially since the
+existing scenarios covered most of the cases already. Ideally, we could have
+added a separate Feature describing winning and losing, and dealt with it
+separately. In practice, here, it&#39;s simpler to just expand the feature&#39;s scope,
+even if it means the scope has creeped out a little. This is what real
+engineering is about, aiming for perfection, but making compromises to match our
+imperfect world where deadlines and tired developers exist.
+
+Let&#39;s fill in our winning case test:
+
+#+CAPTION: Winning test
+#+NAME: track-guess-test4
+#+begin_src python :tangle no
+def test_winning_guess_wins():
+    &quot;&quot;&quot;Scenario: Winning guess&quot;&quot;&quot;
+    # Given a wordle answer
+    answer = &quot;orbit&quot;
+    # And I guessed 3 times
+    guess_number = 3
+    game = WordleGame(answer, guess_number)
+    # When I guess the word
+    # And my guess is the answer
+    guess = answer
+    result = play_round(guess, game)
+    # Then my guess is scored
+    assert result.score is not None, &quot;Guess should be scored&quot;
+    # And the score is perfect
+    assert result.score == &quot;🟩🟩🟩🟩🟩&quot;
+    # And game shows &quot;Game Won
+    assert result.outcome == WordleMoveOutcome.GAME_WON, &quot;Should have won game&quot;
+    assert &quot;game won&quot; in result.message.lower()
+#+end_src
+
+
+With all the tests ready, we cobble together a stub for =play_round= to execute
+the tests and see them go red.
+
+#+CAPTION: stub for =play_round=, returning failure, to make tests run red
+#+NAME: track-guess-impl-dummy
+#+begin_src python :tangle no
+result = WordleMoveOutcome.GAME_OVER_LOST
+return WordleMove(game=game, outcome=result, message=&quot;You suck!&quot;, score=None)
+#+end_src
+
+All right, the tests do fail, right?
+
+#+begin_src shell :tangle no :exports both
+poetry run pytest 2&gt;&amp;1 || true
+#+end_src
+
+#+RESULTS:
+#+begin_example
+============================= test session starts ==============================
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /home/jiby/dev/ws/short/literate_wordle/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/jiby/dev/ws/short/literate_wordle, configfile: pyproject.toml
+plugins: cov-3.0.0, clarity-1.0.1
+collecting ... collected 21 items
+
+tests/test_checking_guess_valid_word.py::test_reject_long_words PASSED   [  4%]
+tests/test_checking_guess_valid_word.py::test_reject_overly_short_words PASSED [  9%]
+tests/test_checking_guess_valid_word.py::test_reject_nondict_words PASSED [ 14%]
+tests/test_checking_guess_valid_word.py::test_accept_dict_words PASSED   [ 19%]
+tests/test_pick_word.py::test_pick_word_ok_length PASSED                 [ 23%]
+tests/test_scoring_guess.py::test_perfect_guess PASSED                   [ 28%]
+tests/test_scoring_guess.py::test_no_common_character PASSED             [ 33%]
+tests/test_scoring_guess.py::test_wrong_place PASSED                     [ 38%]
+tests/test_scoring_guess.py::test_generic_score[normal_guess1] PASSED    [ 42%]
+tests/test_scoring_guess.py::test_generic_score[normal_guess2] PASSED    [ 47%]
+tests/test_scoring_guess.py::test_generic_score[normal_guess3] PASSED    [ 52%]
+tests/test_scoring_guess.py::test_generic_score[multi_occur1] PASSED     [ 57%]
+tests/test_scoring_guess.py::test_generic_score[multi_occur2] PASSED     [ 61%]
+tests/test_scoring_guess.py::test_generic_score[multi_occur3] PASSED     [ 66%]
+tests/test_scoring_guess.py::test_generic_score[multi_occur4] PASSED     [ 71%]
+tests/test_scoring_guess.py::test_generic_score[multi_occur5] PASSED     [ 76%]
+tests/test_scoring_guess.py::test_generic_score[multi_occur6] PASSED     [ 80%]
+tests/test_track_guess_number.py::test_first_guess_allowed FAILED        [ 85%]
+tests/test_track_guess_number.py::test_sixth_guess_allowed FAILED        [ 90%]
+tests/test_track_guess_number.py::test_seventh_guess_fails_game FAILED     [ 95%]
+tests/test_track_guess_number.py::test_winning_guess_wins FAILED         [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_first_guess_allowed ___________________________
+
+    def test_first_guess_allowed():
+        &quot;&quot;&quot;Scenario: First guess is allowed&quot;&quot;&quot;
+        # Given a wordle answer
+        answer = &quot;orbit&quot;
+        # And I didn&#39;t guess before
+        guess_number = 0
+        game = WordleGame(answer=answer, guess_number=guess_number)
+        # When I guess the word
+        guess = &quot;kebab&quot;
+        result = play_round(guess, game)
+        # Then my guess is scored
+        OUTCOME_CONTINUE = WordleMoveOutcome.GUESS_SCORED_CONTINUE
+&gt;       assert result.outcome == OUTCOME_CONTINUE, &quot;Game shouldn&#39;t be over yet&quot;
+E       AssertionError: Game shouldn&#39;t be over yet
+E       assert == failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         &lt;WordleMoveOutcome.GAME_OVER_LOST: 1&gt;
+E         &lt;WordleMoveOutcome.GUESS_SCORED_CONTINUE: 3&gt;
+E
+
+tests/test_track_guess_number.py:25: AssertionError
+___________________________ test_sixth_guess_allowed ___________________________
+
+    def test_sixth_guess_allowed():
+        &quot;&quot;&quot;Scenario: Sixth guess still allowed&quot;&quot;&quot;
+        # Given a wordle answer
+        answer = &quot;orbit&quot;
+        # And I guessed 5 times
+        guess_number = 6
+        game = WordleGame(answer=answer, guess_number=guess_number)
+        # When I guess the word
+        guess = &quot;kebab&quot;
+        result = play_round(guess, game)
+        # Then my guess is scored
+        OUTCOME_CONTINUE = WordleMoveOutcome.GUESS_SCORED_CONTINUE
+&gt;       assert result.outcome == OUTCOME_CONTINUE, &quot;Game shouldn&#39;t be over yet&quot;
+E       AssertionError: Game shouldn&#39;t be over yet
+E       assert == failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         &lt;WordleMoveOutcome.GAME_OVER_LOST: 1&gt;
+E         &lt;WordleMoveOutcome.GUESS_SCORED_CONTINUE: 3&gt;
+E
+
+tests/test_track_guess_number.py:46: AssertionError
+_________________________ test_seventh_guess_fails_game _________________________
+
+    def test_seventh_guess_fails_game():
+        &quot;&quot;&quot;Scenario: Sixth failed guess is game over&quot;&quot;&quot;
+        # Given a wordle answer
+        answer = &quot;orbit&quot;
+        # And I guessed 6 times already
+        # Guessing 6 times BEFORE, using seventh now:
+        guess_number = 7
+        game = WordleGame(answer, guess_number)
+        # When I guess the word
+        # And my guess isn&#39;t the answer
+        guess = &quot;kebab&quot;
+        result = play_round(guess, game)
+        # Then my guess isn&#39;t scored
+        assert result.outcome == WordleMoveOutcome.GAME_OVER_LOST, &quot;Should have lost game&quot;
+        # But game shows &quot;Game Over&quot;
+&gt;       assert &quot;game over&quot; in result.message.lower(), &quot;Should show game over message&quot;
+E       AssertionError: Should show game over message
+E       assert in failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         game over
+E         you suck!
+E
+
+tests/test_track_guess_number.py:69: AssertionError
+___________________________ test_winning_guess_wins ____________________________
+
+    def test_winning_guess_wins():
+        &quot;&quot;&quot;Scenario: Winning guess&quot;&quot;&quot;
+        # Given a wordle answer
+        answer = &quot;orbit&quot;
+        # And I guessed 3 times
+        guess_number = 3
+        game = WordleGame(answer, guess_number)
+        # When I guess the word
+        # And my guess is the answer
+        guess = answer
+        result = play_round(guess, game)
+        # Then my guess is scored
+&gt;       assert result.score is not None, &quot;Guess should be scored&quot;
+E       AssertionError: Guess should be scored
+E       assert is not failed. [pytest-clarity diff shown]
+E
+E         LHS vs RHS shown below
+E
+E         None
+E
+
+tests/test_track_guess_number.py:86: AssertionError
+- generated xml file: /home/jiby/dev/ws/short/literate_wordle/test_results/results.xml -
+
+----------- coverage: platform linux, python 3.9.5-final-0 -----------
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+src/literate_wordle/__init__.py              1      0   100%
+src/literate_wordle/assets/__init__.py       0      0   100%
+src/literate_wordle/game.py                 20      0   100%
+src/literate_wordle/guess.py                19      0   100%
+src/literate_wordle/words.py                25      0   100%
+------------------------------------------------------------
+TOTAL                                       65      0   100%
+Coverage HTML written to dir test_results/coverage.html
+Coverage XML written to file test_results/coverage.xml
+
+=========================== short test summary info ============================
+FAILED tests/test_track_guess_number.py::test_first_guess_allowed - Assertion...
+FAILED tests/test_track_guess_number.py::test_sixth_guess_allowed - Assertion...
+FAILED tests/test_track_guess_number.py::test_sixth_guess_fails_game - Assert...
+FAILED tests/test_track_guess_number.py::test_winning_guess_wins - AssertionE...
+========================= 4 failed, 17 passed in 0.18s =========================
+#+end_example
+
+All right, let&#39;s implement this.
+** Implementing the feature
+
+First, if we have too many guesses already (before this one), we return game
+lost. This means we decide to fail not at the end of the failed sixth guess, but
+beginning of the seventh.
+
+#+CAPTION: Game over detection. Notice the early-exit pattern.
+#+NAME: track-guess-impl1
+#+begin_src python :tangle no
+if game.guess_number &gt;= 7:
+    message = f&quot;Too many guesses: Game Over. Answer was: {game.answer}&quot;
+    outcome = WordleMoveOutcome.GAME_OVER_LOST
+    return WordleMove(game=game, outcome=outcome, message=message, score=None)
+#+end_src
+
+In order to count a guess, it needs to be a valid word. This means importing
+some of our package&#39;s functions.
+
+#+NAME: track-guess-import-module
+#+begin_src python :tangle no
+from literate_wordle.guess import score_guess
+from literate_wordle.words import check_valid_word
+#+end_src
+
+As we write the code to check if guess is valid word, we notice that if the word
+isn&#39;t valid, we can&#39;t return =GUESS_SCORED_CONTINUE=, because an invalid-word
+guess shouldn&#39;t be counted against the player! So we again revise the
+=WordleMoveOutcome= enum and because it&#39;s a new enum case, we will need to add a
+test for it to cover all grounds! Let&#39;s put a pin in that, finish implementing
+this first.
+
+#+NAME: track-guess-enum4
+#+CAPTION: Fourth outcome: guess wasn&#39;t valid, not counted
+#+begin_src python :tangle no
+GUESS_NOTVALID_CONTINUE = 4
+#+end_src
+
+To compensate for having this enum defined all out of order, we&#39;ll use again the
+=noweb= feature to weave code back in the enum, in the subsection below,
+inserting this fourth possibility in the correct place, so the code looks like
+it should.
+
+#+CAPTION: Invalid word detection.
+#+NAME: track-guess-impl2
+#+begin_src python :tangle no
+valid, validity_msg = check_valid_word(guess)
+if not valid and validity_msg is not None:
+    outcome = WordleMoveOutcome.GUESS_NOTVALID_CONTINUE
+    return WordleMove(game=game, outcome=outcome, message=validity_msg, score=None)
+#+end_src
+
+Now we&#39;ve gotten rid of the cases where the guess was invalid.
+#+CAPTION: Guess is now valid, count it
+#+NAME: track-guess-impl3
+#+begin_src python :tangle no
+# Guess now guaranteed to be valid: count it
+game.guess_number += 1
+#+end_src
+
+#+CAPTION: The now-guaranteed-valid guess should be scored
+#+NAME: track-guess-impl4
+#+begin_src python :tangle no
+score = score_guess(guess, game.answer)
+#+end_src
+
+
+#+CAPTION: Knowing a valid guess, scored, is game won?
+#+NAME: track-guess-impl5
+#+begin_src python :tangle no
+if score == &quot;🟩🟩🟩🟩🟩&quot;:
+    outcome = WordleMoveOutcome.GAME_WON
+    message = f&quot;Correct! Game won in {game.guess_number - 1} guesses&quot;
+    return WordleMove(game=game, outcome=outcome, message=message, score=score)
+#+end_src
+
+#+CAPTION: Last possibility remains: scored, not won/lost, try another guess
+#+NAME: track-guess-impl6
+#+begin_src python :tangle no
+# Only case left is &quot;try another guess&quot;
+outcome = WordleMoveOutcome.GUESS_SCORED_CONTINUE
+message = f&quot;Try again! Guess number {game.guess_number - 1}. Score is: {score}&quot;
+return WordleMove(game=game, outcome=outcome, message=message, score=score)
+#+end_src
+
+
+Note that throughout this codebase, we made a lot of assumptions and
+repetitions around the length of a Wordle answer/guess, and this translate to
+repeated hardcoded-ness like above regarding emojis. These could have been
+addressed right away during implementation, and indeed we did, but it&#39;s
+important to consider if the scope increase is worth it: generalized Wordle to
+N characters isn&#39;t super interesting to me, as it would require cutting new
+dictionaries, etc, and I&#39;m just not that into Wordle. This is the kind of
+technical design decision we can do by having a firm grasp on project scope,
+another advantage of deep understanding of project requirements.
+
+Back to the implementation: tests should all pass now, =make= is happy, but
+there&#39;s an interesting issue:
+
+#+begin_example
+----------- coverage: platform linux, python 3.9.5-final-0 -----------
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+src/literate_wordle/__init__.py              1      0   100%
+src/literate_wordle/assets/__init__.py       0      0   100%
+src/literate_wordle/game.py                 38      2    95%
+src/literate_wordle/guess.py                19      0   100%
+src/literate_wordle/words.py                25      0   100%
+------------------------------------------------------------
+TOTAL                                       83      2    98%
+Coverage HTML written to dir test_results/coverage.html
+Coverage XML written to file test_results/coverage.xml
+#+end_example
+
+We lowered coverage, nooo! Exploring the coverage HTML file in a browser, we see
+that the lines in question that aren&#39;t covered are:
+
+#+CAPTION: Lines of code that weren&#39;t hit in any test, as witnessed by test coverage library
+#+begin_src python :tangle no
+if not valid and validity_msg is not None:
+    outcome = WordleMoveOutcome.GUESS_NOTVALID_CONTINUE
+    return WordleMove(game=game, outcome=outcome, message=validity_msg, score=None)
+#+end_src
+
+Oh! That&#39;s the test case we put a pin in! Right, so we&#39;re back to writing that
+test. I wonder if we should write a whole scenario to back it up? It&#39;s not
+really obvious!
+
+If this test case spins out of an edge case of our implementation, it&#39;s not
+really coming from a business requirement, so it&#39;s probably not worth writing a
+Gherkin Scenario alongside the other ones. If it is indeed an overlooked
+requirement, then yes, add it to the requirements pile and write a feature.
+
+Hmm, let&#39;s write the test first, and see if the scenario that emerges is a
+requirement.
+
+#+NAME: track-guess-test5
+#+begin_src python :tangle no
+def test_invalid_guess_not_counted():
+    &quot;&quot;&quot;Scenario: Invalid guess isn&#39;t counted&quot;&quot;&quot;
+    # Given a wordle answer
+    answer = &quot;orbit&quot;
+    # And I guessed 3 times
+    guess_number = 3
+    game = WordleGame(answer=answer, guess_number=guess_number)
+    # When I guess the word
+    # But my guess isn&#39;t a dictionary word
+    guess = &quot;xolfy&quot;
+    result = play_round(guess, game)
+    # Then my guess is rejected as invalid word
+    OUTCOME_BADWORD = WordleMoveOutcome.GUESS_NOTVALID_CONTINUE
+    assert result.outcome == OUTCOME_BADWORD, &quot;Guess should have been rejected&quot;
+    # And my guess is not scored
+    assert result.score is None, &quot;No score should be given on bad word&quot;
+#+end_src
+
+Hmm, after some thought, it seems that the function we implemented, compared to
+the feature being described in Gherkin, is indeed different!
+
+As mentioned before, the Gherkin feature was about tracking specific number of
+guesses, but we increased scope to consider the wider win scenario, using the
+&quot;play round&quot; feature. Expanding the feature again to cover more cases than just
+how many guesses, it needs to understand if the guess is correct word or not.
+
+So for the specific purpose of tracking guesses as a feature, we&#39;re already
+covered by existing scenarios. But not only are we missing edge cases of
+implementation, as we saw in coverage metrics, but this is the wider feature
+that a /play a round/ Feature would cover.
+
+This game&#39;s implementation being so very near completion, I am not interested
+in creating another feature file, I&#39;ll just expand a bit the original feature
+to be about being able to play a whole round, wins and losses included, just to
+keep this narrative barely on track.
+
+#+NAME: track-guess-feat2
+#+begin_src feature :tangle no
+Feature: Playing a round
+  As a Wordle game
+  I need to track how many guesses were already given, stating wins/losses
+  In order to play the game
+#+end_src
+
+
+#+CAPTION: New scenario
+#+NAME: track-guess-scenario5
+#+begin_src feature :tangle no
+Scenario: Invalid guess isn&#39;t counted
+  Given a wordle answer
+  And I guessed 3 times
+  When I guess the word
+  But my guess isn&#39;t a dictionary word
+  Then my guess is rejected as invalid word
+  And my guess is not scored
+#+end_src
+
+
+And with this new test, we&#39;re back to passing tests and 100% coverage!
+
+** Tangling out the whole thing
+
+The feature first:
+
+#+begin_src feature :tangle features/track_guesses.feature :noweb yes
+&lt;&lt;track-guess-feat2&gt;&gt;
+
+&lt;&lt;track-guess-scenario1&gt;&gt;
+
+&lt;&lt;track-guess-scenario2&gt;&gt;
+
+&lt;&lt;track-guess-scenario3&gt;&gt;
+
+&lt;&lt;track-guess-scenario4&gt;&gt;
+
+&lt;&lt;track-guess-scenario5&gt;&gt;
+#+end_src
+
+The tests:
+
+#+begin_src python :tangle tests/test_track_guess_number.py :noweb yes
+&lt;&lt;track-guess-test-docs&gt;&gt;
+
+
+&lt;&lt;track-guess-test-import&gt;&gt;
+
+
+&lt;&lt;track-guess-test1&gt;&gt;
+
+
+&lt;&lt;track-guess-test2&gt;&gt;
+
+
+&lt;&lt;track-guess-test3&gt;&gt;
+
+
+&lt;&lt;track-guess-test4&gt;&gt;
+
+
+# Case covered by existing gherkin feature:
+# Intentional, see wordle.org for reasoning
+&lt;&lt;track-guess-test5&gt;&gt;
+#+end_src
+
+#+begin_src python :tangle src/literate_wordle/game.py :noweb yes
+&quot;&quot;&quot;Wordle game&#39;s state and playing rounds&quot;&quot;&quot;
+
+
+&lt;&lt;track-guess-import-dataclass&gt;&gt;
+
+&lt;&lt;track-guess-import-module&gt;&gt;
+
+
+&lt;&lt;track-guess-gamestate1&gt;&gt;
+    &lt;&lt;track-guess-enum4&gt;&gt;
+
+
+&lt;&lt;track-guess-gamestate2&gt;&gt;
+
+
+&lt;&lt;track-guess-proto&gt;&gt;
+    &lt;&lt;track-guess-impl1&gt;&gt;
+    &lt;&lt;track-guess-impl2&gt;&gt;
+    &lt;&lt;track-guess-impl3&gt;&gt;
+    &lt;&lt;track-guess-impl4&gt;&gt;
+    &lt;&lt;track-guess-impl5&gt;&gt;
+    &lt;&lt;track-guess-impl6&gt;&gt;
+#+end_src
+
+* Final round: command line interface
+
+We have assembled lego bricks into an almost finished product, as we have enough to
+play a single round. Let&#39;s give this project a shell command to invoke, tying
+together all the other disjointed features.
+
+#+CAPTION: Final feature of our system: play the game!
+#+begin_src feature :tangle features/command_line_entrypoint.feature
+Feature: Pywordle shell command
+  As a Wordle game
+  I need a shell command to launch the game
+  In order to give convenient entrypoint for players
+#+end_src
+
+I don&#39;t think it&#39;s necessary to give specific scenarios, because we&#39;ve
+thoroughly tested the underlying implementation of the game, we just need to
+assemble it into a shell command.
+
+So let&#39;s define an entrypoint for the game, generating a new one:
+
+#+CAPTION: Create a new game (object)
+#+NAME: cli-main1
+#+begin_src python :tangle no
+def new_game() -&gt; WordleGame:
+    &quot;&quot;&quot;Generate a new WordleGame&quot;&quot;&quot;
+    return WordleGame(answer=pick_answer_word(), guess_number=1)
+#+end_src
+
+And how to play until we lose, printing to stdout as we go:
+
+#+CAPTION: The main game loop. Notice the trick: dependency injection of all input and output as &quot;callables&quot;, which we can inject later to be =print= and =input=, or automate instead for testing.
+#+NAME: cli-main2
+#+begin_src python :tangle no
+def play_game(game: WordleGame, guess_fetcher: Callable, response_logger: Callable):
+    &quot;&quot;&quot;Plays the given WordleGame until completion.
+
+    Asks guess_fetcher for guess, and sends response to response_logger
+    &quot;&quot;&quot;
+    outcome = WordleMoveOutcome.GUESS_SCORED_CONTINUE  # Gotta start somehow
+    while outcome not in {WordleMoveOutcome.GAME_WON, WordleMoveOutcome.GAME_OVER_LOST}:
+        guess = guess_fetcher()
+        result = play_round(guess=guess, game=game)
+        response_logger(result.message)
+        game = result.game
+        outcome = result.outcome
+#+end_src
+
+Pepper in the few imports we need:
+
+#+CAPTION: Callable is the type of anything that can be called (function but also classes with =__init__= methods...)
+#+NAME: cli-main-import-std
+#+begin_src python :tangle no
+from typing import Callable
+#+end_src
+
+#+CAPTION: Other functions we referenced
+#+NAME: cli-main-import-mod
+#+begin_src python :tangle no
+from literate_wordle.game import WordleGame, WordleMoveOutcome, play_round
+from literate_wordle.words import pick_answer_word
+#+end_src
+
+Now we can add command line argument parsing in a separate file:
+
+#+CAPTION: An argument parser with no argument, to give us usage via =--help= flags. Notice the =raw_args=, if passed, is given, and defaults to =None=. This allows us to call this function ourselves to test it, but still use =None= to use =sys.argv= automatically.
+#+NAME: cli-pargs1
+#+begin_src python :tangle no
+def parse_args(raw_args: Optional[Sequence[str]] = None) -&gt; argparse.Namespace:
+    &quot;&quot;&quot;Parse given command line arguments&quot;&quot;&quot;
+    description = &quot;Wordle implementation in Python, as literate programming&quot;
+    # Bit overkill since there is no real argument to parse yet
+    parser = argparse.ArgumentParser(prog=&quot;pywordle&quot;, description=description)
+    return parser.parse_args(raw_args)
+#+end_src
+
+#+CAPTION: The Python arguments parsing library. =click= is fancier, but this is neat and self-contained.
+#+NAME: cli-pargs-import-std1
+#+begin_src python :tangle no
+import argparse
+#+end_src
+
+#+CAPTION: Typing hints for our arguments. =Sequence= is a generalized version of List that is &quot;anything we can iterate over&quot;, so a linked list would match.
+#+NAME: cli-pargs-import-std2
+#+begin_src python :tangle no
+from typing import Optional, Sequence
+#+end_src
+
+#+CAPTION: Inject the input and output functions to =play_game=
+#+NAME: cli-pargs2
+#+begin_src python :tangle no
+def play_game_args(raw_args: Optional[Sequence[str]] = None):
+    &quot;&quot;&quot;Play a standard Wordle game from stdin to stdout, given args&quot;&quot;&quot;
+    _ = parse_args(raw_args)
+    game = new_game()
+    play_game(game=game, guess_fetcher=input, response_logger=print)
+#+end_src
+
+#+CAPTION: Defining an explicit function for the python package to enter through
+#+NAME: cli-pargs3
+#+begin_src python :tangle no
+def main():
+    &quot;&quot;&quot;Pass sys.argv to the play_game_args function&quot;&quot;&quot;
+    play_game_args(sys.argv[1:])
+#+end_src
+
+#+CAPTION: More stdlib imports
+#+NAME: cli-pargs-import-std3
+#+begin_src python :tangle no
+import sys
+#+end_src
+
+#+CAPTION: More custom imports
+#+NAME: cli-pargs-import-mod
+#+begin_src python :tangle no
+from literate_wordle.main import new_game, play_game
+#+end_src
+
+Since both our main and cli are meant to be untestable, because it&#39;s the
+interactive entrypoint, it&#39;s a bit unfair to compute coverage over it. Let&#39;s
+blacklist these two files, preventing them weighing down coverage metric.
+
+#+begin_src conf :tangle .coveragerc
+[run]
+omit =
+    # Don&#39;t compute coverage for these 2 manual invocation files
+    src/literate_wordle/main.py
+    src/literate_wordle/cli.py
+#+end_src
+
+** Tangling it out
+#+begin_src python :tangle src/literate_wordle/main.py :noweb yes
+&quot;&quot;&quot;Entrypoint for pywordle&quot;&quot;&quot;
+
+
+&lt;&lt;cli-main-import-std&gt;&gt;
+
+&lt;&lt;cli-main-import-mod&gt;&gt;
+
+
+&lt;&lt;cli-main1&gt;&gt;
+
+
+&lt;&lt;cli-main2&gt;&gt;
+
+
+&lt;&lt;cli-main3&gt;&gt;
+#+end_src
+
+
+#+begin_src python :tangle src/literate_wordle/cli.py :noweb yes
+&quot;&quot;&quot;Command line entrypoint for pywordle&quot;&quot;&quot;
+
+
+&lt;&lt;cli-pargs-import-std1&gt;&gt;
+&lt;&lt;cli-pargs-import-std3&gt;&gt;
+&lt;&lt;cli-pargs-import-std2&gt;&gt;
+
+&lt;&lt;cli-pargs-import-mod&gt;&gt;
+
+
+&lt;&lt;cli-pargs1&gt;&gt;
+
+
+&lt;&lt;cli-pargs2&gt;&gt;
+
+
+&lt;&lt;cli-pargs3&gt;&gt;
+#+end_src
+
+
+** Launching as CLI
+In Python, when using [[https://python-poetry.org/][Poetry]] like we are, the package is defined in
+=pyproject.toml=. To define a new command, this means using the
+=tool.poetry.script= key:
+
+#+begin_src conf :tangle no
+[tool.poetry.scripts]
+pywordle = &quot;literate_wordle.cli:main&quot;
+#+end_src
+
+So we can now manually invoke this tool. And for the given argument parser, a
+help message should be available:
+
+#+CAPTION: Invoking the help menu. Note &quot;poetry run&quot; prefix to ensure we&#39;re running inside virtualenv, where the package is installed
+#+begin_src shell :tangle no :exports both
+poetry run pywordle --help
+#+end_src
+
+#+RESULTS:
+: usage: pywordle [-h]
+:
+: Wordle implementation in Python, as literate programming
+:
+: optional arguments:
+:   -h, --help  show this help message and exit
+
+And we can play a round!
+
+: $ poetry shell
+: $ pywordle
+: hello
+: Try again! Guess number 1. Score is: ⬜🟨🟨⬜🟨
+: lobes
+: Try again! Guess number 2. Score is: 🟨🟩⬜🟩⬜
+: cranes
+: Guess too long
+: crane
+: Try again! Guess number 3. Score is: ⬜⬜⬜🟨🟨
+: novel
+: Correct! Game won in 4 guesses
+
+Taking a step back, we&#39;ve got command line launch of the game, and we can play
+with it. We&#39;re done here, especially for a short experimental project.
+
+But if this codebase was to be maintained, extended, reused, the bar for
+&quot;acceptable&quot; test coverage would be much higher.
+
+For instance, we have no test overall on the game loop of guess input/output,
+despite all the layers below being pretty well covered. So I&#39;d want tests that
+call the =play_game= function with scripted inputs and log the outputs, taking
+advantage of the dependency injection we set up to make proper UI-oriented
+tests. These would reveal, for instance, that when launching the game, there is
+nothing greeting us, no prompt for a guess, which is a usability issue.
+
+In our case, that&#39;s an exercise left for the reader.
+
+Remember that testing&#39;s primary goal is to increase our trust in the system we
+build.
+
+In that vein, because we&#39;ve got feature acceptance tests covered for every
+layer, the biggest source of uncertainty in the system is the implementation
+itself: we&#39;re just not shaking out the code very much, beyond what a normal
+usage would look like. This calls for exploring the edge cases that code may
+have, regardless of intended features. Every string parameter should be tried
+with empty string, uppercase vs lowercase, different encoding, etc.
+
+* Conclusion
+
+We just walked through building a simple wordle program from scratch, using
+literate programming to weave a novel&#39;s worth of explanations and reasoning,
+with code blocks that export to the proper project code locations.
+
+The project uses modern Python tooling (poetry, pytest) and uses formatters
+(black, isort), linters (flake8 with plugins), type checkers (mypy), and the
+project generates its own general documentation (including this page, if you&#39;re
+reading it in a browser) and API reference (Sphinx with myst_parser for Markdown
+support), enforcing compliance of every tool via make and pre-commit.
+
+The code was written in a Test-driven (TDD) way, as the tests always came before
+the feature itself, guiding how the implementation looks like, all the way to
+having 100% test coverage (whatever that means).
+
+More importantly in my eyes, we only built what was strictly necessary, by using
+Behaviour-driven development (BDD, also called acceptance-test-driven
+development) to guide what subfeature to build next based on our needs. These
+specifications were encoded as Gherkin Features, available in a dedicated
+=features/= folder, and thanks to the magic of Sphinx documentation, each of
+those are collected into a list of requirements in a dedicated Requirements
+page of the docs.
+
+Since all of the feature files have associated acceptance tests that match the
+phrasing of the Gherkin features, future automation work could look at linking
+the requirements in Sphinx to the associated test file, so as to finally get
+full traceability from requirements, through specifications, to implementation
+and finally acceptance tests that pass.
+
+This project was my first foray into literate programming at this scale, an
+attempt to bring together all the good ideas of TDD, modern Python development,
+Gherkin usage for requirements traceability purposes (without overly zealous
+extremes of Cucumber automation). All these ideas were until now scattered,
+implemented each without the others in different places, and this project
+fuses them into something I hope is more valuable than the sum of its parts.
+
+If you like what you see here, have a look at my other writings, available on
+my blog: https://jiby.tech.
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wordle.html" class="btn btn-neutral float-left" title="Literate programming wordle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_collections/gherkin_feature.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

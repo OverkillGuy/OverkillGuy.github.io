@@ -1,0 +1,59 @@
+:py:mod:`literate_wordle.guess`
+===============================
+
+.. py:module:: literate_wordle.guess
+
+.. autoapi-nested-parse::
+
+   Score guesses of Wordle game
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.guess.CharacterScore
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.guess.score_guess
+
+
+
+.. py:class:: CharacterScore
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+   A single character's score
+
+   .. py:attribute:: OK
+      :annotation: = 🟩
+
+      
+
+   .. py:attribute:: NO
+      :annotation: = ⬜
+
+      
+
+   .. py:attribute:: WRONG_PLACE
+      :annotation: = 🟨
+
+      
+
+
+.. py:function:: score_guess(guess: str, answer: str) -> str
+
+   Score an individual guess with Counter
+
+

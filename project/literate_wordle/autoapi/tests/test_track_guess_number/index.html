@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.test_track_guess_number &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/assets/jsonview.bundle.js"></script>
+        <script src="../../../_static/assets/jsonview_loader.js"></script>
+        <script src="../../../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../../../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">tests.test_track_guess_number</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/tests/test_track_guess_number/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tests.test_track_guess_number">
+<span id="tests-test-track-guess-number"></span><h1><a class="reference internal" href="#module-tests.test_track_guess_number" title="tests.test_track_guess_number"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tests.test_track_guess_number</span></code></a><a class="headerlink" href="#module-tests.test_track_guess_number" title="Permalink to this headline"></a></h1>
+<p>Validates the Gherkin file features/track_guesses.feature</p>
+<dl class="simple">
+<dt>Feature: Playing a round</dt><dd><p>As a Wordle game
+I need to track how many guesses were already given, stating wins/losses
+In order to play the game</p>
+</dd>
+</dl>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tests.test_track_guess_number.test_first_guess_allowed" title="tests.test_track_guess_number.test_first_guess_allowed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_first_guess_allowed</span></code></a>()</p></td>
+<td><p>Scenario: First guess is allowed</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tests.test_track_guess_number.test_sixth_guess_allowed" title="tests.test_track_guess_number.test_sixth_guess_allowed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_sixth_guess_allowed</span></code></a>()</p></td>
+<td><p>Scenario: Fifth guess still allowed</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tests.test_track_guess_number.test_seventh_guess_fails_game" title="tests.test_track_guess_number.test_seventh_guess_fails_game"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_seventh_guess_fails_game</span></code></a>()</p></td>
+<td><p>Scenario: Sixth failed guess is game over</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tests.test_track_guess_number.test_winning_guess_wins" title="tests.test_track_guess_number.test_winning_guess_wins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_winning_guess_wins</span></code></a>()</p></td>
+<td><p>Scenario: Winning guess</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tests.test_track_guess_number.test_invalid_guess_not_counted" title="tests.test_track_guess_number.test_invalid_guess_not_counted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_invalid_guess_not_counted</span></code></a>()</p></td>
+<td><p>Scenario: Invalid guess isn't counted</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_track_guess_number.test_first_guess_allowed">
+<span class="sig-prename descclassname"><span class="pre">tests.test_track_guess_number.</span></span><span class="sig-name descname"><span class="pre">test_first_guess_allowed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_track_guess_number.html#test_first_guess_allowed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_track_guess_number.test_first_guess_allowed" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: First guess is allowed</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_track_guess_number.test_sixth_guess_allowed">
+<span class="sig-prename descclassname"><span class="pre">tests.test_track_guess_number.</span></span><span class="sig-name descname"><span class="pre">test_sixth_guess_allowed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_track_guess_number.html#test_sixth_guess_allowed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_track_guess_number.test_sixth_guess_allowed" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Fifth guess still allowed</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_track_guess_number.test_seventh_guess_fails_game">
+<span class="sig-prename descclassname"><span class="pre">tests.test_track_guess_number.</span></span><span class="sig-name descname"><span class="pre">test_seventh_guess_fails_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_track_guess_number.html#test_seventh_guess_fails_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_track_guess_number.test_seventh_guess_fails_game" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Sixth failed guess is game over</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_track_guess_number.test_winning_guess_wins">
+<span class="sig-prename descclassname"><span class="pre">tests.test_track_guess_number.</span></span><span class="sig-name descname"><span class="pre">test_winning_guess_wins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_track_guess_number.html#test_winning_guess_wins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_track_guess_number.test_winning_guess_wins" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Winning guess</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_track_guess_number.test_invalid_guess_not_counted">
+<span class="sig-prename descclassname"><span class="pre">tests.test_track_guess_number.</span></span><span class="sig-name descname"><span class="pre">test_invalid_guess_not_counted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tests/test_track_guess_number.html#test_invalid_guess_not_counted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tests.test_track_guess_number.test_invalid_guess_not_counted" title="Permalink to this definition"></a></dt>
+<dd><p>Scenario: Invalid guess isn’t counted</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

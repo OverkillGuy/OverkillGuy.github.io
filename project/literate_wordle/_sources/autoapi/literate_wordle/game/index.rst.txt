@@ -1,0 +1,106 @@
+:py:mod:`literate_wordle.game`
+==============================
+
+.. py:module:: literate_wordle.game
+
+.. autoapi-nested-parse::
+
+   Wordle game's state and playing rounds
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.game.WordleMoveOutcome
+   literate_wordle.game.WordleGame
+   literate_wordle.game.WordleMove
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.game.play_round
+
+
+
+.. py:class:: WordleMoveOutcome
+
+   Bases: :py:obj:`enum.Enum`
+
+   Outcome of a single move
+
+   .. py:attribute:: GAME_OVER_LOST
+      :annotation: = 1
+
+      
+
+   .. py:attribute:: GAME_WON
+      :annotation: = 2
+
+      
+
+   .. py:attribute:: GUESS_SCORED_CONTINUE
+      :annotation: = 3
+
+      
+
+   .. py:attribute:: GUESS_NOTVALID_CONTINUE
+      :annotation: = 4
+
+      
+
+
+.. py:class:: WordleGame
+
+   A Wordle game's internal state, before a move is played
+
+   .. py:attribute:: answer
+      :annotation: :str
+
+      
+
+   .. py:attribute:: guess_number
+      :annotation: :int
+
+      
+
+
+.. py:class:: WordleMove
+
+   A Wordle game state once a move is played
+
+   .. py:attribute:: game
+      :annotation: :WordleGame
+
+      
+
+   .. py:attribute:: outcome
+      :annotation: :WordleMoveOutcome
+
+      
+
+   .. py:attribute:: message
+      :annotation: :str
+
+      
+
+   .. py:attribute:: score
+      :annotation: :Optional[str]
+
+      
+
+
+.. py:function:: play_round(guess: str, game: WordleGame) -> WordleMove
+
+   Use guess on the given game, resulting in WordleMove
+
+

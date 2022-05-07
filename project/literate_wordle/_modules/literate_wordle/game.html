@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>literate_wordle.game &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/assets/jsonview.bundle.js"></script>
+        <script src="../../_static/assets/jsonview_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../literate_wordle.html">literate_wordle</a> &raquo;</li>
+      <li>literate_wordle.game</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for literate_wordle.game</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Wordle game&#39;s state and playing rounds&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">literate_wordle.guess</span> <span class="kn">import</span> <span class="n">score_guess</span>
+<span class="kn">from</span> <span class="nn">literate_wordle.words</span> <span class="kn">import</span> <span class="n">check_valid_word</span>
+
+
+<div class="viewcode-block" id="WordleMoveOutcome"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMoveOutcome">[docs]</a><span class="k">class</span> <span class="nc">WordleMoveOutcome</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Outcome of a single move&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="WordleMoveOutcome.GAME_OVER_LOST"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMoveOutcome.GAME_OVER_LOST">[docs]</a>    <span class="n">GAME_OVER_LOST</span> <span class="o">=</span> <span class="mi">1</span></div>
+<div class="viewcode-block" id="WordleMoveOutcome.GAME_WON"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMoveOutcome.GAME_WON">[docs]</a>    <span class="n">GAME_WON</span> <span class="o">=</span> <span class="mi">2</span></div>
+<div class="viewcode-block" id="WordleMoveOutcome.GUESS_SCORED_CONTINUE"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMoveOutcome.GUESS_SCORED_CONTINUE">[docs]</a>    <span class="n">GUESS_SCORED_CONTINUE</span> <span class="o">=</span> <span class="mi">3</span></div>
+<div class="viewcode-block" id="WordleMoveOutcome.GUESS_NOTVALID_CONTINUE"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMoveOutcome.GUESS_NOTVALID_CONTINUE">[docs]</a>    <span class="n">GUESS_NOTVALID_CONTINUE</span> <span class="o">=</span> <span class="mi">4</span></div></div>
+
+
+<span class="nd">@dataclass</span>
+<div class="viewcode-block" id="WordleGame"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleGame">[docs]</a><span class="k">class</span> <span class="nc">WordleGame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A Wordle game&#39;s internal state, before a move is played&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="WordleGame.answer"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleGame.answer">[docs]</a>    <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span></div>
+<div class="viewcode-block" id="WordleGame.guess_number"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleGame.guess_number">[docs]</a>    <span class="n">guess_number</span><span class="p">:</span> <span class="nb">int</span></div></div>
+
+
+<span class="nd">@dataclass</span>
+<div class="viewcode-block" id="WordleMove"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMove">[docs]</a><span class="k">class</span> <span class="nc">WordleMove</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A Wordle game state once a move is played&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="WordleMove.game"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMove.game">[docs]</a>    <span class="n">game</span><span class="p">:</span> <span class="n">WordleGame</span></div>
+<div class="viewcode-block" id="WordleMove.outcome"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMove.outcome">[docs]</a>    <span class="n">outcome</span><span class="p">:</span> <span class="n">WordleMoveOutcome</span></div>
+<div class="viewcode-block" id="WordleMove.message"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMove.message">[docs]</a>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span></div>
+<div class="viewcode-block" id="WordleMove.score"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.WordleMove.score">[docs]</a>    <span class="n">score</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="play_round"><a class="viewcode-back" href="../../autoapi/literate_wordle/game/index.html#literate_wordle.game.play_round">[docs]</a><span class="k">def</span> <span class="nf">play_round</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">game</span><span class="p">:</span> <span class="n">WordleGame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WordleMove</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Use guess on the given game, resulting in WordleMove&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">game</span><span class="o">.</span><span class="n">guess_number</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Too many guesses: Game Over. Answer was: </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">outcome</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GAME_OVER_LOST</span>
+        <span class="k">return</span> <span class="n">WordleMove</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">outcome</span><span class="o">=</span><span class="n">outcome</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">valid</span><span class="p">,</span> <span class="n">validity_msg</span> <span class="o">=</span> <span class="n">check_valid_word</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span> <span class="ow">and</span> <span class="n">validity_msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">outcome</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GUESS_NOTVALID_CONTINUE</span>
+        <span class="k">return</span> <span class="n">WordleMove</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">outcome</span><span class="o">=</span><span class="n">outcome</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">validity_msg</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># Guess now guaranteed to be valid: count it</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">guess_number</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">score_guess</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="o">.</span><span class="n">answer</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">==</span> <span class="s2">&quot;🟩🟩🟩🟩🟩&quot;</span><span class="p">:</span>
+        <span class="n">outcome</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GAME_WON</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Correct! Game won in </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">guess_number</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="s2"> guesses&quot;</span>
+        <span class="k">return</span> <span class="n">WordleMove</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">outcome</span><span class="o">=</span><span class="n">outcome</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">score</span><span class="p">)</span>
+    <span class="c1"># Only case left is &quot;try another guess&quot;</span>
+    <span class="n">outcome</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GUESS_SCORED_CONTINUE</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Try again! Guess number </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">guess_number</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="s2">. Score is: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">WordleMove</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">outcome</span><span class="o">=</span><span class="n">outcome</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">score</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

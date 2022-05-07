@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jiby.tech/tags/bdd/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/tags/blog/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url>
@@ -13,12 +18,37 @@
   </url>
   
   <url>
+    <loc>https://jiby.tech/tags/gherkin/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url>
   
   <url>
+    <loc>https://jiby.tech/post/literate-wordle/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/literate-programming/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jiby.tech/post/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/project/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jiby.tech/tags/python/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url>
   
@@ -43,17 +73,12 @@
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/bdd/</loc>
-    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
+    <loc>https://jiby.tech/tags/tdd/</loc>
+    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://jiby.tech/tags/cucumber/</loc>
-    <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/gherkin/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
   </url>
   
@@ -93,12 +118,7 @@
   </url>
   
   <url>
-    <loc>https://jiby.tech/tags/management/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jiby.tech/tags/project/</loc>
+    <loc>https://jiby.tech/tags/project-management/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
   </url>
   

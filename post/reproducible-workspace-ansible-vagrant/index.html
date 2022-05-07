@@ -38,6 +38,10 @@ Now the dotfiles are tracked, the next biggest pain is to install packages and f
 			</li>
 			
 			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
 				<a href="/about">About</a>
 			</li>
 			
@@ -130,7 +134,7 @@ plain-text file that can be reproduced by other team members.</p>
   <span style="color:#cb4b16">SHELL</span>
 <span style="color:#719e07">end</span></code></pre></div>
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 1</span>:
+  <span class="src-block-number">Code Snippet 1:</span>
   A simple Vagrantfile
 </div>
 
@@ -196,7 +200,7 @@ with.</p>
           - doc-debian
           - bash-doc</code></pre></div>
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 2</span>:
+  <span class="src-block-number">Code Snippet 2:</span>
   A sample playbook borrowed from jibyconf, my dotfiles repository
 </div>
 
@@ -227,7 +231,7 @@ Virtualbox)</p>
   <span style="color:#586e75"># [...] Other provisioners or machines</span>
 <span style="color:#719e07">end</span></code></pre></div>
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 3</span>:
+  <span class="src-block-number">Code Snippet 3:</span>
   Part of my Vagrantfile, describing debby, a debian machine provisioned by ansible
 </div>
 
@@ -264,7 +268,7 @@ Vagrantfile looks like:</p>
   <span style="color:#719e07">end</span>
 <span style="color:#719e07">end</span></code></pre></div>
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 4</span>:
+  <span class="src-block-number">Code Snippet 4:</span>
   Server section of Vagrantfile, Debian stable exposing ports for Gitea
 </div>
 
@@ -310,7 +314,7 @@ more detailed tour in a future article.</p>
 
 <p>I encourage you to try picking a computer you don&rsquo;t care much about
 (old machine that would go to e-waste otherwise), read through the
-<a href="https://docs.ansible.com/ansible/latest/user%5Fguide/intro%5Fgetting%5Fstarted.html">Ansible basic tutorials</a>, create an inventory that connects to that
+<a href="https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html">Ansible basic tutorials</a>, create an inventory that connects to that
 machine, and write a simple playbook to install some package, and
 follow your curiosity in this safe playground machine, that you can
 tear down and rebuild easily. Then feel the power of these tools by
@@ -330,9 +334,24 @@ hand-me-down machines</em>, reproducibility is key.</p>
 <hr />
 
 <ol>
-<li id="fn:fn-1">This pet/cattle distinction is quite important to the Infrastructure as Code movement, which explains part of its goal as &ldquo;replace pets with cattle&rdquo;. As mentioned, this specific workspace emulation project has a pet VM as intended output, which goes against these precepts. More common uses of devops tools involve fleet management, which fits the pet/cattle division more.
+<li id="fn:fn-1"><p>This pet/cattle distinction is quite important
+to the Infrastructure as Code movement, which explains part of its
+goal as &ldquo;replace pets with cattle&rdquo;. As mentioned, this specific
+workspace emulation project has a pet VM as intended output, which
+goes against these precepts. More common uses of devops tools involve
+fleet management, which fits the pet/cattle division more.</p>
  <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
-<li id="fn:fn-2">Yes, Vagrant can use Docker as backend to provide virtual machine services. It&rsquo;s crazy, and my brain hurts too. This is awesome, though, as it opens up Vagrantfiles to even broader setups. Imagine a single Vagrantfile used for local testing during development, describing 2 machines: the docker container for your backend server code, built via Dockerfile in the same folder, and a Windows client to launch as VM via Virtualbox. This Vagrant setup enables local machines for fast development cycle, but allow Vagrant to be skipped in production but reusing the Docker image and potentially playbook for server/client deployment.
+
+<li id="fn:fn-2"><p>Yes, Vagrant can use Docker as backend to
+provide virtual machine services. It&rsquo;s crazy, and my brain hurts too.
+This is awesome, though, as it opens up Vagrantfiles to even broader
+setups. Imagine a single Vagrantfile used for local testing during
+development, describing 2 machines: the docker container for your
+backend server code, built via Dockerfile in the same folder, and a
+Windows client to launch as VM via Virtualbox. This Vagrant setup
+enables local machines for fast development cycle, but allow Vagrant
+to be skipped in production but reusing the Docker image and
+potentially playbook for server/client deployment.</p>
  <a class="footnote-return" href="#fnref:fn-2"><sup>[return]</sup></a></li>
 </ol>
 </div>
@@ -354,6 +373,8 @@ hand-me-down machines</em>, reproducibility is key.</p>
 								<li><a href="/tags/infrastructure-as-code">infrastructure-as-code</a></li>
 								
 								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/project">project</a></li>
 								
 							</ul>
 					</nav>

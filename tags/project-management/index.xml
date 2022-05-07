@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>project-management on Jiby&#39;s toolbox</title>
+    <link>https://jiby.tech/tags/project-management/</link>
+    <description>Recent content in project-management on Jiby&#39;s toolbox</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/project-management/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gherkin Features for user requirements</title>
+      <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/gherkin-features-user-requirements/</guid>
+      <description>The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines.</description>
+    </item>
+    
+  </channel>
+</rss>

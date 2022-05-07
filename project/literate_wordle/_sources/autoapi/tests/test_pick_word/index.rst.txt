@@ -1,0 +1,34 @@
+:py:mod:`tests.test_pick_word`
+==============================
+
+.. py:module:: tests.test_pick_word
+
+.. autoapi-nested-parse::
+
+   Validates the Gherkin file features/pick_answer_word.feature:
+
+   Feature: Pick an answer word
+     As a Wordle game
+     I need to pick a random 5 letter word
+     In order to let players guess it
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_pick_word.test_pick_word_ok_length
+
+
+
+.. py:function:: test_pick_word_ok_length()
+
+   Confirm a wordle solution is of right size
+
+

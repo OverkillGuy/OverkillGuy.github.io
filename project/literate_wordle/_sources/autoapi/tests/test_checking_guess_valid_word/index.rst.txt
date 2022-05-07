@@ -1,0 +1,52 @@
+:py:mod:`tests.test_checking_guess_valid_word`
+==============================================
+
+.. py:module:: tests.test_checking_guess_valid_word
+
+.. autoapi-nested-parse::
+
+   Validates the Gherkin file features/checking_guess_valid_word.feature:
+
+   Feature: Checking a guess is a valid word
+     As a Wordle game
+     I need to confirm each guessed word is valid
+     So that I only accept real words, no kwyjibo
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_checking_guess_valid_word.test_reject_long_words
+   tests.test_checking_guess_valid_word.test_reject_overly_short_words
+   tests.test_checking_guess_valid_word.test_reject_nondict_words
+   tests.test_checking_guess_valid_word.test_accept_dict_words
+
+
+
+.. py:function:: test_reject_long_words()
+
+   Scenario: Reject long words
+
+
+.. py:function:: test_reject_overly_short_words()
+
+   Scenario: Reject short words
+
+
+.. py:function:: test_reject_nondict_words()
+
+   Scenario: Reject fake words via dictionary
+
+
+.. py:function:: test_accept_dict_words()
+
+   Scenario: Accept five letter dictionary words
+
+

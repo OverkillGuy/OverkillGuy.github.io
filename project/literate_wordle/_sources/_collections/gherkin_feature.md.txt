@@ -1,0 +1,72 @@
+# Requirements
+
+Each entry below is taken from a file found from the `features/` folder,
+rendered into a a [sphinxcontrib-needs
+requirement](https://sphinxcontrib-needs.readthedocs.io/en/latest/), and lists
+out the file's content, rendered as Gherkin properly. Adding new files in `features/` will make this page grow on next render.
+
+## List of requirements
+
+
+### command_line_entrypoint.feature
+
+```{eval-rst}
+.. req:: command_line_entrypoint.feature
+   :id: FEATURE_COMMAND_LINE_ENTRYPOINT
+
+   .. literalinclude:: gherkin_features/command_line_entrypoint.feature
+      :language: gherkin
+      :caption: Rendered from file `features/command_line_entrypoint.feature`
+```
+
+### track_guesses.feature
+
+```{eval-rst}
+.. req:: track_guesses.feature
+   :id: FEATURE_TRACK_GUESSES
+
+   .. literalinclude:: gherkin_features/track_guesses.feature
+      :language: gherkin
+      :caption: Rendered from file `features/track_guesses.feature`
+```
+
+### checking_guess_valid_word.feature
+
+```{eval-rst}
+.. req:: checking_guess_valid_word.feature
+   :id: FEATURE_CHECKING_GUESS_VALID_WORD
+
+   .. literalinclude:: gherkin_features/checking_guess_valid_word.feature
+      :language: gherkin
+      :caption: Rendered from file `features/checking_guess_valid_word.feature`
+```
+
+### pick_answer_word.feature
+
+```{eval-rst}
+.. req:: pick_answer_word.feature
+   :id: FEATURE_PICK_ANSWER_WORD
+
+   .. literalinclude:: gherkin_features/pick_answer_word.feature
+      :language: gherkin
+      :caption: Rendered from file `features/pick_answer_word.feature`
+```
+
+### scoring_guess.feature
+
+```{eval-rst}
+.. req:: scoring_guess.feature
+   :id: FEATURE_SCORING_GUESS
+
+   .. literalinclude:: gherkin_features/scoring_guess.feature
+      :language: gherkin
+      :caption: Rendered from file `features/scoring_guess.feature`
+```
+
+
+## Requirements summary
+
+```{eval-rst}
+.. needtable:: Requirements list
+   :style: table
+```

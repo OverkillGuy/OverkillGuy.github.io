@@ -1,0 +1,11 @@
+:py:mod:`literate_wordle.assets`
+================================
+
+.. py:module:: literate_wordle.assets
+
+.. autoapi-nested-parse::
+
+   Static binary assets (dictionaries) required to perform Wordle
+
+
+

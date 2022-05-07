@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>literate_wordle.words &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/assets/jsonview.bundle.js"></script>
+        <script src="../../_static/assets/jsonview_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../literate_wordle.html">literate_wordle</a> &raquo;</li>
+      <li>literate_wordle.words</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for literate_wordle.words</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Dictionary features to back wordle solutions&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">pkg_resources</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">cache</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">assets</span>  <span class="c1"># Relative import of the assets/ folder</span>
+
+<div class="viewcode-block" id="ANSWERS_FILENAME"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.ANSWERS_FILENAME">[docs]</a><span class="n">ANSWERS_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;wordle_answers_dict.txt.gz&quot;</span></div>
+<div class="viewcode-block" id="ACCEPTED_FILENAME"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.ACCEPTED_FILENAME">[docs]</a><span class="n">ACCEPTED_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;wordle_accepted_words_dict.txt.gz&quot;</span></div>
+
+
+<div class="viewcode-block" id="get_answers"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.get_answers">[docs]</a><span class="k">def</span> <span class="nf">get_answers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Grab the Wordle answers as a set of string words&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_asset_zip_as_set</span><span class="p">(</span><span class="n">ANSWERS_FILENAME</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_accepted_words"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.get_accepted_words">[docs]</a><span class="k">def</span> <span class="nf">get_accepted_words</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Grab the Wordle accepted words dictionary as a set of string words&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_asset_zip_as_set</span><span class="p">(</span><span class="n">ACCEPTED_FILENAME</span><span class="p">)</span></div>
+
+
+<span class="nd">@cache</span>
+<div class="viewcode-block" id="get_asset_zip_as_set"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.get_asset_zip_as_set">[docs]</a><span class="k">def</span> <span class="nf">get_asset_zip_as_set</span><span class="p">(</span><span class="n">asset_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Decompress a file in assets module into a set of words, separated by newline&quot;&quot;&quot;</span>
+    <span class="n">compressed_bytes</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">read_binary</span><span class="p">(</span><span class="n">assets</span><span class="p">,</span> <span class="n">asset_filename</span><span class="p">)</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">compressed_bytes</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="n">string_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)]</span>
+    <span class="c1"># Protect against whitespace-only lines during file-read causing empty stripped word</span>
+    <span class="n">non_empty_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">string_list</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">non_empty_words</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pick_answer_word"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.pick_answer_word">[docs]</a><span class="k">def</span> <span class="nf">pick_answer_word</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Pick a single word out of the dictionary of answers&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">get_answers</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="check_valid_word"><a class="viewcode-back" href="../../autoapi/literate_wordle/words/index.html#literate_wordle.words.check_valid_word">[docs]</a><span class="k">def</span> <span class="nf">check_valid_word</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Check a wordle guess is valid: length and in dictionary&quot;&quot;&quot;</span>
+    <span class="n">answer_length</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">guess_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">guess_length</span> <span class="o">&lt;</span> <span class="n">answer_length</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Guess too short&quot;</span>
+    <span class="k">if</span> <span class="n">guess_length</span> <span class="o">&gt;</span> <span class="n">answer_length</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Guess too long&quot;</span>
+    <span class="n">valid_words_dict</span> <span class="o">=</span> <span class="n">get_accepted_words</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">valid_words_dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Not a word from the dictionary&quot;</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

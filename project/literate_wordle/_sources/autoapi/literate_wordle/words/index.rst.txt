@@ -1,0 +1,72 @@
+:py:mod:`literate_wordle.words`
+===============================
+
+.. py:module:: literate_wordle.words
+
+.. autoapi-nested-parse::
+
+   Dictionary features to back wordle solutions
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.words.get_answers
+   literate_wordle.words.get_accepted_words
+   literate_wordle.words.get_asset_zip_as_set
+   literate_wordle.words.pick_answer_word
+   literate_wordle.words.check_valid_word
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.words.ANSWERS_FILENAME
+   literate_wordle.words.ACCEPTED_FILENAME
+
+
+.. py:data:: ANSWERS_FILENAME
+   :annotation: = wordle_answers_dict.txt.gz
+
+   
+
+.. py:data:: ACCEPTED_FILENAME
+   :annotation: = wordle_accepted_words_dict.txt.gz
+
+   
+
+.. py:function:: get_answers() -> set[str]
+
+   Grab the Wordle answers as a set of string words
+
+
+.. py:function:: get_accepted_words() -> set[str]
+
+   Grab the Wordle accepted words dictionary as a set of string words
+
+
+.. py:function:: get_asset_zip_as_set(asset_filename: str) -> set[str]
+
+   Decompress a file in assets module into a set of words, separated by newline
+
+
+.. py:function:: pick_answer_word() -> str
+
+   Pick a single word out of the dictionary of answers
+
+
+.. py:function:: check_valid_word(guess: str) -> tuple[bool, Optional[str]]
+
+   Check a wordle guess is valid: length and in dictionary
+
+

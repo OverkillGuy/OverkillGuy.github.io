@@ -1,0 +1,41 @@
+:py:mod:`literate_wordle.cli`
+=============================
+
+.. py:module:: literate_wordle.cli
+
+.. autoapi-nested-parse::
+
+   Command line entrypoint for pywordle
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.cli.parse_args
+   literate_wordle.cli.play_game_args
+   literate_wordle.cli.main
+
+
+
+.. py:function:: parse_args(raw_args: Optional[Sequence[str]] = None) -> argparse.Namespace
+
+   Parse given command line arguments
+
+
+.. py:function:: play_game_args(raw_args: Optional[Sequence[str]] = None)
+
+   Play a standard Wordle game from stdin to stdout, given args
+
+
+.. py:function:: main()
+
+   Pass sys.argv to the play_game_args function
+
+

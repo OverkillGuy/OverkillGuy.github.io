@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>bdd</title>
+      <link>https://jiby.tech/tags/bdd/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/bdd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
@@ -22,6 +31,42 @@
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/documentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gherkin</title>
+      <link>https://jiby.tech/tags/gherkin/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/gherkin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>literate-programming</title>
+      <link>https://jiby.tech/tags/literate-programming/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/literate-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>project</title>
+      <link>https://jiby.tech/tags/project/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://jiby.tech/tags/python/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/python/</guid>
       <description></description>
     </item>
     
@@ -44,11 +89,11 @@
     </item>
     
     <item>
-      <title>bdd</title>
-      <link>https://jiby.tech/tags/bdd/</link>
-      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      <title>tdd</title>
+      <link>https://jiby.tech/tags/tdd/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
       
-      <guid>https://jiby.tech/tags/bdd/</guid>
+      <guid>https://jiby.tech/tags/tdd/</guid>
       <description></description>
     </item>
     
@@ -58,15 +103,6 @@
       <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/cucumber/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gherkin</title>
-      <link>https://jiby.tech/tags/gherkin/</link>
-      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/gherkin/</guid>
       <description></description>
     </item>
     
@@ -107,20 +143,11 @@
     </item>
     
     <item>
-      <title>management</title>
-      <link>https://jiby.tech/tags/management/</link>
+      <title>project-management</title>
+      <link>https://jiby.tech/tags/project-management/</link>
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jiby.tech/tags/management/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>project</title>
-      <link>https://jiby.tech/tags/project/</link>
-      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/project/</guid>
+      <guid>https://jiby.tech/tags/project-management/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,37 @@
+:py:mod:`literate_wordle.main`
+==============================
+
+.. py:module:: literate_wordle.main
+
+.. autoapi-nested-parse::
+
+   Entrypoint for pywordle
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   literate_wordle.main.new_game
+   literate_wordle.main.play_game
+
+
+
+.. py:function:: new_game() -> literate_wordle.game.WordleGame
+
+   Generate a new WordleGame
+
+
+.. py:function:: play_game(game: literate_wordle.game.WordleGame, guess_fetcher: Callable, response_logger: Callable)
+
+   Plays the given WordleGame until completion.
+
+   Asks guess_fetcher for guess, and sends response to response_logger
+
+

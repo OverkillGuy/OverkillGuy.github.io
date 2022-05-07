@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.test_track_guess_number &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/assets/jsonview.bundle.js"></script>
+        <script src="../../_static/assets/jsonview_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>tests.test_track_guess_number</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.test_track_guess_number</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Validates the Gherkin file features/track_guesses.feature</span>
+
+<span class="sd">Feature: Playing a round</span>
+<span class="sd">  As a Wordle game</span>
+<span class="sd">  I need to track how many guesses were already given, stating wins/losses</span>
+<span class="sd">  In order to play the game</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">literate_wordle.game</span> <span class="kn">import</span> <span class="n">WordleGame</span><span class="p">,</span> <span class="n">WordleMoveOutcome</span><span class="p">,</span> <span class="n">play_round</span>
+<span class="kn">from</span> <span class="nn">literate_wordle.guess</span> <span class="kn">import</span> <span class="n">CharacterScore</span> <span class="k">as</span> <span class="n">Score</span>
+
+
+<div class="viewcode-block" id="test_first_guess_allowed"><a class="viewcode-back" href="../../autoapi/tests/test_track_guess_number/index.html#tests.test_track_guess_number.test_first_guess_allowed">[docs]</a><span class="k">def</span> <span class="nf">test_first_guess_allowed</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: First guess is allowed&quot;&quot;&quot;</span>
+    <span class="c1"># Given a wordle answer</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;orbit&quot;</span>
+    <span class="c1"># And I didn&#39;t guess before</span>
+    <span class="n">guess_number</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">game</span> <span class="o">=</span> <span class="n">WordleGame</span><span class="p">(</span><span class="n">answer</span><span class="o">=</span><span class="n">answer</span><span class="p">,</span> <span class="n">guess_number</span><span class="o">=</span><span class="n">guess_number</span><span class="p">)</span>
+    <span class="c1"># When I guess the word</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;kebab&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">play_round</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="p">)</span>
+    <span class="c1"># Then my guess is scored</span>
+    <span class="n">OUTCOME_CONTINUE</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GUESS_SCORED_CONTINUE</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="n">OUTCOME_CONTINUE</span><span class="p">,</span> <span class="s2">&quot;Game shouldn&#39;t be over yet&quot;</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;No score given as result&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Score of incorrect length&quot;</span>
+    <span class="n">ALLOWED_CHARS</span> <span class="o">=</span> <span class="p">[</span><span class="n">score</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">Score</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+        <span class="n">char</span> <span class="ow">in</span> <span class="n">ALLOWED_CHARS</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+    <span class="p">),</span> <span class="s2">&quot;Score doesn&#39;t match score&#39;s characters&quot;</span></div>
+
+
+<div class="viewcode-block" id="test_sixth_guess_allowed"><a class="viewcode-back" href="../../autoapi/tests/test_track_guess_number/index.html#tests.test_track_guess_number.test_sixth_guess_allowed">[docs]</a><span class="k">def</span> <span class="nf">test_sixth_guess_allowed</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Fifth guess still allowed&quot;&quot;&quot;</span>
+    <span class="c1"># Given a wordle answer</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;orbit&quot;</span>
+    <span class="c1"># And I guessed 5 times</span>
+    <span class="n">guess_number</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">game</span> <span class="o">=</span> <span class="n">WordleGame</span><span class="p">(</span><span class="n">answer</span><span class="o">=</span><span class="n">answer</span><span class="p">,</span> <span class="n">guess_number</span><span class="o">=</span><span class="n">guess_number</span><span class="p">)</span>
+    <span class="c1"># When I guess the word</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;kebab&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">play_round</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="p">)</span>
+    <span class="c1"># Then my guess is scored</span>
+    <span class="n">OUTCOME_CONTINUE</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GUESS_SCORED_CONTINUE</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="n">OUTCOME_CONTINUE</span><span class="p">,</span> <span class="s2">&quot;Game shouldn&#39;t be over yet&quot;</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;No score given as result&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Score of incorrect length&quot;</span>
+    <span class="n">OK_CHARS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;🟩&quot;</span><span class="p">,</span> <span class="s2">&quot;🟨&quot;</span><span class="p">,</span> <span class="s2">&quot;⬜&quot;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+        <span class="n">char</span> <span class="ow">in</span> <span class="n">OK_CHARS</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+    <span class="p">),</span> <span class="s2">&quot;Score doesn&#39;t match score&#39;s characters&quot;</span></div>
+
+
+<div class="viewcode-block" id="test_seventh_guess_fails_game"><a class="viewcode-back" href="../../autoapi/tests/test_track_guess_number/index.html#tests.test_track_guess_number.test_seventh_guess_fails_game">[docs]</a><span class="k">def</span> <span class="nf">test_seventh_guess_fails_game</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Sixth failed guess is game over&quot;&quot;&quot;</span>
+    <span class="c1"># Given a wordle answer</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;orbit&quot;</span>
+    <span class="c1"># And I guessed 6 times already</span>
+    <span class="c1"># Guessing 6 times BEFORE, using seventh now:</span>
+    <span class="n">guess_number</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">game</span> <span class="o">=</span> <span class="n">WordleGame</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">guess_number</span><span class="p">)</span>
+    <span class="c1"># When I guess the word</span>
+    <span class="c1"># And my guess isn&#39;t the answer</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;kebab&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">play_round</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="p">)</span>
+    <span class="c1"># Then my guess isn&#39;t scored</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GAME_OVER_LOST</span><span class="p">,</span> <span class="s2">&quot;Should have lost game&quot;</span>
+    <span class="c1"># But game shows &quot;Game Over&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;game over&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="s2">&quot;Should show game over message&quot;</span>
+    <span class="c1"># And game shows the real answer</span>
+    <span class="k">assert</span> <span class="n">answer</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="test_winning_guess_wins"><a class="viewcode-back" href="../../autoapi/tests/test_track_guess_number/index.html#tests.test_track_guess_number.test_winning_guess_wins">[docs]</a><span class="k">def</span> <span class="nf">test_winning_guess_wins</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Winning guess&quot;&quot;&quot;</span>
+    <span class="c1"># Given a wordle answer</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;orbit&quot;</span>
+    <span class="c1"># And I guessed 3 times</span>
+    <span class="n">guess_number</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">game</span> <span class="o">=</span> <span class="n">WordleGame</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">guess_number</span><span class="p">)</span>
+    <span class="c1"># When I guess the word</span>
+    <span class="c1"># And my guess is the answer</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="n">answer</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">play_round</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="p">)</span>
+    <span class="c1"># Then my guess is scored</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Guess should be scored&quot;</span>
+    <span class="c1"># And the score is perfect</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="s2">&quot;🟩🟩🟩🟩🟩&quot;</span>
+    <span class="c1"># And game shows &quot;Game Won</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GAME_WON</span><span class="p">,</span> <span class="s2">&quot;Should have won game&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;game won&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
+
+
+<span class="c1"># Case covered by existing gherkin feature:</span>
+<span class="c1"># Intentional, see wordle.org for reasoning</span>
+<div class="viewcode-block" id="test_invalid_guess_not_counted"><a class="viewcode-back" href="../../autoapi/tests/test_track_guess_number/index.html#tests.test_track_guess_number.test_invalid_guess_not_counted">[docs]</a><span class="k">def</span> <span class="nf">test_invalid_guess_not_counted</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Invalid guess isn&#39;t counted&quot;&quot;&quot;</span>
+    <span class="c1"># Given a wordle answer</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;orbit&quot;</span>
+    <span class="c1"># And I guessed 3 times</span>
+    <span class="n">guess_number</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">game</span> <span class="o">=</span> <span class="n">WordleGame</span><span class="p">(</span><span class="n">answer</span><span class="o">=</span><span class="n">answer</span><span class="p">,</span> <span class="n">guess_number</span><span class="o">=</span><span class="n">guess_number</span><span class="p">)</span>
+    <span class="c1"># When I guess the word</span>
+    <span class="c1"># But my guess isn&#39;t a dictionary word</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;xolfy&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">play_round</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">game</span><span class="p">)</span>
+    <span class="c1"># Then my guess is rejected as invalid word</span>
+    <span class="n">OUTCOME_BADWORD</span> <span class="o">=</span> <span class="n">WordleMoveOutcome</span><span class="o">.</span><span class="n">GUESS_NOTVALID_CONTINUE</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="n">OUTCOME_BADWORD</span><span class="p">,</span> <span class="s2">&quot;Guess should have been rejected&quot;</span>
+    <span class="c1"># And my guess is not scored</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">score</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;No score should be given on bad word&quot;</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

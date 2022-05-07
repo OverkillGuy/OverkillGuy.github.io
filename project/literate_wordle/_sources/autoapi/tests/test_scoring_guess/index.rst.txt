@@ -1,0 +1,52 @@
+:py:mod:`tests.test_scoring_guess`
+==================================
+
+.. py:module:: tests.test_scoring_guess
+
+.. autoapi-nested-parse::
+
+   Validates the Gherkin file features/scoring_guess.feature:
+
+   Feature: Scoring guesses
+     As a Wordle game
+     I need to tell the player how good their guess is
+     In order to help them find the proper answer
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_scoring_guess.test_perfect_guess
+   tests.test_scoring_guess.test_no_common_character
+   tests.test_scoring_guess.test_wrong_place
+   tests.test_scoring_guess.test_generic_score
+
+
+
+.. py:function:: test_perfect_guess()
+
+   Scenario: Perfect guess gives perfect score
+
+
+.. py:function:: test_no_common_character()
+
+   Scenario: No character in common
+
+
+.. py:function:: test_wrong_place()
+
+   Scenario: Character in wrong place
+
+
+.. py:function:: test_generic_score(answer, our_guess, expected_score)
+
+   Scenario Outline: Scoring guesses
+
+

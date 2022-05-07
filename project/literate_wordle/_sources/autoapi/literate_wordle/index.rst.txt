@@ -1,0 +1,41 @@
+:py:mod:`literate_wordle`
+=========================
+
+.. py:module:: literate_wordle
+
+.. autoapi-nested-parse::
+
+   A wordle implementation, in Python, written in literate programming style
+
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   assets/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   cli/index.rst
+   game/index.rst
+   guess/index.rst
+   main/index.rst
+   words/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :annotation: = 1.0.0
+
+   
+

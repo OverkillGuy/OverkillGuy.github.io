@@ -1,0 +1,58 @@
+:py:mod:`tests.test_track_guess_number`
+=======================================
+
+.. py:module:: tests.test_track_guess_number
+
+.. autoapi-nested-parse::
+
+   Validates the Gherkin file features/track_guesses.feature
+
+   Feature: Playing a round
+     As a Wordle game
+     I need to track how many guesses were already given, stating wins/losses
+     In order to play the game
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_track_guess_number.test_first_guess_allowed
+   tests.test_track_guess_number.test_sixth_guess_allowed
+   tests.test_track_guess_number.test_seventh_guess_fails_game
+   tests.test_track_guess_number.test_winning_guess_wins
+   tests.test_track_guess_number.test_invalid_guess_not_counted
+
+
+
+.. py:function:: test_first_guess_allowed()
+
+   Scenario: First guess is allowed
+
+
+.. py:function:: test_sixth_guess_allowed()
+
+   Scenario: Fifth guess still allowed
+
+
+.. py:function:: test_seventh_guess_fails_game()
+
+   Scenario: Sixth failed guess is game over
+
+
+.. py:function:: test_winning_guess_wins()
+
+   Scenario: Winning guess
+
+
+.. py:function:: test_invalid_guess_not_counted()
+
+   Scenario: Invalid guess isn't counted
+
+

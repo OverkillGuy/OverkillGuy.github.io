@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.test_checking_guess_valid_word &mdash; Literate Wordle  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/assets/jsonview.bundle.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/libs/html/datatables.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/common.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/layouts.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/styles.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-needs/modern.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/assets/jsonview.bundle.js"></script>
+        <script src="../../_static/assets/jsonview_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables.min.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/datatables_loader.js"></script>
+        <script src="../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Literate Wordle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle.html">Literate programming wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../wordle_sources.html">Source of Literate Wordle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_collections/gherkin_feature.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Literate Wordle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>tests.test_checking_guess_valid_word</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.test_checking_guess_valid_word</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Validates the Gherkin file features/checking_guess_valid_word.feature:</span>
+
+<span class="sd">Feature: Checking a guess is a valid word</span>
+<span class="sd">  As a Wordle game</span>
+<span class="sd">  I need to confirm each guessed word is valid</span>
+<span class="sd">  So that I only accept real words, no kwyjibo</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">literate_wordle.words</span> <span class="kn">import</span> <span class="n">check_valid_word</span>
+
+
+<div class="viewcode-block" id="test_reject_long_words"><a class="viewcode-back" href="../../autoapi/tests/test_checking_guess_valid_word/index.html#tests.test_checking_guess_valid_word.test_reject_long_words">[docs]</a><span class="k">def</span> <span class="nf">test_reject_long_words</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Reject long words&quot;&quot;&quot;</span>
+    <span class="c1"># When guessing &quot;affable&quot;</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;affable&quot;</span>
+    <span class="n">is_valid</span><span class="p">,</span> <span class="n">reject_reason</span> <span class="o">=</span> <span class="n">check_valid_word</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="c1"># Then the guess is rejected</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">,</span> <span class="s2">&quot;Overly long guess should have been rejected&quot;</span>
+    <span class="c1"># And reason for rejection is &quot;Guess too long&quot;</span>
+    <span class="k">assert</span> <span class="n">reject_reason</span> <span class="o">==</span> <span class="s2">&quot;Guess too long&quot;</span></div>
+
+
+<div class="viewcode-block" id="test_reject_overly_short_words"><a class="viewcode-back" href="../../autoapi/tests/test_checking_guess_valid_word/index.html#tests.test_checking_guess_valid_word.test_reject_overly_short_words">[docs]</a><span class="k">def</span> <span class="nf">test_reject_overly_short_words</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Reject short words&quot;&quot;&quot;</span>
+    <span class="c1"># When guessing &quot;baby&quot;</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;baby&quot;</span>
+    <span class="n">is_valid</span><span class="p">,</span> <span class="n">reject_reason</span> <span class="o">=</span> <span class="n">check_valid_word</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="c1"># Then the guess is rejected</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">,</span> <span class="s2">&quot;Overly short guess should have been rejected&quot;</span>
+    <span class="c1"># And reason for rejection is &quot;Guess too short&quot;</span>
+    <span class="k">assert</span> <span class="n">reject_reason</span> <span class="o">==</span> <span class="s2">&quot;Guess too short&quot;</span></div>
+
+
+<div class="viewcode-block" id="test_reject_nondict_words"><a class="viewcode-back" href="../../autoapi/tests/test_checking_guess_valid_word/index.html#tests.test_checking_guess_valid_word.test_reject_nondict_words">[docs]</a><span class="k">def</span> <span class="nf">test_reject_nondict_words</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Reject fake words via dictionary&quot;&quot;&quot;</span>
+    <span class="c1"># When guessing &quot;vbpdj&quot;</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;vbpdj&quot;</span>
+    <span class="n">is_valid</span><span class="p">,</span> <span class="n">reject_reason</span> <span class="o">=</span> <span class="n">check_valid_word</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="c1"># Then the guess is rejected</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">,</span> <span class="s2">&quot;Word not in dictionary should have been rejected&quot;</span>
+    <span class="c1"># And reason for rejection is &quot;Not a word from the dictionary&quot;</span>
+    <span class="k">assert</span> <span class="n">reject_reason</span> <span class="o">==</span> <span class="s2">&quot;Not a word from the dictionary&quot;</span></div>
+
+
+<div class="viewcode-block" id="test_accept_dict_words"><a class="viewcode-back" href="../../autoapi/tests/test_checking_guess_valid_word/index.html#tests.test_checking_guess_valid_word.test_accept_dict_words">[docs]</a><span class="k">def</span> <span class="nf">test_accept_dict_words</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Scenario: Accept five letter dictionary words&quot;&quot;&quot;</span>
+    <span class="c1"># When guessing &quot;crane&quot;</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="s2">&quot;crane&quot;</span>
+    <span class="n">is_valid</span><span class="p">,</span> <span class="n">reject_reason</span> <span class="o">=</span> <span class="n">check_valid_word</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="c1"># Then the guess is accepted</span>
+    <span class="k">assert</span> <span class="n">is_valid</span><span class="p">,</span> <span class="s2">&quot;Correct length word in dictionary should have been accepted&quot;</span>
+    <span class="k">assert</span> <span class="n">reject_reason</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Accepted word should have no reason to be rejected&quot;</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jb Doyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

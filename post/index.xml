@@ -8,6 +8,16 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Literate wordle</title>
+      <link>https://jiby.tech/post/literate-wordle/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/literate-wordle/</guid>
+      <description>I&amp;rsquo;ve recently written a series of articles about Gherkin: its usage for requirements gathering, about its uses in BDD, and a lower-tech alternative to Cucumber, which I&amp;rsquo;m still experimenting with.
+I wanted to showcase all of these ideas brought together, as well as show how comfy modern Python tooling can be. But more than writing code, I would need to explain my reasoning as we draft the program. So I picked up again a tool I always wanted to play with: Literate Programming.</description>
+    </item>
+    
+    <item>
       <title>Reinventing IP Fragmentation</title>
       <link>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>

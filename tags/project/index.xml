@@ -6,14 +6,25 @@
     <description>Recent content in project on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Gherkin Features for user requirements</title>
-      <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>
-      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      <title>Literate wordle</title>
+      <link>https://jiby.tech/post/literate-wordle/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
       
-      <guid>https://jiby.tech/post/gherkin-features-user-requirements/</guid>
-      <description>The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines.</description>
+      <guid>https://jiby.tech/post/literate-wordle/</guid>
+      <description>I&amp;rsquo;ve recently written a series of articles about Gherkin: its usage for requirements gathering, about its uses in BDD, and a lower-tech alternative to Cucumber, which I&amp;rsquo;m still experimenting with.
+I wanted to showcase all of these ideas brought together, as well as show how comfy modern Python tooling can be. But more than writing code, I would need to explain my reasoning as we draft the program. So I picked up again a tool I always wanted to play with: Literate Programming.</description>
+    </item>
+    
+    <item>
+      <title>Reproducible workspace deployment with Ansible and Vagrant</title>
+      <link>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</guid>
+      <description>Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&amp;hellip; Since 2016, I have accumulated over 500 git commits.
+Now the dotfiles are tracked, the next biggest pain is to install packages and folder structures and obscure commands required to set up some subsystems needs which config files.</description>
     </item>
     
   </channel>
