@@ -23,7 +23,7 @@
       
       <guid>https://jiby.tech/post/git-diff-lines-prose/</guid>
       <description>When writing long sentences in documentation repositories, git tends to show really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken, which hides edits happening towards end of line. A colleague of mine asked me if git couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!
-  Figure 1: Can you spot the edit made in a long line of text?
+ Figure 1: Can you spot the edit made in a long line of text?
   Kaushal Modi&amp;rsquo;s blog post on git diff for minified JS and CSS inspired this idea for all you prose lovers.</description>
     </item>
     
@@ -34,7 +34,7 @@
       
       <guid>https://jiby.tech/post/git-graph/</guid>
       <description>Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph   Figure 1: Git graph of this repository
+git log --decorate --oneline --graph  Figure 1: Git graph of this repository
   This can be made into a git command via an entry your ~/.gitconfig:
 [alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
     </item>

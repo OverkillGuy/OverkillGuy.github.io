@@ -7,9 +7,10 @@
 <meta property="og:description" content="Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&hellip; Since 2016, I have accumulated over 500 git commits.
 Now the dotfiles are tracked, the next biggest pain is to install packages and folder structures and obscure commands required to set up some subsystems needs which config files." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/reproducible-workspace-ansible-vagrant/" />
+<meta property="og:url" content="https://jiby.tech/post/reproducible-workspace-ansible-vagrant/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-06-11T00:32:00+01:00" />
 <meta property="article:modified_time" content="2020-06-11T00:32:00+01:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Reproducible workspace deployment with Ansible and Vagrant"/>
 <meta name="twitter:description" content="Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&hellip; Since 2016, I have accumulated over 500 git commits.
@@ -118,7 +119,7 @@ machines running in private networks, running different OSes and
 server/client software, exposing network ports. Using Ruby, this can
 be extended far beyond what&rsquo;s reasonable, all the while remaining a
 plain-text file that can be reproduced by other team members.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#586e75"># See the online documentation at https://docs.vagrantup.com.</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#586e75"># See the online documentation at https://docs.vagrantup.com.</span>
 <span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
   <span style="color:#586e75"># Use debian base box: https://app.vagrantup.com/debian/boxes/testing64</span>
   config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>box <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debian/testing64&#34;</span>
@@ -180,7 +181,7 @@ playbook (list of tasks) on an inventory. This makes it a good starter
 automation software to test on an old laptop, from which to pick up
 tenets of Infrastructure as code, and start building a tech empire
 with.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 - <span style="color:#268bd2">name</span>: Developer documentation  (debian manpages + ~/dev/doc)
   <span style="color:#268bd2">hosts</span>: dev
   <span style="color:#268bd2">tags</span>: [dev, docs, slow]
@@ -214,7 +215,7 @@ Debian machine from a base box, running the playbook on it once before
 handing over control. Once the machine is configured (&ldquo;provisioned&rdquo;),
 I am free to use it via SSH (or remote desktop, or clicking in
 Virtualbox)</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
   config<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>define <span style="color:#2aa198">&#34;dev&#34;</span>, <span style="color:#2aa198">primary</span>: <span style="color:#719e07">true</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>dev<span style="color:#719e07">|</span>
     dev<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>box <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debian/testing64&#34;</span>
     dev<span style="color:#719e07">.</span>vm<span style="color:#719e07">.</span>hostname <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;debby&#34;</span>  <span style="color:#586e75"># Hey debby</span>
@@ -246,7 +247,7 @@ IPs, and port numbers.</p>
 which is handy when describing a development VM + a test server, or
 front and backend systems. Here&rsquo;s what the server portion of my
 Vagrantfile looks like:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#cb4b16">Vagrant</span><span style="color:#719e07">.</span>configure(<span style="color:#2aa198">&#34;2&#34;</span>) <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>config<span style="color:#719e07">|</span>
 
   <span style="color:#586e75"># [...] dev machine as seen above</span>
 
@@ -277,7 +278,7 @@ install of Gitea (a Github clone).</p>
 
 <p>With multiple machines in same Vagrantfile, I can choose which machine
 I need and boot it selectively:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ vagrant status
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ vagrant status
 Current machine states:
 
 dev                       running (virtualbox)
@@ -287,7 +288,7 @@ This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
 VM, run `vagrant status NAME`.</code></pre></div>
 <p>Booting specific machines is a matter of adding a keyword</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant up dev
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant up dev
 <span style="color:#586e75"># or</span>
 vagrant up server
 <span style="color:#586e75"># why not both?</span>

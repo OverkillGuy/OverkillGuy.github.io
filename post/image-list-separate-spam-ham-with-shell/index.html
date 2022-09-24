@@ -7,9 +7,10 @@
 <meta property="og:description" content="Here&rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
 The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &ldquo;save as picture&rdquo; context menu. But a couple of images were still deformed beyond recognition." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/image-list-separate-spam-ham-with-shell/" />
+<meta property="og:url" content="https://jiby.tech/post/image-list-separate-spam-ham-with-shell/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-06-22T00:00:00+01:00" />
 <meta property="article:modified_time" content="2020-06-22T00:00:00+01:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Separating Spam from Ham with the shell"/>
 <meta name="twitter:description" content="Here&rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
@@ -87,13 +88,13 @@ about 30% of raw duplicates (same look, same filesize, likely
 identical content byte for byte). We can check that by hashing the
 files. I used <code>md5sum</code><sup class="footnote-ref" id="fnref:fn-2"><a href="#fn:fn-2">2</a></sup> on the file
 list:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">find -name <span style="color:#2aa198">&#34;*.ppm&#34;</span> &gt; files
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">find -name <span style="color:#2aa198">&#34;*.ppm&#34;</span> &gt; files
 find -name <span style="color:#2aa198">&#34;*.ppm&#34;</span> -exec md5sum <span style="color:#719e07">{}</span> <span style="color:#cb4b16">\;</span> | sort &gt;filesums</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1</span>:
   List files by sorted md5sum output
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">1bf7780ee715d6c6809500f31661133f  ./image-434.ppm
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">1bf7780ee715d6c6809500f31661133f  ./image-434.ppm
 803b77f41c2febccbaa4ed0115427e80  ./image-255.ppm
 8c913d1951e5a90cfbe9a6440a115cde  ./image-131.ppm
 8c913d1951e5a90cfbe9a6440a115cde  ./image-277.ppm</code></pre></div>
@@ -101,7 +102,7 @@ find -name <span style="color:#2aa198">&#34;*.ppm&#34;</span> -exec md5sum <span
 We want to find duplicate filenames. The command <a href="http://man.he.net/?topic=uniq&amp;section=all">uniq(1)</a> could do
 this, but I like to mention that <a href="http://man.he.net/?topic=awk&amp;section=all">awk(1)</a> can do this. Inspired by
 <a href="https://stackoverflow.com/a/32085039">StackOverflow</a>:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk -F<span style="color:#2aa198">&#39; &#39;</span> <span style="color:#2aa198">&#39;a[$1]++ {print $NF}&#39;</span> &lt;filesums &gt; duplicates</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk -F<span style="color:#2aa198">&#39; &#39;</span> <span style="color:#2aa198">&#39;a[$1]++ {print $NF}&#39;</span> &lt;filesums &gt; duplicates</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 2</span>:
   Spot duplicates by indexing on checksum (first field), printing last entry of line (filename)
@@ -110,18 +111,18 @@ this, but I like to mention that <a href="http://man.he.net/?topic=awk&amp;secti
 <p>Now, we want to have the list of unique files, which is list of <code>files</code>
 minus <code>duplicates</code>, that is, files appearing in one file that aren&rsquo;t in
 the other.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">comm -3 &lt;<span style="color:#719e07">(</span>sort files<span style="color:#719e07">)</span> &lt;<span style="color:#719e07">(</span>sort duplicates<span style="color:#719e07">)</span> &gt;unique
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">comm -3 &lt;<span style="color:#719e07">(</span>sort files<span style="color:#719e07">)</span> &lt;<span style="color:#719e07">(</span>sort duplicates<span style="color:#719e07">)</span> &gt;unique
 wc -l files unique duplicates</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 3</span>:
   Get unique files list
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">688 files
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">688 files
 438 unique
 250 duplicates</code></pre></div>
 <p>Fascinating, but let&rsquo;s rewind to the use of <code>comm</code>. &ldquo;<a href="http://man.he.net/?topic=comm&amp;section=all">comm(1)</a> compares
 two sorted files, line by line&rdquo;:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">With  no  options,  produce three-column output.  Column one contains lines
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">With  no  options,  produce three-column output.  Column one contains lines
 unique to FILE1, column two contains lines  unique  to  FILE2,  and  column
 three contains lines common to both files.
 
@@ -135,7 +136,7 @@ in this case. Also, our files weren&rsquo;t necessarily sorted before
 comparison, hence the shell redirection of <code>&lt;(sort file)</code>.</p>
 
 <p>This duplicates list gives us something to delete the duplicate files:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs -I % rm <span style="color:#2aa198">&#34;%&#34;</span> &lt;duplicates</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs -I % rm <span style="color:#2aa198">&#34;%&#34;</span> &lt;duplicates</code></pre></div>
 <p>Even without duplicate files, we still don&rsquo;t know which files are the
 ones we wanted, because many files exported were tiny logos and helper
 symbols like page turn symbol, arrows, horizontal bar separators etc.</p>
@@ -160,37 +161,37 @@ using its dimensions as an image. The bigger the width and height, the
 more likely the file is actually interesting. This could be explored
 by using dedicated image CLI tools like <a href="https://imagemagick.org/index.php">imagemagick</a>, but a lower tech
 solution exists: <a href="http://man.he.net/?topic=file&amp;section=all">file(1)</a>.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs &lt;unique -I % file % &gt; uniqueimagesize</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">xargs &lt;unique -I % file % &gt; uniqueimagesize</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 4</span>:
   Show file information for each of the unique images
 </div>
 
 <p>With sample output</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-672.ppm: Netpbm image data, size = 150 x 46, rawbits, pixmap
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-672.ppm: Netpbm image data, size = 150 x 46, rawbits, pixmap
 ./images-674.ppm: Netpbm image data, size = 553 x 399, rawbits, pixmap
 ./images-675.ppm: Netpbm image data, size = 239 x 39, rawbits, pixmap
 ./images-677.ppm: Netpbm image data, size = 123 x 120, rawbits, pixmap</code></pre></div>
 <p>This is already good enough to get started sorting manually, but I
 thought it more visual to use the image area as metric, again using
 awk, by parsing the above output.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk <span style="color:#2aa198">&#39;{print $1, $7, $9, $7 * $9}&#39;</span> &lt;uniqueimagesize | tr -d <span style="color:#2aa198">&#39;:,&#39;</span> &gt; uniqueimagesizearea</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk <span style="color:#2aa198">&#39;{print $1, $7, $9, $7 * $9}&#39;</span> &lt;uniqueimagesize | tr -d <span style="color:#2aa198">&#39;:,&#39;</span> &gt; uniqueimagesizearea</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 5</span>:
   Show image name, width, height, and area
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-672.ppm 150 46 6900
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-672.ppm 150 46 6900
 ./images-674.ppm 553 399 220647
 ./images-675.ppm 239 39 9321
 ./images-677.ppm 123 120 14760</code></pre></div>
 <p>Now we can sort the result (<a href="http://man.he.net/?topic=sort&amp;section=all">sort(1)</a>) and, for instance, grab the top
 100 (<a href="http://man.he.net/?topic=head&amp;section=all">head(1)</a>).</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sort -n -r -k <span style="color:#2aa198">4</span> &lt; uniqueimagesizearea</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sort -n -r -k <span style="color:#2aa198">4</span> &lt; uniqueimagesizearea</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 6</span>:
   Sort using 4th field (area), numerically (not alphabetic, in which 11&gt;100), and reverse output (top-down)
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-674.ppm 553 399 220647
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">./images-674.ppm 553 399 220647
 ./images-677.ppm 123 120 14760
 ./images-675.ppm 239 39 9321
 ./images-672.ppm 150 46 6900</code></pre></div>

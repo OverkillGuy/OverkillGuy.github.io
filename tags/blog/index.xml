@@ -112,7 +112,7 @@ Since the webapp is requesting data from the API when I click, we should be able
       
       <guid>https://jiby.tech/post/git-diff-lines-prose/</guid>
       <description>When writing long sentences in documentation repositories, git tends to show really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken, which hides edits happening towards end of line. A colleague of mine asked me if git couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!
-  Figure 1: Can you spot the edit made in a long line of text?
+ Figure 1: Can you spot the edit made in a long line of text?
   Kaushal Modi&amp;rsquo;s blog post on git diff for minified JS and CSS inspired this idea for all you prose lovers.</description>
     </item>
     
@@ -123,7 +123,7 @@ Since the webapp is requesting data from the API when I click, we should be able
       
       <guid>https://jiby.tech/post/git-graph/</guid>
       <description>Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph   Figure 1: Git graph of this repository
+git log --decorate --oneline --graph  Figure 1: Git graph of this repository
   This can be made into a git command via an entry your ~/.gitconfig:
 [alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
     </item>
@@ -135,7 +135,7 @@ git log --decorate --oneline --graph   Figure 1: Git graph of this repository
       
       <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
       <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
-  Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
+ Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website   I&amp;rsquo;ve made the slides available on this website, click on the slide below.</description>
     </item>
     
     <item>

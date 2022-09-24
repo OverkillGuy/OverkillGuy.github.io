@@ -1,250 +1,152 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://jiby.tech/tags/bdd/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/blog/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/documentation/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/gherkin/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/literate-wordle/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/literate-programming/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/project/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/python/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/qrxfil/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/rfc/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/tdd/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/cucumber/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/low-tech-cucumber-replacement/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/regex/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/scenarios/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/scripting/</loc>
     <lastmod>2022-04-04T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</loc>
     <lastmod>2022-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/features/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/gherkin-features-user-requirements/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/project-management/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/requirements/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/specifications/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/awk/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/classification/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/shell/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/ansible/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/infrastructure-as-code/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/reproducible/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/vagrant/</loc>
     <lastmod>2020-06-11T00:32:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/data-processing/</loc>
     <lastmod>2019-11-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/awk-replace-some-lines/</loc>
     <lastmod>2019-11-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/git/</loc>
     <lastmod>2019-10-13T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/git-diff-empty-repo/</loc>
     <lastmod>2019-10-13T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/firefox/</loc>
     <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/https/</loc>
     <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/reverse-engineering/</loc>
     <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/reverse-engineer-api-with-firefox/</loc>
     <lastmod>2019-10-09T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/git-diff-lines-prose/</loc>
     <lastmod>2019-10-06T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/git-graph/</loc>
     <lastmod>2019-10-06T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/tags/presentation/</loc>
     <lastmod>2019-10-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/android-terminal-with-termux/</loc>
     <lastmod>2019-10-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/about/</loc>
     <lastmod>2020-10-04T18:07:10+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jiby.tech/post/hello-world/</loc>
     <lastmod>2019-09-18T00:00:00+01:00</lastmod>
   </url>
-  
 </urlset>

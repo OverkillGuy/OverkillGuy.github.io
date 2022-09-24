@@ -6,9 +6,10 @@
 	<meta property="og:title" content="BDD Dreams, Cucumber And Gherkin" />
 <meta property="og:description" content="In the previous post in this series on Gherkin, I showed the tools that Gherkin Features provide for requirements tracking, and mentioned ambitious goals for the Behaviour-driven Development (BDD) movement. In this article, I want to expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of traceability led to Cucumber, a tool for automating acceptance test execution, tracing them back to Gherkin Scenarios. We&rsquo;ll set aside my personal feelings on these tools for a future post." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/" />
+<meta property="og:url" content="https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-20T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-03-20T00:00:00+00:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="BDD Dreams, Cucumber And Gherkin"/>
 <meta name="twitter:description" content="In the previous post in this series on Gherkin, I showed the tools that Gherkin Features provide for requirements tracking, and mentioned ambitious goals for the Behaviour-driven Development (BDD) movement. In this article, I want to expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of traceability led to Cucumber, a tool for automating acceptance test execution, tracing them back to Gherkin Scenarios. We&rsquo;ll set aside my personal feelings on these tools for a future post."/>
@@ -116,7 +117,7 @@ This is where a new Gherkin construct is useful: Scenarios.</p>
 <p>Scenarios (sometimes called Examples) gives us a way to show how behaviour works
 as a testable unit, by breaking it down into precondition, trigger, and
 outcome.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-feature" data-lang="feature"><span style="color:#719e07">Scenario:</span><span style="color:#268bd2"> User signs up to an event
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-feature" data-lang="feature"><span style="color:#719e07">Scenario:</span><span style="color:#268bd2"> User signs up to an event
 </span><span style="color:#268bd2"></span><span style="color:#719e07">  Given </span><span style="color:#268bd2">an event announced in Discord
 </span><span style="color:#268bd2">  </span><span style="color:#719e07">When </span><span style="color:#268bd2">the user reacts to event with the &#34;</span><span style="color:#2aa198">📅</span><span style="color:#268bd2">&#34; emoji
 </span><span style="color:#268bd2">  </span><span style="color:#719e07">Then </span><span style="color:#268bd2">the user is marked as attending the event
@@ -165,7 +166,7 @@ tests are now green, and how many are still red.</p>
 by reading Gherkin. Here&rsquo;s an example of this kind of traceability, taken from
 <a href="https://pypi.org/project/pytest-bdd/">pytest-bdd</a>, a Python reimplementation of Cucumber built as extension of the
 <a href="https://pytest.org/">pytest</a> framework:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-feature" data-lang="feature"><span style="color:#719e07">Feature:</span><span style="color:#268bd2"> Blog
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-feature" data-lang="feature"><span style="color:#719e07">Feature:</span><span style="color:#268bd2"> Blog
 </span><span style="color:#268bd2">    A site where you can publish your articles.
 </span><span style="color:#268bd2">
 </span><span style="color:#268bd2">    </span><span style="color:#719e07">Scenario:</span><span style="color:#268bd2"> Publishing the article
@@ -181,7 +182,7 @@ by reading Gherkin. Here&rsquo;s an example of this kind of traceability, taken 
   <span class="src-block-number">Code Snippet 2</span>:
   features/publish_article.feature
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">from</span> pytest_bdd <span style="color:#719e07">import</span> scenario, given, when, then
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">from</span> pytest_bdd <span style="color:#719e07">import</span> scenario, given, when, then
 
 <span style="color:#268bd2">@scenario</span>(<span style="color:#2aa198">&#39;publish_article.feature&#39;</span>, <span style="color:#2aa198">&#39;Publishing the article&#39;</span>)
 <span style="color:#719e07">def</span> <span style="color:#268bd2">test_publish</span>():
@@ -200,7 +201,7 @@ by reading Gherkin. Here&rsquo;s an example of this kind of traceability, taken 
 
 <span style="color:#268bd2">@when</span>(<span style="color:#2aa198">&#34;I go to the article page&#34;</span>)
 <span style="color:#719e07">def</span> <span style="color:#268bd2">go_to_article</span>(article, browser):
-    browser<span style="color:#719e07">.</span>visit(urljoin(browser<span style="color:#719e07">.</span>url, <span style="color:#2aa198">&#39;/manage/articles/{0}/&#39;</span><span style="color:#719e07">.</span>format(article<span style="color:#719e07">.</span>id)))
+    browser<span style="color:#719e07">.</span>visit(urljoin(browser<span style="color:#719e07">.</span>url, <span style="color:#2aa198">&#39;/manage/articles/</span><span style="color:#2aa198">{0}</span><span style="color:#2aa198">/&#39;</span><span style="color:#719e07">.</span>format(article<span style="color:#719e07">.</span>id)))
 
 
 <span style="color:#268bd2">@when</span>(<span style="color:#2aa198">&#34;I press the publish button&#34;</span>)

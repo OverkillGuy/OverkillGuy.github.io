@@ -197,7 +197,7 @@ pre code {
   
 
 .wrapper {
-    max-width: 760px;
+    max-width: 800px;           /* 80char TTY limit, not 76  */
     margin: 0 auto;
 }
 

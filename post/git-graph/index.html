@@ -5,21 +5,20 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Git pretty graph - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Git pretty graph" />
 <meta property="og:description" content="Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph   Figure 1: Git graph of this repository
+git log --decorate --oneline --graph  Figure 1: Git graph of this repository
   This can be made into a git command via an entry your ~/.gitconfig:
 [alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/git-graph/" />
-<meta property="og:image" content="https://jiby.tech/pictures/git-graph.png" />
-<meta property="og:image" content="https://jiby.tech/pictures/git-graph-short.png" />
+<meta property="og:url" content="https://jiby.tech/post/git-graph/" /><meta property="og:image" content="https://jiby.tech/pictures/git-graph.png" /><meta property="og:image" content="https://jiby.tech/pictures/git-graph-short.png" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-10-06T00:00:00+01:00" />
 <meta property="article:modified_time" content="2019-10-06T00:00:00+01:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jiby.tech/pictures/git-graph.png"/>
 
 <meta name="twitter:title" content="Git pretty graph"/>
 <meta name="twitter:description" content="Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph   Figure 1: Git graph of this repository
+git log --decorate --oneline --graph  Figure 1: Git graph of this repository
   This can be made into a git command via an entry your ~/.gitconfig:
 [alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;"/>
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
@@ -73,17 +72,16 @@ git log --decorate --oneline --graph   Figure 1: Git graph of this repository
 <p>Get a cool graph of commits from the command line! For newbies and experts
 alike, git is a bit hard to visualize. Here&rsquo;s a handy git command to make
 understanding git easier.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git log --decorate --oneline --graph</code></pre></div>
-<figure>
-    <img src="/ox-hugo/git-graph.png"
-         alt="Figure 1: Git graph of this repository" width="100%"/> <figcaption>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git log --decorate --oneline --graph</code></pre></div>
+<figure><img src="/ox-hugo/git-graph.png"
+         alt="Figure 1: Git graph of this repository" width="100%"/><figcaption>
             <p>Figure 1: Git graph of this repository</p>
         </figcaption>
 </figure>
 
 
 <p>This can be made into a git command via an entry your <code>~/.gitconfig</code>:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[alias]
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[alias]
 	graph = log --decorate --oneline --graph</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1</span>:
@@ -91,7 +89,7 @@ understanding git easier.</p>
 </div>
 
 <p>Invoke with</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git graph</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git graph</code></pre></div>
 <p>When this isn&rsquo;t set on a machine (coworkers or servers I am just passing
 through), I usually remember it by the mnemonic device <code>git DOG</code> (like a puppy!).</p>
 
@@ -111,19 +109,18 @@ command flags, try running each combination of these commands (eg: <code>git log
 
 <p>Sometimes you want a larger picture of what&rsquo;s happening. More flags exist for
 your enjoyment. Show all branches in one go:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git graph --all</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git graph --all</code></pre></div>
 <p>This enables visualizing all branches, not just your current one. But sometimes
 you just want the gist of it: what branches, where did it branch off, where
 tags are, skipping the faff. For this, the <code>--simplify-by-decoration</code> flag is
 really helpful:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git graph --simplify-by-decoration</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">git graph --simplify-by-decoration</code></pre></div>
 <p>The flag hides commits that aren&rsquo;t branches or tags. This makes long lines of
 commits &ldquo;collapse&rdquo; into one commit, with only the big moments of history shown
 instead of all of it.</p>
 
-<figure>
-    <img src="/ox-hugo/git-graph-short.png"
-         alt="Figure 2: Same graph with &amp;ndash;simplified-by-decoration" width="100%"/> <figcaption>
+<figure><img src="/ox-hugo/git-graph-short.png"
+         alt="Figure 2: Same graph with &amp;ndash;simplified-by-decoration" width="100%"/><figcaption>
             <p>Figure 2: Same graph with &ndash;simplified-by-decoration</p>
         </figcaption>
 </figure>

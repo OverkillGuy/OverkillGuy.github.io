@@ -7,9 +7,10 @@
 <meta property="og:description" content="In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
 In this article, I want to explain my disilusionment towards Cucumber, and show how a low-tech alternative emerged that I believe covers most of the value for none of the effort." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/low-tech-cucumber-replacement/" />
+<meta property="og:url" content="https://jiby.tech/post/low-tech-cucumber-replacement/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-04T00:00:00+01:00" />
 <meta property="article:modified_time" content="2022-04-04T00:00:00+01:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Low-tech Cucumber replacement"/>
 <meta name="twitter:description" content="In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
@@ -161,7 +162,7 @@ code. So I evolved a technique that can be seen as a natural middle ground.</p>
 Gherkin Scenarios, but inserting it in code comments. I found the Gherkin helps
 me reason about the tests, but the comments nature avoids any tooling
 interference.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">test_reject_long_words</span>():
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">test_reject_long_words</span>():
     <span style="color:#2aa198">&#34;&#34;&#34;Scenario: Reject long words&#34;&#34;&#34;</span>
     <span style="color:#586e75"># When guessing &#34;affable&#34;</span>
     guess <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;affable&#34;</span>
@@ -177,7 +178,7 @@ interference.</p>
 
 <p>When I noticed myself doing this, I started to do it more and more
 intentionally, down to starting new tests with the Gherkin to direct it:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">test_reject_overly_short_words</span>():
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">test_reject_overly_short_words</span>():
     <span style="color:#2aa198">&#34;&#34;&#34;Scenario: Reject short words&#34;&#34;&#34;</span>
     <span style="color:#586e75"># When guessing &#34;baby&#34;</span>
     <span style="color:#586e75"># Then the guess is rejected</span>
@@ -197,13 +198,13 @@ bird&rsquo;s eye view of my tests&rsquo; scenarios, to know what test to write n
 <p>I noticed that the markup syntax I had landed on was pretty regular &hellip; like,
 regular-expression kind of regular. So I experimented with a quick grep command
 on a given file, extracting all the Gherkin Keywords.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#b58900">export</span> <span style="color:#268bd2">GHERKIN_KEYWORDS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Given|When|Then|And|But|Scenario|Background|Feature|In order to|As a|I want to|I need to|So that&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#b58900">export</span> <span style="color:#268bd2">GHERKIN_KEYWORDS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Given|When|Then|And|But|Scenario|Background|Feature|In order to|As a|I want to|I need to|So that&#34;</span>
 grep -E <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">GHERKIN_KEYWORDS</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> tests/test_something.py</code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 3</span>:
   First attempt at extracting Gherkin
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">    &#34;&#34;&#34;Scenario: Reject long words&#34;&#34;&#34;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">    &#34;&#34;&#34;Scenario: Reject long words&#34;&#34;&#34;
     # When guessing &#34;affable&#34;
     # Then the guess is rejected
     # And reason for rejection is &#34;Guess too long&#34;
@@ -219,7 +220,7 @@ grep -E <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</
 <p>It works, but I was irrationally irritated at the comment markers and
 whitespace. A few iterations of the script later, I got a shell function called
 <code>show-gherkin</code>:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># Extracts gherkin from file, printing finename/line number.</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># Extracts gherkin from file, printing finename/line number.</span>
 <span style="color:#586e75"># show-gherkin tests/*.py</span>
 <span style="color:#586e75"># Specify only one file to show only line number</span>
 show-gherkin <span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
@@ -232,7 +233,7 @@ show-gherkin <span style="color:#719e07">()</span> <span style="color:#719e07">{
   <span class="src-block-number">Code Snippet 5</span>:
   Show-gherkin, as it lives now in my dotfiles
 </div>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">13: Scenario: Reject long words
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">13: Scenario: Reject long words
 14: When guessing &#34;affable&#34;
 17: Then the guess is rejected
 19: And reason for rejection is &#34;Guess too long&#34;

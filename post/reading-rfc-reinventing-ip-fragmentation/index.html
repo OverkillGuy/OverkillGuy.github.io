@@ -7,9 +7,10 @@
 <meta property="og:description" content="Let&rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
 Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/" />
+<meta property="og:url" content="https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-05-07T00:00:00+01:00" />
 <meta property="article:modified_time" content="2022-05-07T00:00:00+01:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Reinventing IP Fragmentation"/>
 <meta name="twitter:description" content="Let&rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
@@ -153,7 +154,7 @@ marking the end of the datagram.</p>
 
 <p>On receiving the last fragment (determined by unset more-fragments
 flag), the message can be reassembled.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    0                   1                   2                   3
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |Version|  IHL  |Type of Service|          Total Length         |

@@ -7,9 +7,10 @@
 <meta property="og:description" content="I&rsquo;m writing code to back up my user data off a website that lets me see all of my info (including querying by time, account etc) but doesn&rsquo;t have export features (officially). I am certain there&rsquo;s an API behind the site that I just have to make sense of.
 Since the webapp is requesting data from the API when I click, we should be able to record the web traffic to explore the API." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/reverse-engineer-api-with-firefox/" />
+<meta property="og:url" content="https://jiby.tech/post/reverse-engineer-api-with-firefox/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-10-09T00:00:00+01:00" />
 <meta property="article:modified_time" content="2019-10-09T00:00:00+01:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Reverse-engineering webapp APIs with Firefox"/>
 <meta name="twitter:description" content="I&rsquo;m writing code to back up my user data off a website that lets me see all of my info (including querying by time, account etc) but doesn&rsquo;t have export features (officially). I am certain there&rsquo;s an API behind the site that I just have to make sense of.
@@ -74,7 +75,7 @@ out it can be even easier than that, as we can tell Firefox to record
 this for us during normal website use. Let&rsquo;s see how Firefox can help
 in reverse-engineering APIs!</p>
 
-<p>Open the Firefox developer tools&rsquo; <a href="https://developer.mozilla.org/en-US/docs/Tools/Network%5FMonitor">Network Monitor</a>, and enable the
+<p>Open the Firefox developer tools&rsquo; <a href="https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor">Network Monitor</a>, and enable the
 &ldquo;Persist logs&rdquo; setting, as we&rsquo;ll be crossing many subpages, and want
 to keep the logs during all that browsing. Go through the login
 process as usual, entering credentials when needed. Do the activities
@@ -82,10 +83,9 @@ you want to be able to reproduce through the API, making sure you
 capture all the variations in calls like different query parameters
 (such as date ranges for data graphs).</p>
 
-<figure>
-    <img src="https://mdn.mozillademos.org/files/16245/network%5Fmonitor.png"
-         alt="Figure 1: Firefox network monitor example (credit: Mozilla docs)" width="100%"/> <figcaption>
-            <p>Figure 1: Firefox network monitor example (credit: Mozilla docs)</p>
+<figure><img src="https://firefox-source-docs.mozilla.org/_images/network_monitor.png"
+         alt="Figure 1: Firefox network monitor example (credit: Mozilla docs)" width="100%"/><figcaption>
+            <p><span class="figure-number">Figure 1: </span>Firefox network monitor example (credit: Mozilla docs)</p>
         </figcaption>
 </figure>
 
@@ -94,14 +94,13 @@ capture all the variations in calls like different query parameters
 get you going, reviewing the specific URLs, parameters, verbs. But
 that&rsquo;s not the best part: Firefox can export this file for later use.
 It&rsquo;s called <a href="https://w3c.github.io/web-performance/specs/HAR/Overview.html">HAR (Http ARchives)</a>, and is available through the menu on
-the far right of the developer toolbar (see Figure <a href="#org89adecc">2</a>).</p>
+the far right of the developer toolbar (see Figure <a href="#figure--har-save">2</a>).</p>
 
-<p><a id="org89adecc"></a></p>
+<p><a id="figure--har-save"></a></p>
 
-<figure>
-    <img src="/ox-hugo/har-save.png"
-         alt="Figure 2: Save All as HAR menu in Firefox Network monitor"/> <figcaption>
-            <p>Figure 2: Save All as HAR menu in Firefox Network monitor</p>
+<figure><img src="/ox-hugo/har-save.png"
+         alt="Figure 2: Save All as HAR menu in Firefox Network monitor"/><figcaption>
+            <p><span class="figure-number">Figure 2: </span>Save All as HAR menu in Firefox Network monitor</p>
         </figcaption>
 </figure>
 
@@ -112,19 +111,19 @@ can use our friend <a href="https://stedolan.github.io/jq/">jq(1)</a> to run ana
 <p>I can easily<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup> get the path to
 walk through the HAR file to generalize some <code>jq</code> query, letting unix
 tools do the rest.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># show all the cookies used in requests</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># show all the cookies used in requests</span>
 <span style="color:#586e75"># append `| sort | uniq -c | sort -r` to get usage count for each</span>
 jq .log.entries<span style="color:#719e07">[]</span>.request.cookies<span style="color:#719e07">[]</span> <span style="color:#2aa198">&#34;api_recording.har&#34;</span>
 <span style="color:#586e75"># show all urls hit (filtering by domain, to skip CDNs)</span>
 jq .log.entries<span style="color:#719e07">[]</span>.request.url <span style="color:#2aa198">&#34;api_recording.har&#34;</span> <span style="color:#cb4b16">\
 </span><span style="color:#cb4b16"></span>  | grep <span style="color:#268bd2">$MY_DOMAIN</span> | sort | uniq -c | sort -r</code></pre></div>
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 1</span>:
+  <span class="src-block-number">Code Snippet 1:</span>
   A few interesting queries
 </div>
 
 <p>Here&rsquo;s what it looks like on a <a href="https://github.com/Sterlingg/json-snatcher">Github project</a>:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">      5 github.com/Sterlingg/json-snatcher/show_partial
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">      5 github.com/Sterlingg/json-snatcher/show_partial
       4 github.com/Sterlingg/json-snatcher
       3 github.com/Sterlingg/json-snatcher/issues
       2 github.com/Sterlingg/json-snatcher/used_by_count
@@ -147,18 +146,17 @@ jq .log.entries<span style="color:#719e07">[]</span>.request.url <span style="co
 <p>The best part is to realize that since URLs are tree-structured, we
 can actually view the URLs hit in tree form, which really helps
 understand the structure of the site/API.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jq .log.entries<span style="color:#719e07">[]</span>.request.url <span style="color:#2aa198">&#34;api_recording.har&#34;</span> <span style="color:#cb4b16">\
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">jq .log.entries<span style="color:#719e07">[]</span>.request.url <span style="color:#2aa198">&#34;api_recording.har&#34;</span> <span style="color:#cb4b16">\
 </span><span style="color:#cb4b16"></span>  | grep <span style="color:#268bd2">$MY_DOMAIN</span>  | sed  <span style="color:#2aa198">&#34;s;https://;;&#34;</span> | xargs mkdir -p
 tree <span style="color:#268bd2">$MY_DOMAIN</span></code></pre></div>
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 2</span>:
+  <span class="src-block-number">Code Snippet 2:</span>
   Get a (folder) tree view of URLs hit
 </div>
 
-<figure>
-    <img src="/ox-hugo/github-url-tree.png"
-         alt="Figure 3: A Github project&amp;rsquo;s URL tree using a (processed) Firefox network capture"/> <figcaption>
-            <p>Figure 3: A Github project&rsquo;s URL tree using a (processed) Firefox network capture</p>
+<figure><img src="/ox-hugo/github-url-tree.png"
+         alt="Figure 3: A Github project&amp;rsquo;s URL tree using a (processed) Firefox network capture"/><figcaption>
+            <p><span class="figure-number">Figure 3: </span>A Github project&rsquo;s URL tree using a (processed) Firefox network capture</p>
         </figcaption>
 </figure>
 
