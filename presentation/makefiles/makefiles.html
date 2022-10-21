@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Makefiles</title>
+<meta name="author" content="Jb Doyon"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./revealjs/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./revealjs/dist/theme/blood.css" id="theme"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Makefiles</h1><h4>Build automation and documentation</h4><p>Jb Doyon - <a href="https://jiby.tech/">https://jiby.tech/</a><p>
+<p> </p>
+</section>
+
+<section>
+<section id="slide-org063aa10">
+<h2 id="org063aa10">Press <code>S</code> for speaker notes</h2>
+<p>
+Press <code>SPACE</code> for next page (arrows are wonky)
+</p>
+<aside class="notes">
+<p>
+Here go the super cool speaker notes.
+</p>
+
+<p>
+Note that there are &ldquo;backup slides&rdquo; after the Questions at the end.
+</p>
+
+</aside>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7b7a96f">
+<h2 id="org7b7a96f">Let&rsquo;s play</h2>
+</section>
+<section>
+<p class="fragment roll-in">
+How do you build <i>that</i>?
+</p>
+
+
+
+<div id="org6ecc609" class="figure">
+<p><img src="img/1-scikit-node.png" alt="1-scikit-node.png" style="height: 60vh;" class="fragment roll-in" />
+</p>
+</div>
+
+
+<aside class="notes">
+<ol>
+<li>&ldquo;Yep, I see a beautiful git repository&#x2026; what do I <i>do</i> to &rdquo;build&ldquo; it?&rdquo;
+&ldquo;How do you clear the cache, again?&rdquo;</li>
+
+<li>&ldquo;Should I already have the docker image when running this?&rdquo;
+&ldquo;It&rsquo;s saying something about submodule not initialized. Did I
+miss a step?&rdquo;</li>
+
+<li>&ldquo;I want it to do a complex variant of operations that I don&rsquo;t need
+to remember often, like recombining two common activities and
+changing a variable halfway through&rdquo;</li>
+
+</ol>
+
+<p>
+All too common issues where we just don&rsquo;t know what to do on a new
+project. Especially problematic when hopping between projects,
+languages, etc.
+</p>
+
+</aside>
+
+
+</section>
+<section id="slide-orgb57fd49">
+<h3 id="orgb57fd49">Another one</h3>
+<p>
+How do you build <i>that</i>?
+</p>
+
+
+<div id="org9c5bfd6" class="figure">
+<p><img src="img/2-cruft.png" alt="2-cruft.png" style="height: 60vh;" class="fragment roll-in" />
+</p>
+</div>
+
+
+
+</section>
+<section id="slide-org5360912">
+<h3 id="org5360912">Another one²</h3>
+<p>
+How do you build <i>that</i>?
+</p>
+
+
+<div id="orgdeddfcc" class="figure">
+<p><img src="img/3-ros2.png" alt="3-ros2.png" class="fragment roll-in" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgeed80b9">
+<h2 id="orgeed80b9">The issue</h2>
+<p class="fragment roll-in">
+My job makes me jump between many code repos
+</p>
+
+
+<p class="fragment roll-in">
+How do I start building the code?
+</p>
+
+<ul>
+<li class="fragment roll-in">Java: <code>gradle</code>? <code>mvn</code>?</li>
+<li class="fragment roll-in">Python: <code>./thescript.py</code>? <code>reqs.txt</code>?</li>
+<li class="fragment roll-in">What about the docs? tests? formatter? docker?</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org486613f">
+<h2 id="org486613f">File transformations</h2>
+<p>
+&ldquo;Building&rdquo; = transforming some files into other files
+</p>
+
+
+<div id="orgd4815e5" class="figure">
+<p><img src="img/4_build.svg" alt="4_build.svg" class="org-svg" style="height: 30vh;" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+At the end of the day, it&rsquo;s all about what source file(s) to combine with what
+build command(s), to build what artefact(s).
+</p>
+
+<p>
+Kind of a graph theory problem.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org3566bb7">
+<h2 id="org3566bb7">My dream</h2>
+<p class="fragment roll-in">
+A single place to read about most common commands
+</p>
+
+<p class="fragment roll-in">
+To remind me how, and to avoid typing boring magic
+</p>
+
+
+</section>
+<section id="slide-orgd95b4e0">
+<h3 id="orgd95b4e0">With Makefiles</h3>
+<div class="org-src-container">
+
+<pre class="fragment roll-in"><span style="color: #ECBE7B;">make</span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Build &amp; test &amp; format &amp; [...] = "do what I mean"</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment roll-in"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Specific task combo</span>
+<span style="color: #ECBE7B;">make</span> install test
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment roll-in"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Real specific, but easily forgettable command:</span>
+<span style="color: #ECBE7B;">make</span> docker-login  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">docker login to the AWS ECR</span>
+</pre>
+</div>
+
+</section>
+<section>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #dcaeea;">DOCKER_IMAGE</span>=my-lovely-project
+
+<span style="color: #51afef;">.PHONY</span>: all
+<span style="color: #51afef;">all</span>: install lint docs test build
+
+<span style="color: #51afef;">.PHONY</span>: install
+<span style="color: #51afef;">install</span>:
+    poetry install
+
+<span style="color: #51afef;">.PHONY</span>: lint
+<span style="color: #51afef;">lint</span>:  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Use all linters on all files (not just staged for commit)</span>
+    pre-commit run --all --all-files
+
+<span style="color: #51afef;">.PHONY</span>: test
+<span style="color: #51afef;">test</span>:
+    poetry run pytest
+
+<span style="color: #51afef;">.PHONY</span>: docs
+<span style="color: #51afef;">docs</span>: openapi-spec.json
+    cd docs &amp;&amp; make html
+
+<span style="color: #51afef;">.PHONY</span>: docs-serve
+<span style="color: #51afef;">docs-serve</span>:
+    cd docs/build/html &amp;&amp; python3 -m http.server
+
+<span style="color: #51afef;">.PHONY</span>: docker-build
+<span style="color: #51afef;">docker-build</span>:
+    docker build -t $<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">DOCKER_IMAGE</span><span style="color: #FF8811;">}</span> .
+</pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org4a8e685">
+<h2 id="org4a8e685">By</h2>
+<p>
+<b>using Makefiles in your repos</b>
+</p>
+
+<p>
+you
+</p>
+
+<p>
+<b>document and automate common &ldquo;build&rdquo; tasks</b>
+</p>
+
+</section>
+<section id="slide-org35095fb">
+<h3 id="org35095fb">Specifically</h3>
+<ul>
+<li class="fragment roll-in">Listing build commands = teaching (new lang&#x2026;)</li>
+<li class="fragment roll-in">Shorter commands = automation</li>
+<li class="fragment roll-in">Command composition across languages/tools</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+The fuller version:
+</p>
+<ul>
+<li>Describe how to build files from other files</li>
+<li>README-like aliases of common tasks (build, install, test&#x2026;)</li>
+<li>Work in any language, combining say JS and Python</li>
+
+</ul>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgecef08c">
+<h2 id="orgecef08c"> </h2>
+<div class="outline-text-2" id="text-orgecef08c">
+</div>
+</section>
+<section id="slide-org80fad5a">
+<h3 id="org80fad5a">But, Jb&#x2026;</h3>
+<p class="fragment roll-in">
+Isn&rsquo;t Makefiles for compiling C?
+</p>
+
+</section>
+<section id="slide-org263c018">
+<h3 id="org263c018">Well, yes. But nevermind that!</h3>
+<p class="fragment roll-in">
+It was <i>built</i> for compiling C, but works on any cmd.
+</p>
+
+<p class="fragment roll-in">
+I&rsquo;m talking about a restricted subset of Makefiles
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-why-not">
+<h2 id="why-not">Why not&#x2026;</h2>
+
+</section>
+<section id="slide-org992cbea">
+<h3 id="org992cbea">Why not $LANGUAGE&rsquo;s tool?</h3>
+<p>
+<code>npm run</code>, <code>poetry</code>, <code>cargo</code>, etc
+</p>
+
+<ul>
+<li class="fragment roll-in">I (probably) don&rsquo;t know your language!</li>
+<li class="fragment roll-in">Everyone has <code>make</code>: it&rsquo;s <code>build-essential</code>!</li>
+<li class="fragment roll-in">Makefiles is more powerful (partial rebuild)</li>
+
+</ul>
+
+</section>
+<section id="slide-org503f7c8">
+<h3 id="org503f7c8">Why not shell scripts?</h3>
+<ul>
+<li class="fragment roll-in">I can explain 90% of Makefiles in &lt;10mins</li>
+<li class="fragment roll-in">But I can&rsquo;t trust <i>anybody</i> with shell scripts</li>
+<li class="fragment roll-in"><code>sh</code> doesn&rsquo;t compose complex cmds</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org608060d">
+<h2 id="org608060d">Makefile basics</h2>
+<p class="fragment roll-in">
+Using an SQL course as example
+</p>
+
+</section>
+<section id="slide-orgd0565dd">
+<h3 id="orgd0565dd">Creating a file from scratch</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Download a compressed SQLite database dump</span>
+<span style="color: #51afef;">db.gz</span>:
+    wget -O db.gz  \
+        http://15445.courses.cs.cmu.edu/fall2017/files/md_courts.dump.gz
+</pre>
+</div>
+
+
+<div id="orge988ae9" class="figure">
+<p><img src="img/5_dbgz.svg" alt="5_dbgz.svg" class="org-svg" style="height: 10vh;" />
+</p>
+</div>
+
+<ul>
+<li class="fragment roll-in">&ldquo;To create <code>database.gz</code>, use <code>wget</code>&rdquo;</li>
+<li class="fragment roll-in"><code>&lt;TAB&gt;</code> before wget</li>
+<li class="fragment roll-in">Like any shell, <code>\</code> allows multiline</li>
+
+</ul>
+
+</section>
+<section id="slide-org8229185">
+<h3 id="org8229185">Run this</h3>
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #ECBE7B;">make</span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Run the default (first) target</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Alternatively, explicit the file to create</span>
+<span style="color: #ECBE7B;">make</span> db.gz
+</pre>
+</div>
+
+<ul>
+<li class="fragment roll-in">Downloads the DB dump (500MB) the first time</li>
+<li class="fragment roll-in">Second invocation NOOP: file already exists!</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf7d5a14">
+<h3 id="orgf7d5a14">Dependency</h3>
+<p>
+Extracts <code>db.gz</code> into <code>db.sqlite3</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">db.sqlite3</span>: db.gz
+    zcat db.gz | sqlite3 db.sqlite3
+</pre>
+</div>
+
+
+<div id="org037ed32" class="figure">
+<p><img src="img/6_extract.svg" alt="6_extract.svg" class="org-svg" style="height: 20vh;" />
+</p>
+</div>
+
+<ul>
+<li class="fragment roll-in">Doesn&rsquo;t redownload <code>db.gz</code>: file exists</li>
+<li class="fragment roll-in">If <code>db.gz</code> more recent than <code>db.sqlite3</code>: rerun</li>
+
+</ul>
+
+
+
+</section>
+<section id="slide-org310e88e">
+<h3 id="org310e88e">Complex dependency</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">results/01.txt</span>: query/01.sql db.sqlite3
+    sqlite3 db.sqlite3 &lt;query/01.sql  &gt;results/01.txt
+</pre>
+</div>
+
+
+<div id="orgd34a76e" class="figure">
+<p><img src="img/7_query.svg" alt="7_query.svg" class="org-svg" />
+</p>
+</div>
+</section>
+<section id="slide-orgde6834c">
+<h3 id="orgde6834c">Aliases</h3>
+<p>
+Computing query results via:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #ECBE7B;">make</span> results/01.txt
+</pre>
+</div>
+
+<p>
+That&rsquo;s long: shorter?
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Top of the Makefile: first target = default</span>
+<span style="color: #51afef;">all</span>: results/01.txt
+</pre>
+</div>
+
+<p class="fragment (roll-in)">
+New target <code>all</code> &ldquo;needing&rdquo; <code>results/01.txt</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><span style="color: #ECBE7B;">make</span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">or, explicitly</span>
+<span style="color: #ECBE7B;">make</span> all
+</pre>
+</div>
+
+</section>
+<section>
+
+
+
+<div id="org02a8b6f" class="figure">
+<p><img src="img/8_phony.svg" alt="8_phony.svg" class="org-svg" />
+</p>
+</div>
+<ul>
+<li class="fragment roll-in">Note <code>all</code> is not a real file!</li>
+<li class="fragment roll-in">Called a &ldquo;phony&rdquo; target</li>
+
+</ul>
+</section>
+<section id="slide-org89c4d24">
+<h3 id="org89c4d24">Wait I need sqlite!</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">dependencies</span>:
+    sudo apt-get install sqlite
+</pre>
+</div>
+
+<p>
+<code>dependencies</code> not a file: &ldquo;Phony target&rdquo;
+</p>
+<aside class="notes">
+<ul>
+<li>Makefile targets can be not-files but ideas!</li>
+<li>Called Phony targets</li>
+<li>Conventions like <code>make dep</code>, for dependencies</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-orgcb02853">
+<h3 id="orgcb02853">PHONY targets</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">test</span>:   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Risky!</span>
+    pytest
+</pre>
+</div>
+
+
+<div id="org6aa7aa6" class="figure">
+<p><img src="img/9_phony.svg" alt="9_phony.svg" class="org-svg" />
+</p>
+</div>
+
+
+<ul>
+<li class="fragment roll-in">Works fine, until a file/folder <code>test</code> is created</li>
+<li class="fragment roll-in">Then &ldquo;Nothing to be done for &lsquo;test&rsquo;&rdquo;</li>
+<li class="fragment roll-in">We didn&rsquo;t mark test as Phony, it looks for file</li>
+
+</ul>
+
+</section>
+<section>
+<p>
+Solution: mark file as &ldquo;phony&rdquo;
+</p>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">.PHONY</span>: test  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">"test" isn't a real file, rebuild always</span>
+<span style="color: #51afef;">test</span>:
+    pytest
+</pre>
+</div>
+
+<p>
+Remember: &ldquo;if it&rsquo;s not a real <i>file</i>, it&rsquo;s <code>.PHONY</code>!&rdquo;
+</p>
+
+
+</section>
+<section id="slide-org043c5bc">
+<h3 id="org043c5bc">Variables</h3>
+<p>
+Shorten URL
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #dcaeea;">DB_URL</span>=http://15445.courses.cs.cmu.edu/fall2017/files/md_courts.dump.gz
+
+<span style="color: #51afef;">db.gz</span>:
+    wget -O db.gz <span style="color: #98be65;">"${</span><span style="color: #dcaeea;">DB_URL</span><span style="color: #98be65;">}"</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org0882625">
+<h3 id="org0882625">Variable override</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #dcaeea;">APP_VERSION</span>=<span style="color: #98be65;">"v1.2.3"</span>
+
+<span style="color: #51afef;">.PHONY</span>: docker-build-release
+<span style="color: #51afef;">docker-build-release</span>:
+    docker build -t <span style="color: #98be65;">"my-lovely-app:${</span><span style="color: #dcaeea;">APP_VERSION</span><span style="color: #98be65;">}"</span> .
+</pre>
+</div>
+<p>
+Run via:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #ECBE7B;">make</span> docker-build-release  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Builds v1.2.3</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Override variable just this time:</span>
+<span style="color: #ECBE7B;">make</span> docker-build-release <span style="color: #dcaeea;">APP_VERSION</span>=experimental
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">equivalent to:</span>
+<span style="color: #ECBE7B;">make</span> <span style="color: #dcaeea;">APP_VERSION</span>=experimental docker-build-release
+</pre>
+</div>
+</section>
+<section id="slide-org79a01c9">
+<h3 id="org79a01c9">Separate shells</h3>
+<p>
+Every line is run in different shell
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">bad</span>:
+    export VERSION=<span style="color: #da8548; font-weight: bold;">1.2</span>.<span style="color: #da8548; font-weight: bold;">3</span>
+    <span style="color: #51afef;">wget http</span>://example.com/$<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">VERSION</span><span style="color: #FF8811;">}</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">"No such variable: 'VERSION'"</span>
+</pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org4a88ca7">
+<h2 id="org4a88ca7">Recap</h2>
+<div class="outline-text-2" id="text-org4a88ca7">
+</div>
+</section>
+<section id="slide-orgd48d90a">
+<h3 id="orgd48d90a">File graph</h3>
+<p>
+Links files (nodes) to build commands (edges)
+</p>
+
+<p class="fragment roll-in">
+Directed Acyclic Graph (DAG)
+</p>
+</section>
+<section id="slide-org0a0d3e7">
+<h3 id="org0a0d3e7">Partial rebuild</h3>
+<ul>
+<li class="fragment roll-in">Checks file exists, rebuild via command if missing</li>
+<li class="fragment roll-in">Using file change timestamp (no hash database!)</li>
+<li class="fragment roll-in">Phony targets = always rebuild those</li>
+
+</ul>
+</section>
+<section id="slide-org9529f27">
+<h3 id="org9529f27">Composable</h3>
+<ul>
+<li>Run command sequence</li>
+<li>Override variables</li>
+<li>Much more I haven&rsquo;t shown</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd84ce0a">
+<h2 id="orgd84ce0a">Repo automation</h2>
+<p class="fragment roll-in">
+(<i>Rant begins</i>)
+</p>
+
+
+</section>
+<section id="slide-org84e4a17">
+<h3 id="org84e4a17">Opinion</h3>
+<p>
+<i>Every repo task SHOULD be a Makefile target</i>
+</p>
+
+</section>
+<section id="slide-org9ef12d3">
+<h3 id="org9ef12d3">Python example</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">.PHONY</span>: all
+<span style="color: #51afef;">all</span>: install lint docs test build
+</pre>
+</div>
+
+</section>
+<section>
+
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">.PHONY</span>: install
+<span style="color: #51afef;">install</span>:
+    poetry install
+
+<span style="color: #51afef;">.PHONY</span>: lint
+<span style="color: #51afef;">lint</span>:  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Use all linters on all files (not just staged for commit)</span>
+    pre-commit run --all --all-files
+
+<span style="color: #51afef;">.PHONY</span>: test
+<span style="color: #51afef;">test</span>:
+    poetry run pytest
+
+<span style="color: #51afef;">.PHONY</span>: docs
+<span style="color: #51afef;">docs</span>: openapi-spec.json
+    cd docs &amp;&amp; make html
+
+<span style="color: #51afef;">.PHONY</span>: docs-serve
+<span style="color: #51afef;">docs-serve</span>:
+    cd docs/build/html &amp;&amp; python3 -m http.server
+</pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org19f0d10">
+<h2 id="org19f0d10">By</h2>
+<p>
+<b>using Makefiles in your repos</b>
+</p>
+
+<p>
+you
+</p>
+
+<p>
+<b>document and automate common &ldquo;build&rdquo; tasks</b>
+</p>
+
+</section>
+<section id="slide-org212ce93">
+<h3 id="org212ce93">How do I start?</h3>
+
+</section>
+<section id="slide-orgd798bcf">
+<h3 id="orgd798bcf">Start simple</h3>
+<ul>
+<li class="fragment roll-in">Pick the command you run most often</li>
+<li class="fragment roll-in">Add it to makefile as Phony target</li>
+<li class="fragment roll-in">Start over: second-most used command?</li>
+
+</ul>
+
+</section>
+<section id="slide-org211a552">
+<h3 id="org211a552">And then?</h3>
+
+</section>
+<section id="slide-orgc7a43ba">
+<h3 id="orgc7a43ba">Iterate towards infrequent commands</h3>
+<ul>
+<li class="fragment roll-in">Once common tasks are listed</li>
+<li class="fragment roll-in">Document one-off commands, seldom needed</li>
+<li class="fragment roll-in">Cache-busting, <code>docker system prune</code>&#x2026;</li>
+
+</ul>
+
+</section>
+<section id="slide-org9d75570">
+<h3 id="org9d75570">Avoid complexity</h3>
+<ul>
+<li class="fragment roll-in">Remember, the objective is <i>cheap automation</i>:</li>
+<li class="fragment roll-in">Replace long cmds in README with <code>make init</code></li>
+<li class="fragment roll-in">Aim to replace 90% of all repo activity</li>
+
+</ul>
+
+<p class="fragment roll-in">
+<i>If you ever say &ldquo;I need to debug the Makefile&rdquo;: too far</i>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgaaccf9c">
+<h2 id="orgaaccf9c">README-worthy</h2>
+<p class="fragment roll-in">
+Once most commands are listed
+</p>
+
+<p class="fragment roll-in">
+It&rsquo;s clean enough to exhibit in your <code>README</code>
+</p>
+
+</section>
+<section id="slide-org59b60dc">
+<h3 id="org59b60dc">Sample README section</h3>
+<div class="org-src-container">
+
+<pre class="src src-markdown">For ease of development, a <span style="color: #5B6268;">`</span><span style="color: #98be65; background-color: #2e3138;">Makefile</span><span style="color: #5B6268;">`</span> is provided, use it like this:
+
+<span style="color: #98be65;">    make  # equivalent to "make all" = install lint docs test build</span>
+<span style="color: #98be65;">    # run only specific tasks:</span>
+<span style="color: #98be65;">    make install</span>
+<span style="color: #98be65;">    make lint</span>
+<span style="color: #98be65;">    make test</span>
+<span style="color: #98be65;">    # Combine tasks:</span>
+<span style="color: #98be65;">    make install test</span>
+
+</pre>
+</div>
+
+<p class="fragment roll-in">
+Note the abstraction: could be Java, Rust, Python&#x2026;
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org2548435">
+<h2 id="org2548435">By</h2>
+<p>
+<b>using Makefiles in your repos</b>
+</p>
+
+<p>
+you
+</p>
+
+<p>
+<b>document and automate common &ldquo;build&rdquo; tasks</b>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgd283a56">
+<h2 id="orgd283a56">Questions?</h2>
+<aside class="notes">
+<p>
+Skip to next page for the backup slides with extra material
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfab6e28">
+<h2 id="orgfab6e28">Backup slides</h2>
+<div class="outline-text-2" id="text-orgfab6e28">
+</div>
+</section>
+<section id="slide-orge5932ab">
+<h3 id="orge5932ab">RTFM</h3>
+<p>
+See <a href="https://www.gnu.org/software/make/manual/make.html">GNU Make online docs</a>, or offline:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #ECBE7B;">sudo</span> apt-get install make-doc
+info <span style="color: #ECBE7B;">make</span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Much richer pages than "man </span><span style="color: #5B6268;">make</span><span style="color: #5B6268;">" (*giggles*)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org9e58eee">
+<h3 id="org9e58eee">Make help</h3>
+<p>
+Classic: show list of commands
+</p>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">help</span>: <span style="color: #5B6268;">## </span><span style="color: #5B6268;">display this help message</span>
+    grep <span style="color: #98be65;">'^[a-zA-Z]'</span> $<span style="color: #FF8811;">(</span><span style="color: #dcaeea;">MAKEFILE_LIST</span><span style="color: #FF8811;">)</span> | \
+        sort | \
+        awk -F <span style="color: #98be65;">':.*?## '</span> <span style="color: #98be65;">'NF==2 {printf "  %-26s%s\n", $$1, $$2}'</span>
+</pre>
+</div>
+
+<p>
+Many variants exist, cargo-culted.
+</p>
+
+
+</section>
+<section id="slide-org06170fa">
+<h3 id="org06170fa">Disregard exit code</h3>
+<p>
+Prefix command with <code>-</code> to not fail on nonzero code:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">results/failing_query.txt</span>: db.gz
+    <span style="color: #ECBE7B;">-</span>sqlite3 db.gz <span style="color: #98be65;">"An incorrect SQL query"</span>
+</pre>
+</div>
+
+
+</section>
+<section id="slide-orgc776b9b">
+<h3 id="orgc776b9b">Wildcards</h3>
+<p>
+Match all files, set to a variable
+</p>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #dcaeea;">all_queries</span> = $<span style="color: #FF8811;">(</span><span style="color: #dcaeea;">wildcard</span> query/*.sql<span style="color: #FF8811;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-orge0bf377">
+<h3 id="orge0bf377">Shell commands</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #dcaeea;">BRANCH</span>=$<span style="color: #FF8811;">(</span><span style="color: #dcaeea;">shell</span> echo <span style="color: #98be65;">"${</span><span style="color: #dcaeea;">BUILDKITE_BRANCH</span><span style="color: #98be65;">}"</span> | sed <span style="color: #98be65;">'s;/;_;g'</span><span style="color: #FF8811;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org8dd46f7">
+<h3 id="org8dd46f7">Makefile Rules</h3>
+<p>
+Generic rules, regardless of input:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">results/%.txt</span>: query/%.sql db.sqlite3
+    sqlite3 db.sqlite3 &lt; $<span style="color: #a9a1e1;">&lt;</span>  &gt; <span style="color: #51afef;">$</span><span style="color: #a9a1e1;">@</span>
+</pre>
+</div>
+
+<p>
+Any value that fits <code>%</code> makes rule work:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #ECBE7B;">make</span> results/01.txt  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">% now set to 01</span>
+<span style="color: #ECBE7B;">make</span> results/blah.txt  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">% now set to blah, assumes query/blah.txt</span>
+</pre>
+</div>
+
+
+</section>
+<section id="slide-org43fb26d">
+<h3 id="org43fb26d">Defining functions</h3>
+<div class="org-src-container">
+
+<pre class="src src-makefile">define generate_file
+    sed <span style="color: #98be65;">'s/{NAME}/$(</span><span style="color: #dcaeea;">1</span><span style="color: #98be65;">)/'</span> greetings.tmpl &gt;$<span style="color: #FF8811;">(</span><span style="color: #dcaeea; font-weight: bold;">2</span><span style="color: #FF8811;">)</span>.txt
+endef
+
+<span style="color: #51afef;">all</span>:
+    $<span style="color: #FF8811;">(</span><span style="color: #dcaeea;">call</span> generate_file,John Doe,<span style="color: #da8548; font-weight: bold;">101</span><span style="color: #FF8811;">)</span>
+    $<span style="color: #FF8811;">(</span><span style="color: #dcaeea;">call</span> generate_file,Peter Pan,<span style="color: #da8548; font-weight: bold;">102</span><span style="color: #FF8811;">)</span>
+</pre>
+</div>
+</section>
+<section id="slide-orgf41565d">
+<h3 id="orgf41565d">Sentinel files</h3>
+<p>
+Avoid phonies via real file dependency:
+</p>
+
+<p>
+Create &ldquo;sentinel files&rdquo; <i>manually</i>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile">
+<span style="color: #51afef;">build/docker_image</span>:
+    docker build -t myimagename .
+    docker images -q myimagename &gt; build/docker_image
+
+<span style="color: #51afef;">test.sentinel</span>:
+    pytest &amp;&amp; touch test.sentinel
+</pre>
+</div>
+
+<ul>
+<li class="fragment roll-in">Not phony: depend on real file</li>
+<li class="fragment roll-in">Timestamp of file determines needed to rerun</li>
+
+</ul>
+</section>
+<section id="slide-org8e275de">
+<h3 id="org8e275de">Parallelize</h3>
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Solve the graph with 8 parallel processes</span>
+<span style="color: #ECBE7B;">make</span> -j <span style="color: #da8548; font-weight: bold;">8</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-orgc7a1bd4">
+<h3 id="orgc7a1bd4">Dry-run/debug mode</h3>
+<p>
+Use <code>-n</code> flag for dry-run (debug)
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #ECBE7B;">make</span> -n
+</pre>
+</div>
+
+<pre class="example">
+zcat db.gz | sqlite3 db.sqlite3
+sqlite3 db.sqlite3 &lt;query/01.sql  &gt;results/01.txt
+</pre>
+</section>
+<section id="slide-org05edfc8">
+<h3 id="org05edfc8">Graph a Makefile</h3>
+<p>
+<a href="https://pypi.org/project/makefile2dot/">makefile2dot</a> python package, for GraphViz (dot)
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell">pipx install makefile2dot
+makefile2dot | dot -Tpng &gt; makefile.png
+</pre>
+</div>
+
+
+<div id="org40fd391" class="figure">
+<p><img src="makefile.png" alt="makefile.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgda9ba45">
+<h3 id="orgda9ba45">One shell</h3>
+<p>
+Run all commands into one shell
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">.ONESHELL</span>:  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Just declaring this is enough</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">All further commands are run in one persisting shell invocation</span>
+<span style="color: #51afef;">good</span>:
+    export VERSION=<span style="color: #da8548; font-weight: bold;">1.2</span>.<span style="color: #da8548; font-weight: bold;">3</span>
+    <span style="color: #51afef;">wget http</span>://example.com/$<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">VERSION</span><span style="color: #FF8811;">}</span>
+</pre>
+</div>
+</section>
+<section id="slide-org2a600c5">
+<h3 id="org2a600c5">Polyglot Makefiles</h3>
+<p>
+Don&rsquo;t shell out: use <code>python</code>!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #51afef;">.ONESHELL</span>:
+<span style="color: #51afef;">python</span>: <span style="color: #dcaeea;">SHELL</span> := python3
+<span style="color: #51afef;">python</span>:
+    <span style="color: #dcaeea;">greeting</span> = <span style="color: #98be65;">"hello"</span>
+    print<span style="color: #FF8811;">(</span>f<span style="color: #98be65;">"{greeting}, python!"</span><span style="color: #FF8811;">)</span>
+</pre>
+</div>
+
+<p>
+Or <code>docker run</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-makefile"><span style="color: #dcaeea;">IMG</span>=ubuntu
+<span style="color: #dcaeea;">CMD</span>=/bin/bash
+<span style="color: #dcaeea;">PWD</span>=$<span style="color: #FF8811;">(</span><span style="color: #dcaeea;">shell</span> pwd<span style="color: #FF8811;">)</span>
+<span style="color: #dcaeea;">WRK</span>=workdir
+<span style="color: #dcaeea;">.SHELLFLAGS</span> = run -v $<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">PWD</span><span style="color: #FF8811;">}</span>:/$<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">WRK</span><span style="color: #FF8811;">}</span> --rm --workdir /$<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">WRK</span><span style="color: #FF8811;">}</span> -e $<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">CMD</span><span style="color: #FF8811;">}</span> $<span style="color: #FF8811;">{</span><span style="color: #dcaeea;">IMG</span><span style="color: #FF8811;">}</span> -c
+<span style="color: #dcaeea;">SHELL</span> := docker
+<span style="color: #51afef;">docker</span>:
+    echo <span style="color: #98be65;">"hello, $$(uname -a)!"</span>
+
+</pre>
+</div>
+
+<p>
+See more on <a href="http://agdr.org/2020/05/14/Polyglot-Makefiles.html">Polyglot Makefiles</a>.
+</p>
+
+</section>
+<section id="slide-org60d2326">
+<h3 id="org60d2326">Other Makefile talks</h3>
+<p>
+More opinions about Makefiles
+</p>
+<ul>
+<li><a href="https://tech.davis-hansson.com/p/make/">Your Makefiles are wrong</a></li>
+<li><a href="https://matt-rickard.com/the-unreasonable-effectiveness-of-makefiles">The Unreasonable Effectiveness of Makefiles</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgdd8633e">
+<h2 id="orgdd8633e">EOF</h2>
+<p>
+Read more rants, and this presentation, on <a href="https://jiby.tech">https://jiby.tech</a>
+</p>
+<aside class="notes">
+<p>
+Thank you for letting me tell you more than you needed to know about Makefiles
+</p>
+
+</aside>
+</section>
+</section>
+</div>
+</div>
+<script src="./revealjs/dist/reveal.js"></script>
+<script src="./revealjs/plugin/markdown/markdown.js"></script>
+<script src="./revealjs/plugin/notes/notes.js"></script>
+<script src="./revealjs/plugin/search/search.js"></script>
+<script src="./revealjs/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+
+transition: 'convex',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>

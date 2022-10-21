@@ -1,0 +1,823 @@
+#+title: Makefiles
+#+subtitle: Build automation and documentation
+#+author: Jb Doyon
+#+DATE: <2022-10-21 Fri>
+
+#+REVEAL_TALK_URL: https://jiby.tech/
+
+#+OPTIONS: toc:nil
+#+PROPERTY: header-args :eval no-export
+
+# This presentation is written for Org-mode (https://orgmode.org) in
+# Emacs generating reveal.js slides (https://revealjs.com) via
+# org-re-reveal package (https://gitlab.com/oer/org-re-reveal)
+
+# Enabling this means no speaker notes
+#+OPTIONS: reveal_single_file:nil num:nil
+
+#+REVEAL_THEME: blood
+
+* COMMENT Orga
+Resources here, links to original material, log of time spent etc
+
+* Press =S= for speaker notes
+
+Press =SPACE= for next page (arrows are wonky)
+#+begin_notes
+Here go the super cool speaker notes.
+
+Note that there are "backup slides" after the Questions at the end.
+#+end_notes
+
+
+* Let's play
+
+#+REVEAL: split
+#+ATTR_REVEAL: :frag roll-in
+How do you build /that/?
+
+
+#+ATTR_REVEAL: :frag roll-in
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+file:img/1-scikit-node.png
+
+
+#+BEGIN_NOTES
+1) "Yep, I see a beautiful git repository... what do I /do/ to "build" it?"
+   "How do you clear the cache, again?"
+
+2) "Should I already have the docker image when running this?"
+   "It's saying something about submodule not initialized. Did I
+   miss a step?"
+
+3) "I want it to do a complex variant of operations that I don't need
+   to remember often, like recombining two common activities and
+   changing a variable halfway through"
+
+All too common issues where we just don't know what to do on a new
+project. Especially problematic when hopping between projects,
+languages, etc.
+#+END_NOTES
+
+
+** Another one
+How do you build /that/?
+
+#+ATTR_REVEAL: :frag roll-in
+#+ATTR_ORG: :width 200
+#+ATTR_HTML: :style height: 60vh;
+file:img/2-cruft.png
+
+
+
+** Another one²
+How do you build /that/?
+
+#+ATTR_REVEAL: :frag roll-in
+#+ATTR_ORG: :width 200
+file:img/3-ros2.png
+* The issue
+
+#+ATTR_REVEAL: :frag roll-in
+My job makes me jump between many code repos
+
+
+#+ATTR_REVEAL: :frag roll-in
+How do I start building the code?
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Java: =gradle=? =mvn=?
+- Python: =./thescript.py=? =reqs.txt=?
+- What about the docs? tests? formatter? docker?
+* File transformations
+
+"Building" = transforming some files into other files
+
+#+BEGIN_SRC plantuml :file img/4_build.svg :export results
+@startuml
+digraph dump {
+    file1 [label="Source file(s)", shape="note"];
+    file2 [label="Artefact(s)", shape="note"];
+    file1 -> file2 [label=" build command(s)", fontname=Monospace];
+}
+@enduml
+#+END_SRC
+
+#+ATTR_HTML: :style height: 30vh;
+#+RESULTS:
+[[file:img/4_build.svg]]
+
+#+begin_notes
+At the end of the day, it's all about what source file(s) to combine with what
+build command(s), to build what artefact(s).
+
+Kind of a graph theory problem.
+#+end_notes
+
+* My dream
+#+ATTR_REVEAL: :frag roll-in
+A single place to read about most common commands
+
+#+ATTR_REVEAL: :frag roll-in
+To remind me how, and to avoid typing boring magic
+
+
+** With Makefiles
+
+#+ATTR_REVEAL: :frag roll-in
+#+begin_src shell
+make  # Build & test & format & [...] = "do what I mean"
+#+end_src
+
+#+ATTR_REVEAL: :frag roll-in
+#+begin_src shell
+# Specific task combo
+make install test
+#+end_src
+
+#+ATTR_REVEAL: :frag roll-in
+#+begin_src shell
+# Real specific, but easily forgettable command:
+make docker-login  # docker login to the AWS ECR
+#+end_src
+
+#+REVEAL: split
+
+#+begin_src makefile
+DOCKER_IMAGE=my-lovely-project
+
+.PHONY: all
+all: install lint docs test build
+
+.PHONY: install
+install:
+	poetry install
+
+.PHONY: lint
+lint:  # Use all linters on all files (not just staged for commit)
+	pre-commit run --all --all-files
+
+.PHONY: test
+test:
+	poetry run pytest
+
+.PHONY: docs
+docs: openapi-spec.json
+	cd docs && make html
+
+.PHONY: docs-serve
+docs-serve:
+	cd docs/build/html && python3 -m http.server
+
+.PHONY: docker-build
+docker-build:
+	docker build -t ${DOCKER_IMAGE} .
+#+end_src
+
+* By
+
+
+*using Makefiles in your repos*
+
+you
+
+*document and automate common "build" tasks*
+
+** Specifically
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Listing build commands = teaching (new lang...)
+- Shorter commands = automation
+- Command composition across languages/tools
+
+#+begin_notes
+The fuller version:
+- Describe how to build files from other files
+- README-like aliases of common tasks (build, install, test...)
+- Work in any language, combining say JS and Python
+#+end_notes
+
+*  
+
+** But, Jb...
+
+#+ATTR_REVEAL: :frag roll-in
+Isn't Makefiles for compiling C?
+
+** Well, yes. But nevermind that!
+
+#+ATTR_REVEAL: :frag roll-in
+It was /built/ for compiling C, but works on any cmd.
+
+#+ATTR_REVEAL: :frag roll-in
+I'm talking about a restricted subset of Makefiles
+
+* Why not...
+:PROPERTIES:
+:CUSTOM_ID: why-not
+:END:
+
+** Why not $LANGUAGE's tool?
+
+=npm run=, =poetry=, =cargo=, etc
+
+#+ATTR_REVEAL: :frag (roll-in)
+- I (probably) don't know your language!
+- Everyone has =make=: it's =build-essential=!
+- Makefiles is more powerful (partial rebuild)
+
+** Why not shell scripts?
+
+#+ATTR_REVEAL: :frag (roll-in)
+- I can explain 90% of Makefiles in <10mins
+- But I can't trust /anybody/ with shell scripts
+- =sh= doesn't compose complex cmds
+
+** COMMENT But it doesn't work for X
+
+#+ATTR_REVEAL: :frag roll-in
+Yes! That's part of the appeal:
+
+#+ATTR_REVEAL: :frag roll-in
+/Keep automation simple AND documented/
+#+ATTR_REVEAL: :frag roll-in
+Like =awk=, it's in a sweet spot.
+If you need more, break the glass.
+
+
+* Makefile basics
+
+#+ATTR_REVEAL: :frag roll-in
+Using an SQL course as example
+
+** Creating a file from scratch
+#+begin_src makefile
+# Download a compressed SQLite database dump
+db.gz:
+	wget -O db.gz  \
+		http://15445.courses.cs.cmu.edu/fall2017/files/md_courts.dump.gz
+#+end_src
+
+#+BEGIN_SRC plantuml :file img/5_dbgz.svg :export results
+@startuml
+digraph dump {
+    root [shape=point];
+    dbgz [label="db.gz", shape="note"];
+    root -> dbgz [label=" wget -O ...", fontname=Monospace];
+}
+@enduml
+#+END_SRC
+
+#+ATTR_HTML: :style height: 10vh;
+#+RESULTS:
+[[file:img/5_dbgz.svg]]
+
+#+ATTR_REVEAL: :frag (roll-in)
+- "To create =database.gz=, use =wget="
+- =<TAB>= before wget
+- Like any shell, =\= allows multiline
+
+** Run this
+
+
+#+begin_src shell
+make  # Run the default (first) target
+# Alternatively, explicit the file to create
+make db.gz
+#+end_src
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Downloads the DB dump (500MB) the first time
+- Second invocation NOOP: file already exists!
+
+** Dependency
+
+
+Extracts =db.gz= into =db.sqlite3=
+
+#+begin_src makefile
+db.sqlite3: db.gz
+	zcat db.gz | sqlite3 db.sqlite3
+#+end_src
+
+#+BEGIN_SRC plantuml :file img/6_extract.svg :export results
+@startuml
+digraph dump {
+    dbgz [label="db.gz", shape="note"];
+    dbsql [label="db.sqlite3", shape="note"];
+    dbgz -> dbsql [label=" zcat ...", fontname=Monospace];
+}
+@enduml
+#+END_SRC
+
+#+ATTR_HTML: :style height: 20vh;
+#+RESULTS:
+[[file:img/6_extract.svg]]
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Doesn't redownload =db.gz=: file exists
+- If =db.gz= more recent than =db.sqlite3=: rerun
+
+
+
+** Complex dependency
+#+begin_src makefile :tangle Makefile
+results/01.txt: query/01.sql db.sqlite3
+	sqlite3 db.sqlite3 <query/01.sql  >results/01.txt
+#+end_src
+
+#+BEGIN_SRC plantuml :file img/7_query.svg :export results
+@startuml
+digraph dump {
+    dbsql [label="db.sqlite3", shape="note"];
+    query1 [label="query/01.sql", shape="note"];
+    merge [shape=point,width=0.01,height=0.01];
+    result1 [label="result/01.txt", shape="note"];
+    {dbsql, query1} -> merge [dir=none];
+    merge -> result1 [label=" sqlite3 ...", fontname=Monospace];
+}
+@enduml
+#+END_SRC
+
+#+RESULTS:
+[[file:img/7_query.svg]]
+** Aliases
+
+Computing query results via:
+#+begin_src shell
+make results/01.txt
+#+end_src
+
+That's long: shorter?
+
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src makefile
+# Top of the Makefile: first target = default
+all: results/01.txt
+#+end_src
+
+#+ATTR_REVEAL: :frag (roll-in)
+New target =all= "needing" =results/01.txt=.
+
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src shell
+make  # or, explicitly
+make all
+#+end_src
+
+#+REVEAL: split
+
+
+#+BEGIN_SRC plantuml :file img/8_alias.svg :export results
+@startuml
+digraph dump {
+    dbsql [label="db.sqlite3", shape="note"];
+    query1 [label="query/01.sql", shape="note"];
+    merge [shape=point,width=0.01,height=0.01];
+    result1 [label="result/01.txt", shape="note"];
+    {dbsql, query1} -> merge [dir=none];
+    merge -> result1 [label=" sqlite3 ...", fontname=Monospace];
+    result2 [label="all"];
+    result1 -> result2;
+}
+@enduml
+#+END_SRC
+
+#+RESULTS:
+[[file:img/8_phony.svg]]
+#+ATTR_REVEAL: :frag (roll-in)
+- Note =all= is not a real file!
+- Called a "phony" target
+** Wait I need sqlite!
+#+BEGIN_SRC makefile
+dependencies:
+	sudo apt-get install sqlite
+#+END_SRC
+
+=dependencies= not a file: "Phony target"
+#+BEGIN_NOTES
+- Makefile targets can be not-files but ideas!
+- Called Phony targets
+- Conventions like =make dep=, for dependencies
+#+END_NOTES
+
+** PHONY targets
+
+#+begin_src makefile
+test:   # Risky!
+	pytest
+#+end_src
+
+#+BEGIN_SRC plantuml :file img/9_phony.svg :export results
+@startuml
+digraph dump {
+    root [shape=point];
+    test [label="test", shape="note"];
+    root -> test [label=" pytest", fontname=Monospace];
+}
+@enduml
+#+END_SRC
+
+#+RESULTS:
+[[file:img/9_phony.svg]]
+
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Works fine, until a file/folder =test= is created
+- Then "Nothing to be done for 'test'"
+- We didn't mark test as Phony, it looks for file
+
+#+REVEAL: split
+Solution: mark file as "phony"
+#+begin_src makefile
+.PHONY: test  # "test" isn't a real file, rebuild always
+test:
+	pytest
+#+end_src
+
+Remember: "if it's not a real /file/, it's =.PHONY=!"
+
+
+** COMMENT Target elision
+
+#+begin_src makefile
+.PHONY: all
+all: install lint docs test build
+
+.PHONY: docs-serve
+docs-serve: docs
+	cd docs/build/html && python3 -m http.server
+#+end_src
+
+=Make= optimizes the graph to avoid double-building uselessly:
+
+#+begin_src shell
+make docs test docs  # Skips rebuild of docs
+make docs docs-serve # Equiv to "make docs-serve", docs implicit
+make all docs-serve  # actually useful
+#+end_src
+** Variables
+
+Shorten URL
+
+#+begin_src makefile
+DB_URL=http://15445.courses.cs.cmu.edu/fall2017/files/md_courts.dump.gz
+
+db.gz:
+	wget -O db.gz "${DB_URL}"
+#+end_src
+
+** Variable override
+
+#+begin_src makefile
+APP_VERSION="v1.2.3"
+
+.PHONY: docker-build-release
+docker-build-release:
+	docker build -t "my-lovely-app:${APP_VERSION}" .
+#+end_src
+Run via:
+#+begin_src shell
+make docker-build-release  # Builds v1.2.3
+# Override variable just this time:
+make docker-build-release APP_VERSION=experimental
+# equivalent to:
+make APP_VERSION=experimental docker-build-release
+#+end_src
+** Separate shells
+
+Every line is run in different shell
+
+#+begin_src makefile
+bad:
+	export VERSION=1.2.3
+	wget http://example.com/${VERSION}
+# "No such variable: 'VERSION'"
+#+end_src
+
+** COMMENT Timestamps
+
+#+begin_src shell
+make all  # Nothing to be done for "all"
+# "Update the database" via last modification timestamp:
+touch db.gz
+make  # Rebuilds all targets impacted by db.gz
+#+end_src
+
+#+ATTR_REVEAL: :frag (roll-in)
+- =make= only checks last modification timestamp
+- No "file hash database"
+- Partial rebuilds: walks file-graph
+
+
+* Recap
+** File graph
+Links files (nodes) to build commands (edges)
+
+#+ATTR_REVEAL: :frag roll-in
+Directed Acyclic Graph (DAG)
+** Partial rebuild
+#+ATTR_REVEAL: :frag (roll-in)
+- Checks file exists, rebuild via command if missing
+- Using file change timestamp (no hash database!)
+- Phony targets = always rebuild those
+** Composable
+- Run command sequence
+- Override variables
+- Much more I haven't shown
+
+* Repo automation
+
+#+ATTR_REVEAL: :frag roll-in
+(/Rant begins/)
+
+
+** Opinion
+/Every repo task SHOULD be a Makefile target/
+
+** Python example
+#+begin_src makefile
+.PHONY: all
+all: install lint docs test build
+#+end_src
+
+#+REVEAL: split
+
+
+#+begin_src makefile
+.PHONY: install
+install:
+	poetry install
+
+.PHONY: lint
+lint:  # Use all linters on all files (not just staged for commit)
+	pre-commit run --all --all-files
+
+.PHONY: test
+test:
+	poetry run pytest
+
+.PHONY: docs
+docs: openapi-spec.json
+	cd docs && make html
+
+.PHONY: docs-serve
+docs-serve:
+	cd docs/build/html && python3 -m http.server
+#+end_src
+* By
+
+
+*using Makefiles in your repos*
+
+you
+
+*document and automate common "build" tasks*
+
+** How do I start?
+
+** Start simple
+#+ATTR_REVEAL: :frag (roll-in)
+- Pick the command you run most often
+- Add it to makefile as Phony target
+- Start over: second-most used command?
+
+** And then?
+
+** Iterate towards infrequent commands
+#+ATTR_REVEAL: :frag (roll-in)
+- Once common tasks are listed
+- Document one-off commands, seldom needed
+- Cache-busting, =docker system prune=...
+
+** Avoid complexity
+#+ATTR_REVEAL: :frag (roll-in)
+- Remember, the objective is /cheap automation/:
+- Replace long cmds in README with =make init=
+- Aim to replace 90% of all repo activity
+
+#+ATTR_REVEAL: :frag roll-in
+/If you ever say "I need to debug the Makefile": too far/
+
+* README-worthy
+#+ATTR_REVEAL: :frag roll-in
+Once most commands are listed
+
+#+ATTR_REVEAL: :frag roll-in
+It's clean enough to exhibit in your =README=
+
+** Sample README section
+
+#+begin_src markdown
+For ease of development, a `Makefile` is provided, use it like this:
+
+	make  # equivalent to "make all" = install lint docs test build
+	# run only specific tasks:
+	make install
+	make lint
+	make test
+	# Combine tasks:
+	make install test
+
+#+end_src
+
+#+ATTR_REVEAL: :frag roll-in
+Note the abstraction: could be Java, Rust, Python...
+
+* COMMENT Make tricks
+
+
+* By
+
+
+*using Makefiles in your repos*
+
+you
+
+*document and automate common "build" tasks*
+
+
+* Questions?
+#+begin_notes
+Skip to next page for the backup slides with extra material
+#+end_notes
+
+* Backup slides
+
+** RTFM
+
+See [[https://www.gnu.org/software/make/manual/make.html][GNU Make online docs]], or offline:
+
+#+begin_src shell
+sudo apt-get install make-doc
+info make  # Much richer pages than "man make" (*giggles*)
+#+end_src
+
+** Make help
+
+Classic: show list of commands
+#+begin_src makefile
+help: ## display this help message
+	grep '^[a-zA-Z]' $(MAKEFILE_LIST) | \
+		sort | \
+		awk -F ':.*?## ' 'NF==2 {printf "  %-26s%s\n", $$1, $$2}'
+#+end_src
+
+Many variants exist, cargo-culted.
+
+
+** Disregard exit code
+Prefix command with =-= to not fail on nonzero code:
+#+begin_src makefile
+results/failing_query.txt: db.gz
+	-sqlite3 db.gz "An incorrect SQL query"
+#+end_src
+
+
+** Wildcards
+
+Match all files, set to a variable
+#+begin_src makefile
+all_queries = $(wildcard query/*.sql)
+#+end_src
+
+** Shell commands
+
+#+begin_src makefile
+BRANCH=$(shell echo "${BUILDKITE_BRANCH}" | sed 's;/;_;g')
+#+end_src
+
+** Makefile Rules
+
+Generic rules, regardless of input:
+
+#+begin_src makefile
+results/%.txt: query/%.sql db.sqlite3
+	sqlite3 db.sqlite3 < $<  > $@
+#+end_src
+
+Any value that fits =%= makes rule work:
+
+#+begin_src shell
+make results/01.txt  # % now set to 01
+make results/blah.txt  # % now set to blah, assumes query/blah.txt
+#+end_src
+
+
+** Defining functions
+
+#+begin_src makefile
+define generate_file
+    sed 's/{NAME}/$(1)/' greetings.tmpl >$(2).txt
+endef
+
+all:
+    $(call generate_file,John Doe,101)
+    $(call generate_file,Peter Pan,102)
+#+end_src
+** Sentinel files
+
+Avoid phonies via real file dependency:
+
+Create "sentinel files" /manually/
+
+#+begin_src makefile
+
+build/docker_image:
+	docker build -t myimagename .
+	docker images -q myimagename > build/docker_image
+
+test.sentinel:
+	pytest && touch test.sentinel
+#+end_src
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Not phony: depend on real file
+- Timestamp of file determines needed to rerun
+** Parallelize
+
+#+begin_src shell
+# Solve the graph with 8 parallel processes
+make -j 8
+#+end_src
+
+** Dry-run/debug mode
+
+Use =-n= flag for dry-run (debug)
+
+#+begin_src shell
+make -n
+#+end_src
+
+: zcat db.gz | sqlite3 db.sqlite3
+: sqlite3 db.sqlite3 <query/01.sql  >results/01.txt
+** Graph a Makefile
+
+[[https://pypi.org/project/makefile2dot/][makefile2dot]] python package, for GraphViz (dot)
+
+#+begin_src shell
+pipx install makefile2dot
+makefile2dot | dot -Tpng > makefile.png
+#+end_src
+
+[[file:makefile.png]]
+
+** One shell
+
+Run all commands into one shell
+
+#+begin_src makefile
+.ONESHELL:  # Just declaring this is enough
+# All further commands are run in one persisting shell invocation
+good:
+	export VERSION=1.2.3
+	wget http://example.com/${VERSION}
+#+end_src
+** Polyglot Makefiles
+
+Don't shell out: use =python=!
+
+#+begin_src makefile
+.ONESHELL:
+python: SHELL := python3
+python:
+	greeting = "hello"
+	print(f"{greeting}, python!")
+#+end_src
+
+Or =docker run=:
+
+#+begin_src makefile
+IMG=ubuntu
+CMD=/bin/bash
+PWD=$(shell pwd)
+WRK=workdir
+.SHELLFLAGS = run -v ${PWD}:/${WRK} --rm --workdir /${WRK} -e ${CMD} ${IMG} -c
+SHELL := docker
+docker:
+	echo "hello, $$(uname -a)!"
+
+#+end_src
+
+See more on [[http://agdr.org/2020/05/14/Polyglot-Makefiles.html][Polyglot Makefiles]].
+
+** Other Makefile talks
+More opinions about Makefiles
+- [[https://tech.davis-hansson.com/p/make/][Your Makefiles are wrong]]
+- [[https://matt-rickard.com/the-unreasonable-effectiveness-of-makefiles][The Unreasonable Effectiveness of Makefiles]]
+
+* EOF
+
+Read more rants, and this presentation, on https://jiby.tech
+#+begin_notes
+Thank you for letting me tell you more than you needed to know about Makefiles
+#+end_notes
+
+* COMMENT Local variables                                           :ARCHIVE:
+:PROPERTIES:
+:END:
+For auto-exporting the presentation on saved file in Emacs.
+# Local Variables:
+# eval: (add-hook 'after-save-hook #'org-re-reveal-export-to-html :append :local)
+# End:
