@@ -2,10 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jiby.tech/tags/bdd/</loc>
-    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2022-10-23T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2022-10-23T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2022-10-23T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/presentation/</loc>
+    <lastmod>2022-10-23T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/makefiles-presentation/</loc>
+    <lastmod>2022-10-23T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2022-10-23T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/bdd/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/documentation/</loc>
@@ -14,16 +29,10 @@
     <loc>https://jiby.tech/tags/gherkin/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/post/literate-wordle/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/literate-programming/</loc>
-    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/post/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/project/</loc>
@@ -39,9 +48,6 @@
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/rfc/</loc>
-    <lastmod>2022-05-07T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2022-05-07T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/tdd/</loc>
@@ -136,9 +142,6 @@
   </url><url>
     <loc>https://jiby.tech/post/git-graph/</loc>
     <lastmod>2019-10-06T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/presentation/</loc>
-    <lastmod>2019-10-01T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/android-terminal-with-termux/</loc>
     <lastmod>2019-10-01T00:00:00+01:00</lastmod>

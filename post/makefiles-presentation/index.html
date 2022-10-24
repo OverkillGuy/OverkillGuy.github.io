@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Presentation: Makefiles for build automation and documentation - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Presentation: Makefiles for build automation and documentation" />
+<meta property="og:description" content="Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
+Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/makefiles-presentation/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-23T00:00:00+01:00" />
+<meta property="article:modified_time" content="2022-10-23T00:00:00+01:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Presentation: Makefiles for build automation and documentation"/>
+<meta name="twitter:description" content="Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
+Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands)."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Presentation: Makefiles for build automation and documentation</h1>
+			<div class="meta">Posted on &mdash; Oct 23, 2022</div>
+		</div>
+
+		<div class="markdown">
+			<p>Last Friday, I performed a presentation to my colleagues about Makefiles, and I
+want to share it to the public.</p>
+
+<p>Of note, this presentation is setting aside what people usually know of
+Makefiles (autoconf-generated blobs, opaque to any inspection because
+machine-created), and instead I introduce the concept of file transformation as
+a graph, then teach Makefiles basics (using SQL commands as an example). We then
+move on to my plea for simple Makefiles, and their potential for both
+documentation (explain what your codebase commands are, to the juniors), and as
+lightweight automation (avoid typing long boring commands).</p>
+
+<p>I start by describing how my job brings me to jump between many code repos,
+which can have confusing build/test/format commands. I feel those commands
+under-documented, and wish to have a single point of entry for all the important
+ones I should use around the codebase. I further believe this file can be a
+Makefile, and proceed to show how that could work.</p>
+
+<figure><a href="../../presentation/makefiles/makefiles.html"><img src="../../presentation/makefiles/img/makefiles-prez-intro.png"
+         alt="Figure 1: Click to view the slides" width="100%"/></a><figcaption>
+            <p><span class="figure-number">Figure 1: </span>Click to view the slides</p>
+        </figcaption>
+</figure>
+
+
+<p>For the adventurous, backup slides are available at the end, explaining extra
+complex behaviour, including my favourite: Polyglot Makefiles.</p>
+
+<p>This presentation was long overdue, with my first notes for it going back
+to 2018. I&rsquo;m glad I was finally able to make public my love of simple Makefiles,
+and hope everybody agree they&rsquo;re pretty rad for this particular purpose.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/presentation">presentation</a></li>
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

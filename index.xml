@@ -6,7 +6,17 @@
     <description>Recent content on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Oct 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Presentation: Makefiles for build automation and documentation</title>
+      <link>https://jiby.tech/post/makefiles-presentation/</link>
+      <pubDate>Sun, 23 Oct 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/makefiles-presentation/</guid>
+      <description>Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
+Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands).</description>
+    </item>
+    
     <item>
       <title>Literate wordle</title>
       <link>https://jiby.tech/post/literate-wordle/</link>
