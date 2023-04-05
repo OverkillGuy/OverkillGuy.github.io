@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Quick-start project templates via cookiecutter - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Quick-start project templates via cookiecutter" />
+<meta property="og:description" content="The most boring part of setting up a new code project is typing the boilerplate: it&rsquo;s easy to forget bits, so we just copy the last project&rsquo;s folder and &ldquo;file the serial numbers off&rdquo; on the project name.
+Copy-pasta-driven project setup is not great though, as it&rsquo;s too easy to forget replacing values in obscure files, or misunderstand why project is set up that way in the first place, leading to nasty surprises down the line." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/quick-start-project-templates-via-cookiecutter/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-05T00:00:00+01:00" />
+<meta property="article:modified_time" content="2023-04-05T00:00:00+01:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quick-start project templates via cookiecutter"/>
+<meta name="twitter:description" content="The most boring part of setting up a new code project is typing the boilerplate: it&rsquo;s easy to forget bits, so we just copy the last project&rsquo;s folder and &ldquo;file the serial numbers off&rdquo; on the project name.
+Copy-pasta-driven project setup is not great though, as it&rsquo;s too easy to forget replacing values in obscure files, or misunderstand why project is set up that way in the first place, leading to nasty surprises down the line."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Quick-start project templates via cookiecutter</h1>
+			<div class="meta">Posted on &mdash; Apr 5, 2023</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>The most boring part of setting up a new code project is typing the boilerplate:
+it&rsquo;s easy to forget bits, so we just copy the last project&rsquo;s folder and &ldquo;file the serial numbers off&rdquo; on the project name.</p>
+
+<p>Copy-pasta-driven project setup is not great though, as it&rsquo;s too easy to forget
+replacing values in obscure files, or misunderstand why project is set up that
+way in the first place, leading to nasty surprises down the line.</p>
+
+<p>Related, I happen to have a personal rule, which is to answer every question
+asked for the third time <em>in writing</em> (as wiki entry, or on this blog), and link
+that document as answer, rather than re-explaining the same thing. The reasoning
+is that a question asked three times is evidence of missing documentation, hence
+valuable to write down.</p>
+
+<p>I believe the same thing about code boilerplate: Once I&rsquo;ve written the same
+code thrice, I should make it reusable directly. In this article, I show you
+cookiecutter project templates, and my personal python project template.</p>
+
+<h2 id="enters-cookiecutter">Enters Cookiecutter</h2>
+
+<p><a href="https://cookiecutter.io">Cookiecutter</a> is a tool (written in Python), used for project creation. It
+exposes Jinja2 file templates with a list of questions as JSON file. It&rsquo;s a very
+nice introduction to the world of project templating, and can be used for all
+sorts of projects, not just Python ones.</p>
+
+<p>To solve the repeat project-creation issue, I&rsquo;ve started years ago
+to write down my own Python project template, using cookiecutter.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cfg" data-lang="cfg"><span style="color:#719e07">[tool.poetry]</span>
+name <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;{{cookiecutter.package_name}}&#34;</span>
+version <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;0.1.0&#34;</span>
+description <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;{{cookiecutter.description}}&#34;</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  <code>pyproject.toml</code> sample from the template: note the <code>{{cookiecutter.something}}</code>, ready for replacement
+</div>
+
+<p>As soon as I figured out a new trick, or a best practice I wish to reuse, I&rsquo;d
+put it in the template. See my template on Github: <a href="https://github.com/OverkillGuy/python-template">python-template</a>.</p>
+
+<h2 id="templating-challenges">Templating challenges</h2>
+
+<p>I eventually realized there are two major obstacles to project templates, which
+we should solve to get the full value of templating.</p>
+
+<h3 id="validating-the-template">Validating the template</h3>
+
+<p>How do we know the template is <em>right</em>? How do we know the file generated is
+still valid in your language? Maybe it causes parse errors, maybe it fails your
+formatting rules. Basically, we want to know that we can &ldquo;build&rdquo; the project
+properly, after generating it from template.</p>
+
+<p>This means defining what the template should be able to do once expanded, and
+running those actions on an expanded template, to validate it. Back to having a
+Continuous-Integration system that validates our changes!</p>
+
+<p>I solved this by creating <a href="https://github.com/OverkillGuy/python-template/blob/main/tests/test_template.py">actual python tests for the template</a>, built around
+custom template-expanding fixtures: expand the template in a new folder, run a
+few well-known commands, then assess the result is acceptable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">tests_template_docs_ok</span>(template: Template):
+    <span style="color:#2aa198">&#34;&#34;&#34;Checks we can run make docs on rendered code to get HTML&#34;&#34;&#34;</span>
+    out_path <span style="color:#719e07">=</span> template<span style="color:#719e07">.</span>run_in_dev([<span style="color:#2aa198">&#34;make&#34;</span>, <span style="color:#2aa198">&#34;docs&#34;</span>], template)
+    <span style="color:#719e07">assert</span> os<span style="color:#719e07">.</span>listdir(out_path <span style="color:#719e07">+</span> <span style="color:#2aa198">&#34;/docs/build/html/&#34;</span>), <span style="color:#2aa198">&#34;Docs not built&#34;</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2:</span>
+  Sample test, validating the running of <code>make docs</code> does create a non-empty folder for HTML documentation
+</div>
+
+<p>Another test is running <code>make test</code> and confirming <code>test_results/results.xml</code>
+JUnit test result files created (for test result reporting in CI)</p>
+
+<p>Some tests are more esoteric, like checking we can build a docker image off our
+new package, both the release-worthy image, and a development image, or that
+running the &ldquo;build&rdquo; commands leaves no file unstaged in git, because our
+gitignore should capture all relevant files.</p>
+
+<h3 id="explaining-the-template">Explaining the template</h3>
+
+<p>The other challenge is sharing the reasoning for the template&rsquo;s layout:
+teaching, for instance, that a <code>Makefile</code> is the simplest way to interact with
+the project. Justifying why a release-oriented Dockerfile is called
+<code>release.Dockerfile</code>, not <code>Dockerfile.release</code>. Explaining why linters and
+formatters are run as pre-commit hooks not standalone commands.</p>
+
+<p>This is both a feature discovery problem (new users need to know what their
+fancy templated project can do) and an architectural decision issue (justify
+why use <code>poetry</code> when <code>pip</code> + <code>virtualenv</code> are sufficient).</p>
+
+<p>I solved this by <a href="https://github.com/OverkillGuy/python-template/blob/main/DESIGN.md">creating a file called <code>DESIGN.md</code> at the root of the
+repository</a>, which attempts to document major design decisions of the template.</p>
+
+<p>Every big feature is an entry, along with an explanation why it was chosen,
+what alternatives may exist and why they were dismissed.</p>
+
+<p>Again, this is both a log of decisions for the record, and an opportunity to
+teach new tricks to developers. Some of those decisions may come to be reversed
+over time, as I learn to do better myself. I look forward to that part.</p>
+
+<h2 id="the-template-published">The template, published</h2>
+
+<p>After a few years tweaking it in the dark, I&rsquo;ve finally decided to publish the
+template. You can find it in Github under <a href="https://github.com/OverkillGuy/python-template">python-template</a>. I hope you try it out
+on a new project of yours, and that it either helps you get started, or teaches
+you (or me) something.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/cookiecutter">cookiecutter</a></li>
+								
+								<li><a href="/tags/templating">templating</a></li>
+								
+								<li><a href="/tags/python">python</a></li>
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

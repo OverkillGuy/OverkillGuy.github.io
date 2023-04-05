@@ -6,7 +6,17 @@
     <description>Recent content in blog on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Oct 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Apr 2023 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quick-start project templates via cookiecutter</title>
+      <link>https://jiby.tech/post/quick-start-project-templates-via-cookiecutter/</link>
+      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/quick-start-project-templates-via-cookiecutter/</guid>
+      <description>The most boring part of setting up a new code project is typing the boilerplate: it&amp;rsquo;s easy to forget bits, so we just copy the last project&amp;rsquo;s folder and &amp;ldquo;file the serial numbers off&amp;rdquo; on the project name.
+Copy-pasta-driven project setup is not great though, as it&amp;rsquo;s too easy to forget replacing values in obscure files, or misunderstand why project is set up that way in the first place, leading to nasty surprises down the line.</description>
+    </item>
+    
     <item>
       <title>Presentation: Makefiles for build automation and documentation</title>
       <link>https://jiby.tech/post/makefiles-presentation/</link>
