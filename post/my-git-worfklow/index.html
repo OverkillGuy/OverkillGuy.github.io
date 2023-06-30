@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>My git worfklow - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="My git worfklow" />
+<meta property="og:description" content="Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
+The article is broken down into ideas &#43; recommendations, with recommendations in bold." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/my-git-worfklow/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-30T00:00:00+01:00" />
+<meta property="article:modified_time" content="2023-06-30T00:00:00+01:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="My git worfklow"/>
+<meta name="twitter:description" content="Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
+The article is broken down into ideas &#43; recommendations, with recommendations in bold."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">My git worfklow</h1>
+			<div class="meta">Posted on &mdash; Jun 30, 2023</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>Every now and then, at work, I find myself discussing git worfklows, commit
+messages, branching, releasing, versioning, changelogs etc. Since my opinion has
+remained fairly consistent for the past few years, I found myself repeating the
+same points a lot, so I wrote it down. This page is the resulting compilation of
+my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.</p>
+
+<p>The article is broken down into ideas + recommendations, with recommendations in
+bold. Obviously, this workflow isn&rsquo;t applicable to everyone (sorry, Google! This
+isn&rsquo;t a free consultation!) as different teams have needs that should get dealt
+with differently.</p>
+
+<p>The intent, beyond expressing my views with the internet, is to share &ldquo;the big
+picture&rdquo; of my
+personal framework for software development, beyond just &ldquo;git tags are good&rdquo; or
+other overly-specific advice.</p>
+
+<p><strong>Scope</strong>: The resulting document describes, I hope, a workflow that keeps
+overhead fairly low, works at small team scale (1 to 20 active devs per git
+repository), while keeping reasonable traceability. That&rsquo;s where I find myself
+developing professionally most of my time.</p>
+
+<p><strong>Summary</strong>: Philosophy can be described as <a href="https://trunkbaseddevelopment.com/#scaled-trunk-based-development">(Scaled) Trunk-based
+development</a> with heavy (personal) commit message discipline, tag-based
+versioning, and overall adherence to <a href="https://12factor.net/">12 Factors</a>.</p>
+
+<h2 id="git-commit-guidelines">Git commit guidelines</h2>
+
+<blockquote>
+<p>Follow Chris Beams&rsquo; git commit message guidelines with self-discipline</p>
+</blockquote>
+
+<p>A great reference:
+<a href="https://chris.beams.io/posts/git-commit/">https://chris.beams.io/posts/git-commit</a>.
+The post explains the classic &ldquo;Seven Rules&rdquo;:</p>
+
+<ol>
+<li><p>Separate subject from body with a blank line</p></li>
+
+<li><p>Limit the subject line to 50 characters</p></li>
+
+<li><p>Capitalize the subject line</p></li>
+
+<li><p>Do not end the subject line with a period</p></li>
+
+<li><p>Use the imperative mood in the subject line</p></li>
+
+<li><p>Wrap the body at 72 characters</p></li>
+
+<li><p>Use the body to explain what and why vs. how</p></li>
+</ol>
+
+<p><strong>Recommend formalizing the adoption of that guide as reference</strong>: though these
+are already the best practices of the git community, having a <em>reference to
+point to</em> helps everyone, e.g for onboarding.</p>
+
+<p><strong>Recommend <em>against</em> using</strong> <code>git commit -m</code>: <strong>learn to use your editor
+instead. Similarly, avoid</strong> <code>git add --all</code> <strong>(aka</strong> <code>git add -A</code>). <strong>Instead, learn</strong>
+<code>git add -p</code> <strong>for interactive hunk-by-hunk staging.</strong> I found that learning to tune contents and message of commits early on leads to better
+commits in the long term, and the flags described above are at best crutches
+that prevent such learning.</p>
+
+<h2 id="branching-strategy">Branching strategy</h2>
+
+<blockquote>
+<p>Use trunk-based development, squash-rebasing PRs, staying mindful of the flow from commit
+messages → PR description → commit in master</p>
+</blockquote>
+
+<p><strong>Consider using &ldquo;main&rdquo; instead of &ldquo;master&rdquo;</strong>, not as much for ideological
+reasons, but because it&rsquo;s shorter to type and is clearer for non-latin speakers.
+Once the dust settled on the main vs master debate, I found &ldquo;main&rdquo; aligns common parlance around &ldquo;the main branch&rdquo;, as we don&rsquo;t do much &ldquo;mastering&rdquo;.</p>
+
+<p><strong>Use the main branch for releases</strong> (see versioning section below), <strong>no &ldquo;dev&rdquo; branch</strong>
+(split off main branch for features instead), <strong>no &ldquo;releases&rdquo; branch</strong> (we
+don&rsquo;t need to backport fix to old releases, just fix it for the next
+one).</p>
+
+<p><strong>Use squash-rebase approach</strong> usually, to keep the git log tidy (non-fastforward
+merges can cause clutter in git graph horizontally, and squashing avoids commits
+saying &ldquo;update per review&rdquo; = vertical clutter). Ideally, <strong>maximize the number of
+small PRs</strong>, which could lead to 10 small PRs/commits for a big feature.</p>
+
+<p>If not multiple small PRs, single PRs with &lt;10 individually-meaningful (small)
+commits can acceptably be merged rather than squashed, to track the feature as a
+block. Balance of intent legibility vs history-keeping is an art anyway.</p>
+
+<p>Since, in Github, the primary source of Git commit messages is the Github&rsquo;s PR
+merge button, <strong>the PR merge message in Github should follow commit guidelines</strong>
+outlined above (though github UI makes it hard to stick to 72 chars).</p>
+
+<p>Note that the PR merge message is usually pre-filled using <code>git log</code> of the commits
+sent for review, so PR descriptions should (ideally) just be the original
+content of <code>git log</code> of the commits: We should be able to trace the original
+commit message → PR description → git commit on master as all identical or at
+least very similar.</p>
+
+<p>This is recommended because even though we <em>could technically</em> write silly
+<a href="https://xkcd.com/1296/">&ldquo;Haaaaaands&rdquo; commit messages</a> locally but still rework it to have eloquent commit messages at
+the end, I believe that &ldquo;we play like we practice&rdquo;. Encouraging a good commit message hygiene,
+even locally for branches, is a good habit that produces neat commit messages
+after merging.</p>
+
+<p>Making meaningful commits on the first try isn&rsquo;t obvious: <strong>Each PR sent for
+review should have only meaningful commits</strong>, so devs should get comfortable
+rebasing and reworking a branch into different commits, molding messages onthe way. <strong>Suggest going through
+<a href="https://learngitbranching.js.org/">the learn visual branching exercises</a> to get confident.</strong> While experimenting,
+Github PRs should be marked as &ldquo;Draft&rdquo; to spare reviewers&rsquo; time.</p>
+
+<p>There should be a link between PRs and (Jira/equivalent) ticket on most work, as
+most work should have tickets anyway for more business/technical context.
+<strong>Recommend PR titles have ticket prefix in square-brackets like <code>[ABC-123]</code> for
+linking</strong>.</p>
+
+<p>Avoid prefixing commit messages with tickets on experimental work, as it could
+mean 20+ commits with same prefix, all to squash it back into 1. Consider
+instead using a Draft PR with ticket in title, and commit messages without
+ticket link. <strong>Using ticket as branch name is discouraged</strong> as it makes it
+impossible to understand what a branch is meant for without going online to look up tickets.</p>
+
+<p>Remember that branching/commit guidelines are meant to facilitate work from
+<em>future</em> developers, who may be bisecting years-old code, searching for a bug,
+or an architectural decision that may need overturning due to new context. Be
+considerate of this future human. An
+<a href="https://groups.google.com/g/comp.lang.c++/c/rYCO5yn4lXw/m/oITtSkZOtoUJ">old quote</a> summarizes this as &ldquo;Always code as if the guy who ends up maintaining
+your code will be a violent psychopath who knows where you live. Code for
+readability&rdquo;.</p>
+
+<h2 id="versioning">Versioning</h2>
+
+<blockquote>
+<p>Use either semantic versioning (libraries) or calendar versioning (apps),
+with git tags for marking the released commit.</p>
+</blockquote>
+
+<p>To avoid &ldquo;every commit on main branch may-or-may-not be a release, we don&rsquo;t really know&rdquo;, <strong>use
+git tags on main branch to signify release.</strong> Tag name is the new version after
+bump. Even though every main commit must be <em>deployable</em>, not every main
+commit is released = tagged = deployed.</p>
+
+<p>Process for releasing goes:</p>
+
+<ul>
+<li>make sure main builds green in CI</li>
+<li>make a commit that bumps package version (<code>pyproject.toml</code> or equivalent) and
+updates changelog.</li>
+<li>Create a git tag on the &ldquo;bump version&rdquo; commit of main with new version (prefixed with v, eg.
+<code>v1.2.3</code> or <code>v2023.05.15</code>, see version naming technique below). Bump commit + tag can be automated for
+convenience, see Snippet 1 below.</li>
+<li>Automation takes over on git tag push, triggering actual release, with
+optional human input block to allow actual deployment if any</li>
+</ul>
+
+<p><strong>Presence of a tag with known prefix (usually <code>v</code>) on a commit makes something a
+Release</strong>. Tags without prefix can be used for marking hotfixes or other history
+information that may be useful (last known working, in-the-field changes etc).
+<strong>Github&rsquo;s &ldquo;Release&rdquo; feature may be used to attach changelog information to the
+git tag</strong>, as well as automate notifications for devs/users, but the git tag
+itself is the source of truth, the Github Release is only a beautified version of the
+tag.</p>
+
+<p>Note that the above does not <em>require</em> releases to be git tags <em>on the main
+branch</em>, only that tags have a known prefix to mark as releases. This leeway
+technically enables off-main-branch releases, which can be a compliance nightmare, deal-breaker for
+some, or a life-saver for others. <strong>Consider if requiring releases to be cut from the main
+branch is a useful restriction for your project.</strong></p>
+
+<p>I personally am fond of annotated git tags (<code>--annotate = -a</code> flag of <code>git tag</code>) for
+adding more info about the release, such as a link to version&rsquo;s documentation or
+release-tracking ticket/workboard as relevant, but this is not always
+needed nor worth it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#586e75"># Set BUMP variable to any of poetry-supported (major, minor, patch)
+</span><span style="color:#586e75"># or number (1.2.3 etc), see &#39;poetry version&#39; docs for details
+</span><span style="color:#586e75"></span><span style="color:#268bd2">.PHONY</span><span style="color:#719e07">:</span> release
+<span style="color:#586e75"># Default the bump to a patch (v1.2.3 -&gt; v1.2.4)
+</span><span style="color:#586e75"></span><span style="color:#268bd2">release</span><span style="color:#719e07">:</span> BUMP=patch
+<span style="color:#268bd2">release</span><span style="color:#719e07">:</span>
+<span style="color:#586e75"># Set the new version Makefile variable after the version bump
+</span><span style="color:#586e75"></span>	<span style="color:#719e07">$(</span><span style="color:#b58900">eval</span> NEW_VERSION :<span style="color:#719e07">=</span> <span style="color:#719e07">$(</span>shell poetry version --short <span style="color:#2aa198">${</span><span style="color:#268bd2">BUMP</span><span style="color:#2aa198">}</span><span style="color:#719e07">))</span>
+	sed -i <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		<span style="color:#2aa198">&#34;s/\(## \[Unreleased\]\)/\1\n\n\n## v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198"> - </span><span style="color:#719e07">$(</span>shell date -I<span style="color:#719e07">)</span><span style="color:#2aa198">/&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		CHANGELOG.md
+	git add CHANGELOG.md pyproject.toml
+	git commit -m <span style="color:#2aa198">&#34;Bump to version v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+	git tag -a v<span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		-m <span style="color:#2aa198">&#34;Release v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  Automation, via a <code>Makefile</code> entry for python projects. Running <code>make release BUMP=patch</code> creates a release commit + tag, finalizing the unreleased Changelog.
+</div>
+
+<p>Following <a href="https://12factor.net/build-release-run">12Factors &ldquo;Build-Release-Run&rdquo;</a>: &ldquo;<strong>Releases are an append-only ledger
+and a release cannot be mutated once it is created. Any change must create a new
+release.</strong>&ldquo;</p>
+
+<p><strong>Version naming technique: recommend usually either <a href="http://semver.org">semantic</a> or <a href="http://calver.org">calendar</a>
+versioning, depending if writing library or app. For a broader versioning spec, see <a href="https://peps.python.org/pep-0440/">PEP440 standard</a>.</strong></p>
+
+<p>For libraries, semantic versioning explicits out the API as contract, bumping
+whenever contract changes as major/minor/patch. Note that this can be confusing
+for non-technical users (&ldquo;a big feature was added but this is a <em>minor</em>
+release?” or “you said this was just a bugfix, why is this a <em>major</em> release?&ldquo;).</p>
+
+<p>For &ldquo;apps&rdquo; (programs NOT directly used as building block of another developer,
+ consumed by users instead)
+calendar versioning is a good fit, using sequential numbers that increase always
+with flexibility between full <code>Y-M-D</code> numbering (eg. &ldquo;<code>v2021-01-10</code>&rdquo;), more lax
+<code>Y.minor</code> (eg. &ldquo;<code>2021.14</code>&rdquo; meaning 14th release of year 2021) and other combination
+like <code>sprintnumber.minor</code> (eg: &ldquo;<code>41.3</code>&rdquo; for 3rd release of Sprint 41, with a couple weeks
+between sprints) and variants like <code>Y.M.minor</code> (eg. &ldquo;<code>2021.1.6</code>&rdquo; for 6th version of
+January 2021, which is what Ubuntu does). Anything that has increasing numbers,
+and is sorteable, works.</p>
+
+<p>In rare cases, a single version number is not enough: Dual versioning is a niche
+solution when addressing both techies and end users (or marketing dept) by
+keeping two different versions at once. See Android, which has &ldquo;API levels&rdquo; for
+techies, increasing differently from Android &ldquo;versions&rdquo; for users.</p>
+
+<h2 id="changelog">Changelog</h2>
+
+<blockquote>
+<p>Have a Changelog file in-repo, commonly updated as part of feature work. Use
+keepachangelog format. No git log dumps or conventional commits.</p>
+</blockquote>
+
+<p>To avoid having only <code>git log</code> as reference of &ldquo;what changed in new
+code&rdquo; for user, <strong>have explicit changelogs aimed at (tech-averse)
+&ldquo;customer&rdquo;.</strong></p>
+
+<p><strong>Use <a href="http://keepachangelog.com">keepachangelog.com</a> format</strong>: <code>CHANGELOG.md</code> file mandatory in repo, each
+release its section with release name + timestamp, and a line at the top
+explaining what versioning this project uses (see above).</p>
+
+<p><strong>Updating the changelog should be (mandatory?) part of PR workflow</strong>, in order to
+make the release step as simple as replacing &ldquo;## Unreleased&rdquo; section with the
+date of release. (See Snippet 1 for automating this)</p>
+
+<p>Remember that knowing what was released is a vital part of IT operations: No
+one wants to be paged to fix a system at 3AM, and be answered &ldquo;I dunno what changed,
+<em>check the git log I guess</em>&rdquo;.</p>
+
+<p><strong>Recommend against use of <a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a>.</strong> These cause developers to
+confuse the targets of their words: release notes (changelogs) are for end
+users, and commits are for developers running <code>git bisect</code> in anger. The level
+of detail and what&rsquo;s worthy of mention is not the same. Conventional commits, I
+believe, encourage sloppy commit messages, and are a premature optimization (via
+automation) of the development process, in a place that isn&rsquo;t a performance
+bottleneck. Time spent with tools like commitizen is I believe better invested working with devs around improving commit message practices.</p>
+
+<p>For a similar reason, <strong>recommend against PR and issue templates</strong>, as I found them to
+encourage sloppy &ldquo;check the (compliance) box&rdquo; thinking, rather than honest
+evaluation of the content of the commits.</p>
+
+<h2 id="code-review-process">Code review process</h2>
+
+<blockquote>
+<p>Every code change should be reviewed by another human. Use Google&rsquo;s Code review
+guidelines. Remember a good code review uncovers not just bugs, but knowledge
+gaps, fixing information siloes. Use pre-commit, enforced in CI, to avoid
+talking of petty
+issues of like formatting, linting.</p>
+</blockquote>
+
+<p>Code review is well known to improve code quality. It encourages standards, it
+shares information about recent code changes, spreading knowledge of the
+codebase to multiple people, reducing risk.</p>
+
+<p><strong>Recommend adopting the <a href="https://google.github.io/eng-practices/review">Google Code review guidelines</a></strong>, which solidify the role
+of reviewer and author (just be aware that &ldquo;CL&rdquo; is a Google-specific term that
+means &ldquo;changelist&rdquo; = PR/diff).</p>
+
+<p>Remember that code reviews is not just to squash bugs, but to spread knowledge:
+both general teaching, and specific system knowledge. This is the time to ask
+questions and talk about architecture.</p>
+
+<p>The most hardcore yardstick of PR review is that <strong>approving a PR should mean the
+reviewer can explain the code, and be ready to maintain it themselves (without
+help) going forward</strong>. Adapt this standard as needed to balance review speed and
+thoroughness of knowledge exchange.</p>
+
+<p>Note though that code review is NOT the right place to discuss petty matters
+like formatting or end-of-file newlines, this stuff is best handed off to
+automation like formatter tools. These can usually be set in auto-fix mode, to
+avoid nagging messages, preferring automated fixes instead. <strong>Recommend use of the <a href="https://pre-commit.com">pre-commit</a>
+tool to handle formatting and linting, enforced via CI to ensure compliance.</strong></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This is an overview of the views on Software Development Lifecycle (SDLC) I&rsquo;ve
+held for the past few years, when building software professionally at a fairly
+small scale, with admitedly not a lot of focus on post-release deployment and
+support.</p>
+
+<p>A lot of the practices described here can be found in <a href="https://github.com/OverkillGuy/python-template">my personal Python project
+template</a>, as described in previous post
+<a href="../quick-start-project-templates-via-cookiecutter/">about project templates</a>.</p>
+
+<p>As I&rsquo;m working on a more &ldquo;operational&rdquo; role these days, I&rsquo;ll keep checking if I
+change my views on anything above. I&rsquo;ll report if anything changes in another
+post.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/git">git</a></li>
+								
+								<li><a href="/tags/sdlc">sdlc</a></li>
+								
+								<li><a href="/tags/pre-commit">pre-commit</a></li>
+								
+								<li><a href="/tags/changelog">changelog</a></li>
+								
+								<li><a href="/tags/versioning">versioning</a></li>
+								
+								<li><a href="/tags/codereview">codereview</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

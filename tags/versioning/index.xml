@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>versioning on Jiby&#39;s toolbox</title>
+    <link>https://jiby.tech/tags/versioning/</link>
+    <description>Recent content in versioning on Jiby&#39;s toolbox</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/versioning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My git worfklow</title>
+      <link>https://jiby.tech/post/my-git-worfklow/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/my-git-worfklow/</guid>
+      <description>Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
+The article is broken down into ideas + recommendations, with recommendations in bold.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,13 +6,67 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Apr 2023 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>changelog</title>
+      <link>https://jiby.tech/tags/changelog/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/changelog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>codereview</title>
+      <link>https://jiby.tech/tags/codereview/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/codereview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://jiby.tech/tags/git/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pre-commit</title>
+      <link>https://jiby.tech/tags/pre-commit/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/pre-commit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sdlc</title>
+      <link>https://jiby.tech/tags/sdlc/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/sdlc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>versioning</title>
+      <link>https://jiby.tech/tags/versioning/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/versioning/</guid>
       <description></description>
     </item>
     
@@ -265,15 +319,6 @@
       <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jiby.tech/tags/data-processing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>git</title>
-      <link>https://jiby.tech/tags/git/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/git/</guid>
       <description></description>
     </item>
     

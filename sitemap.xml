@@ -3,24 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2023-04-05T00:00:00+01:00</lastmod>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>https://jiby.tech/tags/cookiecutter/</loc>
-    <lastmod>2023-04-05T00:00:00+01:00</lastmod>
+    <loc>https://jiby.tech/tags/changelog/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/codereview/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/git/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/</loc>
-    <lastmod>2023-04-05T00:00:00+01:00</lastmod>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/my-git-worfklow/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/pre-commit/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/sdlc/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/versioning/</loc>
+    <lastmod>2023-06-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/cookiecutter/</loc>
     <lastmod>2023-04-05T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/python/</loc>
     <lastmod>2023-04-05T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/quick-start-project-templates-via-cookiecutter/</loc>
-    <lastmod>2023-04-05T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2023-04-05T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/templating/</loc>
@@ -127,9 +148,6 @@
   </url><url>
     <loc>https://jiby.tech/post/awk-replace-some-lines/</loc>
     <lastmod>2019-11-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/git/</loc>
-    <lastmod>2019-10-13T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/git-diff-empty-repo/</loc>
     <lastmod>2019-10-13T00:00:00+01:00</lastmod>
