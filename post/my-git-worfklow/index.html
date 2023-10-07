@@ -241,13 +241,15 @@ needed nor worth it.</p>
 <span style="color:#268bd2">release</span><span style="color:#719e07">:</span>
 <span style="color:#586e75"># Set the new version Makefile variable after the version bump
 </span><span style="color:#586e75"></span>	<span style="color:#719e07">$(</span><span style="color:#b58900">eval</span> NEW_VERSION :<span style="color:#719e07">=</span> <span style="color:#719e07">$(</span>shell poetry version --short <span style="color:#2aa198">${</span><span style="color:#268bd2">BUMP</span><span style="color:#2aa198">}</span><span style="color:#719e07">))</span>
-	sed -i <span style="color:#cb4b16">\
-</span><span style="color:#cb4b16"></span>		<span style="color:#2aa198">&#34;s/\(## \[Unreleased\]\)/\1\n\n\n## v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198"> - </span><span style="color:#719e07">$(</span>shell date -I<span style="color:#719e07">)</span><span style="color:#2aa198">/&#34;</span> <span style="color:#cb4b16">\
-</span><span style="color:#cb4b16"></span>		CHANGELOG.md
+	<span style="color:#719e07">$(</span><span style="color:#b58900">eval</span> TMP_CHANGELOG :<span style="color:#719e07">=</span> <span style="color:#719e07">$(</span>shell mktemp<span style="color:#719e07">))</span>
+	sed <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		<span style="color:#2aa198">&#34;s/\(## \[Unreleased\]\)/\1\n\n## v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198"> - </span><span style="color:#719e07">$(</span>shell date +%Y-%m-%d<span style="color:#719e07">)</span><span style="color:#2aa198">/&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		CHANGELOG.md &gt; <span style="color:#2aa198">${</span><span style="color:#268bd2">TMP_CHANGELOG</span><span style="color:#2aa198">}</span>
+	mv --force <span style="color:#2aa198">${</span><span style="color:#268bd2">TMP_CHANGELOG</span><span style="color:#2aa198">}</span> CHANGELOG.md
 	git add CHANGELOG.md pyproject.toml
 	git commit -m <span style="color:#2aa198">&#34;Bump to version v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
-	git tag -a v<span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span> <span style="color:#cb4b16">\
-</span><span style="color:#cb4b16"></span>		-m <span style="color:#2aa198">&#34;Release v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+	git tag --annotate <span style="color:#2aa198">&#34;v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		--message <span style="color:#2aa198">&#34;Release v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
 </code></pre></div>
 <div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1:</span>
