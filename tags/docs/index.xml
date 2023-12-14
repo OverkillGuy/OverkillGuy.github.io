@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docs on Jiby&#39;s toolbox</title>
+    <link>https://jiby.tech/tags/docs/</link>
+    <description>Recent content in docs on Jiby&#39;s toolbox</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Offline developer docs: Dash docsets via Zeal</title>
+      <link>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</guid>
+      <description>Since my earliest university days, I&amp;rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
+One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Offline developer docs: Dash docsets via Zeal - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Offline developer docs: Dash docsets via Zeal" />
+<meta property="og:description" content="Since my earliest university days, I&rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
+One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-12-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-12-15T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Offline developer docs: Dash docsets via Zeal"/>
+<meta name="twitter:description" content="Since my earliest university days, I&rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
+One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Offline developer docs: Dash docsets via Zeal</h1>
+			<div class="meta">Posted on &mdash; Dec 15, 2023</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>Since my earliest university days, I&rsquo;ve spent a lot of time trying to get better
+at computers, immersing myself in the world of Linux, and generally
+improving my software development skills.</p>
+
+<p>One of the aspects that was the most helpful to help me grow was attempting to
+replicate my normal dev workflow, but with less: Learn to operate on Linux not
+Windows, then learn to do dev via on the terminal instead of GUIs, and
+eventually learn to do the same but offline, without any network calls.</p>
+
+<p>These self-imposed challenges taught me about tools and resources that
+I otherwise wouldn&rsquo;t really have reached for, and I&rsquo;m a better nerd for it.</p>
+
+<p>Today, I want to share one of the tricks I&rsquo;ve grown to enjoy: offline
+documentation. Specifically, I want to discuss <a href="https://zealdocs.org/">Zeal</a>, an offline documentation
+browser based on the work from <a href="https://kapeli.com/dash">Kapeli&rsquo;s Dash</a> on MacOS. We&rsquo;ll cover the Zeal
+tool, the file format, how to find good docsets, and how to generate your own,
+and sharing them.</p>
+
+<h2 id="the-lost-art-of-rtfm">The lost art of RTFM</h2>
+
+<p>I&rsquo;m given to understand that nowadays it&rsquo;s cooler to look up basic documentation
+via ChatGPT or other language models, asking a chatbot for the answer to
+questions that the documentation covers.</p>
+
+<p>Before that, some used to reach out on StackOverflow, new questions answered by
+someone quoting the docs directly. The growing back-catalog of standard
+questions and answer became its own encyclopaedia of development, so that when
+searching basic docs questions on our favourite search engine, we find the
+answer on StackOverflow. Even though, again, this answer is a quote of the docs,
+most often even still fresh with the docs page link!</p>
+
+<p>I advise everyone I mentor to master the art of &lsquo;Reading The <em>Fine</em> Manual&rsquo;:
+becoming the only person in your organisation that actually <em>has read</em> the docs
+allows you to bypass all the middlemen of Stackoverflow, gaining crucial cycles
+in a discussion about &ldquo;can we do this?&rdquo;, turning doubts into strong answers like
+&ldquo;yes, we can, there&rsquo;s a flag for that, let me find it again&rdquo;.</p>
+
+<p>In particular, remembering not the whole docs, but what <em>exists</em>, is why I end
+up re-reading the full Dockerfile specs, and docker-build CLI reference every
+few months, just to see what I&rsquo;m missing. Every time I have re-read it, I found
+a few tricks in there that proved useful within days.</p>
+
+<p>So, get comfortable reading the documentation, whatever it is: specs, RFCs&hellip;
+You&rsquo;ll get a leg up on people who didn&rsquo;t, and get inspiration for solving the
+problems of your day.</p>
+
+<p>But sometimes this background knowledge isn&rsquo;t enough, you still do need to look
+up exact syntax etc. This is where our tool of the day comes in.</p>
+
+<h2 id="where-do-you-read-docs">Where do you read docs?</h2>
+
+<p>Depending on what you&rsquo;re looking up, there may be a core body of tools that you
+search the documentation of, over and over again, and for which StackOverflow is
+just a proxy for. My personal favourite for that is the Python docs, for finding
+the exact syntax of standard library functions like <a href="https://docs.python.org/3/library/stdtypes.html?highlight=str%20isdigit#str.isdigit">str.isdigit()</a>, or
+<a href="https://docs.python.org/3/library/pathlib.html?highlight=pathlib%20path%20mkdir#pathlib.Path.mkdir">pathlib.Path.mkdir()</a>.</p>
+
+<p>I use <a href="https://duckduckgo.com">duckduckgo</a>, so I&rsquo;m lucky to have a dedicated search term for that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">!py3 str.isdigit</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">!py path mkdir</code></pre></div>
+<p>these <a href="https://duckduckgo.com/bangs">are called &lsquo;bangs&rsquo;</a>, redirecting the search to the right website&rsquo;s
+searchbox. Neat!</p>
+
+<p>But as I tried to learn to work more and more offline, I wished I had these to
+look up without an internet search, so that I can do this in a train, or an
+airplane.</p>
+
+<p>Initially, I downloaded the docs offline as PDF, but that was
+hardly searchable.<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup></p>
+
+<p>Enough teasing, let&rsquo;s talk about today&rsquo;s star: Zeal docs!</p>
+
+<h2 id="introducing-zeal-a-docset-gui">Introducing Zeal, a docset GUI</h2>
+
+<figure><img src="https://i.imgur.com/qBkZduS.png"
+         alt="Figure 1: View of Zeal docs&amp;rsquo;s main panel, searching some Python docs" width="100%"/><figcaption>
+            <p><span class="figure-number">Figure 1: </span>View of Zeal docs&rsquo;s main panel, searching some Python docs</p>
+        </figcaption>
+</figure>
+
+
+<p>Zeal is free software, initially a Linux/Windows port of the (non-free + not
+gratis) MacOS app <a href="https://kapeli.com/dash">Dash</a>, by Kapeli. Kapeli graciously accepted that Zeal reuse
+Dash&rsquo;s docs source, named &ldquo;docsets&rdquo;, as long as Zeal doesn&rsquo;t impede on the MacOS
+app&rsquo;s monetization.</p>
+
+<p>So, first, we select docs <a href="https://zealdocs.org/#docset-list">from a big list</a> for download and indexing. After a
+short delay, we have all our docs at our fingertips, yay!</p>
+
+<p>Combined with my preference of global keybind of <code>F8</code> to open Zeal, we can pop a
+simple question to the docs really easily.</p>
+
+<p>By default, a search like &ldquo;str.find&rdquo; will search across ALL docsets (across all
+languages/tools we selected), but searches can be confined to single docset via
+&ldquo;python:str.find&rdquo; or equivalent.</p>
+
+<p>There are also <a href="https://zealdocs.org/usage.html#plugins">IDE integrations</a> like <a href="https://github.com/jinzhu/zeal-at-point">Emacs Zeal-at-point</a>, or <a href="https://github.com/deerawan/vscode-dash">VSCode Dash plugin</a>,
+which will open the app on a specific page, based on the text under cursor in
+your main text editor.</p>
+
+<p>There are a few more tips &amp; tricks on <a href="https://zealdocs.org/usage.html">Zeal&rsquo;s &ldquo;Usage&rdquo; page</a>, like use of
+ browser-style tabs (<code>Ctrl+T</code> to open, <code>Ctrl+W</code> to close) and search-within-page
+ via <code>Ctrl+F</code> or Vim-like <code>/</code> vs back-to-toplevel search of <code>Ctrl+K</code> or <code>Ctrl+L</code>.</p>
+
+<h2 id="inspecting-the-docset-ecosystem">Inspecting the docset ecosystem</h2>
+
+<p>There are many aspects of this documentation system that I find appealing: it
+seems that these &ldquo;docsets&rdquo; are official documentation, lightly post-processed,
+mostly by providing precomputed search indexes, packaged for download. Updates
+are managed via a XML-based feed system, all provided by Kapeli.</p>
+
+<p><a href="//hynek.me/articles/productive-fruit-fly-programmer/#documentation-sets">The &lsquo;docset&rsquo; format itself is apparently Apple&rsquo;s &lsquo;Documentation Set Bundles&rsquo;</a>:
+&ldquo;directories with the HTML documentation, metadata in an XML-based property
+list, and a search index in a SQLite database&rdquo;. Says the author of &ldquo;doc2dash&rdquo;, a
+third-party docset-converter for popular HTML docs generators.</p>
+
+<p>Kapeli&rsquo;s documentation around <a href="https://kapeli.com/docsets">Dash docset generation guide</a> is also fantastic,
+explaining how to get started converting whatever language&rsquo;s native docs into
+docsets.</p>
+
+<p>This is particularly interesting to me as I wish more projects were included!</p>
+
+<p>Kapeli&rsquo;s official docsets may be of the highest quality, but more obscure
+projects don&rsquo;t get this treatment. So the community created more. These are the
+&ldquo;user contributed docsets&rdquo;, still hosted by Kapeli (who gives unlimited docset
+access to Zeal thanks to <a href="https://github.com/zealdocs/zeal/issues/24#issuecomment-22607476">non-compete agreement regarding MacOS support</a>). These
+unofficial docsets, of varying quality and freshness levels, can be browsed on a
+<a href="https://zealusercontributions.vercel.app/">user-made site</a>, letting you select individual &ldquo;feed&rdquo; (set of URLs to download
+updates from) for each docset you may want to grab.</p>
+
+<h2 id="making-your-own-docsets">Making your own docsets</h2>
+
+<p>Since docsets can be created by anyone, there&rsquo;s nothing preventing us from
+packaging any HTML docs into docsets. And once aggregated into a feed, served
+over the network, these can imported into Zeal, even privately.</p>
+
+<figure><img src="/ox-hugo/my_zeal_docsets.png"
+         alt="Figure 2: My personal selection of docsets. Note my own project:mass-driver, which I packaged as docset via &amp;lsquo;doc2dash&amp;rsquo;"/><figcaption>
+            <p><span class="figure-number">Figure 2: </span>My personal selection of docsets. Note my own project:<a href="https://jiby.tech/mass-driver/"> mass-driver</a>, which I packaged as docset via &lsquo;doc2dash&rsquo;</p>
+        </figcaption>
+</figure>
+
+
+<p>So it&rsquo;s possible for entire organisations to publish internally the feed of
+their own private docsets, for all their internal tools, even while the rest of
+the world isn&rsquo;t meant to see it outside corporate intranet!</p>
+
+<p>To try this out, I&rsquo;ve <a href="https://github.com/OverkillGuy/python-template/blob/90851104481cf1d179e6f319871f92cd58eb0037/template/Makefile.j2#L28">added &ldquo;doc2dash&rdquo; to my standard Python Project template</a>,
+so as to build docs both in HTML format, and available in docsets. Locally
+symlinking the docs&rsquo; output folder to Zeal&rsquo;s docset folder allows pretty fast
+iteration!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It&rsquo;s interesting that the entire docset world is held together by Kapeli,
+because of their authorship of the original tool. I wonder if the community
+would flourish more, or shrink, if there wasn&rsquo;t such a strong hand curating it.</p>
+
+<p>We all wish for good documentation, but, nowadays, if I&rsquo;m to use a project
+closely-enough to search docs multiple times a day, I wish docsets, and
+for more people to publish them!</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fn-1">I am aware of devdocs.io, an offline developer documentation website, but it&rsquo;s still using a browser, even offline, I find it a bit weird, even though it&rsquo;s very nicely executed. Anyway, nevermind, we&rsquo;re talking about Zeal today, shush!
+ <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/docs">docs</a></li>
+								
+								<li><a href="/tags/documentation">documentation</a></li>
+								
+								<li><a href="/tags/offline">offline</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

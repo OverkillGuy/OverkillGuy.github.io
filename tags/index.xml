@@ -6,13 +6,40 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
       
       <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docs</title>
+      <link>https://jiby.tech/tags/docs/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/docs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>documentation</title>
+      <link>https://jiby.tech/tags/documentation/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/documentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>offline</title>
+      <link>https://jiby.tech/tags/offline/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/offline/</guid>
       <description></description>
     </item>
     
@@ -112,15 +139,6 @@
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/bdd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>documentation</title>
-      <link>https://jiby.tech/tags/documentation/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/documentation/</guid>
       <description></description>
     </item>
     

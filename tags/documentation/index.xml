@@ -6,7 +6,17 @@
     <description>Recent content in documentation on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Offline developer docs: Dash docsets via Zeal</title>
+      <link>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</guid>
+      <description>Since my earliest university days, I&amp;rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
+One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls.</description>
+    </item>
+    
     <item>
       <title>Reinventing IP Fragmentation</title>
       <link>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</link>
