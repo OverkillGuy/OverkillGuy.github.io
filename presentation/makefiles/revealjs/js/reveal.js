@@ -27,7 +27,7 @@ import {
 } from './utils/constants.js'
 
 // The reveal.js version
-export const VERSION = '4.5.0';
+export const VERSION = '4.6.0';
 
 /**
  * reveal.js
@@ -255,7 +255,18 @@ export default function( revealElement, options ) {
 
 		if( !config.showHiddenSlides ) {
 			Util.queryAll( dom.wrapper, 'section[data-visibility="hidden"]' ).forEach( slide => {
-				slide.parentNode.removeChild( slide );
+				const parent = slide.parentNode;
+
+				// If this slide is part of a stack and that stack will be
+				// empty after removing the hidden slide, remove the entire
+				// stack
+				if( parent.childElementCount === 1 && /section/i.test( parent.nodeName ) ) {
+					parent.remove();
+				}
+				else {
+					slide.remove();
+				}
+
 			} );
 		}
 
@@ -2203,7 +2214,7 @@ export default function( revealElement, options ) {
 
 		if( currentSlide && config.autoSlide !== false ) {
 
-			let fragment = currentSlide.querySelector( '.current-fragment' );
+			let fragment = currentSlide.querySelector( '.current-fragment[data-autoslide]' );
 
 			let fragmentAutoSlide = fragment ? fragment.getAttribute( 'data-autoslide' ) : null;
 			let parentAutoSlide = currentSlide.parentNode ? currentSlide.parentNode.getAttribute( 'data-autoslide' ) : null;
@@ -2704,6 +2715,10 @@ export default function( revealElement, options ) {
 		// Slide preloading
 		loadSlide: slideContent.load.bind( slideContent ),
 		unloadSlide: slideContent.unload.bind( slideContent ),
+
+		// Media playback
+		startEmbeddedContent: () => slideContent.startEmbeddedContent( currentSlide ),
+		stopEmbeddedContent: () => slideContent.stopEmbeddedContent( currentSlide, { unloadIframes: false } ),
 
 		// Preview management
 		showPreview,
