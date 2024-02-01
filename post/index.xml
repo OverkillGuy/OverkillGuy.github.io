@@ -6,7 +6,18 @@
     <description>Recent content in Posts on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Embrace the Early Exit</title>
+      <link>https://jiby.tech/post/embrace-early-exit/</link>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/embrace-early-exit/</guid>
+      <description>In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
+But amongst them all, there&amp;rsquo;s one pattern I whole-heartedly love, it&amp;rsquo;s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
+From If+else to ladders and conditionals hell Functions routinely need to check some edge case isn&amp;rsquo;t hit, usually with more edge cases than actual routine happy-path code lines.</description>
+    </item>
+    
     <item>
       <title>Offline developer docs: Dash docsets via Zeal</title>
       <link>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</link>

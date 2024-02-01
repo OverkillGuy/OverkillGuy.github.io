@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Embrace the Early Exit - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Embrace the Early Exit" />
+<meta property="og:description" content="In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
+But amongst them all, there&rsquo;s one pattern I whole-heartedly love, it&rsquo;s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
+From If&#43;else to ladders and conditionals hell Functions routinely need to check some edge case isn&rsquo;t hit, usually with more edge cases than actual routine happy-path code lines." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/embrace-early-exit/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-02-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-02-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Embrace the Early Exit"/>
+<meta name="twitter:description" content="In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
+But amongst them all, there&rsquo;s one pattern I whole-heartedly love, it&rsquo;s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
+From If&#43;else to ladders and conditionals hell Functions routinely need to check some edge case isn&rsquo;t hit, usually with more edge cases than actual routine happy-path code lines."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Embrace the Early Exit</h1>
+			<div class="meta">Posted on &mdash; Feb 1, 2024</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>In programming, there are patterns everywhere: patterns of building code,
+patterns for organising components, even patterns for how to test things. A
+whole industry is looking for
+patterns to solve all their problems.</p>
+
+<p>But amongst them all, there&rsquo;s one pattern I whole-heartedly love, it&rsquo;s the Early Exit. In this
+short and sweet post, I want to declare my undying love to the Early Exit,
+sharing my excitement.</p>
+
+<h2 id="from-if-plus-else-to-ladders-and-conditionals-hell">From If+else to ladders and conditionals hell</h2>
+
+<p>Functions routinely need to check some edge case isn&rsquo;t hit, usually with more
+edge cases than actual routine happy-path code lines.</p>
+
+<p>The most obvious way to write this is to have <code>if</code> for the case that is good,
+and <code>else</code> the cases that aren&rsquo;t.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+    <span style="color:#719e07">if</span> user<span style="color:#719e07">.</span>is_admin():
+        <span style="color:#719e07">return</span> change_content(post, content_change, who<span style="color:#719e07">=</span>user<span style="color:#719e07">.</span>id)
+    <span style="color:#719e07">else</span>:
+        <span style="color:#719e07">raise</span> NotAuthorizedError(<span style="color:#2aa198">&#34;User is not admin&#34;</span>)</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  Hypothetical piece of code, dealing with admins alone being able to change posts.
+</div>
+
+<p>Now, once this specific &ldquo;if&rdquo; is sorted, the code for when everything goes
+according to plan is inside an <code>if</code>, so it is shifted &ldquo;inwards&rdquo; by one layer of
+indentation.</p>
+
+<p>Of course, with more things to check, this gets more elaborate, an issue
+called various names like if-else ladders, or conditional hell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+    <span style="color:#719e07">if</span> user<span style="color:#719e07">.</span>is_admin():
+        <span style="color:#719e07">if</span> post<span style="color:#719e07">.</span>published:
+            <span style="color:#586e75"># The main point of this function is here:</span>
+            <span style="color:#719e07">return</span> change_content(post, content_change, who<span style="color:#719e07">=</span>user<span style="color:#719e07">.</span>id)
+        <span style="color:#719e07">else</span>:
+            <span style="color:#719e07">raise</span> ContentNotPublishedError(<span style="color:#2aa198">&#34;Draft article cannot be changed&#34;</span>)
+    <span style="color:#719e07">else</span>:
+        <span style="color:#719e07">raise</span> NotAuthorizedError(<span style="color:#2aa198">&#34;User is not admin&#34;</span>)</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2:</span>
+  More elaborate checks
+</div>
+
+<p>The entire structure becomes unwieldy, as we hide the very core of the function
+in a scaffolding that isn&rsquo;t easily scannable from afar.</p>
+
+<h2 id="exit-early">Exit Early!</h2>
+
+<p>Early exit is a practice that favours getting the wrong case out of the way
+early, exiting as fast as possible from the function, returning or erroring as
+needed, in order to progressively weed out the edge cases, and allow us to focus
+on the happy path.</p>
+
+<p>Because the bad case has already returned, the further we are in the
+function, the more things we can assert about the current state of the world.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+    <span style="color:#719e07">if</span> <span style="color:#719e07">not</span> user<span style="color:#719e07">.</span>is_admin():
+        <span style="color:#719e07">raise</span> NotAuthorizedError(<span style="color:#2aa198">&#34;User is not admin&#34;</span>)
+    <span style="color:#586e75"># We KNOW user is admin if we reach here</span>
+    <span style="color:#719e07">return</span> change_content(post, content_change, who<span style="color:#719e07">=</span>user<span style="color:#719e07">.</span>id)</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3:</span>
+  First example, rewritten as early exit
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+    <span style="color:#719e07">if</span> <span style="color:#719e07">not</span> user<span style="color:#719e07">.</span>is_admin():
+        <span style="color:#719e07">raise</span> NotAuthorizedError(<span style="color:#2aa198">&#34;User is not admin&#34;</span>)
+    <span style="color:#586e75"># We KNOW user is admin if we reach here</span>
+    <span style="color:#719e07">if</span> <span style="color:#719e07">not</span> post<span style="color:#719e07">.</span>published:
+        <span style="color:#719e07">raise</span> ContentNotPublishedError(<span style="color:#2aa198">&#34;Draft article cannot be changed&#34;</span>)
+    <span style="color:#586e75"># User is admin + post published already:</span>
+    <span style="color:#719e07">return</span> change_content(post, content_change, who<span style="color:#719e07">=</span>user<span style="color:#719e07">.</span>id)</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4:</span>
+  More elaborate checks, early-exit style. Notice how with each comment, we build up more certainty about the state of the system we're in, allowing us to pick the right action.
+</div>
+
+<p>Note that the resulting code avoids multiple levels of indentation, dealing with
+one thing at a time, ending up with a shorter solution that reads more like a
+sentence.</p>
+
+<p>This allows developers to focus on the specific case being dealt with on the
+specific line being worked on, instead of what combination of if/else ladder got
+us to be on this particular line.</p>
+
+<h2 id="early-exit-forever">Early Exit, forever!</h2>
+
+<p>That&rsquo;s all for early exit: I haven&rsquo;t come across any situation that wasn&rsquo;t
+improved by flipping an if/else into an early exit, which makes it a bit of an
+underrated superpower.</p>
+
+<p>I hope I&rsquo;ve communicated the pleasure of flipping complex conditionals around,
+ and hope you get as much mileage as I do out of this silly little trick.</p>
+
+<p>Small insights like these remind me how much fun it is to play with computer programs.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/early-exit">early-exit</a></li>
+								
+								<li><a href="/tags/programming">programming</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>
