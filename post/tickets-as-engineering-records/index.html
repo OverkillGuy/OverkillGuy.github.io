@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Reframing tickets as engineering records - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Reframing tickets as engineering records" />
+<meta property="og:description" content="In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&rsquo;s undeserved, once we reframe what, or who tickets are for.
+In this article I want to revisit the purpose of tickets, usually &ldquo;tickets for project management&rdquo;, explore an alternative viewpoint of &ldquo;tickets as engineering records&rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
+Tickets as project management Under this fairly common viewpoint, tickets are a project manager&rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&rsquo;m of course exaggerating on purpose)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/tickets-as-engineering-records/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-03-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-28T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reframing tickets as engineering records"/>
+<meta name="twitter:description" content="In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&rsquo;s undeserved, once we reframe what, or who tickets are for.
+In this article I want to revisit the purpose of tickets, usually &ldquo;tickets for project management&rdquo;, explore an alternative viewpoint of &ldquo;tickets as engineering records&rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
+Tickets as project management Under this fairly common viewpoint, tickets are a project manager&rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&rsquo;m of course exaggerating on purpose)."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Reframing tickets as engineering records</h1>
+			<div class="meta">Posted on &mdash; Mar 28, 2024</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>In the software world, tickets (as implemented in Jira, etc) often have a bad
+reputation, and I think it&rsquo;s undeserved, once we reframe what, or who tickets
+are <em>for</em>.</p>
+
+<p>In this article I want to revisit the purpose of tickets, usually &ldquo;tickets for
+project management&rdquo;, explore an alternative viewpoint of &ldquo;tickets as engineering
+records&rdquo;, and highlight how tickets should be useable as asynchronous
+alternative to (synchronous) communication.</p>
+
+<h2 id="tickets-as-project-management">Tickets as project management</h2>
+
+<p>Under this fairly common viewpoint, tickets are a project manager&rsquo;s tool, almost
+inflicted upon devs, likely in an attempt to punish them for their arcane powers
+over machine, who knows (I&rsquo;m of course exaggerating on purpose).</p>
+
+<p>Under this interpretation, tickets are not <em>really</em> useful to developers much,
+but instead the closest thing to electronic bracelets, like clock-in clock-out
+punch-cards, but for morsels of work: Work is directed to you via tickets
+assignment, you do the work, you move it to completion and that&rsquo;s all there is
+to it.</p>
+
+<p>I find this an unproductive viewpoint, needlessly adversarial, reeking of
+&ldquo;Managers are evil and want only to make their graphs (of KPIs) look good&rdquo;. In
+that mindset, engineers are the good guys, trying to do their work, but are held
+back by paperwork and the ticket-bureaucracy. How unfair!</p>
+
+<h2 id="tickets-as-engineering-records">Tickets as engineering records</h2>
+
+<p>I found much more productive to reframe ticket use by looking at pure
+bug-trackers, such as Debian&rsquo;s bugzilla: Pick a random bug, notice it tells a
+story of the issue, of who spotted it, how to reproduce, and looking at the
+comments over time, we see the mystery get investigated, hopefully resolved as
+supporting elements are introduced, example and counter-examples found, etc.</p>
+
+<p>These bug trackers use tickets as an engineer&rsquo;s record of what happened during
+the investigation, and even when a bug is long closed, it may still be useful to
+revisit it: to learn what the original issue was, how it was found out, how it
+was fixed, what other solutions were considered but dismissed and why.</p>
+
+<p>So let&rsquo;s think of tickets for new features, or bugs, to be just like engineering
+records for the future: Let&rsquo;s make sure that the design decisions are recorded
+when they occur, especially the kind of twist and turns that occur during
+exploration, and that may answer future questions.</p>
+
+<p>A good engineering ticket can be, just like a good git commit, revisited 2
+(or 10) years later, reading about the decisions (the ones that aren&rsquo;t already
+recorded in architectural/design documents), seeing for instance why this
+library was chosen when another one looked just as mature. Perhaps the ticket
+shows one library wasn&rsquo;t supporting the encryption mode we needed, or a
+compatibility issue with language feature was found, but this was fixed since
+then. Perhaps the performance constraint that required going one way is no
+longer relevant. I like to imagine a good engineering ticket like going into
+<code>git bisect</code>.</p>
+
+<h2 id="tickets-as-async-status-update">Tickets as async status update</h2>
+
+<p>Ticket comments work best as status log, updated asynchronously on your own time
+as work progresses. Every so often, someone will be asking me &ldquo;how close to done
+is this ticket?&rdquo; over chat, or even face to face. By chat, I most of the time
+end up copying the latest update from the ticket, something like &ldquo;Feature
+implemented in PR 123, will start integration-test with branch XYZ tomorrow,
+expect it to be reviewable by Tuesday; need to get Amy to prep the integration
+environment&rdquo;<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup>. So, why interrupt me, <em>synchronously</em>,
+only to get data that can be gotten asynchronously from the ticket, ticket which
+is <em>supposed to be</em> the primary source of this information anyway?</p>
+
+<p>I believe good ticket hygiene means there&rsquo;s frequent updates as comments on
+ticket, just like for incidents: The best place to get the freshest update, is
+not to bother me directly, but to subscribe to the ticket&rsquo;s update feed. This
+scales, when direct messaging won&rsquo;t.</p>
+
+<h2 id="tickets-as-business-continuity-tool">Tickets as business continuity tool</h2>
+
+<p>As work is being selected into sprint, I like to think that a good ticket
+contains enough context so anyone qualified can pick up the full work, and have
+all the arcana documented (like odd requirements, known issues to look out for,
+half-ready code to dust out, or red herrings and traps in the codebase&hellip;).</p>
+
+<p>In that sense, the ticket works as business continuity insurance, where the
+original reporter can become suddenly unavailable, but the work can carry on
+with no measurable interruptions.</p>
+
+<p>I&rsquo;ve even heard of a team where the original ticket reporter is not <em>allowed</em> to
+talk about the ticket during backlog review activity, or any planning poker. I
+find that a brilliant solution to force the context to be written up. I&rsquo;ve even
+heard reports from that team that this practice encouraged juniors to pick up
+harder work, because there was no more hidden knowledge assumed.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I personally believe that a good ticket practice makes codebases survive longer,
+with less friction. Just like good git commit messages help investigate
+years-old decisions, the tickets are a crucial part of the institutional memory
+of a project, when people may not still be there to tell the tale.</p>
+
+<p>But this assumes that we&rsquo;re using tickets not as a burden, but as a detailed
+history of the implementation of a project, down to every attempts and missteps of the project.</p>
+
+<p>Despite the commit messages, and design documents, which carry most of the
+&ldquo;public history&rdquo; across, we sometimes need to see that day-by-day activity
+recounted, the in-the-dark sausage making details, to shine a light on a problem
+or decision that is still impacting us down the line, but may not have felt
+critical to write in a decision record.</p>
+
+<p>But this assumes a rigorous practice of logging often, and in a way that people
+without any timezone overlap can fully track progress and contribute. That part
+is important to foster for a healthy remote culture.</p>
+
+<p>In many of these discussions, I lean towards strong self-imposed discipline,
+which is not something that can be imposed from outside. I&rsquo;ve also found, as my
+career trended towards more operational areas, that the imperatives of quick
+turnaround clash quite heavily with these ideals, forcing me to re-evaluate.
+Certainly a point to revisit in the future!</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fn-1"><p>Notice this format is close to a &ldquo;CAN report&rdquo;, which is in
+heavy use in the firefighting community. From a <a href="https://www.fireengineering.com/firefighter-training/drill-of-the-week-the-can-report-1/">firefighting website</a>: &ldquo;An easy
+way to answer or transmit a progress report is the CAN report. The C A N report
+stands for Conditions, Actions, Needs. By using this order model, the person
+giving the report easily identifies how well they are doing, the conditions they
+are facing, and any support or resource needs that they have.&rdquo; I love learning
+about my job from looking at others!</p>
+ <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/ticket">ticket</a></li>
+								
+								<li><a href="/tags/project-management">project-management</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

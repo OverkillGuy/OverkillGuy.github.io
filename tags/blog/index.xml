@@ -6,7 +6,18 @@
     <description>Recent content in blog on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reframing tickets as engineering records</title>
+      <link>https://jiby.tech/post/tickets-as-engineering-records/</link>
+      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/post/tickets-as-engineering-records/</guid>
+      <description>In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets are for.
+In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering records&amp;rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
+Tickets as project management Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).</description>
+    </item>
+    
     <item>
       <title>Embrace the Early Exit</title>
       <link>https://jiby.tech/post/embrace-early-exit/</link>

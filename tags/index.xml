@@ -6,13 +6,31 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
       
       <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>project-management</title>
+      <link>https://jiby.tech/tags/project-management/</link>
+      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/project-management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ticket</title>
+      <link>https://jiby.tech/tags/ticket/</link>
+      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/ticket/</guid>
       <description></description>
     </item>
     
@@ -256,15 +274,6 @@
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jiby.tech/tags/features/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>project-management</title>
-      <link>https://jiby.tech/tags/project-management/</link>
-      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/project-management/</guid>
       <description></description>
     </item>
     
