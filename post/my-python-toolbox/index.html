@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>My python toolbox - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="My python toolbox" />
+<meta property="og:description" content="The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
+Lately, there&rsquo;s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
+I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/my-python-toolbox/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-04-01T00:00:00+01:00" />
+<meta property="article:modified_time" content="2024-04-01T00:00:00+01:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="My python toolbox"/>
+<meta name="twitter:description" content="The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
+Lately, there&rsquo;s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
+I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools."/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">My python toolbox</h1>
+			<div class="meta">Posted on &mdash; Apr 1, 2024</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>The packaging workflow of Python has historically been a bit messy, starting
+with <code>pip</code> being <em>just</em> good enough, and virtualenvs being a great idea but a
+bit unwieldy. Installation was difficult, and tools like anaconda filled the
+gaps.</p>
+
+<p>Lately, there&rsquo;s been renaissance of package tooling in Python thanks to other
+languages innovating in the area, inspiring and pollinating the ecosystem,
+improving the comfort of development.</p>
+
+<p>I want to present here the tools that I use to work with Python, usually latest
+iterations on well known concepts, to show that Python can be both fun to play
+with, <em>and</em> safe enough if we use modern tools.</p>
+
+<p>This post continues the series on &ldquo;my way of working&rdquo;: See
+<a href="../my-git-worfklow">my git worfklow</a>, my <a href="../makefiles-presentation">Presentation on Makefiles for
+documentation and shorthand</a>. And <a href="../quick-start-project-templates-via-cookiecutter/">as presented previously</a>, all of the below
+patterns can be seen in action in my <a href="https://github.com/OverkillGuy/python-template">python template</a>.</p>
+
+<h2 id="in-a-nutshell">In a nutshell</h2>
+
+<p>I use and recommend:</p>
+
+<ul>
+<li>Python latest (currently 3.12) from <code>apt install</code>, <code>brew</code> or equivalent,
+<strong>avoiding</strong> <code>pyenv</code></li>
+<li><code>pipx</code> to install every python CLI package, replacing <code>pip</code> for command line utilities</li>
+<li><code>poetry</code> as package manager, replacing <code>requirements.txt</code> and managing my
+virtualenvs for code development</li>
+<li><code>ruff</code> as linter + formatter (includes <code>black</code> + <code>isort</code> rules)</li>
+<li>Your favourite editor or IDE, using an LSP client, together with
+<code>python-lsp-server</code> backend, and plugin <code>python-lsp-ruff</code> for real-time
+feedback on code</li>
+<li><code>mypy</code> for type checking</li>
+<li><code>pre-commit</code> for managing all linters/local checks including <code>ruff</code> and
+<code>mypy</code> above</li>
+<li><code>pytest</code> for testing, using <code>pytest-cov</code> for coverage, <code>testcontainers</code> for
+integration tests, and optionally the excellent <code>pytest-cases</code>, for complex
+fixtures</li>
+<li><code>sphinx</code> with <code>myst-parser</code> to generate HTML/PDF documentation from Markdown,
+and <code>sphinx-autodoc2</code> for API Reference supporting Markdown docstrings</li>
+<li><code>make</code> to give shorthand commands for all the above</li>
+</ul>
+
+<p>We&rsquo;ll elaborate on each of these tools next, but again, the best way to try
+using these tools together is to use <a href="https://github.com/OverkillGuy/python-template">my personal python project template</a>, which
+generates a new project with my ideal setup ready to run <code>make</code> in.</p>
+
+<h2 id="system-install-of-python-not-pyenv">System install of Python, not pyenv</h2>
+
+<p>I never really needed to have multiple simultaneous versions of python for each
+project, so I never found it useful to use <code>pyenv</code>, just go for system versions.</p>
+
+<p>So I recommend against using Pyenv, which I find to be overkill for almost every
+project I have ever worked with, adding a layer of complexity, slowness, and
+brittleness over every python commands, for no benefit.</p>
+
+<p>Similarly, I don&rsquo;t use or recommend <code>anaconda</code> because it&rsquo;s never been needed
+for me, last time I used it (a long time ago) it took over just a bit too much
+of the tools at once for my taste.</p>
+
+<p>Instead, pick your system&rsquo;s python installation (<code>apt install python</code> on Ubuntu,
+<code>brew install python@3.12</code> in MacOS via homebrew, whatever works), make sure
+it&rsquo;s reasonably supported (no end of life versions), and ensure you have <code>pip</code>
+and <code>virtualenv</code> available to start with.</p>
+
+<p>Remember that Python is quite good at compatibility around minor versions, so if
+your project says it needs Python 3.10, there usually is not much issue running
+it locally from 3.12. Just ensure your CI matches the version of Python you
+target officially to spot any surprises.</p>
+
+<h2 id="pipx-for-cli-installs-not-pip">Pipx for CLI installs, not pip</h2>
+
+<p>With the above Python installed, do this one and only <code>pip</code> invocation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip --user install pipx</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  Your last pip command ever
+</div>
+
+<p><a href="https://pipx.pypa.io/">Pipx</a> is a wrapper for <code>pip</code> + <code>virtualenv</code> for Python command line tools. It
+will manage any package just like <code>pip</code> would, exposing the commands, but
+setting up internally a virtualenv per command/package, ensuring tools never
+conflict with each other.</p>
+
+<p>Note you will need to run the following to get the commands exposed in shell
+properly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pipx ensurepath</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2:</span>
+  Set up the <code>$PATH</code> for pipx
+</div>
+
+<p>This allows us to install any CLI by replacing <code>pip install &lt;my-package&gt;</code> with
+<code>pipx install &lt;my-package&gt;</code>.</p>
+
+<p>Npm users may recognize the pattern of <code>npx</code> vs <code>npm</code> regarding running commands
+in an isolated fashion.</p>
+
+<p>Now we can install any CLI tool we want, and having them installed locally for
+this user without mangling system packages.</p>
+
+<p>Pipx can even be (ab)used to install packages from git repositories without
+published packages, which is convenient, though not something I encourage at
+scale.</p>
+
+<h2 id="poetry-package-manager">Poetry package manager</h2>
+
+<p><a href="https://python-poetry.org/">Poetry</a> takes over the development process, replacing the need for
+<code>requirements.txt</code> files and manually managed virtualenvs. Instead we specify
+the dependencies and version range we accept, dependency groups, and get version
+pinning for free.</p>
+
+<p>I like Poetry, it somehow fits into my mental model of how to work with code,
+doing the same as <code>cargo</code>, and its TOML file (using <code>pyproject.toml</code>) is very
+similar.</p>
+
+<p>A few sample commands to get inspired by:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">poetry install</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3:</span>
+  Installs all dependencies of a project, generating virtualenv if needed
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">poetry shell  <span style="color:#586e75"># Activate the venv</span>
+<span style="color:#586e75"># Alternatively, just run a single command in venv:</span>
+poetry run &lt;mycmd&gt;</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4:</span>
+  Running arbitrary commands, as shell or one-off
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># Tree of dependencies incl. transitive:</span>
+poetry show --tree
+<span style="color:#586e75"># Table of outdated packages:</span>
+poetry show --outdated
+<span style="color:#586e75"># Update outdated packages within specified ranges:</span>
+poetry update</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5:</span>
+  Show and manipulate dependencies
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#586e75"># Prints current package version</span>
+poetry version --short
+<span style="color:#586e75"># Bump the package:</span>
+poetry version &lt;major-minor-patch-or-number&gt;
+poetry version minor
+poetry version 1.2.3</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6:</span>
+  Checking or bumping package's version
+</div>
+
+<p>Note that, though <code>poetry shell</code> works fine as a venv activation command, I
+recommend scripts and users get used to <code>poetry run &lt;cmd&gt;</code> for all commands, in
+order to explicit the need to run this command inside the virtualenv. Once past
+the mental hurdle of adding this prefix, it&rsquo;s really neat.</p>
+
+<p>There&rsquo;s just one setup thing I <del>recommend</del> force on all my fellow poetry
+users, it&rsquo;s to run the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">poetry config virtualenv.in-project true</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 7:</span>
+  Ensures the virtualenv is created in project folder under <code>.venv/</code>, making it easy to play with the venv without <code>poetry</code>, and easy to wipe via <code>find .venv/ -delete</code>
+</div>
+
+<p>I personally don&rsquo;t understand why this config is not the default, instead
+preferring to create virtualenvs somewhere difficult to pin down.</p>
+
+<h2 id="ruff-the-mega-linter-formatter">Ruff, the mega linter, formatter</h2>
+
+<p>Once upon a time, we used a conjunction of isort, black, and flake8, and had to
+have plugins for each of them for compatibility with the others.</p>
+
+<p>But nowadays, <code>ruff</code> just takes over it all.</p>
+
+<p><a href="https://docs.astral.sh/ruff/">Ruff</a> is, according to its docs:</p>
+
+<blockquote>
+<p>An extremely fast Python linter and code formatter, written in Rust [&hellip;]</p>
+
+<p>10-100x faster than existing linters (like Flake8) and formatters (like Black)
+[&hellip;]</p>
+
+<p>Ruff can be used to replace Flake8 (plus dozens of plugins), Black, isort,
+pydocstyle, pyupgrade, autoflake, and more, all while executing tens or hundreds
+of times faster than any individual tool.</p>
+</blockquote>
+
+<p>There&rsquo;s nothing else to say, install this one tool, learn to tweak some of it
+(like enabling auto-fix mode for most rules) and just forget about linting ever
+again!</p>
+
+<p>In particular I enforce the rules about forcing docstrings in top-level of
+module + functions, but that&rsquo;s just my preference, again to force myself to get
+basic explanation of purpose.</p>
+
+<h2 id="mypy-for-type-checking">Mypy for type checking</h2>
+
+<p>Modern Python has type hints. These are obviously not as thorough as statically
+typed languages, but preserve the benefit of both explaining types to humans
+reading the code, and being verifiable statically by tooling (just remember that
+at runtime, the interpreter does not care about these!).</p>
+
+<p>So we use a type-checker, explicitly checking that the types are consistent.</p>
+
+<p>I strongly recommend starting to use types for even the most simple
+business-domain interpretations of primitives: a tool for managing software
+deployment will likely benefit from defining a custom alias over <code>str</code> called
+<code>Environment</code>, another for <code>Datacenter</code>, etc, so as to clarify the meaning of
+parameters being passed via typing. This allows return types like
+<code>tuple[Environment, Datacenter]</code> as opposed to <code>tuple[str, str]</code>.</p>
+
+<p>Suggest enforcing through code reviews the requirement of &ldquo;any function should
+have types for input and type for output&rdquo;. The escape hatch <code>typing.Any</code> is a
+valid type matching anything, fallback when we genuinely do not know, but
+generally this should be avoided as it goes against the point of narrowing down
+types.</p>
+
+<p>And for the typing pedants who say Python&rsquo;s duck typing is <em>supposed</em> to not
+enforce type constraints but &ldquo;shape&rdquo; constraints, they can enjoy being smug, and
+then define <a href="https://docs.python.org/3/library/typing.html#typing.Protocol">typing.Protocol</a>s for type matching instead, the idea remains the
+same.</p>
+
+<h2 id="pre-commit-to-run-all-linters-consistently">Pre-commit to run all linters consistently</h2>
+
+<p><a href="https://pre-commit.com">Pre-commit</a> (the specific python tool from <a href="https://pre-commit.com">https://pre-commit.com</a>, not the
+concept of having git hooks ran before committing, though the tool linked does
+that and is named after it) is a tool to define &ldquo;hooks&rdquo; to run against files of
+the repo, mostly for linters, but also for formatters.</p>
+
+<p>The tool supports a truly impressive number of build systems<sup class="footnote-ref" id="fnref:fn-1"><a href="#fn:fn-1">1</a></sup>, isolating each tool in a
+virtualenv equivalent of the hook&rsquo;s language, enabling hooks to be run
+repeatedly while staying isolated.</p>
+
+<p>The <a href="https://github.com/pre-commit/pre-commit-hooks">default pre-commit-hook repo</a> defines a slew of useful checks like &ldquo;never
+allow committing a private SSH key&rdquo;, or &ldquo;trim trailing whitespaces in files&rdquo;.
+These are inexpensive to run and helpful to enforce.</p>
+
+<p>So linters like <code>ruff</code> and <code>mypy</code> above are managed by this tool, which is built
+to hook up to git pre-commit hooks, getting a kind of cheap local &ldquo;CI-lite&rdquo;
+checks before committing.</p>
+
+<p>Error exit codes in hooks fail the checks, but the tool also diffs the repo
+before/after running the hooks, so that a formatter fixing format issues fails
+the pre-commit hook because files were modified. For me, this usually means
+running the checks via <code>make</code> once, getting a formatter autofix some code
+(failing hooks this time) and then a second run of <code>make</code>, hopefully passing
+now, just to be sure that there&rsquo;s no remaining issue.</p>
+
+<p>Scripts local to the repo can also be defined as checks, so we can enforce
+repo-specific consistency, and even export our checks for others. This is
+perfect for a team trying to set up validators across their organisation.</p>
+
+<p>I highly recommend to configure CI servers to run the linters independently, to
+ensure that the standards stay high even if devs forget to run the checks
+locally. This way any merge request will require these to pass as well as tests
+to pass, so we&rsquo;ll never get surprised with lint failures creeping in the
+codebase, zero tolerance for lint!</p>
+
+<h2 id="editor-support-via-lsp">Editor support via LSP</h2>
+
+<p>I&rsquo;m not preachy about editors, but I want to make sure everybody gets a
+consistent set of tooling, even if their editor choice is not very common (I&rsquo;m
+an Emacs user after all).</p>
+
+<p>So I recommend people who may not know about it look up <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a>
+(LSP), a technology that enables editor-independent code analysis, only need to
+instal an LSP client plugin for your favourite editor.</p>
+
+<p>For python, a few LSP servers exist, I recommend using <code>python-lsp-server</code>, and
+integrating your editor with it.</p>
+
+<p>In particular, it has a plugin for <code>ruff</code>, called <code>python-lsp-ruff</code>, which
+exposes in code all the checks that ruff would do when you run it as a
+pre-commit hook, but interactively during your editing for faster feedback.</p>
+
+<p>Per above, these are python CLIs, so we recommend to install via <code>pipx</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pipx install python-language-server
+<span style="color:#586e75"># Install the ruff plugin inside the LSP&#39;s venv</span>
+pipx inject python-language-server python-language-ruff</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 8:</span>
+  Installing the Python LSP Server
+</div>
+
+<p>Note again that LSP is just a nice to have in editors, maybe your favourite tool
+already <em>has</em> good Python support, like PyCharm or VSCode, but just in case, LSP
+is a really good tool to level the playing field.</p>
+
+<h2 id="pytest-for-testing">Pytest for testing</h2>
+
+<p>Pytest is simply a <em>nice</em> testing framework. Remembering that since pre-commit
+above manages all their own virtualenv, this makes pytest is the first tool in
+the list that we depend on for testing that needs included in poetry&rsquo;s explicit
+dependencies. We thus define a dedicated poetry dependency group for tests, in
+which we include pytest and a few others, as there are a couple more amazing
+plugins that complement pytest well.</p>
+
+<h3 id="parametrized-test-cases">Parametrized test cases</h3>
+
+<p>One such plugin is <a href="https://smarie.github.io/python-pytest-cases/">pytest-cases</a>, which enables complex test fixtures, perfect
+for parametrizing tests that use complex structures like NumPy arrays etc. Since
+these parametrized tests &ldquo;dimensions&rdquo; are defined as functions or classes, we
+can use function/class naming, and expansive docstrings to describe exactly how
+this specific case is different from the rest, or why it&rsquo;s useful to explore.</p>
+
+<h3 id="integration-tests-using-docker">Integration tests using docker</h3>
+
+<p>For integration testing, I like to use the
+<a href="https://testcontainers-python.readthedocs.io/">Python version of
+testcontainers</a>, which enables anyone with a docker socket to run containerized
+services like <code>postgres</code>, spun up and down on the fly as test fixtures. This
+enables tests that validate features using a clean database, persisted (or not,
+configurable) across tests.</p>
+
+<h3 id="fake-data-with-faker">Fake data with Faker</h3>
+
+<p>The well known <a href="https://faker.readthedocs.io/en/master/">faker</a> library is also amazing for generating realistic-sounding
+data in an easy way, with good localization too. Perfect when shipping a library
+with new types that need believable sample data for effective testing.</p>
+
+<h3 id="property-based-testing">Property-based testing</h3>
+
+<p>Finally, I&rsquo;m keen to get the opportunity to use the <a href="https://hypothesis.readthedocs.io/en/latest/index.html">hypothesis</a> library soon,
+to have property-based tests checking for invariants in the software, compared
+against generated data.</p>
+
+<h2 id="sphinx-for-docs">Sphinx for docs</h2>
+
+<p>For documentation, I like to define a separate poetry dependency group.</p>
+
+<p>I&rsquo;ve reviewed a lot of docs-as-code systems, and despite the innovations, I rely
+on good old <a href="https://www.sphinx-doc.org/en/master/">Sphinx docs</a> for documentation-generation, with a twist. Its various
+output formats like HTML and PDF via LaTeX are hard to beat, and the extensive
+plugin list makes up for its peculiarities.</p>
+
+<p>In particular, though the original docs source format of Sphinx is a custom
+thing called reStructuredText (extension .rst), we replace it via <a href="https://myst-parser.readthedocs.io/en/latest/">myst-parser</a>
+instead, a plugin that parses regular MarkDown instead of RST. So we write
+markdown in docs, and still get <em>lovely</em> documentation.</p>
+
+<p>I default to using the <a href="https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html">sphinx-readthedocs</a> theme to get the classic &ldquo;ReadTheDocs&rdquo;
+look, which looks serious enough, if a little unoriginal. Use your own taste to
+choose a theme, pick one from the <a href="https://sphinx-themes.readthedocs.io/en/latest/">sphinx themes gallery</a>!</p>
+
+<p>I strongly believe that code documentation should contain an API Reference
+detailing packages and contents. Sphinx does have an autodoc system, but I
+recommend <a href="https://sphinx-autodoc2.readthedocs.io/en/latest/">sphinx-autodoc2</a> as a replacement, to enable the same markdown parsing
+of <code>myst-parser</code> in code and docstrings.</p>
+
+<p>Like for <code>pytest</code>, there&rsquo;s extras that are useful in some cases, but worth
+pointing out in general to show how accomodating our toolbox can be.</p>
+
+<h3 id="requirements-as-code">Requirements as code</h3>
+
+<p>Starting with <a href="https://sphinx-needs.readthedocs.io/en/latest/">sphinx-needs</a><sup class="footnote-ref" id="fnref:fn-2"><a href="#fn:fn-2">2</a></sup>, a requirements-as-code extension,
+enabling the writing up of requirements, specifications, and their relationship
+between each other as part of the docs.</p>
+
+<p>Remember that we can mix in links to actual code (functions, classes etc) within
+our prose, so we can trace requirements from the source, to specifications,
+implementation, and even down to feature acceptance tests. When the alternative
+to track this is hundreds of pages of Word documents or spreadsheets, being able
+to manage the history in version control, alongside of the implementing code,
+and get change requests over git diffs of actual code is a wonderful
+improvement.</p>
+
+<h3 id="page-generation-from-template">Page generation from template</h3>
+
+<p>To generate templated docs pages, there&rsquo;s a little plugin called <a href="https://pypi.org/project/sphinx-jinja/">sphinx-jinja</a>,
+which exposes the Jinja template engine of Sphinx, with custom programmable
+data. I&rsquo;ve used this in the past to render a markdown page full of images stored
+in a folder, with section separators titled after the image filenames. We never
+<em>think</em> we need this sort of tool, but documentation often benefit from
+automatically including a summary of data/code in the repo, without having to
+manually update docs when the source changes.</p>
+
+<p>The sphinx <code>conf.py</code> file is where we can run Python code to generate the
+context data, such as my example of listing images in filesystem, generating
+dict of data.</p>
+
+<h3 id="diagrams-as-code">Diagrams as code</h3>
+
+<p>Finally, I love diagrams in docs, in particular diagrams-as-code. The tool that
+stole my heart a long time ago is <a href="https://plantuml.com/">PlantUML</a>, a Java tool built on top of
+GraphViz. Note it recently shed its notoriously ugly default theme and is now
+quite pretty by default. So we have another sphinx plugin, <a href="https://pypi.org/project/sphinx-plantuml/">sphinx-plantuml</a> which
+opens up integration with sphinx, rendering diagrams from code to image.</p>
+
+<p>Note though that a Java program is harder to package in a Python world, so
+sometimes I just render diagrams manually and commit the resulting image, not
+using this plugin. There&rsquo;s always a docker image available to render these as
+one-offs. Remember to go for SVG if you can afford it, it makes diagrams nicer
+when zoomed in.</p>
+
+<p>I&rsquo;ll likely come back to this concept of X-as-code in other posts, as these
+successive movements overall have been very influential in my career, and keep
+on surprising me.</p>
+
+<h2 id="and-make-to-shorten-it-all">And &lsquo;Make&rsquo; to shorten it all</h2>
+
+<p>As I&rsquo;ve <a href="../post/makefiles-presentation">presented before</a>, The <code>Makefile</code> is a convenient shorthand, a way to
+chain tasks together and override default values on the fly. The file is also
+handy to show/teach people what the common dev commands are.</p>
+
+<p>So of course all the above tooling should be wrapped in a Makefile to run
+everything in a simple invocation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cfg" data-lang="cfg">make
+<span style="color:#586e75"># alias for:</span>
+make all
+<span style="color:#586e75"># which expands to:</span>
+make install lint test docs build install-hooks</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 9:</span>
+  90% of my work during heavy development
+</div>
+
+<p>These commands break down to:</p>
+
+<ul>
+<li>First, run <code>poetry install</code> to get all build+test dependencies, virtualenv&hellip;</li>
+<li>Then run <code>pre-commit</code> for the linters and formatters</li>
+<li>Then the (unit) tests via <code>pytest</code> (it is assumed integration tests are
+heavier and not run in the main dev loop)</li>
+<li>Then build the docs via <code>sphinx</code></li>
+<li>Then build the python package via <code>poetry build</code> (both wheel and tarball)</li>
+<li>Then ensure the pre-commit hooks are installed<sup class="footnote-ref" id="fnref:fn-3"><a href="#fn:fn-3">3</a></sup></li>
+</ul>
+
+<p>The sum of all these tasks runs in under 10 seconds total, with the slowest and
+most variable part being the tests, depending on the project. It helps to just
+run unit tests there, and have a separate target for heavier testing.</p>
+
+<p>I&rsquo;ve skipped here a few less common targets like <code>make docker-build-dev</code>, but the
+idea is still to document and automate common dev tasks. See <a href="https://github.com/OverkillGuy/mass-driver/blob/c8982b31eda3e2051cd241bf8f16493d9f41b4de/Makefile">a sample Makefile</a>
+from a project I&rsquo;m working on, for reference of what to expect.</p>
+
+<p>Note that ideal use of <code>make</code> is to have CI run the exact same command as local
+devs do, to the point where CI pipelines run exclusively one of the <code>make</code>
+command linked above: <code>make docs</code>, <code>make lint</code>, <code>make test</code>, <code>make docs</code>, 100%
+match between devs&rsquo; workspaces and CI.</p>
+
+<p>In projects that need configuration or secrets, I usually throw in <code>.env</code> file
+loading from the Makefile, to allow config to either be set via file, overriden
+by local <code>.env</code> file, and overriden by any command line invocations of <code>make</code>.</p>
+
+<p>I&rsquo;ve recently been experimenting with a <code>make help</code> command that reads Makefile
+comments with two hashes (<code>##</code>) as well as Makefile target names, which provides
+a nice documentation aspect for people who don&rsquo;t want to read Makefiles!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There are a great many tools that are worth talking about but were left out,
+like the fascinating <a href="https://import-linter.readthedocs.io/en/stable/readme.html">import-linter</a> to enforce architecture via package-import
+contracts. I may revisit some of these in new posts as new patterns evolve,
+tools get replaced, etc.</p>
+
+<p>This was an overview of the core tools I enjoy while working with modern Python.
+Ideally, this can serve as a guide to curious devs looking for a solid set of
+tools, and hope by this list to prove that by using nice utilities, we can get a
+toolbox that makes it reasonably safe to work in, but keeps the fun aspects of
+Python.</p>
+
+<p>As mentioned before, I am continually porting new concepts and ideas in my
+<a href="https://github.com/OverkillGuy/python-template">personal project template</a>, have a look sometimes to see what new idea made it
+in!</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fn-1"><p>Aside from the
+obvious like Python, Java, Golang, Rust, etc, it also has a Docker (Dockerfile)
+system, and a docker image one, which allow to respectively
+clone+docker-build+docker-run, or docker run an upstream image, so these checks
+can be pinned via containers too! Truly a wonderful tool, though others have
+noted that its <a href="https://python-poetry.org/docs/pre-commit-hooks/#why-does-pre-commit-autoupdate-not-update-to-the-latest-version">auto-update policy</a> is a little odd.</p>
+ <a class="footnote-return" href="#fnref:fn-1"><sup>[return]</sup></a></li>
+
+<li id="fn:fn-2"><p>While we&rsquo;re talking about sphinx-needs, shout out
+to my ex-colleague and amazing developer Daniel Eades for his plugin
+<a href="https://sphinx-graph.readthedocs.io/en/main/index.html">sphinx-graph</a>, which aims to reimplement the ideals of sphinx-needs from scratch,
+coming at it from an explicitly graph-based perspective. This may be early days,
+but I&rsquo;m keeping my eye on that tool!</p>
+ <a class="footnote-return" href="#fnref:fn-2"><sup>[return]</sup></a></li>
+
+<li id="fn:fn-3"><p>Yes, this may be surprising
+to an unsuspecting user, that to run <code>make</code> will set up pre-commit hooks. It&rsquo;s
+almost backdoor-like, but I found it very useful to ensure newcomers to the
+repo don&rsquo;t have to think about these checks, so setting up the hooks for their
+next <code>git commit</code> is supremely useful, even if it is taking over their
+environment. Of course, on some repos I choose to not run that command, as the
+&ldquo;surprise&rdquo; may be seen as adversarial.</p>
+ <a class="footnote-return" href="#fnref:fn-3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/python">python</a></li>
+								
+								<li><a href="/tags/tools">tools</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

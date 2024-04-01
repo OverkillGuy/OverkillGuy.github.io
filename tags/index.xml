@@ -6,13 +6,31 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://jiby.tech/tags/python/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>https://jiby.tech/tags/tools/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/tags/tools/</guid>
       <description></description>
     </item>
     
@@ -139,15 +157,6 @@
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/cookiecutter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://jiby.tech/tags/python/</link>
-      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/python/</guid>
       <description></description>
     </item>
     

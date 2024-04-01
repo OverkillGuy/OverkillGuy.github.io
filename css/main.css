@@ -191,8 +191,13 @@ ul {
     background-color: #FAFAFA;
 }
 
+code {
+	background-color: #ddd;
+}
+
 pre code {
-  display: inline-block;
+    display: inline-block;
+    background: transparent;
 }
   
 

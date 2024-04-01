@@ -6,7 +6,18 @@
     <description>Recent content on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My python toolbox</title>
+      <link>https://jiby.tech/post/my-python-toolbox/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
+      
+      <guid>https://jiby.tech/post/my-python-toolbox/</guid>
+      <description>The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
+Lately, there&amp;rsquo;s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
+I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools.</description>
+    </item>
+    
     <item>
       <title>Reframing tickets as engineering records</title>
       <link>https://jiby.tech/post/tickets-as-engineering-records/</link>
