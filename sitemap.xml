@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jiby.tech/tags/awk/</loc>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
+  </url><url>
     <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2024-04-01T00:00:00+01:00</lastmod>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/make-help-documenting-makefile/</loc>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/</loc>
-    <lastmod>2024-04-01T00:00:00+01:00</lastmod>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/makefiles/</loc>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/my-python-toolbox/</loc>
     <lastmod>2024-04-01T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>https://jiby.tech/post/</loc>
-    <lastmod>2024-04-01T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/tags/python/</loc>
-    <lastmod>2024-04-01T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2024-04-01T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/tools/</loc>
@@ -145,9 +154,6 @@
   </url><url>
     <loc>https://jiby.tech/tags/specifications/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/awk/</loc>
-    <lastmod>2020-06-22T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/classification/</loc>
     <lastmod>2020-06-22T00:00:00+01:00</lastmod>

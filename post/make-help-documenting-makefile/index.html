@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Documenting Makefiles via a help message - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Documenting Makefiles via a help message" />
+<meta property="og:description" content="I&rsquo;ve written in the past about using Makefiles for build automation and documentation. But sometimes I wish to provide help to users, that doesn&rsquo;t require being a Makefiles expert to read!
+Let&rsquo;s explore how we can teach users our build system by turning the project&rsquo;s Makefile (and awk) into a cheap documentation-as-code tool.
+What it looks like make help Code Snippet 1: How to ask for help   Figure 1: Result of asking for help" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiby.tech/post/make-help-documenting-makefile/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-07-21T00:00:00+01:00" />
+<meta property="article:modified_time" content="2024-07-21T00:00:00+01:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Documenting Makefiles via a help message"/>
+<meta name="twitter:description" content="I&rsquo;ve written in the past about using Makefiles for build automation and documentation. But sometimes I wish to provide help to users, that doesn&rsquo;t require being a Makefiles expert to read!
+Let&rsquo;s explore how we can teach users our build system by turning the project&rsquo;s Makefile (and awk) into a cheap documentation-as-code tool.
+What it looks like make help Code Snippet 1: How to ask for help   Figure 1: Result of asking for help"/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Documenting Makefiles via a help message</h1>
+			<div class="meta">Posted on &mdash; Jul 21, 2024</div>
+		</div>
+
+		<div class="markdown">
+			
+
+<p>I&rsquo;ve written in the past about <a href="../makefiles-presentation">using Makefiles for build automation and documentation</a>.
+But sometimes I wish to provide help to users, that <em>doesn&rsquo;t</em> require
+being a Makefiles expert to read!</p>
+
+<p>Let&rsquo;s explore how we can teach users our build system by turning
+the project&rsquo;s Makefile (and <code>awk</code>) into a cheap documentation-as-code tool.</p>
+
+<h2 id="what-it-looks-like">What it looks like</h2>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make help</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  How to ask for help
+</div>
+
+<figure><img src="/ox-hugo/make-help-rendered.png"
+         alt="Figure 1: Result of asking for help" width="100%"/><figcaption>
+            <p><span class="figure-number">Figure 1: </span>Result of asking for help</p>
+        </figcaption>
+</figure>
+
+
+<p>As expected, when asking to disable colors:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make <span style="color:#b58900">help</span> <span style="color:#268bd2">NO_COLOR</span><span style="color:#719e07">=</span><span style="color:#2aa198">1</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2:</span>
+  How to ask for help, without color
+</div>
+
+<figure><img src="/ox-hugo/make-help-nocolor-rendered.png"
+         alt="Figure 2: Help, without colors" width="100%"/><figcaption>
+            <p><span class="figure-number">Figure 2: </span>Help, without colors</p>
+        </figcaption>
+</figure>
+
+
+<h2 id="the-makefile">The Makefile</h2>
+
+<p>This all works with a Makefile target named &ldquo;help&rdquo;, running <code>awk</code> over the Makefile itself to filter/transform it into what we want to see.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#586e75"># Run &#39;make help&#39; to see guidance on usage of this Makefile
+</span><span style="color:#586e75"># Note that comments with single # aren&#39;t rendered, requires ##
+</span><span style="color:#586e75"></span>
+<span style="color:#268bd2">ANSI_COLOR_RED</span><span style="color:#719e07">=</span><span style="color:#cb4b16">\0</span>33<span style="color:#719e07">[</span>31;1;4m
+<span style="color:#268bd2">ANSI_COLOR_RESET</span><span style="color:#719e07">=</span><span style="color:#cb4b16">\0</span>33<span style="color:#719e07">[</span>0m
+ifneq (${NO_COLOR}, )
+<span style="color:#268bd2">ANSI_COLOR_RED</span><span style="color:#719e07">=</span>
+<span style="color:#268bd2">ANSI_COLOR_RESET</span><span style="color:#719e07">=</span>
+endif
+
+<span style="color:#586e75">## Generate the help message by reading the Makefile
+</span><span style="color:#586e75"></span><span style="color:#268bd2">.PHONY</span><span style="color:#719e07">:</span> help
+<span style="color:#268bd2">help</span><span style="color:#719e07">:</span>
+	@echo <span style="color:#2aa198">&#34;This makefile contains the following targets,&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>          <span style="color:#2aa198">&#34;from most commonly used to least:&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>          <span style="color:#2aa198">&#34;(docs first, then target name)&#34;</span>
+	@echo <span style="color:#2aa198">&#34;Set NO_COLOR=1 to disable ANSI color coding\n&#34;</span>
+	@awk <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		<span style="color:#2aa198">&#39;/^##/ {sub(/## */,&#34;&#34;); print} \
+</span><span style="color:#2aa198">		/^[a-z0-9-]+:/ &amp;&amp; !/\.PHONY:/ \
+</span><span style="color:#2aa198">			{sub(/:.*/, &#34;&#34;); \
+</span><span style="color:#2aa198">				print &#34;⮡   ${ANSI_COLOR_RED}&#34; \
+</span><span style="color:#2aa198">					$$0 \
+</span><span style="color:#2aa198">					&#34;${ANSI_COLOR_RESET}\n&#34; \
+</span><span style="color:#2aa198">			}&#39;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		Makefile
+
+<span style="color:#586e75"># Sample Makefile command being documented:
+</span><span style="color:#586e75"></span>
+<span style="color:#586e75">## Set up the virtualenv and install the package + dependencies
+</span><span style="color:#586e75"></span><span style="color:#268bd2">.PHONY</span><span style="color:#719e07">:</span> install
+<span style="color:#268bd2">install</span><span style="color:#719e07">:</span>
+	poetry install
+</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3:</span>
+  The full Makefile used above
+</div>
+
+<p>I&rsquo;m happy to say that, while I&rsquo;ve seen this idea a few times out there, this specific
+implementation has a few things not seen elsewehere, and I&rsquo;m
+pretty happy about it. Let&rsquo;s dig into it.</p>
+
+<h2 id="breaking-it-down">Breaking it down</h2>
+
+<p>Looking at the file&rsquo;s content, top to bottom.</p>
+
+<p>First, a simple message for curious people peeking at the file, to tell them that help is on the way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#586e75"># Run &#39;make help&#39; to see guidance on usage of this Makefile
+</span></code></pre></div>
+<p>This is to give hope to people who may have opened the Makefile out of
+<em>desperation</em>, not interested in details, just wanting to know how to operate
+the repo. The message for them is &ldquo;we&rsquo;ve got docs, no need to read the whole file!&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#586e75"># Note that comments with single # aren&#39;t rendered, requires ##
+</span></code></pre></div>
+<p>We follow with a quick explanation about how we determine the comments that get
+rendered (useful info for users), from the ones that aren&rsquo;t (implementation
+details). Of course, this specific line being only one <code>#</code> means it will not
+show in the rendered version: an implementation detail indeed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#268bd2">ANSI_COLOR_RED</span><span style="color:#719e07">=</span><span style="color:#cb4b16">\0</span>33<span style="color:#719e07">[</span>31;1;4m
+<span style="color:#268bd2">ANSI_COLOR_RESET</span><span style="color:#719e07">=</span><span style="color:#cb4b16">\0</span>33<span style="color:#719e07">[</span>0m
+ifneq (${NO_COLOR}, )
+<span style="color:#268bd2">ANSI_COLOR_RED</span><span style="color:#719e07">=</span>
+<span style="color:#268bd2">ANSI_COLOR_RESET</span><span style="color:#719e07">=</span>
+endif</code></pre></div>
+<p>We want to print help in color for convenience, but we&rsquo;re very aware that ANSI
+color codes aren&rsquo;t for everyone, all the time, because we&rsquo;ve read and abide by
+<a href="https://no-color.org/">https://no-color.org/</a>, which states:</p>
+
+<blockquote>
+<p>Command-line software which adds ANSI color to its output by default should check for a <code>NO_COLOR</code> environment variable that, when present and not an empty string (regardless of its value), prevents the addition of ANSI color.</p>
+</blockquote>
+
+<p>So we set internal variables to the values of ANSI color codes for red + color-reset,
+and if the <code>NO_COLOR</code> variable is set (not equal to empty string, per the quote
+&ldquo;regardless of its value&rdquo;), override those values to be the
+empty string, nullifying them, printing nothing instead, no color markers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#586e75">## Generate the help message by reading the Makefile
+</span><span style="color:#586e75"></span><span style="color:#268bd2">.PHONY</span><span style="color:#719e07">:</span> help
+<span style="color:#268bd2">help</span><span style="color:#719e07">:</span></code></pre></div>
+<p>Finally we get to a target and its documentation!</p>
+
+<p>This is a simple Makefile target, set as phony (this is NOT about <em>creating a
+file named &ldquo;help&rdquo;</em>, but a <em>command</em> to run always when running <code>make help</code>, see
+<a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html">Phony Targets</a> documentation)
+with some user-facing documentation above it.</p>
+
+<p>As for the content of this target, what to run when asked for help&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">	@echo <span style="color:#2aa198">&#34;This makefile contains the following targets,&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>          <span style="color:#2aa198">&#34;from most commonly used to least:&#34;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>          <span style="color:#2aa198">&#34;(docs first, then target name)\n&#34;</span>
+</code></pre></div>
+<p>First, we runs the command echo (the shell script built-in), printing a
+top-level general help message. Note the <code>@</code> prefix, which is a Makefile thing,
+used to disable printing the command being run before its output: We don&rsquo;t need
+to double-print the message (command to run as well as the resulting message
+from running it), so we put an <code>@</code> in front.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">	@echo <span style="color:#2aa198">&#34;Set NO_COLOR=1 to disable ANSI color coding\n&#34;</span>
+</code></pre></div>
+<p>Similarly, we notify the users about the <code>NO_COLOR</code> flag.</p>
+
+<p>And finally the real meat of this trick:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">	@awk <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		<span style="color:#2aa198">&#39;/^##/ {sub(/## */,&#34;&#34;); print} \
+</span><span style="color:#2aa198">		/^[a-z0-9-]+:/ &amp;&amp; !/\.PHONY:/ \
+</span><span style="color:#2aa198">			{sub(/:.*/, &#34;&#34;); \
+</span><span style="color:#2aa198">				print &#34;⮡   ${ANSI_COLOR_RED}&#34; \
+</span><span style="color:#2aa198">					$$0 \
+</span><span style="color:#2aa198">					&#34;${ANSI_COLOR_RESET}\n&#34; \
+</span><span style="color:#2aa198">			}&#39;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>		Makefile
+</code></pre></div>
+<p>This <code>awk</code> command processes the Makefile itself for printing docs.
+In general, <code>awk</code> is called like <code>awk 'a whole awk program in here'
+filename-to-process</code>, with in our case the
+filename being <code>Makefile</code>.</p>
+
+<p>As for the awk program being run over the file: awk&rsquo;s language works by defining
+patterns then actions to do on each pattern. Patterns usually are regular
+expressions delimited by slashes like <code>/pattern/</code>, filtering the line being
+processed, and actions are delimited by <code>{do_stuff}</code>. Specifically, we run two
+patterns-and-actions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk"><span style="color:#586e75"># Filter to only match lines starting with ##</span>
+<span style="color:#dc322f">/^##/</span>
+<span style="color:#586e75"># ... and, for these matching lines...</span>
+{
+    <span style="color:#268bd2">sub</span>(<span style="color:#dc322f">/## */</span>,<span style="color:#2aa198">&#34;&#34;</span>);  <span style="color:#586e75"># remove the ## prefix in line + whitespace</span>
+    <span style="color:#268bd2">print</span>  <span style="color:#586e75"># and print the modified line</span>
+}</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4:</span>
+  First pattern + action, a doc-extractor command, annotated
+</div>
+
+<p>The result of running this single pattern + action on our previous file is:</p>
+
+<figure><img src="/ox-hugo/make-help-section1.png"
+         alt="Figure 3: Result of just the first pattern-action combo over the Makefile. We see just the docs!" width="100%"/><figcaption>
+            <p><span class="figure-number">Figure 3: </span>Result of just the first pattern-action combo over the Makefile. We see just the docs!</p>
+        </figcaption>
+</figure>
+
+
+<p>And the second command, broken down first between pattern then action:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk"><span style="color:#586e75"># Filter to makefile targets only.</span>
+<span style="color:#586e75"># done via filtering lines that have a : character</span>
+<span style="color:#dc322f">/^[a-z0-9-]+:/</span>
+<span style="color:#719e07">&amp;&amp;</span>
+<span style="color:#586e75"># but Phony targets would be captured here, so exclude them</span>
+<span style="color:#586e75"># using the ! in front of pattern</span>
+<span style="color:#586e75"># Escaping . which has a meaning in regexes</span>
+<span style="color:#719e07">!</span><span style="color:#dc322f">/\.PHONY:/</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5:</span>
+  Makefile target name detection pattern
+</div>
+
+<p>That pattern ensures we have the Makefile target selected, but we want to make
+it printed with color etc. We do this via the action run over the pattern, below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk">{
+    <span style="color:#586e75"># Erase anything after the target name, like dependencies</span>
+    <span style="color:#268bd2">sub</span>(<span style="color:#dc322f">/:.*/</span>, <span style="color:#2aa198">&#34;&#34;</span>);
+    <span style="color:#586e75"># Print the modified line, with some text before and after</span>
+    <span style="color:#268bd2">print</span> \
+        <span style="color:#2aa198">&#34;⮡   ${ANSI_COLOR_RED}&#34;</span>  <span style="color:#586e75"># pretty arrow + 4 spaces + red color</span>
+        <span style="color:#719e07">$$</span><span style="color:#2aa198">0</span>  <span style="color:#586e75"># The original line = $0. Makefiles escape $ as $$</span>
+        <span style="color:#2aa198">&#34;${ANSI_COLOR_RESET}\n&#34;</span>  <span style="color:#586e75"># Print the ANSI color reset</span>
+}</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6:</span>
+  Print the name of the makefile target, as action over previous pattern
+</div>
+
+<h2 id="why-do-it-like-this">Why do it like this</h2>
+
+<p>I was trying to tailor this script to be convenient for prospective users, while
+ remaining fairly simple to implement, and easy to explain to curious minds. Let&rsquo;s
+ review a few of the technical decisions that went into it.</p>
+
+<h3 id="why-documentation-then-command">Why documentation then command?</h3>
+
+<p>The first choice was having the docs show up first in the result,
+<em>then</em> the command being documented: Usually, documentation systems print the
+command first (as a kind of section header), and then describe it with
+documentation.</p>
+
+<p>But in the Makefile itself it would make no sense to have the command first,
+then have the documentation below it.
+Usually the docs are like javadocs, written just before the code, and the docs
+renderer swaps the order.</p>
+
+<p>To find a way to do command then docs would have meant the script would need to
+store commands and docs, then swap their order in the output, which increases
+complexity of our script.</p>
+
+<p>Much easier to highlight that the command being printed is <em>after</em> the docs by
+taking advantage of indentation, with fancy characters like that
+right-angled arrow, and of course we color the output.</p>
+
+<p>So we just &ldquo;filter and print&rdquo; the whole file, top to bottom, in the order
+the file is written, taking advantage of awk doing all the heavy lifting for us.</p>
+
+<p>Of course, when we use ANSI colors, it&rsquo;s pretty important that we support
+the <code>NO_COLOR</code> directive, it&rsquo;s just being a good command-line citizen.</p>
+
+<h3 id="why-use-makefile-s-echo">Why use Makefile&rsquo;s echo?</h3>
+
+<p>I could have avoided the echo command, and instead have all the text inside the
+Makefile, with two <code>##</code> for the &ldquo;these are the commands&rdquo; and &ldquo;Set NO_COLOR=1&rdquo;
+messages. The choice to use an &ldquo;echo&rdquo; instead is minor, but it highlights an
+important point around documentation:</p>
+
+<p>First, this would mean we&rsquo;re mixing up the two kinds of users of the Makefile:
+the people needing help about the build system, are likely not the people who
+will open up the makefile and read a block of text from it.</p>
+
+<p>The other issue is that after the overall help message, I wanted a couple of
+empty lines
+of separation, which would require me to write into the Makefile a couple of empty lines with just <code>##</code>,
+defacing the Makefile for the sake of the aesthetics of the documentation
+message?</p>
+
+<p>Nah, much nicer to have the Makefile have an extra echo command to prefix the
+actual documentation. This way we&rsquo;ve split messages aimed at basic help vs
+Makefile-editing wizards.</p>
+
+<h3 id="why-two-hashes-----to-trigger-the-documentation">Why two hashes (##) to trigger the documentation?</h3>
+
+<p>As described, we have two kinds of users to write docs for: devs who just want
+simple help (using <code>make help</code>), who likely will be overwhelmed by the details
+of the Makefile (for now), and devs who will read the whole Makefile and likely
+edit it. Because of the different targets, we need to make some docs messages
+(comments) visible to one group but not the other.</p>
+
+<p>I thus steal the trick from javadocs, that simple comments are technical
+details, but comments with two characters are aimed at documentation, generated
+by extracting from the code.</p>
+
+<p>In the purest sense, this is documentation-as-code: Documentation living inside
+the repository next to the code it described, the docs is managed as code,
+versioned, reviewed etc.
+I do seem to gravitate around documentation as code in multiple posts, so I may try
+to collect my thoughts around it in a future article.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I&rsquo;ve presented before that I <a href="../makefiles-presentation">really like Makefiles</a>, and I acknowledge that for
+Makefile non-experts, it can be difficult to understand what&rsquo;s going on.</p>
+
+<p>My interest is making sure that entry-level users can find guidance on running
+project-related commands without having to become experts themselves.
+Usually, the discovery process around Makefiles means opening the Makefile and
+getting overwhelmed by the complexity. This system of <code>make help</code> addresses
+that, by providing some kind of documentation-as-code, summarizing what a user
+may want to do, easing them in.</p>
+
+<p>On the way I got to talk about a few things I like, from awk, to docs as code,
+and justify the multiple users of documentation.</p>
+
+<p>So I hope this Makefile documentation-as-code trick is useful to pass on.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/makefiles">makefiles</a></li>
+								
+								<li><a href="/tags/awk">awk</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>
