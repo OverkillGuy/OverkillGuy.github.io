@@ -6,22 +6,49 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Jul 2024 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>blog</title>
+      <link>https://jiby.tech/tags/blog/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>process</title>
+      <link>https://jiby.tech/tags/process/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>project-management</title>
+      <link>https://jiby.tech/tags/project-management/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/project-management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>risk</title>
+      <link>https://jiby.tech/tags/risk/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiby.tech/tags/risk/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>awk</title>
       <link>https://jiby.tech/tags/awk/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/awk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>blog</title>
-      <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/blog/</guid>
       <description></description>
     </item>
     
@@ -49,15 +76,6 @@
       <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
       
       <guid>https://jiby.tech/tags/tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>project-management</title>
-      <link>https://jiby.tech/tags/project-management/</link>
-      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/project-management/</guid>
       <description></description>
     </item>
     

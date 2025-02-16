@@ -2,25 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jiby.tech/tags/awk/</loc>
-    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/process/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/project-management/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/risk/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/you-need-a-risk-register/</loc>
+    <lastmod>2025-02-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/awk/</loc>
     <lastmod>2024-07-21T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/make-help-documenting-makefile/</loc>
     <lastmod>2024-07-21T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/tags/makefiles/</loc>
-    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/post/</loc>
-    <lastmod>2024-07-21T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2024-07-21T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/my-python-toolbox/</loc>
@@ -31,9 +43,6 @@
   </url><url>
     <loc>https://jiby.tech/tags/tools/</loc>
     <lastmod>2024-04-01T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/project-management/</loc>
-    <lastmod>2024-03-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/post/tickets-as-engineering-records/</loc>
     <lastmod>2024-03-28T00:00:00+00:00</lastmod>
