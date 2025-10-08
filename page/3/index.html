@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.92.2" />
+	<meta name="generator" content="Hugo 0.151.0">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Jiby&#39;s toolbox - Jb Doyon&#39;s personal website </title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="alternate" type="application/rss+xml" href="https://jiby.tech/index.xml" title="Jiby's toolbox" />
-	<meta property="og:title" content="Jiby&#39;s toolbox" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://jiby.tech/" />
+	<meta property="og:url" content="https://jiby.tech/">
+  <meta property="og:site_name" content="Jiby&#39;s toolbox">
+  <meta property="og:title" content="Jiby&#39;s toolbox">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Jiby&#39;s toolbox"/>
-<meta name="twitter:description" content=""/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jiby&#39;s toolbox">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
@@ -65,13 +65,43 @@
 				
 				<div class="post">
 					<div class="meta">Oct 6, 2019</div>
+					<a class="title" href="/post/git-diff-lines-prose/">Git diff for prose</a> &mdash;
+					<span class="description">
+						
+						<p>When writing long sentences in documentation repositories, <code>git</code> tends to show
+really unhelpful diffs. They are unreadable because long lines aren&rsquo;t broken,
+which hides edits happening towards end of line. A colleague of mine asked me if git
+couldn&rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!</p>
+<figure><img src="/ox-hugo/prose-diff-before.png"
+    alt="Figure 1: Can you spot the edit made in a long line of text?" width="100%"><figcaption>
+      <p>Figure 1: Can you spot the edit made in a long line of text?</p>&hellip;
+						
+					</span>
+				</div>
+				
+				<div class="post">
+					<div class="meta">Oct 6, 2019</div>
 					<a class="title" href="/post/git-graph/">Git pretty graph</a> &mdash;
 					<span class="description">
 						
-						Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph  Figure 1: Git graph of this repository
-  This can be made into a git command via an entry your ~/.gitconfig:
-[alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias "&hellip;
+						<p>Get a cool graph of commits from the command line! For newbies and experts
+alike, git is a bit hard to visualize. Here&rsquo;s a handy git command to make
+understanding git easier.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log --decorate --oneline --graph
+</span></span></code></pre></div><figure><img src="/ox-hugo/git-graph.png"
+    alt="Figure 1: Git graph of this repository" width="100%"><figcaption>
+      <p>Figure 1: Git graph of this repository</p>
+    </figcaption>
+</figure>
+
+<p>This can be made into a git command via an entry your <code>~/.gitconfig</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[alias]
+</span></span><span style="display:flex;"><span>	graph = log --decorate --oneline --graph
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1</span>:
+  Alias "graph" defined in ~/.gitconfig file
+</div>
+<p>Invoke with</p>&hellip;
 						
 					</span>
 				</div>
@@ -81,8 +111,19 @@ git log --decorate --oneline --graph  Figure 1: Git graph of this repository
 					<a class="title" href="/post/android-terminal-with-termux/">Presenting Android terminal with Termux (EdLug)</a> &mdash;
 					<span class="description">
 						
-						Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &ldquo;The freedom of shelling out on Android&rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
-I've made the slides available on this website, click on the slide below. Remember that there are speaker notes for people following at home, press `S` to use them.&hellip;
+						<p>Last night, I presented about <a href="https://termux.com">Termux</a> to EdLug, the Edinburgh Linux User group
+(see the <a href="https://www.meetup.com/Edinburgh-Linux-User-Group-EdLUG/events/264919828/">event page on meetup.com</a>) in a talk titled &ldquo;The freedom of shelling
+out on Android&rdquo;. It was tons of fun showing off how your Android phone/tablet
+getting a terminal unlocks a powerful tool!</p>
+<div title="Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website">
+<img src="../../presentation/termux/pictures/tmux-framed.png" alt="tmux-framed.png" width="40%" title="Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website" />
+I've made the slides available on this website, click on the slide below.
+Remember that there are speaker notes for people following at home, press `S` to
+use them. These were built with [Reveal.js](https://revealjs.com).
+</div>
+<figure><a href="../../presentation/termux/android_shell_termux.html"><img src="../../presentation/termux/pictures/termux-prez-intro.png"
+    alt="Figure 1: Click to view the slides" width="100%"></a><figcaption>
+      <p><span class="figure-number">Figure 1: </span>Click to view the slides</p>&hellip;
 						
 					</span>
 				</div>
@@ -92,10 +133,14 @@ I've made the slides available on this website, click on the slide below. Rememb
 					<a class="title" href="/post/hello-world/">First post</a> &mdash;
 					<span class="description">
 						
-						Welcome to my website!
-This blog is meant to record some of the thoughts I keep coming back to, or discussions I&rsquo;ve had over and over again with different people. My rule of thumb for inclusion here is &ldquo;if you&rsquo;ve had to say it more than twice, it&rsquo;s time to write it down&rdquo;.
-See the About page for my background and motivations.
-Look forward more posts as I try to condense my thoughts in written form.&hellip;
+						<p>Welcome to my website!</p>
+<p>This blog is meant to record some of the thoughts I keep coming back to, or
+discussions I&rsquo;ve had over and over again with different people. My
+rule of thumb for inclusion here is &ldquo;if you&rsquo;ve had to say it more than
+twice, it&rsquo;s time to write it down&rdquo;.</p>
+<p>See the <a href="/about/">About page</a> for my background and motivations.</p>
+<p>Look forward more posts as I try to condense my thoughts in written
+form.</p>&hellip;
 						
 					</span>
 				</div>

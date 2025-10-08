@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ticket on Jiby&#39;s toolbox</title>
+    <title>Ticket on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/ticket/</link>
-    <description>Recent content in ticket on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Ticket on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/ticket/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/ticket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reframing tickets as engineering records</title>
       <link>https://jiby.tech/post/tickets-as-engineering-records/</link>
       <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/tickets-as-engineering-records/</guid>
-      <description>In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets are for.
-In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering records&amp;rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
-Tickets as project management Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).</description>
+      <description>&lt;p&gt;In the software world, tickets (as implemented in Jira, etc) often have a bad&#xA;reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets&#xA;are &lt;em&gt;for&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for&#xA;project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering&#xA;records&amp;rdquo;, and highlight how tickets should be useable as asynchronous&#xA;alternative to (synchronous) communication.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tickets-as-project-management&#34;&gt;Tickets as project management&lt;/h2&gt;&#xA;&lt;p&gt;Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost&#xA;inflicted upon devs, likely in an attempt to punish them for their arcane powers&#xA;over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

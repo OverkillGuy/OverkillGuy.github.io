@@ -3,18 +3,24 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Presentation: Makefiles for build automation and documentation - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Presentation: Makefiles for build automation and documentation" />
-<meta property="og:description" content="Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
-Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands)." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://jiby.tech/post/makefiles-presentation/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-10-23T00:00:00+01:00" />
-<meta property="article:modified_time" content="2022-10-23T00:00:00+01:00" />
+	<meta property="og:url" content="https://jiby.tech/post/makefiles-presentation/">
+  <meta property="og:site_name" content="Jiby&#39;s toolbox">
+  <meta property="og:title" content="Presentation: Makefiles for build automation and documentation">
+  <meta property="og:description" content="Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
+Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands).">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-10-23T00:00:00+01:00">
+    <meta property="article:modified_time" content="2022-10-23T00:00:00+01:00">
+    <meta property="article:tag" content="Presentation">
+    <meta property="article:tag" content="Blog">
+    <meta property="article:tag" content="Makefiles">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Presentation: Makefiles for build automation and documentation"/>
-<meta name="twitter:description" content="Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
-Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands)."/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Presentation: Makefiles for build automation and documentation">
+  <meta name="twitter:description" content="Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
+Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands).">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
@@ -63,7 +69,6 @@ Of note, this presentation is setting aside what people usually know of Makefile
 		<div class="markdown">
 			<p>Last Friday, I performed a presentation to my colleagues about Makefiles, and I
 want to share it to the public.</p>
-
 <p>Of note, this presentation is setting aside what people usually know of
 Makefiles (autoconf-generated blobs, opaque to any inspection because
 machine-created), and instead I introduce the concept of file transformation as
@@ -71,23 +76,19 @@ a graph, then teach Makefiles basics (using SQL commands as an example). We then
 move on to my plea for simple Makefiles, and their potential for both
 documentation (explain what your codebase commands are, to the juniors), and as
 lightweight automation (avoid typing long boring commands).</p>
-
 <p>I start by describing how my job brings me to jump between many code repos,
 which can have confusing build/test/format commands. I feel those commands
 under-documented, and wish to have a single point of entry for all the important
 ones I should use around the codebase. I further believe this file can be a
 Makefile, and proceed to show how that could work.</p>
-
 <figure><a href="../../presentation/makefiles/makefiles.html"><img src="../../presentation/makefiles/img/makefiles-prez-intro.png"
-         alt="Figure 1: Click to view the slides" width="100%"/></a><figcaption>
-            <p><span class="figure-number">Figure 1: </span>Click to view the slides</p>
-        </figcaption>
+    alt="Figure 1: Click to view the slides" width="100%"></a><figcaption>
+      <p><span class="figure-number">Figure 1: </span>Click to view the slides</p>
+    </figcaption>
 </figure>
-
 
 <p>For the adventurous, backup slides are available at the end, explaining extra
 complex behaviour, including my favourite: Polyglot Makefiles.</p>
-
 <p>This presentation was long overdue, with my first notes for it going back
 to 2018. I&rsquo;m glad I was finally able to make public my love of simple Makefiles,
 and hope everybody agree they&rsquo;re pretty rad for this particular purpose.</p>
@@ -111,7 +112,7 @@ and hope everybody agree they&rsquo;re pretty rad for this particular purpose.</
 				
 			
 		</div>
-		</div>
+	</div>
 	<div class="footer wrapper">
 	<nav class="nav">
 		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>

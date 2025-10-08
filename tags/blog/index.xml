@@ -1,248 +1,180 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>blog on Jiby&#39;s toolbox</title>
+    <title>Blog on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/blog/</link>
-    <description>Recent content in blog on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Blog on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Oct 2025 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keyboard navigation Vimium in Firefox</title>
+      <link>https://jiby.tech/post/firefox-keyboard-extensions-vimium/</link>
+      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/post/firefox-keyboard-extensions-vimium/</guid>
+      <description>&lt;p&gt;Today I want to celebrate niche tooling that makes life more comfortable on the computer.&#xA;For context, I like to work with computers from the keyboard, minimizing use of the mouse.&#xA;But this is often difficult to do consistently, especially when everything is a web app, a world known to be mouse-focused.&#xA;Let me tell you about the fantastic Firefox extensions Vimium, and Edit With Emacs, both of which make the keyboard life more pleasant.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>You need a risk register</title>
       <link>https://jiby.tech/post/you-need-a-risk-register/</link>
       <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/you-need-a-risk-register/</guid>
-      <description>I&amp;rsquo;ve been thinking a lot about risk registers recently. I feel like people don&amp;rsquo;t know enough about them, or reject them on principle for being &amp;ldquo;more process&amp;rdquo;.
-I&amp;rsquo;ve worked in projects where the process was heavy, and like many, I very much didn&amp;rsquo;t like it then. But since moving to more &amp;ldquo;agile&amp;rdquo; environments, I&amp;rsquo;ve repeatedly been missing the structured aspects of writing things down, and wished for more rigour, more &amp;hellip; process?</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve been thinking a lot about risk registers recently. I feel like people don&amp;rsquo;t&#xA;know enough about them, or reject them on principle for being &amp;ldquo;more process&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve worked in projects where the process was heavy, and like many, I very much&#xA;didn&amp;rsquo;t like it then. But since moving to more &amp;ldquo;agile&amp;rdquo; environments, I&amp;rsquo;ve&#xA;repeatedly been missing the structured aspects of writing things down, and&#xA;wished for more rigour,  more &amp;hellip; process?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Documenting Makefiles via a help message</title>
       <link>https://jiby.tech/post/make-help-documenting-makefile/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/make-help-documenting-makefile/</guid>
-      <description>I&amp;rsquo;ve written in the past about using Makefiles for build automation and documentation. But sometimes I wish to provide help to users, that doesn&amp;rsquo;t require being a Makefiles expert to read!
-Let&amp;rsquo;s explore how we can teach users our build system by turning the project&amp;rsquo;s Makefile (and awk) into a cheap documentation-as-code tool.
-What it looks like make help Code Snippet 1: How to ask for help   Figure 1: Result of asking for help</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve written in the past about &lt;a href=&#34;../makefiles-presentation&#34;&gt;using Makefiles for build automation and documentation&lt;/a&gt;.&#xA;But sometimes I wish to provide help to users, that &lt;em&gt;doesn&amp;rsquo;t&lt;/em&gt; require&#xA;being a Makefiles expert to read!&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s explore how we can teach users our build system by turning&#xA;the project&amp;rsquo;s Makefile (and &lt;code&gt;awk&lt;/code&gt;) into a cheap documentation-as-code tool.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-it-looks-like&#34;&gt;What it looks like&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make &lt;span style=&#34;color:#b58900&#34;&gt;help&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;src-block-caption&#34;&gt;&#xA;  &lt;span class=&#34;src-block-number&#34;&gt;Code Snippet 1:&lt;/span&gt;&#xA;  How to ask for help&#xA;&lt;/div&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://jiby.tech/ox-hugo/make-help-rendered.png&#34;&#xA;    alt=&#34;Figure 1: Result of asking for help&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;&lt;span class=&#34;figure-number&#34;&gt;Figure 1: &lt;/span&gt;Result of asking for help&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>My python toolbox</title>
       <link>https://jiby.tech/post/my-python-toolbox/</link>
       <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/my-python-toolbox/</guid>
-      <description>The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
-Lately, there&amp;rsquo;s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
-I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools.</description>
+      <description>&lt;p&gt;The packaging workflow of Python has historically been a bit messy, starting&#xA;with &lt;code&gt;pip&lt;/code&gt; being &lt;em&gt;just&lt;/em&gt; good enough, and virtualenvs being a great idea but a&#xA;bit unwieldy. Installation was difficult, and tools like anaconda filled the&#xA;gaps.&lt;/p&gt;&#xA;&lt;p&gt;Lately, there&amp;rsquo;s been renaissance of package tooling in Python thanks to other&#xA;languages innovating in the area, inspiring and pollinating the ecosystem,&#xA;improving the comfort of development.&lt;/p&gt;&#xA;&lt;p&gt;I want to present here the tools that I use to work with Python, usually latest&#xA;iterations on well known concepts, to show that Python can be both fun to play&#xA;with, &lt;em&gt;and&lt;/em&gt; safe enough if we use modern tools.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reframing tickets as engineering records</title>
       <link>https://jiby.tech/post/tickets-as-engineering-records/</link>
       <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/tickets-as-engineering-records/</guid>
-      <description>In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets are for.
-In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering records&amp;rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
-Tickets as project management Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).</description>
+      <description>&lt;p&gt;In the software world, tickets (as implemented in Jira, etc) often have a bad&#xA;reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets&#xA;are &lt;em&gt;for&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for&#xA;project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering&#xA;records&amp;rdquo;, and highlight how tickets should be useable as asynchronous&#xA;alternative to (synchronous) communication.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tickets-as-project-management&#34;&gt;Tickets as project management&lt;/h2&gt;&#xA;&lt;p&gt;Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost&#xA;inflicted upon devs, likely in an attempt to punish them for their arcane powers&#xA;over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Embrace the Early Exit</title>
       <link>https://jiby.tech/post/embrace-early-exit/</link>
       <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/embrace-early-exit/</guid>
-      <description>In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
-But amongst them all, there&amp;rsquo;s one pattern I whole-heartedly love, it&amp;rsquo;s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
-From If+else to ladders and conditionals hell Functions routinely need to check some edge case isn&amp;rsquo;t hit, usually with more edge cases than actual routine happy-path code lines.</description>
+      <description>&lt;p&gt;In programming, there are patterns everywhere: patterns of building code,&#xA;patterns for organising components, even patterns for how to test things. A&#xA;whole industry is looking for&#xA;patterns to solve all their problems.&lt;/p&gt;&#xA;&lt;p&gt;But amongst them all, there&amp;rsquo;s one pattern I whole-heartedly love, it&amp;rsquo;s the Early Exit. In this&#xA;short and sweet post, I want to declare my undying love to the Early Exit,&#xA;sharing my excitement.&lt;/p&gt;&#xA;&lt;h2 id=&#34;from-if-plus-else-to-ladders-and-conditionals-hell&#34;&gt;From If+else to ladders and conditionals hell&lt;/h2&gt;&#xA;&lt;p&gt;Functions routinely need to check some edge case isn&amp;rsquo;t hit, usually with more&#xA;edge cases than actual routine happy-path code lines.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Offline developer docs: Dash docsets via Zeal</title>
       <link>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</link>
       <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</guid>
-      <description>Since my earliest university days, I&amp;rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
-One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls.</description>
+      <description>&lt;p&gt;Since my earliest university days, I&amp;rsquo;ve spent a lot of time trying to get better&#xA;at computers, immersing myself in the world of Linux, and generally&#xA;improving my software development skills.&lt;/p&gt;&#xA;&lt;p&gt;One of the aspects that was the most helpful to help me grow was attempting to&#xA;replicate my normal dev workflow, but with less: Learn to operate on Linux not&#xA;Windows, then learn to do dev via on the terminal instead of GUIs, and&#xA;eventually learn to do the same but offline, without any network calls.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>My git worfklow</title>
       <link>https://jiby.tech/post/my-git-worfklow/</link>
       <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/my-git-worfklow/</guid>
-      <description>Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
-The article is broken down into ideas + recommendations, with recommendations in bold.</description>
+      <description>&lt;p&gt;Every now and then, at work, I find myself discussing git worfklows, commit&#xA;messages, branching, releasing, versioning, changelogs etc. Since my opinion has&#xA;remained fairly consistent for the past few years, I found myself repeating the&#xA;same points a lot, so I wrote it down. This page is the resulting compilation of&#xA;my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.&lt;/p&gt;&#xA;&lt;p&gt;The article is broken down into ideas + recommendations, with recommendations in&#xA;bold. Obviously, this workflow isn&amp;rsquo;t applicable to everyone (sorry, Google! This&#xA;isn&amp;rsquo;t a free consultation!) as different teams have needs that should get dealt&#xA;with differently.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Quick-start project templates via cookiecutter</title>
       <link>https://jiby.tech/post/quick-start-project-templates-via-cookiecutter/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/quick-start-project-templates-via-cookiecutter/</guid>
-      <description>The most boring part of setting up a new code project is typing the boilerplate: it&amp;rsquo;s easy to forget bits, so we just copy the last project&amp;rsquo;s folder and &amp;ldquo;file the serial numbers off&amp;rdquo; on the project name.
-Copy-pasta-driven project setup is not great though, as it&amp;rsquo;s too easy to forget replacing values in obscure files, or misunderstand why project is set up that way in the first place, leading to nasty surprises down the line.</description>
+      <description>&lt;p&gt;The most boring part of setting up a new code project is typing the boilerplate:&#xA;it&amp;rsquo;s easy to forget bits, so we just copy the last project&amp;rsquo;s folder and &amp;ldquo;file the serial numbers off&amp;rdquo; on the project name.&lt;/p&gt;&#xA;&lt;p&gt;Copy-pasta-driven project setup is not great though, as it&amp;rsquo;s too easy to forget&#xA;replacing values in obscure files, or misunderstand why project is set up that&#xA;way in the first place, leading to nasty surprises down the line.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Presentation: Makefiles for build automation and documentation</title>
       <link>https://jiby.tech/post/makefiles-presentation/</link>
       <pubDate>Sun, 23 Oct 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/makefiles-presentation/</guid>
-      <description>Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
-Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands).</description>
+      <description>&lt;p&gt;Last Friday, I performed a presentation to my colleagues about Makefiles, and I&#xA;want to share it to the public.&lt;/p&gt;&#xA;&lt;p&gt;Of note, this presentation is setting aside what people usually know of&#xA;Makefiles (autoconf-generated blobs, opaque to any inspection because&#xA;machine-created), and instead I introduce the concept of file transformation as&#xA;a graph, then teach Makefiles basics (using SQL commands as an example). We then&#xA;move on to my plea for simple Makefiles, and their potential for both&#xA;documentation (explain what your codebase commands are, to the juniors), and as&#xA;lightweight automation (avoid typing long boring commands).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Literate wordle</title>
       <link>https://jiby.tech/post/literate-wordle/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/literate-wordle/</guid>
-      <description>I&amp;rsquo;ve recently written a series of articles about Gherkin: its usage for requirements gathering, about its uses in BDD, and a lower-tech alternative to Cucumber, which I&amp;rsquo;m still experimenting with.
-I wanted to showcase all of these ideas brought together, as well as show how comfy modern Python tooling can be. But more than writing code, I would need to explain my reasoning as we draft the program. So I picked up again a tool I always wanted to play with: Literate Programming.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently written a series of articles about Gherkin: &lt;a href=&#34;../gherkin-features-user-requirements/&#34;&gt;its usage for&#xA;requirements gathering&lt;/a&gt;, about &lt;a href=&#34;../bdd-dreams-cucumber-and-gherkin/&#34;&gt;its uses in BDD&lt;/a&gt;, and a &lt;a href=&#34;../low-tech-cucumber-replacement/&#34;&gt;lower-tech alternative to Cucumber&lt;/a&gt;, which I&amp;rsquo;m still experimenting with.&lt;/p&gt;&#xA;&lt;p&gt;I wanted to showcase all of these ideas brought together, as well as show how&#xA;comfy modern Python tooling can be. But more than writing code, I would need to&#xA;explain my reasoning as we draft the program. So I picked up again a tool I always&#xA;wanted to play with: Literate Programming.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reinventing IP Fragmentation</title>
       <link>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</guid>
-      <description>Let&amp;rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
-Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side.</description>
+      <description>&lt;p&gt;Let&amp;rsquo;s explore how a file-format design exercise turned into&#xA;reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that&#xA;the protocols that the internet are built on have fantastic public&#xA;documents called &lt;a href=&#34;https://en.wikipedia.org/wiki/Request_for_Comments&#34;&gt;RFC&lt;/a&gt;s.&lt;/p&gt;&#xA;&lt;h2 id=&#34;designing-a-file-format&#34;&gt;Designing a file format&lt;/h2&gt;&#xA;&lt;p&gt;I was idly thinking about designing a good binary file format for a side project&#xA;of mine called &lt;a href=&#34;https://github.com/OverkillGuy/qrxfil&#34;&gt;qrxfil&lt;/a&gt;. The project aims at QR-code-based file export: split a&#xA;file in many pieces (based on content limit of QR codes) before reassembling it&#xA;on the other side.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Low-tech Cucumber replacement</title>
       <link>https://jiby.tech/post/low-tech-cucumber-replacement/</link>
       <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/low-tech-cucumber-replacement/</guid>
-      <description>In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
-In this article, I want to explain my disilusionment towards Cucumber, and show how a low-tech alternative emerged that I believe covers most of the value for none of the effort.</description>
+      <description>&lt;p&gt;In the previous post, I showed how Gherkin Scenarios provide a great framework&#xA;for acceptance test definition. I also showed how the dreams of the BDD movement&#xA;extend to automating Gherkin, using a tool called Cucumber, enforcing&#xA;traceability of acceptance tests.&lt;/p&gt;&#xA;&lt;p&gt;In this article, I want to explain my disilusionment towards Cucumber, and show&#xA;how a low-tech alternative emerged that I believe covers most of the value&#xA;for none of the effort.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>BDD Dreams, Cucumber And Gherkin</title>
       <link>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</guid>
-      <description>In the previous post in this series on Gherkin, I showed the tools that Gherkin Features provide for requirements tracking, and mentioned ambitious goals for the Behaviour-driven Development (BDD) movement. In this article, I want to expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of traceability led to Cucumber, a tool for automating acceptance test execution, tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on these tools for a future post.</description>
+      <description>&lt;p&gt;In the &lt;a href=&#34;../../post/gherkin-features-user-requirements/&#34;&gt;previous post in this series on Gherkin&lt;/a&gt;, I showed the tools that Gherkin&#xA;Features provide for requirements tracking, and mentioned ambitious goals for&#xA;the Behaviour-driven Development (BDD) movement. In this article, I want to&#xA;expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of&#xA;traceability led to Cucumber, a tool for automating acceptance test execution,&#xA;tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on&#xA;these tools for a future post.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gherkin Features for user requirements</title>
       <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/gherkin-features-user-requirements/</guid>
-      <description>The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines.</description>
+      <description>&lt;p&gt;&lt;strong&gt;The most common mistake I see developers make is building the wrong thing&lt;/strong&gt;: Not&#xA;tracking exactly what is required from the start, and instead getting excited&#xA;about the cool technical problems ahead. Fast forward a few days, weeks, months,&#xA;showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed&#xA;and what was built becomes obvious, in a frenzy of last minute changes to reach&#xA;the original goal under pressure from deadlines.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Separating Spam from Ham with the shell</title>
       <link>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</link>
       <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</guid>
-      <description>Here&amp;rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
-The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &amp;ldquo;save as picture&amp;rdquo; context menu. But a couple of images were still deformed beyond recognition.</description>
+      <description>&lt;p&gt;Here&amp;rsquo;s how attempting to export images off a Word Document&#xA;led to a quest for data deduplication and classification using the&#xA;shell.&lt;/p&gt;&#xA;&lt;p&gt;The images I wanted to export were MS Word diagrams drawn in Word,&#xA;rather than PNG files&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&#xA;Because those doodle-shapes do not export to PNG well, I first&#xA;copy-pasted them into Powerpoint to get the familiar &amp;ldquo;save as picture&amp;rdquo;&#xA;context menu. But a couple of images were still deformed beyond&#xA;recognition.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reproducible workspace deployment with Ansible and Vagrant</title>
       <link>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</link>
       <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</guid>
-      <description>Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&amp;hellip; Since 2016, I have accumulated over 500 git commits.
-Now the dotfiles are tracked, the next biggest pain is to install packages and folder structures and obscure commands required to set up some subsystems needs which config files.</description>
+      <description>&lt;p&gt;Like many developers, I keep track of my configuration files in&#xA;version control, to make moving to new machines is simpler and share&#xA;code with others. This process started out for my Emacs config files&#xA;at first, but grew to consume other aspects: bash functions, git&#xA;aliases&amp;hellip; Since 2016, I have accumulated over &lt;a href=&#34;https://github.com/OverkillGuy/jibyconf&#34;&gt;500 git commits&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Now the &lt;a href=&#34;https://dotfiles.org&#34;&gt;dotfiles&lt;/a&gt; are tracked, the next biggest pain is to install&#xA;packages and folder structures and obscure commands required to set up&#xA;some subsystems needs which config files. Wouldn&amp;rsquo;t it be nice to have&#xA;an all-in-one setup?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Using Awk to replace only some lines</title>
       <link>https://jiby.tech/post/awk-replace-some-lines/</link>
       <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/awk-replace-some-lines/</guid>
-      <description>I was trying to convert bank-issued CSV files that have a weird data layout, for automatic processing by the excellent ledger. This made me learn a new thing about awk. Follow me down the UNIXy goodness!
-The data I was getting looks like this:
-Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance 29/02/2018,Restaurant,14.5,,1234.2 12/03/2018,ATM withdrawal,50,,1184.2 23/04/2018,Deposited check,,100,1284.2 Note the last line having 100 in a different column: The problem is that, when receiving money, the transaction is logged in a separate entry (&amp;ldquo;Credit Amount&amp;rdquo;) than the (more common) case of debit, which goes to &amp;ldquo;Debit Amount&amp;rdquo; column.</description>
+      <description>&lt;p&gt;I was trying to convert bank-issued CSV files that have a weird data&#xA;layout, for automatic processing by the excellent &lt;a href=&#34;https://www.ledger-cli.org/&#34;&gt;ledger&lt;/a&gt;. This made me&#xA;learn a new thing about &lt;code&gt;awk&lt;/code&gt;. Follow me down the UNIXy goodness!&lt;/p&gt;&#xA;&lt;p&gt;The data I was getting looks like this:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;29/02/2018,Restaurant,14.5,,1234.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;12/03/2018,ATM withdrawal,50,,1184.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;23/04/2018,Deposited check,,100,1284.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note the last line having 100 in a different column: The problem is&#xA;that, when receiving money, the transaction is logged in a separate&#xA;entry (&amp;ldquo;Credit Amount&amp;rdquo;) than the (more common) case of debit, which&#xA;goes to &amp;ldquo;Debit Amount&amp;rdquo; column. My importing tools required a single&#xA;column, so the output must look like this:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git diff from empty commit</title>
       <link>https://jiby.tech/post/git-diff-empty-repo/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/git-diff-empty-repo/</guid>
-      <description>In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &amp;ldquo;nothing&amp;rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&amp;rsquo;s a specific commit hash we can use to diff from &amp;ldquo;nothing&amp;rdquo; to the first commit:</description>
+      <description>&lt;p&gt;In order to troubleshoot a bug in the very early history of a project&#xA;using git, I needed a way to show the git diff from &amp;ldquo;nothing&amp;rdquo; to the&#xA;first commit. Since git keeps a linked graph of commits, what I wanted&#xA;was a diff from the commit before the first one. Searching the onlines&#xA;dug up &lt;a href=&#34;https://stackoverflow.com/a/40884093&#34;&gt;this answer on StackOverflow&lt;/a&gt;, showing that there&amp;rsquo;s a specific&#xA;commit hash we can use to diff from &amp;ldquo;nothing&amp;rdquo; to the first commit:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reverse-engineering webapp APIs with Firefox</title>
       <link>https://jiby.tech/post/reverse-engineer-api-with-firefox/</link>
       <pubDate>Wed, 09 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/reverse-engineer-api-with-firefox/</guid>
-      <description>I&amp;rsquo;m writing code to back up my user data off a website that lets me see all of my info (including querying by time, account etc) but doesn&amp;rsquo;t have export features (officially). I am certain there&amp;rsquo;s an API behind the site that I just have to make sense of.
-Since the webapp is requesting data from the API when I click, we should be able to record the web traffic to explore the API.</description>
+      <description>&lt;p&gt;I&amp;rsquo;m writing code to back up my user data off a website that lets me&#xA;&lt;span class=&#34;underline&#34;&gt;see&lt;/span&gt; all of my info (including querying by time, account etc) but&#xA;doesn&amp;rsquo;t have export features (officially). I am certain there&amp;rsquo;s an API&#xA;behind the site that I just have to make sense of.&lt;/p&gt;&#xA;&lt;p&gt;Since the webapp is requesting data from the API when I click, we&#xA;should be able to record the web traffic to explore the API. My first&#xA;thought was to use &lt;code&gt;tcpdump(8)&lt;/code&gt;, a powerful network sniffer. But for&#xA;HTTPS traffic, the TLS encryption makes the network-level capture&#xA;useless. We can of course look into &lt;a href=&#34;https://mitmproxy.org/&#34;&gt;MITM HTTPS proxies&lt;/a&gt;. But it turns&#xA;out it can be even easier than that, as we can tell Firefox to record&#xA;this for us during normal website use. Let&amp;rsquo;s see how Firefox can help&#xA;in reverse-engineering APIs!&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git diff for prose</title>
       <link>https://jiby.tech/post/git-diff-lines-prose/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/git-diff-lines-prose/</guid>
-      <description>When writing long sentences in documentation repositories, git tends to show really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken, which hides edits happening towards end of line. A colleague of mine asked me if git couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!
- Figure 1: Can you spot the edit made in a long line of text?
-  Kaushal Modi&amp;rsquo;s blog post on git diff for minified JS and CSS inspired this idea for all you prose lovers.</description>
+      <description>&lt;p&gt;When writing long sentences in documentation repositories, &lt;code&gt;git&lt;/code&gt; tends to show&#xA;really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken,&#xA;which hides edits happening towards end of line. A colleague of mine asked me if git&#xA;couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://jiby.tech/ox-hugo/prose-diff-before.png&#34;&#xA;    alt=&#34;Figure 1: Can you spot the edit made in a long line of text?&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Figure 1: Can you spot the edit made in a long line of text?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git pretty graph</title>
       <link>https://jiby.tech/post/git-graph/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/git-graph/</guid>
-      <description>Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph  Figure 1: Git graph of this repository
-  This can be made into a git command via an entry your ~/.gitconfig:
-[alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
+      <description>&lt;p&gt;Get a cool graph of commits from the command line! For newbies and experts&#xA;alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make&#xA;understanding git easier.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git log --decorate --oneline --graph&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;figure&gt;&lt;img src=&#34;https://jiby.tech/ox-hugo/git-graph.png&#34;&#xA;    alt=&#34;Figure 1: Git graph of this repository&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Figure 1: Git graph of this repository&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;This can be made into a git command via an entry your &lt;code&gt;~/.gitconfig&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[alias]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;graph = log --decorate --oneline --graph&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;src-block-caption&#34;&gt;&#xA;  &lt;span class=&#34;src-block-number&#34;&gt;Code Snippet 1&lt;/span&gt;:&#xA;  Alias &#34;graph&#34; defined in ~/.gitconfig file&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Invoke with&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Presenting Android terminal with Termux (EdLug)</title>
       <link>https://jiby.tech/post/android-terminal-with-termux/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
-      <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
-I&#39;ve made the slides available on this website, click on the slide below. Remember that there are speaker notes for people following at home, press `S` to use them.</description>
+      <description>&lt;p&gt;Last night, I presented about &lt;a href=&#34;https://termux.com&#34;&gt;Termux&lt;/a&gt; to EdLug, the Edinburgh Linux User group&#xA;(see the &lt;a href=&#34;https://www.meetup.com/Edinburgh-Linux-User-Group-EdLUG/events/264919828/&#34;&gt;event page on meetup.com&lt;/a&gt;) in a talk titled &amp;ldquo;The freedom of shelling&#xA;out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet&#xA;getting a terminal unlocks a powerful tool!&lt;/p&gt;&#xA;&lt;div title=&#34;Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website&#34;&gt;&#xA;&lt;img src=&#34;../../presentation/termux/pictures/tmux-framed.png&#34; alt=&#34;tmux-framed.png&#34; width=&#34;40%&#34; title=&#34;Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website&#34; /&gt;&#xA;I&#39;ve made the slides available on this website, click on the slide below.&#xA;Remember that there are speaker notes for people following at home, press `S` to&#xA;use them. These were built with [Reveal.js](https://revealjs.com).&#xA;&lt;/div&gt;&#xA;&lt;figure&gt;&lt;a href=&#34;../../presentation/termux/android_shell_termux.html&#34;&gt;&lt;img src=&#34;../../presentation/termux/pictures/termux-prez-intro.png&#34;&#xA;    alt=&#34;Figure 1: Click to view the slides&#34; width=&#34;100%&#34;&gt;&lt;/a&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;&lt;span class=&#34;figure-number&#34;&gt;Figure 1: &lt;/span&gt;Click to view the slides&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>First post</title>
       <link>https://jiby.tech/post/hello-world/</link>
       <pubDate>Wed, 18 Sep 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/hello-world/</guid>
-      <description>Welcome to my website!
-This blog is meant to record some of the thoughts I keep coming back to, or discussions I&amp;rsquo;ve had over and over again with different people. My rule of thumb for inclusion here is &amp;ldquo;if you&amp;rsquo;ve had to say it more than twice, it&amp;rsquo;s time to write it down&amp;rdquo;.
-See the About page for my background and motivations.
-Look forward more posts as I try to condense my thoughts in written form.</description>
+      <description>&lt;p&gt;Welcome to my website!&lt;/p&gt;&#xA;&lt;p&gt;This blog is meant to record some of the thoughts I keep coming back to, or&#xA;discussions I&amp;rsquo;ve had over and over again with different people. My&#xA;rule of thumb for inclusion here is &amp;ldquo;if you&amp;rsquo;ve had to say it more than&#xA;twice, it&amp;rsquo;s time to write it down&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;See the &lt;a href=&#34;https://jiby.tech/about/&#34;&gt;About page&lt;/a&gt; for my background and motivations.&lt;/p&gt;&#xA;&lt;p&gt;Look forward more posts as I try to condense my thoughts in written&#xA;form.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

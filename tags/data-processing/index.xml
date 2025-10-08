@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>data-processing on Jiby&#39;s toolbox</title>
+    <title>Data-Processing on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/data-processing/</link>
-    <description>Recent content in data-processing on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Data-Processing on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/data-processing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/data-processing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using Awk to replace only some lines</title>
       <link>https://jiby.tech/post/awk-replace-some-lines/</link>
       <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/awk-replace-some-lines/</guid>
-      <description>I was trying to convert bank-issued CSV files that have a weird data layout, for automatic processing by the excellent ledger. This made me learn a new thing about awk. Follow me down the UNIXy goodness!
-The data I was getting looks like this:
-Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance 29/02/2018,Restaurant,14.5,,1234.2 12/03/2018,ATM withdrawal,50,,1184.2 23/04/2018,Deposited check,,100,1284.2 Note the last line having 100 in a different column: The problem is that, when receiving money, the transaction is logged in a separate entry (&amp;ldquo;Credit Amount&amp;rdquo;) than the (more common) case of debit, which goes to &amp;ldquo;Debit Amount&amp;rdquo; column.</description>
+      <description>&lt;p&gt;I was trying to convert bank-issued CSV files that have a weird data&#xA;layout, for automatic processing by the excellent &lt;a href=&#34;https://www.ledger-cli.org/&#34;&gt;ledger&lt;/a&gt;. This made me&#xA;learn a new thing about &lt;code&gt;awk&lt;/code&gt;. Follow me down the UNIXy goodness!&lt;/p&gt;&#xA;&lt;p&gt;The data I was getting looks like this:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;29/02/2018,Restaurant,14.5,,1234.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;12/03/2018,ATM withdrawal,50,,1184.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;23/04/2018,Deposited check,,100,1284.2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note the last line having 100 in a different column: The problem is&#xA;that, when receiving money, the transaction is logged in a separate&#xA;entry (&amp;ldquo;Credit Amount&amp;rdquo;) than the (more common) case of debit, which&#xA;goes to &amp;ldquo;Debit Amount&amp;rdquo; column. My importing tools required a single&#xA;column, so the output must look like this:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

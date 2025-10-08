@@ -4,431 +4,352 @@
     <title>Tags on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/</link>
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Oct 2025 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>blog</title>
+      <title>Blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
-      
+      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
       <guid>https://jiby.tech/tags/blog/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>process</title>
-      <link>https://jiby.tech/tags/process/</link>
-      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/process/</guid>
+      <title>Emacs</title>
+      <link>https://jiby.tech/tags/emacs/</link>
+      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/emacs/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>project-management</title>
-      <link>https://jiby.tech/tags/project-management/</link>
-      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/project-management/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>risk</title>
-      <link>https://jiby.tech/tags/risk/</link>
-      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/risk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>awk</title>
-      <link>https://jiby.tech/tags/awk/</link>
-      <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/awk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>makefiles</title>
-      <link>https://jiby.tech/tags/makefiles/</link>
-      <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/makefiles/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://jiby.tech/tags/python/</link>
-      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tools</title>
-      <link>https://jiby.tech/tags/tools/</link>
-      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ticket</title>
-      <link>https://jiby.tech/tags/ticket/</link>
-      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/ticket/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>early-exit</title>
-      <link>https://jiby.tech/tags/early-exit/</link>
-      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/early-exit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://jiby.tech/tags/programming/</link>
-      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docs</title>
-      <link>https://jiby.tech/tags/docs/</link>
-      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/docs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>documentation</title>
-      <link>https://jiby.tech/tags/documentation/</link>
-      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/documentation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>offline</title>
-      <link>https://jiby.tech/tags/offline/</link>
-      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/offline/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>changelog</title>
-      <link>https://jiby.tech/tags/changelog/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/changelog/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>codereview</title>
-      <link>https://jiby.tech/tags/codereview/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/codereview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>git</title>
-      <link>https://jiby.tech/tags/git/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>pre-commit</title>
-      <link>https://jiby.tech/tags/pre-commit/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/pre-commit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sdlc</title>
-      <link>https://jiby.tech/tags/sdlc/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/sdlc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>versioning</title>
-      <link>https://jiby.tech/tags/versioning/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/versioning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cookiecutter</title>
-      <link>https://jiby.tech/tags/cookiecutter/</link>
-      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/cookiecutter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>templating</title>
-      <link>https://jiby.tech/tags/templating/</link>
-      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/templating/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>presentation</title>
-      <link>https://jiby.tech/tags/presentation/</link>
-      <pubDate>Sun, 23 Oct 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/presentation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bdd</title>
-      <link>https://jiby.tech/tags/bdd/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/bdd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gherkin</title>
-      <link>https://jiby.tech/tags/gherkin/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/gherkin/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>literate-programming</title>
-      <link>https://jiby.tech/tags/literate-programming/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/literate-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>project</title>
-      <link>https://jiby.tech/tags/project/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>qrxfil</title>
-      <link>https://jiby.tech/tags/qrxfil/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/qrxfil/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rfc</title>
-      <link>https://jiby.tech/tags/rfc/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/rfc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tdd</title>
-      <link>https://jiby.tech/tags/tdd/</link>
-      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/tdd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cucumber</title>
-      <link>https://jiby.tech/tags/cucumber/</link>
-      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/cucumber/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>regex</title>
-      <link>https://jiby.tech/tags/regex/</link>
-      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/regex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scenarios</title>
-      <link>https://jiby.tech/tags/scenarios/</link>
-      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/scenarios/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scripting</title>
-      <link>https://jiby.tech/tags/scripting/</link>
-      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/scripting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>features</title>
-      <link>https://jiby.tech/tags/features/</link>
-      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/features/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>requirements</title>
-      <link>https://jiby.tech/tags/requirements/</link>
-      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/requirements/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>specifications</title>
-      <link>https://jiby.tech/tags/specifications/</link>
-      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/specifications/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>classification</title>
-      <link>https://jiby.tech/tags/classification/</link>
-      <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/classification/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>shell</title>
-      <link>https://jiby.tech/tags/shell/</link>
-      <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ansible</title>
-      <link>https://jiby.tech/tags/ansible/</link>
-      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/ansible/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>infrastructure-as-code</title>
-      <link>https://jiby.tech/tags/infrastructure-as-code/</link>
-      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/infrastructure-as-code/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reproducible</title>
-      <link>https://jiby.tech/tags/reproducible/</link>
-      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/reproducible/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vagrant</title>
-      <link>https://jiby.tech/tags/vagrant/</link>
-      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
-      
-      <guid>https://jiby.tech/tags/vagrant/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>data-processing</title>
-      <link>https://jiby.tech/tags/data-processing/</link>
-      <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiby.tech/tags/data-processing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>firefox</title>
+      <title>Firefox</title>
       <link>https://jiby.tech/tags/firefox/</link>
-      <pubDate>Wed, 09 Oct 2019 00:00:00 +0100</pubDate>
-      
+      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
       <guid>https://jiby.tech/tags/firefox/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>https</title>
+      <title>Vim</title>
+      <link>https://jiby.tech/tags/vim/</link>
+      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/vim/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Process</title>
+      <link>https://jiby.tech/tags/process/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/process/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Project-Management</title>
+      <link>https://jiby.tech/tags/project-management/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/project-management/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Risk</title>
+      <link>https://jiby.tech/tags/risk/</link>
+      <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/risk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Awk</title>
+      <link>https://jiby.tech/tags/awk/</link>
+      <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/awk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Makefiles</title>
+      <link>https://jiby.tech/tags/makefiles/</link>
+      <pubDate>Sun, 21 Jul 2024 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/makefiles/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://jiby.tech/tags/python/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tools</title>
+      <link>https://jiby.tech/tags/tools/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/tools/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ticket</title>
+      <link>https://jiby.tech/tags/ticket/</link>
+      <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/ticket/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Early-Exit</title>
+      <link>https://jiby.tech/tags/early-exit/</link>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/early-exit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming</title>
+      <link>https://jiby.tech/tags/programming/</link>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docs</title>
+      <link>https://jiby.tech/tags/docs/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/docs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Documentation</title>
+      <link>https://jiby.tech/tags/documentation/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/documentation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Offline</title>
+      <link>https://jiby.tech/tags/offline/</link>
+      <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/offline/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Changelog</title>
+      <link>https://jiby.tech/tags/changelog/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/changelog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Codereview</title>
+      <link>https://jiby.tech/tags/codereview/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/codereview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://jiby.tech/tags/git/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pre-Commit</title>
+      <link>https://jiby.tech/tags/pre-commit/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/pre-commit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sdlc</title>
+      <link>https://jiby.tech/tags/sdlc/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/sdlc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Versioning</title>
+      <link>https://jiby.tech/tags/versioning/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/versioning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cookiecutter</title>
+      <link>https://jiby.tech/tags/cookiecutter/</link>
+      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/cookiecutter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Templating</title>
+      <link>https://jiby.tech/tags/templating/</link>
+      <pubDate>Wed, 05 Apr 2023 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/templating/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Presentation</title>
+      <link>https://jiby.tech/tags/presentation/</link>
+      <pubDate>Sun, 23 Oct 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/presentation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bdd</title>
+      <link>https://jiby.tech/tags/bdd/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/bdd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gherkin</title>
+      <link>https://jiby.tech/tags/gherkin/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/gherkin/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Literate-Programming</title>
+      <link>https://jiby.tech/tags/literate-programming/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/literate-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Project</title>
+      <link>https://jiby.tech/tags/project/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/project/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Qrxfil</title>
+      <link>https://jiby.tech/tags/qrxfil/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/qrxfil/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rfc</title>
+      <link>https://jiby.tech/tags/rfc/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/rfc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tdd</title>
+      <link>https://jiby.tech/tags/tdd/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/tdd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cucumber</title>
+      <link>https://jiby.tech/tags/cucumber/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/cucumber/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Regex</title>
+      <link>https://jiby.tech/tags/regex/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/regex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scenarios</title>
+      <link>https://jiby.tech/tags/scenarios/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/scenarios/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scripting</title>
+      <link>https://jiby.tech/tags/scripting/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/scripting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Features</title>
+      <link>https://jiby.tech/tags/features/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/features/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Requirements</title>
+      <link>https://jiby.tech/tags/requirements/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/requirements/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Specifications</title>
+      <link>https://jiby.tech/tags/specifications/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/specifications/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Classification</title>
+      <link>https://jiby.tech/tags/classification/</link>
+      <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/classification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shell</title>
+      <link>https://jiby.tech/tags/shell/</link>
+      <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ansible</title>
+      <link>https://jiby.tech/tags/ansible/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/ansible/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Infrastructure-as-Code</title>
+      <link>https://jiby.tech/tags/infrastructure-as-code/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/infrastructure-as-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reproducible</title>
+      <link>https://jiby.tech/tags/reproducible/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/reproducible/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vagrant</title>
+      <link>https://jiby.tech/tags/vagrant/</link>
+      <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/vagrant/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data-Processing</title>
+      <link>https://jiby.tech/tags/data-processing/</link>
+      <pubDate>Sat, 16 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/data-processing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Https</title>
       <link>https://jiby.tech/tags/https/</link>
       <pubDate>Wed, 09 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/tags/https/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>reverse-engineering</title>
+      <title>Reverse-Engineering</title>
       <link>https://jiby.tech/tags/reverse-engineering/</link>
       <pubDate>Wed, 09 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/tags/reverse-engineering/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

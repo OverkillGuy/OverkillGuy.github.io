@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>presentation on Jiby&#39;s toolbox</title>
+    <title>Presentation on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/presentation/</link>
-    <description>Recent content in presentation on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Presentation on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Oct 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/presentation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Oct 2022 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/presentation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Presentation: Makefiles for build automation and documentation</title>
       <link>https://jiby.tech/post/makefiles-presentation/</link>
       <pubDate>Sun, 23 Oct 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/makefiles-presentation/</guid>
-      <description>Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
-Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands).</description>
+      <description>&lt;p&gt;Last Friday, I performed a presentation to my colleagues about Makefiles, and I&#xA;want to share it to the public.&lt;/p&gt;&#xA;&lt;p&gt;Of note, this presentation is setting aside what people usually know of&#xA;Makefiles (autoconf-generated blobs, opaque to any inspection because&#xA;machine-created), and instead I introduce the concept of file transformation as&#xA;a graph, then teach Makefiles basics (using SQL commands as an example). We then&#xA;move on to my plea for simple Makefiles, and their potential for both&#xA;documentation (explain what your codebase commands are, to the juniors), and as&#xA;lightweight automation (avoid typing long boring commands).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Presenting Android terminal with Termux (EdLug)</title>
       <link>https://jiby.tech/post/android-terminal-with-termux/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/android-terminal-with-termux/</guid>
-      <description>Last night, I presented about Termux to EdLug, the Edinburgh Linux User group (see the event page on meetup.com) in a talk titled &amp;ldquo;The freedom of shelling out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet getting a terminal unlocks a powerful tool!
-I&#39;ve made the slides available on this website, click on the slide below. Remember that there are speaker notes for people following at home, press `S` to use them.</description>
+      <description>&lt;p&gt;Last night, I presented about &lt;a href=&#34;https://termux.com&#34;&gt;Termux&lt;/a&gt; to EdLug, the Edinburgh Linux User group&#xA;(see the &lt;a href=&#34;https://www.meetup.com/Edinburgh-Linux-User-Group-EdLUG/events/264919828/&#34;&gt;event page on meetup.com&lt;/a&gt;) in a talk titled &amp;ldquo;The freedom of shelling&#xA;out on Android&amp;rdquo;. It was tons of fun showing off how your Android phone/tablet&#xA;getting a terminal unlocks a powerful tool!&lt;/p&gt;&#xA;&lt;div title=&#34;Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website&#34;&gt;&#xA;&lt;img src=&#34;../../presentation/termux/pictures/tmux-framed.png&#34; alt=&#34;tmux-framed.png&#34; width=&#34;40%&#34; title=&#34;Termux running vim, gcc, strace, with tmux splitting screen. Credit: Termux website&#34; /&gt;&#xA;I&#39;ve made the slides available on this website, click on the slide below.&#xA;Remember that there are speaker notes for people following at home, press `S` to&#xA;use them. These were built with [Reveal.js](https://revealjs.com).&#xA;&lt;/div&gt;&#xA;&lt;figure&gt;&lt;a href=&#34;../../presentation/termux/android_shell_termux.html&#34;&gt;&lt;img src=&#34;../../presentation/termux/pictures/termux-prez-intro.png&#34;&#xA;    alt=&#34;Figure 1: Click to view the slides&#34; width=&#34;100%&#34;&gt;&lt;/a&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;&lt;span class=&#34;figure-number&#34;&gt;Figure 1: &lt;/span&gt;Click to view the slides&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

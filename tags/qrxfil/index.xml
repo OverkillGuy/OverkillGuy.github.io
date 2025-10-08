@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>qrxfil on Jiby&#39;s toolbox</title>
+    <title>Qrxfil on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/qrxfil/</link>
-    <description>Recent content in qrxfil on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Qrxfil on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/qrxfil/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/qrxfil/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reinventing IP Fragmentation</title>
       <link>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</guid>
-      <description>Let&amp;rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
-Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side.</description>
+      <description>&lt;p&gt;Let&amp;rsquo;s explore how a file-format design exercise turned into&#xA;reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that&#xA;the protocols that the internet are built on have fantastic public&#xA;documents called &lt;a href=&#34;https://en.wikipedia.org/wiki/Request_for_Comments&#34;&gt;RFC&lt;/a&gt;s.&lt;/p&gt;&#xA;&lt;h2 id=&#34;designing-a-file-format&#34;&gt;Designing a file format&lt;/h2&gt;&#xA;&lt;p&gt;I was idly thinking about designing a good binary file format for a side project&#xA;of mine called &lt;a href=&#34;https://github.com/OverkillGuy/qrxfil&#34;&gt;qrxfil&lt;/a&gt;. The project aims at QR-code-based file export: split a&#xA;file in many pieces (based on content limit of QR codes) before reassembling it&#xA;on the other side.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

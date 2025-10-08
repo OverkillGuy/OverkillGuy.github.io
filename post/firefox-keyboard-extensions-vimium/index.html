@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Keyboard navigation Vimium in Firefox - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:url" content="https://jiby.tech/post/firefox-keyboard-extensions-vimium/">
+  <meta property="og:site_name" content="Jiby&#39;s toolbox">
+  <meta property="og:title" content="Keyboard navigation Vimium in Firefox">
+  <meta property="og:description" content="Today I want to celebrate niche tooling that makes life more comfortable on the computer. For context, I like to work with computers from the keyboard, minimizing use of the mouse. But this is often difficult to do consistently, especially when everything is a web app, a world known to be mouse-focused. Let me tell you about the fantastic Firefox extensions Vimium, and Edit With Emacs, both of which make the keyboard life more pleasant.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-10-09T00:00:00+01:00">
+    <meta property="article:modified_time" content="2025-10-09T00:00:00+01:00">
+    <meta property="article:tag" content="Blog">
+    <meta property="article:tag" content="Firefox">
+    <meta property="article:tag" content="Vim">
+    <meta property="article:tag" content="Emacs">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Keyboard navigation Vimium in Firefox">
+  <meta name="twitter:description" content="Today I want to celebrate niche tooling that makes life more comfortable on the computer. For context, I like to work with computers from the keyboard, minimizing use of the mouse. But this is often difficult to do consistently, especially when everything is a web app, a world known to be mouse-focused. Let me tell you about the fantastic Firefox extensions Vimium, and Edit With Emacs, both of which make the keyboard life more pleasant.">
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Keyboard navigation Vimium in Firefox</h1>
+			<div class="meta">Posted on &mdash; Oct 9, 2025</div>
+		</div>
+
+		<div class="markdown">
+			<p>Today I want to celebrate niche tooling that makes life more comfortable on the computer.
+For context, I like to work with computers from the keyboard, minimizing use of the mouse.
+But this is often difficult to do consistently, especially when everything is a web app, a world known to be mouse-focused.
+Let me tell you about the fantastic Firefox extensions Vimium, and Edit With Emacs, both of which make the keyboard life more pleasant.</p>
+<h2 id="keyboard-warrior">Keyboard warrior</h2>
+<p>It&rsquo;s simple, I don&rsquo;t like to use the mouse.
+I find it imprecise and slow, not &ldquo;moving at the speed of thought&rdquo;.
+Especially the idea that when my gaze is on something, I now need to catch up to it with my other hand.
+So when I can get rid of the mouse, I usually do, in favour of the keyboard.</p>
+<p>I don&rsquo;t particularly believe that it&rsquo;s much &ldquo;faster&rdquo; move around via keyboard, it&rsquo;s more of a &ldquo;not losing focus&rdquo; to keep my eyes focused on the thing I want to do, and type, rather than drag the mouse around until it lines up (or doesn&rsquo;t! accidents happen).
+Of course I&rsquo;m not representative of computer users all round, and don&rsquo;t pretend to be.
+I just don&rsquo;t like to mouse around when I&rsquo;m focusing!</p>
+<p>I&rsquo;ve in the past had much success encouraging use the keyboard by flipping my mouse upside down:
+This turns every reach for the mouse from reflex to an intentional action (&ldquo;is this really worth unflipping the mouse, breaking the streak?&rdquo;), deprogramming myself from reaching automatically.</p>
+<p>But as you might expect, most web navigation (reading a search page result, clicking on the 3rd link, possibly pressing next page) is mouse driven, but feels like it shouldn&rsquo;t need to?</p>
+<h2 id="vimium-navigate-firefox-with-the-keyboard">Vimium: Navigate Firefox with the keyboard</h2>
+<p><a href="https://vimium.github.io/">Vimium</a> is a Firefox<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+extension for keyboard navigation, inspired by Vim.</p>
+<p>You can watch this Vimium demo video to see how it works.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/t67Sn0RGK54?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<p>Overall, Vimium makes Firefox act more like Vim, and in particular provides a vim-like jump ability that makes casual navigation very convenient.</p>
+<h2 id="edit-with-emacs-type-in-textarea-inside-a-real-text-editor">Edit with Emacs: type in textarea inside a real text editor</h2>
+<p>Still helping with keyboard use, but much more niche, is the Firefox extension <a href="https://addons.mozilla.org/en-US/firefox/addon/edit-with-emacs1/">Edit With Emacs</a>.
+As described on the firefox extension&rsquo;s page:</p>
+<blockquote>
+<p>Allows user to edit web-page textareas with Emacs (and other editors).</p></blockquote>
+<figure><img src="/ox-hugo/edit_with_emacs.png"
+    alt="Figure 1: The &ldquo;Edit with Emacs&rdquo; button in a Github comment field (also available via configurable keyboard shortcut while focusing the textarea)"><figcaption>
+      <p><span class="figure-number">Figure 1: </span>The &ldquo;Edit with Emacs&rdquo; button in a Github comment field (also available via configurable keyboard shortcut while focusing the textarea)</p>
+    </figcaption>
+</figure>
+
+<p>Once clicked, this tool pops a new Emacs frame, and lets you edit that text in Emacs until you&rsquo;re done and &ldquo;quit&rdquo; the file, which copies the contents back.</p>
+<p>What happens behind the scene is an Emacs package called &ldquo;edit-server&rdquo;, which serves HTTP requests on localhost port 9292, with Firefox calling to provide the initial content and the URL the request comes from.
+This whole setup means that other editors are supported, if they want, see <a href="https://github.com/stsquad/emacs_chrome/wiki/edit-server">list of alternative edit-servers</a>.</p>
+<p>In typical Emacs fashion, there&rsquo;s much configuration available, like customizing the kind of text mode selected depending on the website, so Github Markdown is highlighted, or changing the keyboard shortcut that moves you to the editor.</p>
+<p>As might be expected of a browser hack, this breaks in overly fancy textboxes, like Jira&rsquo;s, which is too bad, but I really like the principle of moving more of my text editing life back to the text editor I call home.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I like using the keyboard, and I like little tricks to make my workflow more comfortable.
+With most of my computer life spent editing text, I&rsquo;m happy that Firefox can be bent to be more friendly to that lifestyle.</p>
+<p>These Firefox extensions give me joy, by providing a sort of &ldquo;accessibility&rdquo; that I find web browsers sometimes can lack.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Vimium is available for Chrome too, but I like Free Software
+and want to encourage it, so Firefox it is. I&rsquo;ve spent enough time
+trying to excise Google from my life, to end up using their browser monopoly.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/firefox">firefox</a></li>
+								
+								<li><a href="/tags/vim">vim</a></li>
+								
+								<li><a href="/tags/emacs">emacs</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

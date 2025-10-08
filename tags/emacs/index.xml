@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Emacs on Jiby&#39;s toolbox</title>
+    <link>https://jiby.tech/tags/emacs/</link>
+    <description>Recent content in Emacs on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Oct 2025 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keyboard navigation Vimium in Firefox</title>
+      <link>https://jiby.tech/post/firefox-keyboard-extensions-vimium/</link>
+      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/post/firefox-keyboard-extensions-vimium/</guid>
+      <description>&lt;p&gt;Today I want to celebrate niche tooling that makes life more comfortable on the computer.&#xA;For context, I like to work with computers from the keyboard, minimizing use of the mouse.&#xA;But this is often difficult to do consistently, especially when everything is a web app, a world known to be mouse-focused.&#xA;Let me tell you about the fantastic Firefox extensions Vimium, and Edit With Emacs, both of which make the keyboard life more pleasant.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

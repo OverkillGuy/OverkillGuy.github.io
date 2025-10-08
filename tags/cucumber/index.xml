@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>cucumber on Jiby&#39;s toolbox</title>
+    <title>Cucumber on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/cucumber/</link>
-    <description>Recent content in cucumber on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Cucumber on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Apr 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/cucumber/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Apr 2022 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/cucumber/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Low-tech Cucumber replacement</title>
       <link>https://jiby.tech/post/low-tech-cucumber-replacement/</link>
       <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/low-tech-cucumber-replacement/</guid>
-      <description>In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
-In this article, I want to explain my disilusionment towards Cucumber, and show how a low-tech alternative emerged that I believe covers most of the value for none of the effort.</description>
+      <description>&lt;p&gt;In the previous post, I showed how Gherkin Scenarios provide a great framework&#xA;for acceptance test definition. I also showed how the dreams of the BDD movement&#xA;extend to automating Gherkin, using a tool called Cucumber, enforcing&#xA;traceability of acceptance tests.&lt;/p&gt;&#xA;&lt;p&gt;In this article, I want to explain my disilusionment towards Cucumber, and show&#xA;how a low-tech alternative emerged that I believe covers most of the value&#xA;for none of the effort.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>BDD Dreams, Cucumber And Gherkin</title>
       <link>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</guid>
-      <description>In the previous post in this series on Gherkin, I showed the tools that Gherkin Features provide for requirements tracking, and mentioned ambitious goals for the Behaviour-driven Development (BDD) movement. In this article, I want to expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of traceability led to Cucumber, a tool for automating acceptance test execution, tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on these tools for a future post.</description>
+      <description>&lt;p&gt;In the &lt;a href=&#34;../../post/gherkin-features-user-requirements/&#34;&gt;previous post in this series on Gherkin&lt;/a&gt;, I showed the tools that Gherkin&#xA;Features provide for requirements tracking, and mentioned ambitious goals for&#xA;the Behaviour-driven Development (BDD) movement. In this article, I want to&#xA;expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of&#xA;traceability led to Cucumber, a tool for automating acceptance test execution,&#xA;tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on&#xA;these tools for a future post.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

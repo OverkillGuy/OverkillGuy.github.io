@@ -1,49 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gherkin on Jiby&#39;s toolbox</title>
+    <title>Gherkin on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/gherkin/</link>
-    <description>Recent content in gherkin on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Gherkin on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/gherkin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/gherkin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Literate wordle</title>
       <link>https://jiby.tech/post/literate-wordle/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/literate-wordle/</guid>
-      <description>I&amp;rsquo;ve recently written a series of articles about Gherkin: its usage for requirements gathering, about its uses in BDD, and a lower-tech alternative to Cucumber, which I&amp;rsquo;m still experimenting with.
-I wanted to showcase all of these ideas brought together, as well as show how comfy modern Python tooling can be. But more than writing code, I would need to explain my reasoning as we draft the program. So I picked up again a tool I always wanted to play with: Literate Programming.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently written a series of articles about Gherkin: &lt;a href=&#34;../gherkin-features-user-requirements/&#34;&gt;its usage for&#xA;requirements gathering&lt;/a&gt;, about &lt;a href=&#34;../bdd-dreams-cucumber-and-gherkin/&#34;&gt;its uses in BDD&lt;/a&gt;, and a &lt;a href=&#34;../low-tech-cucumber-replacement/&#34;&gt;lower-tech alternative to Cucumber&lt;/a&gt;, which I&amp;rsquo;m still experimenting with.&lt;/p&gt;&#xA;&lt;p&gt;I wanted to showcase all of these ideas brought together, as well as show how&#xA;comfy modern Python tooling can be. But more than writing code, I would need to&#xA;explain my reasoning as we draft the program. So I picked up again a tool I always&#xA;wanted to play with: Literate Programming.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Low-tech Cucumber replacement</title>
       <link>https://jiby.tech/post/low-tech-cucumber-replacement/</link>
       <pubDate>Mon, 04 Apr 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/low-tech-cucumber-replacement/</guid>
-      <description>In the previous post, I showed how Gherkin Scenarios provide a great framework for acceptance test definition. I also showed how the dreams of the BDD movement extend to automating Gherkin, using a tool called Cucumber, enforcing traceability of acceptance tests.
-In this article, I want to explain my disilusionment towards Cucumber, and show how a low-tech alternative emerged that I believe covers most of the value for none of the effort.</description>
+      <description>&lt;p&gt;In the previous post, I showed how Gherkin Scenarios provide a great framework&#xA;for acceptance test definition. I also showed how the dreams of the BDD movement&#xA;extend to automating Gherkin, using a tool called Cucumber, enforcing&#xA;traceability of acceptance tests.&lt;/p&gt;&#xA;&lt;p&gt;In this article, I want to explain my disilusionment towards Cucumber, and show&#xA;how a low-tech alternative emerged that I believe covers most of the value&#xA;for none of the effort.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>BDD Dreams, Cucumber And Gherkin</title>
       <link>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/bdd-dreams-cucumber-and-gherkin/</guid>
-      <description>In the previous post in this series on Gherkin, I showed the tools that Gherkin Features provide for requirements tracking, and mentioned ambitious goals for the Behaviour-driven Development (BDD) movement. In this article, I want to expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of traceability led to Cucumber, a tool for automating acceptance test execution, tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on these tools for a future post.</description>
+      <description>&lt;p&gt;In the &lt;a href=&#34;../../post/gherkin-features-user-requirements/&#34;&gt;previous post in this series on Gherkin&lt;/a&gt;, I showed the tools that Gherkin&#xA;Features provide for requirements tracking, and mentioned ambitious goals for&#xA;the Behaviour-driven Development (BDD) movement. In this article, I want to&#xA;expand on these BDD ideals, show Gherkin Scenarios, and explain how the dream of&#xA;traceability led to Cucumber, a tool for automating acceptance test execution,&#xA;tracing them back to Gherkin Scenarios. We&amp;rsquo;ll set aside my personal feelings on&#xA;these tools for a future post.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gherkin Features for user requirements</title>
       <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/gherkin-features-user-requirements/</guid>
-      <description>The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines.</description>
+      <description>&lt;p&gt;&lt;strong&gt;The most common mistake I see developers make is building the wrong thing&lt;/strong&gt;: Not&#xA;tracking exactly what is required from the start, and instead getting excited&#xA;about the cool technical problems ahead. Fast forward a few days, weeks, months,&#xA;showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed&#xA;and what was built becomes obvious, in a frenzy of last minute changes to reach&#xA;the original goal under pressure from deadlines.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

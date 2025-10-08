@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>project on Jiby&#39;s toolbox</title>
+    <title>Project on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/project/</link>
-    <description>Recent content in project on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Project on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Literate wordle</title>
       <link>https://jiby.tech/post/literate-wordle/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/literate-wordle/</guid>
-      <description>I&amp;rsquo;ve recently written a series of articles about Gherkin: its usage for requirements gathering, about its uses in BDD, and a lower-tech alternative to Cucumber, which I&amp;rsquo;m still experimenting with.
-I wanted to showcase all of these ideas brought together, as well as show how comfy modern Python tooling can be. But more than writing code, I would need to explain my reasoning as we draft the program. So I picked up again a tool I always wanted to play with: Literate Programming.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently written a series of articles about Gherkin: &lt;a href=&#34;../gherkin-features-user-requirements/&#34;&gt;its usage for&#xA;requirements gathering&lt;/a&gt;, about &lt;a href=&#34;../bdd-dreams-cucumber-and-gherkin/&#34;&gt;its uses in BDD&lt;/a&gt;, and a &lt;a href=&#34;../low-tech-cucumber-replacement/&#34;&gt;lower-tech alternative to Cucumber&lt;/a&gt;, which I&amp;rsquo;m still experimenting with.&lt;/p&gt;&#xA;&lt;p&gt;I wanted to showcase all of these ideas brought together, as well as show how&#xA;comfy modern Python tooling can be. But more than writing code, I would need to&#xA;explain my reasoning as we draft the program. So I picked up again a tool I always&#xA;wanted to play with: Literate Programming.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reproducible workspace deployment with Ansible and Vagrant</title>
       <link>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</link>
       <pubDate>Thu, 11 Jun 2020 00:32:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/reproducible-workspace-ansible-vagrant/</guid>
-      <description>Like many developers, I keep track of my configuration files in version control, to make moving to new machines is simpler and share code with others. This process started out for my Emacs config files at first, but grew to consume other aspects: bash functions, git aliases&amp;hellip; Since 2016, I have accumulated over 500 git commits.
-Now the dotfiles are tracked, the next biggest pain is to install packages and folder structures and obscure commands required to set up some subsystems needs which config files.</description>
+      <description>&lt;p&gt;Like many developers, I keep track of my configuration files in&#xA;version control, to make moving to new machines is simpler and share&#xA;code with others. This process started out for my Emacs config files&#xA;at first, but grew to consume other aspects: bash functions, git&#xA;aliases&amp;hellip; Since 2016, I have accumulated over &lt;a href=&#34;https://github.com/OverkillGuy/jibyconf&#34;&gt;500 git commits&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Now the &lt;a href=&#34;https://dotfiles.org&#34;&gt;dotfiles&lt;/a&gt; are tracked, the next biggest pain is to install&#xA;packages and folder structures and obscure commands required to set up&#xA;some subsystems needs which config files. Wouldn&amp;rsquo;t it be nice to have&#xA;an all-in-one setup?&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

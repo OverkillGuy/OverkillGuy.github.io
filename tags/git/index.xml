@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on Jiby&#39;s toolbox</title>
+    <title>Git on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/git/</link>
-    <description>Recent content in git on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Git on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My git worfklow</title>
       <link>https://jiby.tech/post/my-git-worfklow/</link>
       <pubDate>Fri, 30 Jun 2023 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/my-git-worfklow/</guid>
-      <description>Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
-The article is broken down into ideas + recommendations, with recommendations in bold.</description>
+      <description>&lt;p&gt;Every now and then, at work, I find myself discussing git worfklows, commit&#xA;messages, branching, releasing, versioning, changelogs etc. Since my opinion has&#xA;remained fairly consistent for the past few years, I found myself repeating the&#xA;same points a lot, so I wrote it down. This page is the resulting compilation of&#xA;my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.&lt;/p&gt;&#xA;&lt;p&gt;The article is broken down into ideas + recommendations, with recommendations in&#xA;bold. Obviously, this workflow isn&amp;rsquo;t applicable to everyone (sorry, Google! This&#xA;isn&amp;rsquo;t a free consultation!) as different teams have needs that should get dealt&#xA;with differently.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git diff from empty commit</title>
       <link>https://jiby.tech/post/git-diff-empty-repo/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/git-diff-empty-repo/</guid>
-      <description>In order to troubleshoot a bug in the very early history of a project using git, I needed a way to show the git diff from &amp;ldquo;nothing&amp;rdquo; to the first commit. Since git keeps a linked graph of commits, what I wanted was a diff from the commit before the first one. Searching the onlines dug up this answer on StackOverflow, showing that there&amp;rsquo;s a specific commit hash we can use to diff from &amp;ldquo;nothing&amp;rdquo; to the first commit:</description>
+      <description>&lt;p&gt;In order to troubleshoot a bug in the very early history of a project&#xA;using git, I needed a way to show the git diff from &amp;ldquo;nothing&amp;rdquo; to the&#xA;first commit. Since git keeps a linked graph of commits, what I wanted&#xA;was a diff from the commit before the first one. Searching the onlines&#xA;dug up &lt;a href=&#34;https://stackoverflow.com/a/40884093&#34;&gt;this answer on StackOverflow&lt;/a&gt;, showing that there&amp;rsquo;s a specific&#xA;commit hash we can use to diff from &amp;ldquo;nothing&amp;rdquo; to the first commit:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git diff for prose</title>
       <link>https://jiby.tech/post/git-diff-lines-prose/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/git-diff-lines-prose/</guid>
-      <description>When writing long sentences in documentation repositories, git tends to show really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken, which hides edits happening towards end of line. A colleague of mine asked me if git couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!
- Figure 1: Can you spot the edit made in a long line of text?
-  Kaushal Modi&amp;rsquo;s blog post on git diff for minified JS and CSS inspired this idea for all you prose lovers.</description>
+      <description>&lt;p&gt;When writing long sentences in documentation repositories, &lt;code&gt;git&lt;/code&gt; tends to show&#xA;really unhelpful diffs. They are unreadable because long lines aren&amp;rsquo;t broken,&#xA;which hides edits happening towards end of line. A colleague of mine asked me if git&#xA;couldn&amp;rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://jiby.tech/ox-hugo/prose-diff-before.png&#34;&#xA;    alt=&#34;Figure 1: Can you spot the edit made in a long line of text?&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Figure 1: Can you spot the edit made in a long line of text?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git pretty graph</title>
       <link>https://jiby.tech/post/git-graph/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/git-graph/</guid>
-      <description>Get a cool graph of commits from the command line! For newbies and experts alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make understanding git easier.
-git log --decorate --oneline --graph  Figure 1: Git graph of this repository
-  This can be made into a git command via an entry your ~/.gitconfig:
-[alias] graph = log --decorate --oneline --graph Code Snippet 1: Alias &#34;</description>
+      <description>&lt;p&gt;Get a cool graph of commits from the command line! For newbies and experts&#xA;alike, git is a bit hard to visualize. Here&amp;rsquo;s a handy git command to make&#xA;understanding git easier.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git log --decorate --oneline --graph&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;figure&gt;&lt;img src=&#34;https://jiby.tech/ox-hugo/git-graph.png&#34;&#xA;    alt=&#34;Figure 1: Git graph of this repository&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Figure 1: Git graph of this repository&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;This can be made into a git command via an entry your &lt;code&gt;~/.gitconfig&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[alias]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;graph = log --decorate --oneline --graph&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;src-block-caption&#34;&gt;&#xA;  &lt;span class=&#34;src-block-number&#34;&gt;Code Snippet 1&lt;/span&gt;:&#xA;  Alias &#34;graph&#34; defined in ~/.gitconfig file&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Invoke with&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

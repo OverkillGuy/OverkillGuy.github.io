@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tools on Jiby&#39;s toolbox</title>
+    <title>Tools on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/tools/</link>
-    <description>Recent content in tools on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Tools on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My python toolbox</title>
       <link>https://jiby.tech/post/my-python-toolbox/</link>
       <pubDate>Mon, 01 Apr 2024 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/my-python-toolbox/</guid>
-      <description>The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
-Lately, there&amp;rsquo;s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
-I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools.</description>
+      <description>&lt;p&gt;The packaging workflow of Python has historically been a bit messy, starting&#xA;with &lt;code&gt;pip&lt;/code&gt; being &lt;em&gt;just&lt;/em&gt; good enough, and virtualenvs being a great idea but a&#xA;bit unwieldy. Installation was difficult, and tools like anaconda filled the&#xA;gaps.&lt;/p&gt;&#xA;&lt;p&gt;Lately, there&amp;rsquo;s been renaissance of package tooling in Python thanks to other&#xA;languages innovating in the area, inspiring and pollinating the ecosystem,&#xA;improving the comfort of development.&lt;/p&gt;&#xA;&lt;p&gt;I want to present here the tools that I use to work with Python, usually latest&#xA;iterations on well known concepts, to show that Python can be both fun to play&#xA;with, &lt;em&gt;and&lt;/em&gt; safe enough if we use modern tools.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

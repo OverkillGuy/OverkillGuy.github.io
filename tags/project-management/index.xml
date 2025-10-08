@@ -1,41 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>project-management on Jiby&#39;s toolbox</title>
+    <title>Project-Management on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/project-management/</link>
-    <description>Recent content in project-management on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Project-Management on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/project-management/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/project-management/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>You need a risk register</title>
       <link>https://jiby.tech/post/you-need-a-risk-register/</link>
       <pubDate>Sun, 16 Feb 2025 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/you-need-a-risk-register/</guid>
-      <description>I&amp;rsquo;ve been thinking a lot about risk registers recently. I feel like people don&amp;rsquo;t know enough about them, or reject them on principle for being &amp;ldquo;more process&amp;rdquo;.
-I&amp;rsquo;ve worked in projects where the process was heavy, and like many, I very much didn&amp;rsquo;t like it then. But since moving to more &amp;ldquo;agile&amp;rdquo; environments, I&amp;rsquo;ve repeatedly been missing the structured aspects of writing things down, and wished for more rigour, more &amp;hellip; process?</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve been thinking a lot about risk registers recently. I feel like people don&amp;rsquo;t&#xA;know enough about them, or reject them on principle for being &amp;ldquo;more process&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve worked in projects where the process was heavy, and like many, I very much&#xA;didn&amp;rsquo;t like it then. But since moving to more &amp;ldquo;agile&amp;rdquo; environments, I&amp;rsquo;ve&#xA;repeatedly been missing the structured aspects of writing things down, and&#xA;wished for more rigour,  more &amp;hellip; process?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reframing tickets as engineering records</title>
       <link>https://jiby.tech/post/tickets-as-engineering-records/</link>
       <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/tickets-as-engineering-records/</guid>
-      <description>In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets are for.
-In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering records&amp;rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
-Tickets as project management Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).</description>
+      <description>&lt;p&gt;In the software world, tickets (as implemented in Jira, etc) often have a bad&#xA;reputation, and I think it&amp;rsquo;s undeserved, once we reframe what, or who tickets&#xA;are &lt;em&gt;for&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In this article I want to revisit the purpose of tickets, usually &amp;ldquo;tickets for&#xA;project management&amp;rdquo;, explore an alternative viewpoint of &amp;ldquo;tickets as engineering&#xA;records&amp;rdquo;, and highlight how tickets should be useable as asynchronous&#xA;alternative to (synchronous) communication.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tickets-as-project-management&#34;&gt;Tickets as project management&lt;/h2&gt;&#xA;&lt;p&gt;Under this fairly common viewpoint, tickets are a project manager&amp;rsquo;s tool, almost&#xA;inflicted upon devs, likely in an attempt to punish them for their arcane powers&#xA;over machine, who knows (I&amp;rsquo;m of course exaggerating on purpose).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gherkin Features for user requirements</title>
       <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/gherkin-features-user-requirements/</guid>
-      <description>The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines.</description>
+      <description>&lt;p&gt;&lt;strong&gt;The most common mistake I see developers make is building the wrong thing&lt;/strong&gt;: Not&#xA;tracking exactly what is required from the start, and instead getting excited&#xA;about the cool technical problems ahead. Fast forward a few days, weeks, months,&#xA;showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed&#xA;and what was built becomes obvious, in a frenzy of last minute changes to reach&#xA;the original goal under pressure from deadlines.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

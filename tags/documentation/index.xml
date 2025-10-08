@@ -1,40 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>documentation on Jiby&#39;s toolbox</title>
+    <title>Documentation on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/documentation/</link>
-    <description>Recent content in documentation on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Documentation on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jiby.tech/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Offline developer docs: Dash docsets via Zeal</title>
       <link>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</link>
       <pubDate>Fri, 15 Dec 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/offline-dev-docs-zeal-dash-docsets/</guid>
-      <description>Since my earliest university days, I&amp;rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
-One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls.</description>
+      <description>&lt;p&gt;Since my earliest university days, I&amp;rsquo;ve spent a lot of time trying to get better&#xA;at computers, immersing myself in the world of Linux, and generally&#xA;improving my software development skills.&lt;/p&gt;&#xA;&lt;p&gt;One of the aspects that was the most helpful to help me grow was attempting to&#xA;replicate my normal dev workflow, but with less: Learn to operate on Linux not&#xA;Windows, then learn to do dev via on the terminal instead of GUIs, and&#xA;eventually learn to do the same but offline, without any network calls.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reinventing IP Fragmentation</title>
       <link>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/reading-rfc-reinventing-ip-fragmentation/</guid>
-      <description>Let&amp;rsquo;s explore how a file-format design exercise turned into reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that the protocols that the internet are built on have fantastic public documents called RFCs.
-Designing a file format I was idly thinking about designing a good binary file format for a side project of mine called qrxfil. The project aims at QR-code-based file export: split a file in many pieces (based on content limit of QR codes) before reassembling it on the other side.</description>
+      <description>&lt;p&gt;Let&amp;rsquo;s explore how a file-format design exercise turned into&#xA;reinventing the wheel, and let&amp;rsquo;s all appreciate how lucky we are that&#xA;the protocols that the internet are built on have fantastic public&#xA;documents called &lt;a href=&#34;https://en.wikipedia.org/wiki/Request_for_Comments&#34;&gt;RFC&lt;/a&gt;s.&lt;/p&gt;&#xA;&lt;h2 id=&#34;designing-a-file-format&#34;&gt;Designing a file format&lt;/h2&gt;&#xA;&lt;p&gt;I was idly thinking about designing a good binary file format for a side project&#xA;of mine called &lt;a href=&#34;https://github.com/OverkillGuy/qrxfil&#34;&gt;qrxfil&lt;/a&gt;. The project aims at QR-code-based file export: split a&#xA;file in many pieces (based on content limit of QR codes) before reassembling it&#xA;on the other side.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gherkin Features for user requirements</title>
       <link>https://jiby.tech/post/gherkin-features-user-requirements/</link>
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://jiby.tech/post/gherkin-features-user-requirements/</guid>
-      <description>The most common mistake I see developers make is building the wrong thing: Not tracking exactly what is required from the start, and instead getting excited about the cool technical problems ahead. Fast forward a few days, weeks, months, showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed and what was built becomes obvious, in a frenzy of last minute changes to reach the original goal under pressure from deadlines.</description>
+      <description>&lt;p&gt;&lt;strong&gt;The most common mistake I see developers make is building the wrong thing&lt;/strong&gt;: Not&#xA;tracking exactly what is required from the start, and instead getting excited&#xA;about the cool technical problems ahead. Fast forward a few days, weeks, months,&#xA;showcasing the product near completion, suddenly the rift between what&amp;rsquo;s needed&#xA;and what was built becomes obvious, in a frenzy of last minute changes to reach&#xA;the original goal under pressure from deadlines.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

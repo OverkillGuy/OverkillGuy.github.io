@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.92.2" />
+	<meta name="generator" content="Hugo 0.151.0">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Jiby&#39;s toolbox - Jb Doyon&#39;s personal website </title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="alternate" type="application/rss+xml" href="https://jiby.tech/index.xml" title="Jiby's toolbox" />
-	<meta property="og:title" content="Jiby&#39;s toolbox" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://jiby.tech/" />
+	<meta property="og:url" content="https://jiby.tech/">
+  <meta property="og:site_name" content="Jiby&#39;s toolbox">
+  <meta property="og:title" content="Jiby&#39;s toolbox">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Jiby&#39;s toolbox"/>
-<meta name="twitter:description" content=""/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jiby&#39;s toolbox">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
@@ -64,12 +64,29 @@
 				
 				
 				<div class="post">
+					<div class="meta">Oct 9, 2025</div>
+					<a class="title" href="/post/firefox-keyboard-extensions-vimium/">Keyboard navigation Vimium in Firefox</a> &mdash;
+					<span class="description">
+						
+						<p>Today I want to celebrate niche tooling that makes life more comfortable on the computer.
+For context, I like to work with computers from the keyboard, minimizing use of the mouse.
+But this is often difficult to do consistently, especially when everything is a web app, a world known to be mouse-focused.
+Let me tell you about the fantastic Firefox extensions Vimium, and Edit With Emacs, both of which make the keyboard life more pleasant.</p>&hellip;
+						
+					</span>
+				</div>
+				
+				<div class="post">
 					<div class="meta">Feb 16, 2025</div>
 					<a class="title" href="/post/you-need-a-risk-register/">You need a risk register</a> &mdash;
 					<span class="description">
 						
-						I&rsquo;ve been thinking a lot about risk registers recently. I feel like people don&rsquo;t know enough about them, or reject them on principle for being &ldquo;more process&rdquo;.
-I&rsquo;ve worked in projects where the process was heavy, and like many, I very much didn&rsquo;t like it then. But since moving to more &ldquo;agile&rdquo; environments, I&rsquo;ve repeatedly been missing the structured aspects of writing things down, and wished for more rigour, more &hellip; process?&hellip;
+						<p>I&rsquo;ve been thinking a lot about risk registers recently. I feel like people don&rsquo;t
+know enough about them, or reject them on principle for being &ldquo;more process&rdquo;.</p>
+<p>I&rsquo;ve worked in projects where the process was heavy, and like many, I very much
+didn&rsquo;t like it then. But since moving to more &ldquo;agile&rdquo; environments, I&rsquo;ve
+repeatedly been missing the structured aspects of writing things down, and
+wished for more rigour,  more &hellip; process?</p>&hellip;
 						
 					</span>
 				</div>
@@ -79,9 +96,20 @@ I&rsquo;ve worked in projects where the process was heavy, and like many, I very
 					<a class="title" href="/post/make-help-documenting-makefile/">Documenting Makefiles via a help message</a> &mdash;
 					<span class="description">
 						
-						I&rsquo;ve written in the past about using Makefiles for build automation and documentation. But sometimes I wish to provide help to users, that doesn&rsquo;t require being a Makefiles expert to read!
-Let&rsquo;s explore how we can teach users our build system by turning the project&rsquo;s Makefile (and awk) into a cheap documentation-as-code tool.
-What it looks like make help Code Snippet 1: How to ask for help   Figure 1: Result of asking for help&hellip;
+						<p>I&rsquo;ve written in the past about <a href="../makefiles-presentation">using Makefiles for build automation and documentation</a>.
+But sometimes I wish to provide help to users, that <em>doesn&rsquo;t</em> require
+being a Makefiles expert to read!</p>
+<p>Let&rsquo;s explore how we can teach users our build system by turning
+the project&rsquo;s Makefile (and <code>awk</code>) into a cheap documentation-as-code tool.</p>
+<h2 id="what-it-looks-like">What it looks like</h2>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>make <span style="color:#b58900">help</span>
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  How to ask for help
+</div>
+<figure><img src="/ox-hugo/make-help-rendered.png"
+    alt="Figure 1: Result of asking for help" width="100%"><figcaption>
+      <p><span class="figure-number">Figure 1: </span>Result of asking for help</p>&hellip;
 						
 					</span>
 				</div>
@@ -91,9 +119,16 @@ What it looks like make help Code Snippet 1: How to ask for help   Figure 1: Res
 					<a class="title" href="/post/my-python-toolbox/">My python toolbox</a> &mdash;
 					<span class="description">
 						
-						The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
-Lately, there&rsquo;s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
-I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools.&hellip;
+						<p>The packaging workflow of Python has historically been a bit messy, starting
+with <code>pip</code> being <em>just</em> good enough, and virtualenvs being a great idea but a
+bit unwieldy. Installation was difficult, and tools like anaconda filled the
+gaps.</p>
+<p>Lately, there&rsquo;s been renaissance of package tooling in Python thanks to other
+languages innovating in the area, inspiring and pollinating the ecosystem,
+improving the comfort of development.</p>
+<p>I want to present here the tools that I use to work with Python, usually latest
+iterations on well known concepts, to show that Python can be both fun to play
+with, <em>and</em> safe enough if we use modern tools.</p>&hellip;
 						
 					</span>
 				</div>
@@ -103,9 +138,17 @@ I want to present here the tools that I use to work with Python, usually latest 
 					<a class="title" href="/post/tickets-as-engineering-records/">Reframing tickets as engineering records</a> &mdash;
 					<span class="description">
 						
-						In the software world, tickets (as implemented in Jira, etc) often have a bad reputation, and I think it&rsquo;s undeserved, once we reframe what, or who tickets are for.
-In this article I want to revisit the purpose of tickets, usually &ldquo;tickets for project management&rdquo;, explore an alternative viewpoint of &ldquo;tickets as engineering records&rdquo;, and highlight how tickets should be useable as asynchronous alternative to (synchronous) communication.
-Tickets as project management Under this fairly common viewpoint, tickets are a project manager&rsquo;s tool, almost inflicted upon devs, likely in an attempt to punish them for their arcane powers over machine, who knows (I&rsquo;m of course exaggerating on purpose).&hellip;
+						<p>In the software world, tickets (as implemented in Jira, etc) often have a bad
+reputation, and I think it&rsquo;s undeserved, once we reframe what, or who tickets
+are <em>for</em>.</p>
+<p>In this article I want to revisit the purpose of tickets, usually &ldquo;tickets for
+project management&rdquo;, explore an alternative viewpoint of &ldquo;tickets as engineering
+records&rdquo;, and highlight how tickets should be useable as asynchronous
+alternative to (synchronous) communication.</p>
+<h2 id="tickets-as-project-management">Tickets as project management</h2>
+<p>Under this fairly common viewpoint, tickets are a project manager&rsquo;s tool, almost
+inflicted upon devs, likely in an attempt to punish them for their arcane powers
+over machine, who knows (I&rsquo;m of course exaggerating on purpose).</p>&hellip;
 						
 					</span>
 				</div>
@@ -115,9 +158,16 @@ Tickets as project management Under this fairly common viewpoint, tickets are a 
 					<a class="title" href="/post/embrace-early-exit/">Embrace the Early Exit</a> &mdash;
 					<span class="description">
 						
-						In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
-But amongst them all, there&rsquo;s one pattern I whole-heartedly love, it&rsquo;s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
-From If+else to ladders and conditionals hell Functions routinely need to check some edge case isn&rsquo;t hit, usually with more edge cases than actual routine happy-path code lines.&hellip;
+						<p>In programming, there are patterns everywhere: patterns of building code,
+patterns for organising components, even patterns for how to test things. A
+whole industry is looking for
+patterns to solve all their problems.</p>
+<p>But amongst them all, there&rsquo;s one pattern I whole-heartedly love, it&rsquo;s the Early Exit. In this
+short and sweet post, I want to declare my undying love to the Early Exit,
+sharing my excitement.</p>
+<h2 id="from-if-plus-else-to-ladders-and-conditionals-hell">From If+else to ladders and conditionals hell</h2>
+<p>Functions routinely need to check some edge case isn&rsquo;t hit, usually with more
+edge cases than actual routine happy-path code lines.</p>&hellip;
 						
 					</span>
 				</div>
@@ -127,8 +177,13 @@ From If+else to ladders and conditionals hell Functions routinely need to check 
 					<a class="title" href="/post/offline-dev-docs-zeal-dash-docsets/">Offline developer docs: Dash docsets via Zeal</a> &mdash;
 					<span class="description">
 						
-						Since my earliest university days, I&rsquo;ve spent a lot of time trying to get better at computers, immersing myself in the world of Linux, and generally improving my software development skills.
-One of the aspects that was the most helpful to help me grow was attempting to replicate my normal dev workflow, but with less: Learn to operate on Linux not Windows, then learn to do dev via on the terminal instead of GUIs, and eventually learn to do the same but offline, without any network calls.&hellip;
+						<p>Since my earliest university days, I&rsquo;ve spent a lot of time trying to get better
+at computers, immersing myself in the world of Linux, and generally
+improving my software development skills.</p>
+<p>One of the aspects that was the most helpful to help me grow was attempting to
+replicate my normal dev workflow, but with less: Learn to operate on Linux not
+Windows, then learn to do dev via on the terminal instead of GUIs, and
+eventually learn to do the same but offline, without any network calls.</p>&hellip;
 						
 					</span>
 				</div>
@@ -138,8 +193,15 @@ One of the aspects that was the most helpful to help me grow was attempting to r
 					<a class="title" href="/post/my-git-worfklow/">My git worfklow</a> &mdash;
 					<span class="description">
 						
-						Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
-The article is broken down into ideas + recommendations, with recommendations in bold.&hellip;
+						<p>Every now and then, at work, I find myself discussing git worfklows, commit
+messages, branching, releasing, versioning, changelogs etc. Since my opinion has
+remained fairly consistent for the past few years, I found myself repeating the
+same points a lot, so I wrote it down. This page is the resulting compilation of
+my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.</p>
+<p>The article is broken down into ideas + recommendations, with recommendations in
+bold. Obviously, this workflow isn&rsquo;t applicable to everyone (sorry, Google! This
+isn&rsquo;t a free consultation!) as different teams have needs that should get dealt
+with differently.</p>&hellip;
 						
 					</span>
 				</div>
@@ -149,8 +211,11 @@ The article is broken down into ideas + recommendations, with recommendations in
 					<a class="title" href="/post/quick-start-project-templates-via-cookiecutter/">Quick-start project templates via cookiecutter</a> &mdash;
 					<span class="description">
 						
-						The most boring part of setting up a new code project is typing the boilerplate: it&rsquo;s easy to forget bits, so we just copy the last project&rsquo;s folder and &ldquo;file the serial numbers off&rdquo; on the project name.
-Copy-pasta-driven project setup is not great though, as it&rsquo;s too easy to forget replacing values in obscure files, or misunderstand why project is set up that way in the first place, leading to nasty surprises down the line.&hellip;
+						<p>The most boring part of setting up a new code project is typing the boilerplate:
+it&rsquo;s easy to forget bits, so we just copy the last project&rsquo;s folder and &ldquo;file the serial numbers off&rdquo; on the project name.</p>
+<p>Copy-pasta-driven project setup is not great though, as it&rsquo;s too easy to forget
+replacing values in obscure files, or misunderstand why project is set up that
+way in the first place, leading to nasty surprises down the line.</p>&hellip;
 						
 					</span>
 				</div>
@@ -160,19 +225,15 @@ Copy-pasta-driven project setup is not great though, as it&rsquo;s too easy to f
 					<a class="title" href="/post/makefiles-presentation/">Presentation: Makefiles for build automation and documentation</a> &mdash;
 					<span class="description">
 						
-						Last Friday, I performed a presentation to my colleagues about Makefiles, and I want to share it to the public.
-Of note, this presentation is setting aside what people usually know of Makefiles (autoconf-generated blobs, opaque to any inspection because machine-created), and instead I introduce the concept of file transformation as a graph, then teach Makefiles basics (using SQL commands as an example). We then move on to my plea for simple Makefiles, and their potential for both documentation (explain what your codebase commands are, to the juniors), and as lightweight automation (avoid typing long boring commands).&hellip;
-						
-					</span>
-				</div>
-				
-				<div class="post">
-					<div class="meta">May 7, 2022</div>
-					<a class="title" href="/post/literate-wordle/">Literate wordle</a> &mdash;
-					<span class="description">
-						
-						I&rsquo;ve recently written a series of articles about Gherkin: its usage for requirements gathering, about its uses in BDD, and a lower-tech alternative to Cucumber, which I&rsquo;m still experimenting with.
-I wanted to showcase all of these ideas brought together, as well as show how comfy modern Python tooling can be. But more than writing code, I would need to explain my reasoning as we draft the program. So I picked up again a tool I always wanted to play with: Literate Programming.&hellip;
+						<p>Last Friday, I performed a presentation to my colleagues about Makefiles, and I
+want to share it to the public.</p>
+<p>Of note, this presentation is setting aside what people usually know of
+Makefiles (autoconf-generated blobs, opaque to any inspection because
+machine-created), and instead I introduce the concept of file transformation as
+a graph, then teach Makefiles basics (using SQL commands as an example). We then
+move on to my plea for simple Makefiles, and their potential for both
+documentation (explain what your codebase commands are, to the juniors), and as
+lightweight automation (avoid typing long boring commands).</p>&hellip;
 						
 					</span>
 				</div>

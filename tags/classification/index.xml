@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>classification on Jiby&#39;s toolbox</title>
+    <title>Classification on Jiby&#39;s toolbox</title>
     <link>https://jiby.tech/tags/classification/</link>
-    <description>Recent content in classification on Jiby&#39;s toolbox</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Classification on Jiby&#39;s toolbox</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jun 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://jiby.tech/tags/classification/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Jun 2020 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://jiby.tech/tags/classification/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Separating Spam from Ham with the shell</title>
       <link>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</link>
       <pubDate>Mon, 22 Jun 2020 00:00:00 +0100</pubDate>
-      
       <guid>https://jiby.tech/post/image-list-separate-spam-ham-with-shell/</guid>
-      <description>Here&amp;rsquo;s how attempting to export images off a Word Document led to a quest for data deduplication and classification using the shell.
-The images I wanted to export were MS Word diagrams drawn in Word, rather than PNG files1. Because those doodle-shapes do not export to PNG well, I first copy-pasted them into Powerpoint to get the familiar &amp;ldquo;save as picture&amp;rdquo; context menu. But a couple of images were still deformed beyond recognition.</description>
+      <description>&lt;p&gt;Here&amp;rsquo;s how attempting to export images off a Word Document&#xA;led to a quest for data deduplication and classification using the&#xA;shell.&lt;/p&gt;&#xA;&lt;p&gt;The images I wanted to export were MS Word diagrams drawn in Word,&#xA;rather than PNG files&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&#xA;Because those doodle-shapes do not export to PNG well, I first&#xA;copy-pasted them into Powerpoint to get the familiar &amp;ldquo;save as picture&amp;rdquo;&#xA;context menu. But a couple of images were still deformed beyond&#xA;recognition.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
