@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Mobile-based development with Termux on Android - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:url" content="https://jiby.tech/post/nomad-dev-termux-android/">
+  <meta property="og:site_name" content="Jiby&#39;s toolbox">
+  <meta property="og:title" content="Mobile-based development with Termux on Android">
+  <meta property="og:description" content="I’ve written a lot about Termux in the past, and since then, have continued to refine workflows around Android terminals, trying to push it to extremes. With extra software, or accessories, how light can you go without a real computer, while retaining a good development environment?
+In this post, I want to show how far a tiny bit of hardware and software together have pushed my “travel mindset”, while preserving a good amount of comfort.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-03-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-17T00:00:00+00:00">
+    <meta property="article:tag" content="Blog">
+    <meta property="article:tag" content="Android">
+    <meta property="article:tag" content="Hardware">
+    <meta property="article:tag" content="Termux">
+    <meta property="article:tag" content="Firefox">
+    <meta property="article:tag" content="Digital-Nomad">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mobile-based development with Termux on Android">
+  <meta name="twitter:description" content="I’ve written a lot about Termux in the past, and since then, have continued to refine workflows around Android terminals, trying to push it to extremes. With extra software, or accessories, how light can you go without a real computer, while retaining a good development environment?
+In this post, I want to show how far a tiny bit of hardware and software together have pushed my “travel mindset”, while preserving a good amount of comfort.">
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Mobile-based development with Termux on Android</h1>
+			<div class="meta">Posted on &mdash; Mar 17, 2026</div>
+		</div>
+
+		<div class="markdown">
+			<p>I&rsquo;ve <a href="../android-terminal-with-termux">written a lot about Termux in the past</a>, and since then, have continued to refine workflows around Android terminals, trying to push it to extremes. With extra software, or accessories, how light can you go without a real computer, while retaining a good development environment?</p>
+<p>In this post, I want to show how far a tiny bit of hardware and software together have pushed my &ldquo;travel mindset&rdquo;, while preserving a good amount of comfort.</p>
+<h2 id="android-termux-firefox-enough-to-be-dangerous">Android, Termux, Firefox: Enough to be dangerous</h2>
+<p>I&rsquo;ve already shown Android&rsquo;s terminal capability via Termux. I&rsquo;ve also recently shown how <a href="../firefox-keyboard-extensions-vimium">Firefox has some really convenient extensions like Vimium</a>, that make navigating easier.</p>
+<p>In this case, I want to bring it all together into one screenshot, that showcases what we can do:</p>
+<figure><img src="/ox-hugo/android_termux_firefox.png"
+    alt="Figure 1: Screenshot of my Android device, showing a split screen of Termux terminal writing a blogpost in Emacs, and other side of Firefox serving the blog being edited, running from a local port. A floating window of Twitch stream provides entertainment. Note Firefox shows the very page of the blog being edited in Emacs, with Vimium active, ready to click links." width="100%"><figcaption>
+      <p><span class="figure-number">Figure 1: </span>Screenshot of my Android device, showing a split screen of Termux terminal writing a blogpost in Emacs, and other side of Firefox serving the blog being edited, running from a local port. A floating window of Twitch stream provides entertainment. Note Firefox shows the very page of the blog being edited in Emacs,  with Vimium active, ready to click links.</p>
+    </figcaption>
+</figure>
+
+<p>The picture is a lot to take in, but basically, Termux can run any commands, including in my case Emacs for editing, as well as, say, <a href="https://gohugo.io">hugo</a>, the static site generator. And since Termux can bind on local ports, it can render a local website for your phone&rsquo;s Firefox<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>Firefox itself can run extensions: though on Android, it officially only has a small list of approved extensions, we can install anything by enabling Firefox&rsquo;s Developer Mode, and installing the arbitrary XPI extension after downloading them directly as files.
+That&rsquo;s how I got Vimium back<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>So Firefox extensions, a terminal full of tools, compilers and interpreters, together give a lot of flexibility in the software stack.
+In fact, enough power that (per screenshot) the first draft of this post was created from Termux, which is a nice feeling.</p>
+<h2 id="hardware-makes-that-software-better">Hardware makes that software better</h2>
+<p>Smartphones have a downside for terminal use: the virtual keyboard takes up most of the screen. But hey, this is a modern device, we can fix the software with more hardware!</p>
+<figure><img src="/ox-hugo/android_termux_setup.jpg"
+    alt="Figure 2: Watching a Twitch stream (of the game Subnautica) on Android, using a foldable phone stand, a foldable bluetooth keyboard to type to Twitch Chat, and bluetooth speakers for volume (optional). Plugged in to a portable battery for durability, by an unrollable USB cable." width="100%"><figcaption>
+      <p><span class="figure-number">Figure 2: </span>Watching a Twitch stream (of the game Subnautica) on Android, using a foldable phone stand, a foldable bluetooth keyboard to type to Twitch Chat, and bluetooth speakers for volume (optional). Plugged in to a portable battery for durability, by an unrollable USB cable.</p>
+    </figcaption>
+</figure>
+
+<p>This whole setup fits in a pocket (except for the battery, which is currently
+not pocket-friendly, but variants exist that can fit) while providing a really
+solid experience. In this case, the keyboard is an Arteck HB066, bluetooth
+foldable keyboard. Any portable keyboard would do, but this one fits really
+well.</p>
+<p>Now, of course, this won&rsquo;t fully replace a PC for gaming, but a lot can be done for not a lot of money, and quite conveniently, with only minimal loss of comfort from the small factor.</p>
+<figure><img src="/ox-hugo/android_termux_fold.jpg"
+    alt="Figure 3: The same setup, collapsed for travel. This all fits in a pocket! Except the battery, of course, but smaller batteries exist." width="50%"><figcaption>
+      <p><span class="figure-number">Figure 3: </span>The same setup, collapsed for travel. This all fits in a pocket! Except the battery, of course, but smaller batteries exist.</p>
+    </figcaption>
+</figure>
+
+<p>Of course, what I&rsquo;ve shown is just first attempt at cheap mobility, a slapdash personal initiative bringing together a couple tools I had lying around.
+There&rsquo;s room for improvement, iteration.</p>
+<h2 id="possible-extensions">Possible extensions</h2>
+<p>The most obvious limitation is the limited screen real-estate: this is a tiny phone screen on which we cram a lot of pixels, and would be better if we can see more, bigger text.</p>
+<p>Depending on the amount of money you&rsquo;re willing to spend, and what you count as &ldquo;fits in your pocket&rdquo;, we can consider external displays, upgrading the system quite a bit towards full tablet-level worthiness, while keeping connectivity of USB type C. These seem to run for $100-$600, and turn your small phone into a big tablet, able to watch films etc.</p>
+<figure><img src="https://cdn.mos.cms.futurecdn.net/gVZndkfy892kbcCdNbtB3F.jpg"
+    alt="Figure 4: Sample external monitor, powered and fed by USB type C cable (credits: TechRadar). We can imagine getting a boost from turning a phone&rsquo;s small viewport into an A4 paper&rsquo;s page&rsquo;s worth! Need some pretty big pockets though, to fit this in." width="100%"><figcaption>
+      <p><span class="figure-number">Figure 4: </span>Sample external monitor, powered and fed by USB type C cable (credits: <a href="https://www.techradar.com/reviews/labists-133-inch-portable-usb-type-c-monitor">TechRadar</a>). We can imagine getting a boost from turning a phone&rsquo;s small viewport into an A4 paper&rsquo;s page&rsquo;s worth! Need some pretty big pockets though, to fit this in.</p>
+    </figcaption>
+</figure>
+
+<p>Another direction of travel can be fuller software capabilities, like by rooting the device, potentially getting a chrooted Linux installation like Debian. These solutions get quite technical, sometimes a little risky, as the closer to the hardware, the closer to making it an unusable brick. But in return we can unlock a broader, fuller software ecosystem, such as graphical apps via X11 servers, or more powerful tools because of direct access to the mobile baseband.</p>
+<p>I&rsquo;m personally very happy with just Termux and my &ldquo;non-rooted sandbox&rdquo;, because I&rsquo;m using free software apps via F-Droid, but others may want more.</p>
+<p>There&rsquo;s also room to extend beyond the device itself, because Termux has many capabilities, like SSH, one can connect in and out of desktops, laptops, servers, running scripts,  launching Android activities, dialogs, integrating with home automation etc.
+Not everything needs to run on the Android device itself, but Termux allows a broad amount of scripting via its Termux API.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>You may reasonably ask: &ldquo;Why did you spend so much effort to turn your phone into a tablet?&rdquo;. Part of it is the challenge, part of it to learn.</p>
+<p>Back in university, I learned about Linux by wiping Windows on my new laptop, no turning back possible.
+As I got more comfortable, I ratcheted it up by disabling the graphical interface, learning how to do everything from the command line: software development, wifi connection, web browsing, etc.</p>
+<p>These &ldquo;forceful immersion&rdquo; challenges I found to always be a ton of fun to me, because the self-imposed limitations taught me to &ldquo;use my other senses&rdquo;, learning faster than reading theory around the topic.</p>
+<p>In this case, the aim was to amplify the phone in my pocket into as close as possible to a home computer. By combining terminal tools like Termux, Firefox extensions, and supplementing an actual keyboard, we can get quite close!</p>
+<p>There&rsquo;s an other element to this, where the overall concept really appeals to me: I love the idea of a &ldquo;docking station&rdquo; that elevates the capabilities of an otherwise mobile device. I believe that we can do better than the arbitrary separation of phones vs tablets vs laptops vs desktops, and this is a fun, low stakes experiment to understand it.</p>
+<p>I&rsquo;ll keep tweaking the setup with new tools, adapt other parts of kit, playing digital nomad!</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>I&rsquo;ve taken advantage of this port binding capability when I originally demonstrated Termux in front of an audience, by revealing that the presentation they were watching was a website hosted from my phone&rsquo;s Termux, fetched over USB network by my laptop. Neat trick.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>I wish I didn&rsquo;t have to fight free software to get it running the way I want, but Mozilla has been acting a bit like thugs on the removal of XPI extensions on mobile Firefox.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/android">android</a></li>
+								
+								<li><a href="/tags/hardware">hardware</a></li>
+								
+								<li><a href="/tags/termux">termux</a></li>
+								
+								<li><a href="/tags/firefox">firefox</a></li>
+								
+								<li><a href="/tags/digital-nomad">digital-nomad</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

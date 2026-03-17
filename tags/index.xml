@@ -6,13 +6,48 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Oct 2025 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Android</title>
+      <link>https://jiby.tech/tags/android/</link>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/android/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Blog</title>
       <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
       <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Digital-Nomad</title>
+      <link>https://jiby.tech/tags/digital-nomad/</link>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/digital-nomad/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Firefox</title>
+      <link>https://jiby.tech/tags/firefox/</link>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/firefox/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hardware</title>
+      <link>https://jiby.tech/tags/hardware/</link>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/hardware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Termux</title>
+      <link>https://jiby.tech/tags/termux/</link>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://jiby.tech/tags/termux/</guid>
       <description></description>
     </item>
     <item>
@@ -20,13 +55,6 @@
       <link>https://jiby.tech/tags/emacs/</link>
       <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
       <guid>https://jiby.tech/tags/emacs/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Firefox</title>
-      <link>https://jiby.tech/tags/firefox/</link>
-      <pubDate>Thu, 09 Oct 2025 00:00:00 +0100</pubDate>
-      <guid>https://jiby.tech/tags/firefox/</guid>
       <description></description>
     </item>
     <item>
