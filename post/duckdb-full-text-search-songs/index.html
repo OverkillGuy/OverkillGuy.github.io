@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Full-text search using DuckDB - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:url" content="https://jiby.tech/post/duckdb-full-text-search-songs/">
+  <meta property="og:site_name" content="Jiby&#39;s toolbox">
+  <meta property="og:title" content="Full-text search using DuckDB">
+  <meta property="og:description" content="I like to explore data, as can be seen in previous posts. I also love to learn new tools on the way. In this case, a friend’s request for help turned into a challenge around fuzzy matching of text strings. So I took the opportunity to go and learn a new tool, and to present it here.
+Let me tell you about DuckDB, which acts like sqlite on steroids, perfect for data analysis of all kinds, but viewed through the lens of full-text similarity search.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-04-17T00:00:00+01:00">
+    <meta property="article:modified_time" content="2026-04-17T00:00:00+01:00">
+    <meta property="article:tag" content="Blog">
+    <meta property="article:tag" content="Duckdb">
+    <meta property="article:tag" content="Search">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Full-text search using DuckDB">
+  <meta name="twitter:description" content="I like to explore data, as can be seen in previous posts. I also love to learn new tools on the way. In this case, a friend’s request for help turned into a challenge around fuzzy matching of text strings. So I took the opportunity to go and learn a new tool, and to present it here.
+Let me tell you about DuckDB, which acts like sqlite on steroids, perfect for data analysis of all kinds, but viewed through the lens of full-text similarity search.">
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Full-text search using DuckDB</h1>
+			<div class="meta">Posted on &mdash; Apr 17, 2026</div>
+		</div>
+
+		<div class="markdown">
+			<p>I like to explore data, as can be seen in previous posts.
+I also love to learn new tools on the way.
+In this case, a friend&rsquo;s request for help turned into a challenge around fuzzy matching of text strings.
+So I took the opportunity to go and learn a new tool, and to present it here.</p>
+<p>Let me tell you about DuckDB, which acts like sqlite on steroids, perfect for data analysis of all kinds, but viewed through the lens of full-text similarity search.</p>
+<h2 id="the-given-problem">The given problem</h2>
+<p>My friend was apparently trying to download all of his songs from Spotify.
+This &hellip; process failed, with some files not downloaded (and soon worse).</p>
+<p>For the easy part of the problem: given 2 lists of files (filename string), one list (<code>all_songs</code>) with all the files to download, and the other list (<code>downloaded</code>) is the files that did download, find the songs whose download didn&rsquo;t succeed.
+Effectively, we want the set difference of <code>all_songs - downloaded</code>.</p>
+<p>Assuming two file lists as newline-delimited files, we have already found a way to do this in a previous article, see <a href="/post/image-list-separate-spam-ham-with-shell/">separating ham from spam on the shell</a>. This would be roughly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Checking number of files from each</span>
+</span></span><span style="display:flex;"><span>$ wc -l all_songs.txt downloaded.txt
+</span></span><span style="display:flex;"><span> <span style="color:#2aa198">2142</span> all_songs.txt
+</span></span><span style="display:flex;"><span> <span style="color:#2aa198">1937</span> downloaded.txt
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Compute the list of all songs that aren&#39;t downloaded</span>
+</span></span><span style="display:flex;"><span>$ comm -2 -3 &lt;<span style="color:#719e07">(</span>sort all_songs.txt<span style="color:#719e07">)</span> &lt;<span style="color:#719e07">(</span>sort downloaded.txt<span style="color:#719e07">)</span> &gt; missing.txt
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># How many songs missing?</span>
+</span></span><span style="display:flex;"><span>$ wc -l missing.txt
+</span></span><span style="display:flex;"><span> <span style="color:#2aa198">481</span> missing.txt
+</span></span></code></pre></div><p>But, hum, here&rsquo;s a problem: <code>missing + downloaded</code> =  481 + 1937 = 2418, which is bigger than 2142 = the size of <code>all_songs</code>. Impossible!</p>
+<p>So we start digging into the data, has simple math failed us? Are additions rubbish? Nah, soon enough, we find the following sample data exhibiting mismatches:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span><span style="color:#dc322f">- 12 Études, Op. 10 : Chopin: 12 Études, Op. 10 - No. 3 in E Major
+</span></span></span><span style="display:flex;"><span><span style="color:#dc322f"></span><span style="color:#719e07">+ 12 Études, Op. 10: No. 3 in E Major
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+</span></span><span style="display:flex;"><span><span style="color:#dc322f">- Ain&#39;t That A Kick In The Head - Remastered 1997
+</span></span></span><span style="display:flex;"><span><span style="color:#dc322f"></span><span style="color:#719e07">+ Ain&#39;t That A Kick In The Head (1997 Remastered Version)
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  Sample file names not lining up on both sides despite the identical meaning
+</div>
+<p>And we come to the real problem, which explains the numbers: file names aren&rsquo;t matching exactly even when they are similar. These are sometimes other editions, or same editions but with files named differently. How unfortunate!</p>
+<p>So now we have a new problem: <em>given two lists of strings that do not quite line up exactly</em>, find the closest (fuzzy) matches for each item of one list, in the other.</p>
+<h2 id="alternatives-considered--why-we-rushed-to-overkill-it-via-duckdb">Alternatives considered (why we rushed to overkill it via DuckDB)</h2>
+<p>Quick napkin-math check: considering that we have approximately 2000 lines worth of files at worst on both sides, the resulting cross-product would be ~4 million rows. That&rsquo;s very manageable on a local system, so we&rsquo;re not talking of blowing up our memory or storage.</p>
+<p>Also, with our diff trick above, we did reduce the data to match from 2000 songs back down to ~500 missing songs, which makes the data size smaller, but that&rsquo;s barely an order of magnitude less to match against.</p>
+<p>As engineers, we need to be pragmatic, so of course we recommended the simplest solution first: <em>grab a spreadsheet, export the missing 500 songs, and do some manual data review.</em>
+This was of course suggested (and done by my friend), <strong>but we&rsquo;re here to learn a new tool given half an opportunity, not to be sensible</strong>.</p>
+<p>Moving on to solutions: the textbook, simplest string diff (&ldquo;distance metric&rdquo;) is the Levenshtein distance (edit distance), which counts the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one string into another&hellip;
+But I didn&rsquo;t want to program that, or use a package for that, I wanted to use a bigger gun for this problem.</p>
+<p>From a quick search around solutions for string-search and similarity, I found two good solutions, with differing cost: building a full-text search index, or semantic transformer, to compute semantic similarity rather than just string proximity.</p>
+<p>I know that databases usually have those kinds of feature (Postgres, MariaDB, etc), and that sqlite could be configured fairly easily for full text search.
+But there&rsquo;s a cool tool I had my eye on for a while, which I knew could solve this, it&rsquo;d be the perfect opportunity to play with it.</p>
+<h2 id="duckdb-local-data-analytics-via-sql">DuckDB, local data analytics via SQL</h2>
+<p>Here comes <a href="https://duckdb.org">DuckDB</a>, a kind of swiss-army knife of data analysis.
+It seems it&rsquo;s presenting itself like a sqlite drop-in replacement with a million more data-analysis features, via extensions.</p>
+<p>Features like reading CSV, Parquet files, accessing data from AWS S3 natively, and <a href="https://duckdb.org/docs/stable/core_extensions/overview">so many more extensions</a> like geospatial, H3, and relevant for us: full-text search.</p>
+<p>So in general, think of it like a local SQL database you can generate/export from &ldquo;regular&rdquo; data sources, with many extensions to make exploratory analysis possible. Perfect for our usecase!</p>
+<h2 id="discovering-the-full-text-search-extension">Discovering the full text search extension</h2>
+<p>Looking through the extensions registry, I found the Full Text Search extension, and a relevant blogpost: <a href="https://duckdb.org/2025/06/13/text-analytics#full-text-search">Lightweight Text Analytics Workflows with DuckDB</a>.</p>
+<p>Skimming that post, I saw again three options of increasing complexity: keyword search (using SQL <code>LIKE</code>), full-text search, and semantic search via transformers.</p>
+<p>We quickly discard the SQL <code>LIKE</code> approach, with no good keywords to search for, then throw out the semantic transformers, as I didn&rsquo;t want to do pre-processing of our text by some programming language: I want to play with a database!</p>
+<p>So, we load the data into DuckDB, from 2 text files with new line delimiters. The easiest way is to pretend these are CSV files with no header and one column:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> all_songs
+</span></span><span style="display:flex;"><span><span style="color:#719e07">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    row_number() OVER () <span style="color:#719e07">AS</span> id,
+</span></span><span style="display:flex;"><span>    column0 <span style="color:#719e07">AS</span> content
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> read_csv(<span style="color:#2aa198">&#39;all_songs.txt&#39;</span>, header<span style="color:#719e07">=</span><span style="color:#719e07">false</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> downloaded <span style="color:#719e07">AS</span> <span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    row_number() OVER () <span style="color:#719e07">AS</span> id,
+</span></span><span style="display:flex;"><span>    column0 <span style="color:#719e07">AS</span> content
+</span></span><span style="display:flex;"><span> <span style="color:#719e07">FROM</span> read_csv(<span style="color:#2aa198">&#39;downloaded.txt&#39;</span>, header<span style="color:#719e07">=</span><span style="color:#719e07">false</span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2:</span>
+  Create two tables from reading so-called-CSV files
+</div>
+<p>Which lands us our data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">count</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> all_songs;  <span style="color:#586e75">-- 2142
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">count</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> downloaded; <span style="color:#586e75">-- 1937
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3:</span>
+  Validating the data we imported
+</div>
+<p>We&rsquo;ll next install and load the full-text extension.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>INSTALL fts;
+</span></span><span style="display:flex;"><span><span style="color:#719e07">LOAD</span> fts;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4:</span>
+  Convenient set-up of extensions
+</div>
+<p>Now we create a full text index for the downloaded&rsquo;s content column, indexed by downloaded-table ID.
+This index will let us compare a given string (which we will pick from <code>all_songs</code>, but could use any string) against the downloaded song title, computing a similarity metric.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>PRAGMA create_fts_index(
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;downloaded&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;id&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;content&#34;</span>,
+</span></span><span style="display:flex;"><span>    strip_accents <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">lower</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>,
+</span></span><span style="display:flex;"><span>    overwrite <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5:</span>
+  Create a full text search index on table <code>downloaded</code>, indexing values of field "content" (and no other), with the index referencing values of the "id"column.
+</div>
+<p>Interestingly, the creation of the index lets us specify all sorts of parameters useful to tailor a &ldquo;proper&rdquo; search experience, like language for stem-finding, stopword list, regex to ignore, etc.
+In our case, we just went with the default, pretending that most songs in the list will be English strings.</p>
+<p>Now, to the fun part. We want to compute the similarity metric across all permutations of <code>all_songs</code> and <code>downloaded</code>.
+This sounds like a cross-join!</p>
+<p>Starting small, let&rsquo;s pick some data we know to be similar.
+First, we pick a single song from the original set (<code>all_songs</code>), that we&rsquo;d like to pair:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬─────────────────────────┐
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │  id   │         content         │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ int64 │         varchar         │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────┼─────────────────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     2 │ Heroes  - 2017 Remaster │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- └───────┴─────────────────────────┘
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6:</span>
+  Picking a reference song from <code>all_songs</code>
+</div>
+<p>By manual search we found this to line up with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> downloaded <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">691</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬────────────────────────┐
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │  id   │        content         │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ int64 │        varchar         │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────┼────────────────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │   691 │ Heroes (2017 Remaster) │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- └───────┴────────────────────────┘
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 7:</span>
+  Same song in the <code>dowloaded</code> table, though note it's not the exact same string
+</div>
+<p>Now we picked items we know should match, we can compute the similarity metric, just for this one reference song against its known-good-match</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    reference.content <span style="color:#719e07">AS</span> text_searched,
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75">-- bm25 score compute:
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    fts_main_downloaded.match_bm25(
+</span></span><span style="display:flex;"><span>       <span style="color:#2aa198">691</span>,  <span style="color:#586e75">-- index ID in &#39;downloaded&#39; table
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>       reference.content  <span style="color:#586e75">-- freeform text to compare against
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Picking that ONE song as reference
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">AS</span> reference
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> all_songs.id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌─────────────────────────┬──────────────┐
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │      text_searched      │  bm25_score  │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │         varchar         │ decimal(3,2) │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├─────────────────────────┼──────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ Heroes  - 2017 Remaster │         4.62 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- └─────────────────────────┴──────────────┘
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 8:</span>
+  Calculating the match score for a single song that we know will line up well for (high score)
+</div>
+<p>Some things to note in the scoring query: <code>fts_main_downloaded</code> is a table made up by the full-text search extension, with the pattern being <code>fts_&lt;databasename&gt;_&lt;table_name&gt;</code>, with <code>main</code> apparently the default DuckDB database name. In that database, we compute the <a href="https://en.wikipedia.org/wiki/Okapi_BM25">bm25 score</a> of the match. Skipping over how this works (it&rsquo;s magic that the database provides+ a rabbit-hole for another day!), we get a pretty good score! But we don&rsquo;t know what a bad score looks like?</p>
+<p>So now that we have computed score for 1 song, let&rsquo;s compute ALL the matches for that reference song, amongst ALL the downloaded ones!</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">WITH</span> reference_song <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> id, content
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> all_songs
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Show the id, song name + the match score (bm25_score)
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    dl.id <span style="color:#719e07">AS</span> dl_id,
+</span></span><span style="display:flex;"><span>    dl.content <span style="color:#719e07">AS</span> dl_content,
+</span></span><span style="display:flex;"><span>    fts_main_downloaded.match_bm25(
+</span></span><span style="display:flex;"><span>        dl.id,
+</span></span><span style="display:flex;"><span>        reference.content
+</span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Picking ONE song as reference
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">FROM</span> reference_song <span style="color:#719e07">AS</span> reference
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Crossed against all the ones to look out for
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">IS</span> <span style="color:#719e07">NOT</span> <span style="color:#719e07">NULL</span>  <span style="color:#586e75">-- (sometimes score is NULL: skip those)
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- But show us top 10 matches by descending score
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> bm25_score <span style="color:#719e07">DESC</span> <span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────────┬─────────────────────────────────┬──────────────┐
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │   dl_id   │            dl_content           │  bm25_score  │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │   int64   │             varchar             │ decimal(3,2) │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────────┼─────────────────────────────────┼──────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │       691 │ Heroes (2017 Remaster)          │         4.62 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │      1094 │ My Hero                         │         3.38 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │      1195 │ Panda Hero (Piano Version)      │         1.96 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │        61 │ Alright (2015 - Remaster)       │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │       110 │ Babooshka (2018 Remaster)       │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │       122 │ Battlefield (Remastered 2017)   │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │       811 │ Intergalactic (Remastered 2009) │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │       947 │ Little Lies (Remastered)        │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │      1309 │ Roundabout (2008 Remaster)      │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │      1437 │ Song 2 (2012 Remaster)          │         1.89 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────────┴─────────────────────────────────┴──────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ 10 rows                                          3 columns │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- └────────────────────────────────────────────────────────────┘
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 9:</span>
+  Show top 10 matches in <code>downloaded</code> for our one song, by similarity metric
+</div>
+<p>And so we confirm what we just showed before: <code>all_song</code> id = 2 has for top-match the <code>downloaded</code> table&rsquo;s id = 691, with a similarity score &gt; 4.6, and we even get a feel of the similarity metric, with the scores falling sharply below 2 pretty quickly after that.</p>
+<p>We note that experimentally, we found many cases where the full text search didn&rsquo;t return anything (NULL score field), which we didn&rsquo;t really attempt to understand beyond brushing it off as disjoint character sets, stop-words and other ignore conditions that a more formal study would care about, but this experiment is purely about getting a feel for what songs match, it was all about heuristics.</p>
+<h2 id="scaling-the-computation">Scaling the computation</h2>
+<p>Now the next question, is to do that, but for the cross product of all songs on both sides, so around 2000 x 2000 = approx 4M rows.</p>
+<p>Running the query from before for 1 x 2000 rows took a few seconds or two on my machine, which may take a while?</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores
+</span></span><span style="display:flex;"><span><span style="color:#719e07">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    all_s.id <span style="color:#719e07">AS</span> all_songs_id,
+</span></span><span style="display:flex;"><span>    all_s.content <span style="color:#719e07">AS</span> all_songs_content,  <span style="color:#586e75">-- redundant: FK via all_s.id
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    dl.id <span style="color:#719e07">AS</span> dl_id,
+</span></span><span style="display:flex;"><span>    dl.content <span style="color:#719e07">AS</span> dl_content,  <span style="color:#586e75">-- redundant: FK via dl.id
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    fts_main_downloaded.match_bm25(
+</span></span><span style="display:flex;"><span>        dl.id,
+</span></span><span style="display:flex;"><span>        all_s.content
+</span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">AS</span> all_s
+</span></span><span style="display:flex;"><span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 10:</span>
+  Naive cross-join generation of score for all combinations of reference songs and matches. Didn't work for me.
+</div>
+<p>This never completed on my machine, exhausting dozens of GB of storage space on the way there.</p>
+<p>Of course, one obvious storage optimization is to not re-write the full strings each time, relying on the IDs as pointers, nor to create the row if the score doesn&rsquo;t compute properly, or is too low:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores
+</span></span><span style="display:flex;"><span><span style="color:#719e07">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    all_s.id <span style="color:#719e07">AS</span> all_songs_id,
+</span></span><span style="display:flex;"><span>    dl.id <span style="color:#719e07">AS</span> dl_id,
+</span></span><span style="display:flex;"><span>    fts_main_downloaded.match_bm25(
+</span></span><span style="display:flex;"><span>        dl.id,
+</span></span><span style="display:flex;"><span>        all_s.content
+</span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> all_songs all_s
+</span></span><span style="display:flex;"><span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">IS</span> <span style="color:#719e07">NOT</span> <span style="color:#719e07">NULL</span> <span style="color:#719e07">AND</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>.<span style="color:#2aa198">5</span>;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 11:</span>
+  Modified score computation, avoiding costly storage of strings, and skipping cases where score is not computable or meaningful (experimentally found threshold of 1.5 to show too little similarity). Still fails on my machine.
+</div>
+<p>Except on my machine this cross join compute still takes forever and blows up my local storage (I stopped it after 20GB was consumed on my disk just processing it), which I didn&rsquo;t want to dig into, so how about batching inserts? We can script that.</p>
+<p>So first we create the empty table:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores (
+</span></span><span style="display:flex;"><span>    all_songs_id <span style="color:#b58900">INTEGER</span>,
+</span></span><span style="display:flex;"><span>    dl_id <span style="color:#b58900">INTEGER</span>,
+</span></span><span style="display:flex;"><span>    bm25_score <span style="color:#b58900">DECIMAL</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 12:</span>
+  Creating an empty score table
+</div>
+<p>Try a batch of 10x2000  rows, using an offset for the IDs (set to 0 for now) so we can scroll that window later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Subset of 10 songs from all_songs
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">WITH</span> all_songs_10 <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> id, content
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> all_songs
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> id <span style="color:#719e07">ASC</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span> <span style="color:#719e07">OFFSET</span> <span style="color:#2aa198">0</span>  <span style="color:#586e75">-- Offset for iterating over &#34;which 10 songs&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>)
+</span></span><span style="display:flex;"><span><span style="color:#719e07">INSERT</span> <span style="color:#719e07">INTO</span> scores
+</span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    all_songs_10.id <span style="color:#719e07">as</span> all_songs_id,
+</span></span><span style="display:flex;"><span>    downloaded.id <span style="color:#719e07">as</span> dl_id,
+</span></span><span style="display:flex;"><span>    fts_main_downloaded.match_bm25(
+</span></span><span style="display:flex;"><span>        downloaded.id,
+</span></span><span style="display:flex;"><span>        all_songs_10.content
+</span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> all_songs_10  <span style="color:#586e75">-- 10 records only, not all
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#586e75">-- cross with ~2000
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- Cull miscalculations + score-too-low, avoid storage waste
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">IS</span> <span style="color:#719e07">NOT</span> <span style="color:#719e07">NULL</span> <span style="color:#719e07">AND</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>.<span style="color:#2aa198">5</span>;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 13:</span>
+  Compute the first batch of 10 x 2000 rows scores, using an offset starting at 0
+</div>
+<p>Then check the number of rows for scores we generated, shouldn&rsquo;t be too many matches:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> scores; <span style="color:#586e75">-- 82
+</span></span></span></code></pre></div><p>Exploring the data, it seems that of the 10 songs we tried to find match for, 2 or 3 of them have too little information to match anything (after stop words, collapse of accents etc), so the 80 matches are approx 10 reasonable matches per reference song, which sounds plausible.</p>
+<p>Now, because we&rsquo;ve done a single batch of 10 songs, we can write a really quick shell script to iterate over each of these, changing the offset by 10 each time from 0 to the max number, like scrolling the window!
+I didn&rsquo;t particularly care to do this myself, and this is exactly the kind of trivial shell script we can offshore to a LLM, and so some mild LLM prompting (+ manual tweaks) gave me this really boring script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#719e07">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">DB</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;song_matches.db&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">TABLE</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;all_songs&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">BATCH_SIZE</span><span style="color:#719e07">=</span><span style="color:#2aa198">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Get total number of rows to iterate over</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">TOTAL_ROWS</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span>duckdb <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$DB</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;SELECT COUNT(*) FROM </span><span style="color:#268bd2">$TABLE</span><span style="color:#2aa198">;&#34;</span> -csv -noheader | tail -n1<span style="color:#719e07">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;There are </span><span style="color:#268bd2">$TOTAL_ROWS</span><span style="color:#2aa198"> rows to batch into batches of </span><span style="color:#268bd2">$BATCH_SIZE</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">for</span> <span style="color:#719e07">((</span> <span style="color:#268bd2">OFFSET</span><span style="color:#719e07">=</span>0; OFFSET&lt;TOTAL_ROWS; <span style="color:#268bd2">OFFSET</span><span style="color:#719e07">+=</span>BATCH_SIZE <span style="color:#719e07">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Processing rows </span><span style="color:#268bd2">$OFFSET</span><span style="color:#2aa198"> to </span><span style="color:#719e07">$((</span>OFFSET+BATCH_SIZE-1<span style="color:#719e07">))</span><span style="color:#2aa198">...&#34;</span>
+</span></span><span style="display:flex;"><span>    duckdb <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$DB</span><span style="color:#2aa198">&#34;</span> -c <span style="color:#2aa198">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">WITH all_songs_10 AS (
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    SELECT id, content
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    FROM all_songs
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    ORDER BY id ASC
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    LIMIT 10 OFFSET </span><span style="color:#2aa198">${</span><span style="color:#268bd2">OFFSET</span><span style="color:#2aa198">}</span><span style="color:#2aa198">
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">)
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">INSERT INTO scores
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">SELECT
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    all_songs_10.id as all_songs_id,
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    downloaded.id as dl_id,
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    fts_main_downloaded.match_bm25(
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">        downloaded.id,
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">        all_songs_10.content
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    )::DECIMAL(3,2) AS bm25_score
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">FROM all_songs_10
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">CROSS JOIN downloaded
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">WHERE bm25_score IS NOT NULL AND bm25_score &gt; 1.5;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">done</span>
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 14:</span>
+  Jippity-issued script iterating over batches of 10 reference songs to compute similarity against 2000 downloaded song each.
+</div>
+<p>This script takes around 10 minutes to run, which is par for the course given it took 2-3 second to go for 10 rows, and we&rsquo;re going from 10 to 2000, scaling by factor 200: 3s x 200 = 600s = 10 minutes.</p>
+<p>Now, for our final trick: we have a <code>scores</code> table that lists ids from other tables, so to see the full results, we need to join the <code>all_songs/downloaded</code> tables back in:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> all_s.id, all_s.content, dl.id, dl.content, bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> scores <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> all_songs <span style="color:#719e07">AS</span> all_s <span style="color:#719e07">ON</span> all_s.id <span style="color:#719e07">=</span> s.all_songs_id
+</span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl <span style="color:#719e07">ON</span> dl.id <span style="color:#719e07">=</span> s.downloaded_id
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> s.all_songs_id <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">10</span>  <span style="color:#586e75">-- look at 10 reference songs first
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> all_s.id <span style="color:#719e07">ASC</span>, bm25_score <span style="color:#719e07">DESC</span>;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 15:</span>
+  Show me the reference songs, then their top matches (top matches via generating only score &gt; 1.5) for the first 10 songs of <code>all_songs</code>. Limit to 10 for debug only
+</div>
+<p>With result (culled for relevance)</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬────────────────────────────────────┬───────┬──────────────────────────┬────────────┐
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │  id   │              content               │ id_1  │        content_1         │ bm25_score │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ int64 │              varchar               │ int64 │         varchar          │   float    │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────┼────────────────────────────────────┼───────┼──────────────────────────┼────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     2 │ Heroes  - 2017 Remaster            │   691 │ Heroes (2017 Remaster)   │        4.6 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     2 │ Heroes  - 2017 Remaster            │  1094 │ My Hero                  │       3.37 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     5 │ (Don&#39;t Fear) The Reaper            │     2 │ (Don&#39;t Fear) The Reaper  │       6.48 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     5 │ (Don&#39;t Fear) The Reaper            │  1275 │ Reaper                   │        3.7 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     5 │ (Don&#39;t Fear) The Reaper            │   489 │ Fear &amp; Delight           │       2.83 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     5 │ (Don&#39;t Fear) The Reaper            │  1089 │ Mr. Fear                 │       2.83 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │     5 │ (Don&#39;t Fear) The Reaper            │  1859 │ You Don&#39;t Own Me         │       2.41 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │    24 │ 7 Minutes In Heaven (Atavan Halen) │  1772 │ Welcome To Heaven        │        3.7 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │    24 │ 7 Minutes In Heaven (Atavan Halen) │  1403 │ Sixty Minute Man         │       2.68 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │    24 │ 7 Minutes In Heaven (Atavan Halen) │   400 │ Don&#39;t Get Lost in Heaven │       2.49 │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────┴────────────────────────────────────┴───────┴──────────────────────────┴────────────┤
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ 10 rows                                                                          5 columns │
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- └────────────────────────────────────────────────────────────────────────────────────────────┘
+</span></span></span></code></pre></div><p>In fact, since it&rsquo;s kind of the only proper way to see that data, let&rsquo;s make a view of it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">VIEW</span> scores_and_titles <span style="color:#719e07">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> all_s.id, all_s.content, dl.id, dl.content, bm25_score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> scores <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> all_songs <span style="color:#719e07">AS</span> all_s <span style="color:#719e07">ON</span> all_s.id <span style="color:#719e07">=</span> s.all_songs_id
+</span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl <span style="color:#719e07">ON</span> dl.id <span style="color:#719e07">=</span> s.downloaded_id
+</span></span><span style="display:flex;"><span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> all_s.id <span style="color:#719e07">ASC</span>, bm25_score <span style="color:#719e07">DESC</span>;
+</span></span></code></pre></div><p>I chose to export this back to CSV = Excel-openable spreadsheet for my friend, via DuckDB&rsquo;s export:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">COPY</span> (<span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> scores_and_titles <span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#719e07">TO</span> <span style="color:#2aa198">&#39;scores_above_2.csv&#39;</span> (HEADER, <span style="color:#719e07">DELIMITER</span> <span style="color:#2aa198">&#39;,&#39;</span>);
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>I jumped on an occasion to fuzzy match two sets of data, chose to play with DuckDB, a new tool I&rsquo;ve wanted to use for a while, and continue exploring my growing affection for SQL.</p>
+<p>I&rsquo;ll admit a few limitations to this , that I would address if this was to become a production-ready system:</p>
+<ol>
+<li>
+<p>I don&rsquo;t really understand the parameters of the full-text search engine, so we may have missed a bunch of matching capability</p>
+</li>
+<li>
+<p>The dataset we played with (song names) was a bit too international to match fuzzily (some songs too short, or in varied character sets).</p>
+</li>
+<li>
+<p>We also didn&rsquo;t really understand why the cross-join didn&rsquo;t compute and instead blew up, bypassing it via batching without a thought.</p>
+</li>
+</ol>
+<p>All these don&rsquo;t invalidate my enthusiasm for this data exploration, which was another opportunity to overthink a simple task and bring databases into it!</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/duckdb">duckdb</a></li>
+								
+								<li><a href="/tags/search">search</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

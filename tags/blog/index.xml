@@ -6,8 +6,15 @@
     <description>Recent content in Blog on Jiby&#39;s toolbox</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0100</lastBuildDate>
     <atom:link href="https://jiby.tech/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Full-text search using DuckDB</title>
+      <link>https://jiby.tech/post/duckdb-full-text-search-songs/</link>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/post/duckdb-full-text-search-songs/</guid>
+      <description>&lt;p&gt;I like to explore data, as can be seen in previous posts.&#xA;I also love to learn new tools on the way.&#xA;In this case, a friend&amp;rsquo;s request for help turned into a challenge around fuzzy matching of text strings.&#xA;So I took the opportunity to go and learn a new tool, and to present it here.&lt;/p&gt;&#xA;&lt;p&gt;Let me tell you about DuckDB, which acts like sqlite on steroids, perfect for data analysis of all kinds, but viewed through the lens of full-text similarity search.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Mobile-based development with Termux on Android</title>
       <link>https://jiby.tech/post/nomad-dev-termux-android/</link>

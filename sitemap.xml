@@ -2,10 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jiby.tech/tags/android/</loc>
-    <lastmod>2026-03-17T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/tags/blog/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/duckdb/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/duckdb-full-text-search-songs/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/search/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/android/</loc>
     <lastmod>2026-03-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/digital-nomad/</loc>
@@ -17,16 +35,7 @@
     <loc>https://jiby.tech/tags/hardware/</loc>
     <lastmod>2026-03-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2026-03-17T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/post/nomad-dev-termux-android/</loc>
-    <lastmod>2026-03-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/post/</loc>
-    <lastmod>2026-03-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2026-03-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/termux/</loc>

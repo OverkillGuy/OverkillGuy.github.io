@@ -6,20 +6,34 @@
     <description>Recent content in Tags on Jiby&#39;s toolbox</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0100</lastBuildDate>
     <atom:link href="https://jiby.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog</title>
+      <link>https://jiby.tech/tags/blog/</link>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/blog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Duckdb</title>
+      <link>https://jiby.tech/tags/duckdb/</link>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/duckdb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Search</title>
+      <link>https://jiby.tech/tags/search/</link>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0100</pubDate>
+      <guid>https://jiby.tech/tags/search/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Android</title>
       <link>https://jiby.tech/tags/android/</link>
       <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
       <guid>https://jiby.tech/tags/android/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Blog</title>
-      <link>https://jiby.tech/tags/blog/</link>
-      <pubDate>Tue, 17 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://jiby.tech/tags/blog/</guid>
       <description></description>
     </item>
     <item>
