@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jiby.tech/tags/blog/</loc>
-    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/information-theory/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/post/solving-wordle-sqlite-entropy/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/sqlite/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://jiby.tech/tags/wordle/</loc>
+    <lastmod>2026-07-30T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/duckdb/</loc>
     <lastmod>2026-04-17T00:00:00+01:00</lastmod>
@@ -11,16 +32,7 @@
     <loc>https://jiby.tech/post/duckdb-full-text-search-songs/</loc>
     <lastmod>2026-04-17T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>https://jiby.tech/</loc>
-    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/post/</loc>
-    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
-  </url><url>
     <loc>https://jiby.tech/tags/search/</loc>
-    <lastmod>2026-04-17T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>https://jiby.tech/tags/</loc>
     <lastmod>2026-04-17T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://jiby.tech/tags/android/</loc>

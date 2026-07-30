@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.151.0">
+	<meta name="generator" content="Hugo 0.163.3">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Jiby&#39;s toolbox - Jb Doyon&#39;s personal website </title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="alternate" type="application/rss+xml" href="https://jiby.tech/index.xml" title="Jiby's toolbox" />
 	<meta property="og:url" content="https://jiby.tech/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="Jiby&#39;s toolbox">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="Jiby&#39;s toolbox">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="website">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Jiby&#39;s toolbox">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Jiby&#39;s toolbox">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
@@ -64,6 +64,28 @@
 				
 				
 				<div class="post">
+					<div class="meta">Nov 16, 2019</div>
+					<a class="title" href="/post/awk-replace-some-lines/">Using Awk to replace only some lines</a> &mdash;
+					<span class="description">
+						
+						<p>I was trying to convert bank-issued CSV files that have a weird data
+layout, for automatic processing by the excellent <a href="https://www.ledger-cli.org/">ledger</a>. This made me
+learn a new thing about <code>awk</code>. Follow me down the UNIXy goodness!</p>
+<p>The data I was getting looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance
+</span></span><span style="display:flex;"><span>29/02/2018,Restaurant,14.5,,1234.2
+</span></span><span style="display:flex;"><span>12/03/2018,ATM withdrawal,50,,1184.2
+</span></span><span style="display:flex;"><span>23/04/2018,Deposited check,,100,1284.2
+</span></span></code></pre></div><p>Note the last line having 100 in a different column: The problem is
+that, when receiving money, the transaction is logged in a separate
+entry (&ldquo;Credit Amount&rdquo;) than the (more common) case of debit, which
+goes to &ldquo;Debit Amount&rdquo; column. My importing tools required a single
+column, so the output must look like this:</p>&hellip;
+						
+					</span>
+				</div>
+				
+				<div class="post">
 					<div class="meta">Oct 13, 2019</div>
 					<a class="title" href="/post/git-diff-empty-repo/">Git diff from empty commit</a> &mdash;
 					<span class="description">
@@ -109,8 +131,8 @@ really unhelpful diffs. They are unreadable because long lines aren&rsquo;t brok
 which hides edits happening towards end of line. A colleague of mine asked me if git
 couldn&rsquo;t be configured to make this sort of thing more obvious. Challenge accepted!</p>
 <figure><img src="/ox-hugo/prose-diff-before.png"
-    alt="Figure 1: Can you spot the edit made in a long line of text?" width="100%"><figcaption>
-      <p>Figure 1: Can you spot the edit made in a long line of text?</p>&hellip;
+			alt="Figure 1: Can you spot the edit made in a long line of text?" width="100%"><figcaption>
+			<p>Figure 1: Can you spot the edit made in a long line of text?</p>&hellip;
 						
 					</span>
 				</div>
@@ -123,15 +145,15 @@ couldn&rsquo;t be configured to make this sort of thing more obvious. Challenge 
 						<p>Get a cool graph of commits from the command line! For newbies and experts
 alike, git is a bit hard to visualize. Here&rsquo;s a handy git command to make
 understanding git easier.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log --decorate --oneline --graph
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log --decorate --oneline --graph
 </span></span></code></pre></div><figure><img src="/ox-hugo/git-graph.png"
-    alt="Figure 1: Git graph of this repository" width="100%"><figcaption>
-      <p>Figure 1: Git graph of this repository</p>
-    </figcaption>
+			alt="Figure 1: Git graph of this repository" width="100%"><figcaption>
+			<p>Figure 1: Git graph of this repository</p>
+		</figcaption>
 </figure>
 
 <p>This can be made into a git command via an entry your <code>~/.gitconfig</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[alias]
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[alias]
 </span></span><span style="display:flex;"><span>	graph = log --decorate --oneline --graph
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1</span>:
@@ -158,8 +180,8 @@ Remember that there are speaker notes for people following at home, press `S` to
 use them. These were built with [Reveal.js](https://revealjs.com).
 </div>
 <figure><a href="../../presentation/termux/android_shell_termux.html"><img src="../../presentation/termux/pictures/termux-prez-intro.png"
-    alt="Figure 1: Click to view the slides" width="100%"></a><figcaption>
-      <p><span class="figure-number">Figure 1: </span>Click to view the slides</p>&hellip;
+			alt="Figure 1: Click to view the slides" width="100%"></a><figcaption>
+			<p><span class="figure-number">Figure 1: </span>Click to view the slides</p>&hellip;
 						
 					</span>
 				</div>

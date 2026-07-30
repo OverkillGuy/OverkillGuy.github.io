@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.151.0">
+	<meta name="generator" content="Hugo 0.163.3">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Jiby&#39;s toolbox - Jb Doyon&#39;s personal website </title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="alternate" type="application/rss+xml" href="https://jiby.tech/index.xml" title="Jiby's toolbox" />
 	<meta property="og:url" content="https://jiby.tech/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="Jiby&#39;s toolbox">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="Jiby&#39;s toolbox">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="website">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Jiby&#39;s toolbox">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Jiby&#39;s toolbox">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
@@ -62,6 +62,21 @@
 			<div class="posts">
 				
 				
+				
+				<div class="post">
+					<div class="meta">Jul 30, 2026</div>
+					<a class="title" href="/post/solving-wordle-sqlite-entropy/">Solving Wordle with information theory and SQLite</a> &mdash;
+					<span class="description">
+						
+						<p>I&rsquo;ve previously spent some time <a href="../../post/literate-wordle">implementing wordle</a>, and since then enjoyed watching others discuss how to solve the game using programming, especially the solutions based on information theory.</p>
+<p>Naturally, I was interested in trying them out, given my own implementation of the game. Let me show you how I used SQL to solve Wordle, using maths from information theory.</p>
+<h2 id="wordle">Wordle?</h2>
+<p>Briefly, <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> is a daily word game run by the New York Times, where we need to find a secret 5-letter word within 6 attempts.
+You may know this game from the American/Dutch TV game Lingo, or the French TV game Motus.
+To guide us, each character of each attempt is scored as either perfect (right letter, right position) = &ldquo;🟩&rdquo;, or wrong position (letter is used but elsewhere) = &ldquo;🟨&rdquo;, or a miss (character not used at all in the word) = &ldquo;⬜&rdquo; (or &ldquo;⬛&rdquo; depending on OS).</p>&hellip;
+						
+					</span>
+				</div>
 				
 				<div class="post">
 					<div class="meta">Apr 17, 2026</div>
@@ -127,14 +142,14 @@ being a Makefiles expert to read!</p>
 <p>Let&rsquo;s explore how we can teach users our build system by turning
 the project&rsquo;s Makefile (and <code>awk</code>) into a cheap documentation-as-code tool.</p>
 <h2 id="what-it-looks-like">What it looks like</h2>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>make <span style="color:#b58900">help</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>make <span style="color:#b58900">help</span>
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1:</span>
   How to ask for help
 </div>
 <figure><img src="/ox-hugo/make-help-rendered.png"
-    alt="Figure 1: Result of asking for help" width="100%"><figcaption>
-      <p><span class="figure-number">Figure 1: </span>Result of asking for help</p>&hellip;
+			alt="Figure 1: Result of asking for help" width="100%"><figcaption>
+			<p><span class="figure-number">Figure 1: </span>Result of asking for help</p>&hellip;
 						
 					</span>
 				</div>
@@ -209,24 +224,6 @@ improving my software development skills.</p>
 replicate my normal dev workflow, but with less: Learn to operate on Linux not
 Windows, then learn to do dev via on the terminal instead of GUIs, and
 eventually learn to do the same but offline, without any network calls.</p>&hellip;
-						
-					</span>
-				</div>
-				
-				<div class="post">
-					<div class="meta">Jun 30, 2023</div>
-					<a class="title" href="/post/my-git-worfklow/">My git worfklow</a> &mdash;
-					<span class="description">
-						
-						<p>Every now and then, at work, I find myself discussing git worfklows, commit
-messages, branching, releasing, versioning, changelogs etc. Since my opinion has
-remained fairly consistent for the past few years, I found myself repeating the
-same points a lot, so I wrote it down. This page is the resulting compilation of
-my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.</p>
-<p>The article is broken down into ideas + recommendations, with recommendations in
-bold. Obviously, this workflow isn&rsquo;t applicable to everyone (sorry, Google! This
-isn&rsquo;t a free consultation!) as different teams have needs that should get dealt
-with differently.</p>&hellip;
 						
 					</span>
 				</div>

@@ -4,22 +4,22 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Full-text search using DuckDB - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:url" content="https://jiby.tech/post/duckdb-full-text-search-songs/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="Full-text search using DuckDB">
-  <meta property="og:description" content="I like to explore data, as can be seen in previous posts. I also love to learn new tools on the way. In this case, a friend’s request for help turned into a challenge around fuzzy matching of text strings. So I took the opportunity to go and learn a new tool, and to present it here.
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="Full-text search using DuckDB">
+	<meta property="og:description" content="I like to explore data, as can be seen in previous posts. I also love to learn new tools on the way. In this case, a friend’s request for help turned into a challenge around fuzzy matching of text strings. So I took the opportunity to go and learn a new tool, and to present it here.
 Let me tell you about DuckDB, which acts like sqlite on steroids, perfect for data analysis of all kinds, but viewed through the lens of full-text similarity search.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2026-04-17T00:00:00+01:00">
-    <meta property="article:modified_time" content="2026-04-17T00:00:00+01:00">
-    <meta property="article:tag" content="Blog">
-    <meta property="article:tag" content="Duckdb">
-    <meta property="article:tag" content="Search">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
+		<meta property="article:published_time" content="2026-04-17T00:00:00+01:00">
+		<meta property="article:modified_time" content="2026-04-17T00:00:00+01:00">
+		<meta property="article:tag" content="Blog">
+		<meta property="article:tag" content="Duckdb">
+		<meta property="article:tag" content="Search">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Full-text search using DuckDB">
-  <meta name="twitter:description" content="I like to explore data, as can be seen in previous posts. I also love to learn new tools on the way. In this case, a friend’s request for help turned into a challenge around fuzzy matching of text strings. So I took the opportunity to go and learn a new tool, and to present it here.
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Full-text search using DuckDB">
+	<meta name="twitter:description" content="I like to explore data, as can be seen in previous posts. I also love to learn new tools on the way. In this case, a friend’s request for help turned into a challenge around fuzzy matching of text strings. So I took the opportunity to go and learn a new tool, and to present it here.
 Let me tell you about DuckDB, which acts like sqlite on steroids, perfect for data analysis of all kinds, but viewed through the lens of full-text similarity search.">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
@@ -78,7 +78,7 @@ This &hellip; process failed, with some files not downloaded (and soon worse).</
 <p>For the easy part of the problem: given 2 lists of files (filename string), one list (<code>all_songs</code>) with all the files to download, and the other list (<code>downloaded</code>) is the files that did download, find the songs whose download didn&rsquo;t succeed.
 Effectively, we want the set difference of <code>all_songs - downloaded</code>.</p>
 <p>Assuming two file lists as newline-delimited files, we have already found a way to do this in a previous article, see <a href="/post/image-list-separate-spam-ham-with-shell/">separating ham from spam on the shell</a>. This would be roughly:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Checking number of files from each</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Checking number of files from each</span>
 </span></span><span style="display:flex;"><span>$ wc -l all_songs.txt downloaded.txt
 </span></span><span style="display:flex;"><span> <span style="color:#2aa198">2142</span> all_songs.txt
 </span></span><span style="display:flex;"><span> <span style="color:#2aa198">1937</span> downloaded.txt
@@ -89,11 +89,11 @@ Effectively, we want the set difference of <code>all_songs - downloaded</code>.<
 </span></span><span style="display:flex;"><span> <span style="color:#2aa198">481</span> missing.txt
 </span></span></code></pre></div><p>But, hum, here&rsquo;s a problem: <code>missing + downloaded</code> =  481 + 1937 = 2418, which is bigger than 2142 = the size of <code>all_songs</code>. Impossible!</p>
 <p>So we start digging into the data, has simple math failed us? Are additions rubbish? Nah, soon enough, we find the following sample data exhibiting mismatches:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span><span style="color:#dc322f">- 12 Études, Op. 10 : Chopin: 12 Études, Op. 10 - No. 3 in E Major
-</span></span></span><span style="display:flex;"><span><span style="color:#dc322f"></span><span style="color:#719e07">+ 12 Études, Op. 10: No. 3 in E Major
-</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span><span style="color:#dc322f">- 12 Études, Op. 10 : Chopin: 12 Études, Op. 10 - No. 3 in E Major
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">+ 12 Études, Op. 10: No. 3 in E Major
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#dc322f">- Ain&#39;t That A Kick In The Head - Remastered 1997
-</span></span></span><span style="display:flex;"><span><span style="color:#dc322f"></span><span style="color:#719e07">+ Ain&#39;t That A Kick In The Head (1997 Remastered Version)
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">+ Ain&#39;t That A Kick In The Head (1997 Remastered Version)
 </span></span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1:</span>
   Sample file names not lining up on both sides despite the identical meaning
@@ -120,7 +120,7 @@ It seems it&rsquo;s presenting itself like a sqlite drop-in replacement with a m
 <p>Skimming that post, I saw again three options of increasing complexity: keyword search (using SQL <code>LIKE</code>), full-text search, and semantic search via transformers.</p>
 <p>We quickly discard the SQL <code>LIKE</code> approach, with no good keywords to search for, then throw out the semantic transformers, as I didn&rsquo;t want to do pre-processing of our text by some programming language: I want to play with a database!</p>
 <p>So, we load the data into DuckDB, from 2 text files with new line delimiters. The easiest way is to pretend these are CSV files with no header and one column:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> all_songs
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> all_songs
 </span></span><span style="display:flex;"><span><span style="color:#719e07">AS</span>
 </span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
 </span></span><span style="display:flex;"><span>    row_number() OVER () <span style="color:#719e07">AS</span> id,
@@ -136,14 +136,14 @@ It seems it&rsquo;s presenting itself like a sqlite drop-in replacement with a m
   Create two tables from reading so-called-CSV files
 </div>
 <p>Which lands us our data:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">count</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> all_songs;  <span style="color:#586e75">-- 2142
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">count</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> downloaded; <span style="color:#586e75">-- 1937
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">count</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> all_songs;  <span style="color:#586e75">-- 2142
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">count</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> downloaded; <span style="color:#586e75">-- 1937
 </span></span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 3:</span>
   Validating the data we imported
 </div>
 <p>We&rsquo;ll next install and load the full-text extension.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>INSTALL fts;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>INSTALL fts;
 </span></span><span style="display:flex;"><span><span style="color:#719e07">LOAD</span> fts;
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 4:</span>
@@ -151,7 +151,7 @@ It seems it&rsquo;s presenting itself like a sqlite drop-in replacement with a m
 </div>
 <p>Now we create a full text index for the downloaded&rsquo;s content column, indexed by downloaded-table ID.
 This index will let us compare a given string (which we will pick from <code>all_songs</code>, but could use any string) against the downloaded song title, computing a similarity metric.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>PRAGMA create_fts_index(
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>PRAGMA create_fts_index(
 </span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;downloaded&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;id&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;content&#34;</span>,
@@ -169,7 +169,7 @@ In our case, we just went with the default, pretending that most songs in the li
 This sounds like a cross-join!</p>
 <p>Starting small, let&rsquo;s pick some data we know to be similar.
 First, we pick a single song from the original set (<code>all_songs</code>), that we&rsquo;d like to pair:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>;
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬─────────────────────────┐
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │  id   │         content         │
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ int64 │         varchar         │
@@ -181,7 +181,7 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
   Picking a reference song from <code>all_songs</code>
 </div>
 <p>By manual search we found this to line up with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> downloaded <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">691</span>;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> downloaded <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">691</span>;
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬────────────────────────┐
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │  id   │        content         │
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ int64 │        varchar         │
@@ -193,15 +193,15 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
   Same song in the <code>dowloaded</code> table, though note it's not the exact same string
 </div>
 <p>Now we picked items we know should match, we can compute the similarity metric, just for this one reference song against its known-good-match</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
 </span></span><span style="display:flex;"><span>    reference.content <span style="color:#719e07">AS</span> text_searched,
 </span></span><span style="display:flex;"><span>    <span style="color:#586e75">-- bm25 score compute:
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    fts_main_downloaded.match_bm25(
+</span></span></span><span style="display:flex;"><span>    fts_main_downloaded.match_bm25(
 </span></span><span style="display:flex;"><span>       <span style="color:#2aa198">691</span>,  <span style="color:#586e75">-- index ID in &#39;downloaded&#39; table
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>       reference.content  <span style="color:#586e75">-- freeform text to compare against
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
+</span></span></span><span style="display:flex;"><span>       reference.content  <span style="color:#586e75">-- freeform text to compare against
+</span></span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- Picking that ONE song as reference
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">AS</span> reference
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> all_songs <span style="color:#719e07">AS</span> reference
 </span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> all_songs.id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>;
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌─────────────────────────┬──────────────┐
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │      text_searched      │  bm25_score  │
@@ -215,13 +215,13 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
 </div>
 <p>Some things to note in the scoring query: <code>fts_main_downloaded</code> is a table made up by the full-text search extension, with the pattern being <code>fts_&lt;databasename&gt;_&lt;table_name&gt;</code>, with <code>main</code> apparently the default DuckDB database name. In that database, we compute the <a href="https://en.wikipedia.org/wiki/Okapi_BM25">bm25 score</a> of the match. Skipping over how this works (it&rsquo;s magic that the database provides+ a rabbit-hole for another day!), we get a pretty good score! But we don&rsquo;t know what a bad score looks like?</p>
 <p>So now that we have computed score for 1 song, let&rsquo;s compute ALL the matches for that reference song, amongst ALL the downloaded ones!</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">WITH</span> reference_song <span style="color:#719e07">AS</span> (
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">WITH</span> reference_song <span style="color:#719e07">AS</span> (
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> id, content
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> all_songs
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">WHERE</span> id <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- Show the id, song name + the match score (bm25_score)
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">SELECT</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
 </span></span><span style="display:flex;"><span>    dl.id <span style="color:#719e07">AS</span> dl_id,
 </span></span><span style="display:flex;"><span>    dl.content <span style="color:#719e07">AS</span> dl_content,
 </span></span><span style="display:flex;"><span>    fts_main_downloaded.match_bm25(
@@ -229,12 +229,12 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
 </span></span><span style="display:flex;"><span>        reference.content
 </span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- Picking ONE song as reference
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">FROM</span> reference_song <span style="color:#719e07">AS</span> reference
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> reference_song <span style="color:#719e07">AS</span> reference
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- Crossed against all the ones to look out for
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl
 </span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">IS</span> <span style="color:#719e07">NOT</span> <span style="color:#719e07">NULL</span>  <span style="color:#586e75">-- (sometimes score is NULL: skip those)
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- But show us top 10 matches by descending score
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> bm25_score <span style="color:#719e07">DESC</span> <span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> bm25_score <span style="color:#719e07">DESC</span> <span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span>;
 </span></span><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────────┬─────────────────────────────────┬──────────────┐
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │   dl_id   │            dl_content           │  bm25_score  │
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │   int64   │             varchar             │ decimal(3,2) │
@@ -261,14 +261,14 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
 <h2 id="scaling-the-computation">Scaling the computation</h2>
 <p>Now the next question, is to do that, but for the cross product of all songs on both sides, so around 2000 x 2000 = approx 4M rows.</p>
 <p>Running the query from before for 1 x 2000 rows took a few seconds or two on my machine, which may take a while?</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores
 </span></span><span style="display:flex;"><span><span style="color:#719e07">AS</span>
 </span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
 </span></span><span style="display:flex;"><span>    all_s.id <span style="color:#719e07">AS</span> all_songs_id,
 </span></span><span style="display:flex;"><span>    all_s.content <span style="color:#719e07">AS</span> all_songs_content,  <span style="color:#586e75">-- redundant: FK via all_s.id
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    dl.id <span style="color:#719e07">AS</span> dl_id,
+</span></span></span><span style="display:flex;"><span>    dl.id <span style="color:#719e07">AS</span> dl_id,
 </span></span><span style="display:flex;"><span>    dl.content <span style="color:#719e07">AS</span> dl_content,  <span style="color:#586e75">-- redundant: FK via dl.id
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>    fts_main_downloaded.match_bm25(
+</span></span></span><span style="display:flex;"><span>    fts_main_downloaded.match_bm25(
 </span></span><span style="display:flex;"><span>        dl.id,
 </span></span><span style="display:flex;"><span>        all_s.content
 </span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
@@ -280,7 +280,7 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
 </div>
 <p>This never completed on my machine, exhausting dozens of GB of storage space on the way there.</p>
 <p>Of course, one obvious storage optimization is to not re-write the full strings each time, relying on the IDs as pointers, nor to create the row if the score doesn&rsquo;t compute properly, or is too low:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores
 </span></span><span style="display:flex;"><span><span style="color:#719e07">AS</span>
 </span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
 </span></span><span style="display:flex;"><span>    all_s.id <span style="color:#719e07">AS</span> all_songs_id,
@@ -298,7 +298,7 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
 </div>
 <p>Except on my machine this cross join compute still takes forever and blows up my local storage (I stopped it after 20GB was consumed on my disk just processing it), which I didn&rsquo;t want to dig into, so how about batching inserts? We can script that.</p>
 <p>So first we create the empty table:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores (
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> scores (
 </span></span><span style="display:flex;"><span>    all_songs_id <span style="color:#b58900">INTEGER</span>,
 </span></span><span style="display:flex;"><span>    dl_id <span style="color:#b58900">INTEGER</span>,
 </span></span><span style="display:flex;"><span>    bm25_score <span style="color:#b58900">DECIMAL</span>
@@ -308,13 +308,13 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
   Creating an empty score table
 </div>
 <p>Try a batch of 10x2000  rows, using an offset for the IDs (set to 0 for now) so we can scroll that window later.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Subset of 10 songs from all_songs
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">WITH</span> all_songs_10 <span style="color:#719e07">AS</span> (
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Subset of 10 songs from all_songs
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">WITH</span> all_songs_10 <span style="color:#719e07">AS</span> (
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> id, content
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> all_songs
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> id <span style="color:#719e07">ASC</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span> <span style="color:#719e07">OFFSET</span> <span style="color:#2aa198">0</span>  <span style="color:#586e75">-- Offset for iterating over &#34;which 10 songs&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>)
+</span></span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#719e07">INSERT</span> <span style="color:#719e07">INTO</span> scores
 </span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
 </span></span><span style="display:flex;"><span>    all_songs_10.id <span style="color:#719e07">as</span> all_songs_id,
@@ -324,20 +324,20 @@ First, we pick a single song from the original set (<code>all_songs</code>), tha
 </span></span><span style="display:flex;"><span>        all_songs_10.content
 </span></span><span style="display:flex;"><span>    )::<span style="color:#b58900">DECIMAL</span>(<span style="color:#2aa198">3</span>,<span style="color:#2aa198">2</span>) <span style="color:#719e07">AS</span> bm25_score
 </span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> all_songs_10  <span style="color:#586e75">-- 10 records only, not all
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#586e75">-- cross with ~2000
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> downloaded <span style="color:#586e75">-- cross with ~2000
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- Cull miscalculations + score-too-low, avoid storage waste
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">IS</span> <span style="color:#719e07">NOT</span> <span style="color:#719e07">NULL</span> <span style="color:#719e07">AND</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>.<span style="color:#2aa198">5</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">IS</span> <span style="color:#719e07">NOT</span> <span style="color:#719e07">NULL</span> <span style="color:#719e07">AND</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>.<span style="color:#2aa198">5</span>;
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 13:</span>
   Compute the first batch of 10 x 2000 rows scores, using an offset starting at 0
 </div>
 <p>Then check the number of rows for scores we generated, shouldn&rsquo;t be too many matches:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> scores; <span style="color:#586e75">-- 82
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">FROM</span> scores; <span style="color:#586e75">-- 82
 </span></span></span></code></pre></div><p>Exploring the data, it seems that of the 10 songs we tried to find match for, 2 or 3 of them have too little information to match anything (after stop words, collapse of accents etc), so the 80 matches are approx 10 reasonable matches per reference song, which sounds plausible.</p>
 <p>Now, because we&rsquo;ve done a single batch of 10 songs, we can write a really quick shell script to iterate over each of these, changing the offset by 10 each time from 0 to the max number, like scrolling the window!
 I didn&rsquo;t particularly care to do this myself, and this is exactly the kind of trivial shell script we can offshore to a LLM, and so some mild LLM prompting (+ manual tweaks) gave me this really boring script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#719e07">#!/usr/bin/env bash
-</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#719e07">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">DB</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;song_matches.db&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">TABLE</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;all_songs&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">BATCH_SIZE</span><span style="color:#719e07">=</span><span style="color:#2aa198">10</span>
@@ -375,18 +375,18 @@ I didn&rsquo;t particularly care to do this myself, and this is exactly the kind
 </div>
 <p>This script takes around 10 minutes to run, which is par for the course given it took 2-3 second to go for 10 rows, and we&rsquo;re going from 10 to 2000, scaling by factor 200: 3s x 200 = 600s = 10 minutes.</p>
 <p>Now, for our final trick: we have a <code>scores</code> table that lists ids from other tables, so to see the full results, we need to join the <code>all_songs/downloaded</code> tables back in:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> all_s.id, all_s.content, dl.id, dl.content, bm25_score
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> all_s.id, all_s.content, dl.id, dl.content, bm25_score
 </span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> scores <span style="color:#719e07">AS</span> s
 </span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> all_songs <span style="color:#719e07">AS</span> all_s <span style="color:#719e07">ON</span> all_s.id <span style="color:#719e07">=</span> s.all_songs_id
 </span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl <span style="color:#719e07">ON</span> dl.id <span style="color:#719e07">=</span> s.downloaded_id
 </span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> s.all_songs_id <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">10</span>  <span style="color:#586e75">-- look at 10 reference songs first
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> all_s.id <span style="color:#719e07">ASC</span>, bm25_score <span style="color:#719e07">DESC</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> all_s.id <span style="color:#719e07">ASC</span>, bm25_score <span style="color:#719e07">DESC</span>;
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 15:</span>
   Show me the reference songs, then their top matches (top matches via generating only score &gt; 1.5) for the first 10 songs of <code>all_songs</code>. Limit to 10 for debug only
 </div>
 <p>With result (culled for relevance)</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬────────────────────────────────────┬───────┬──────────────────────────┬────────────┐
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- ┌───────┬────────────────────────────────────┬───────┬──────────────────────────┬────────────┐
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │  id   │              content               │ id_1  │        content_1         │ bm25_score │
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ int64 │              varchar               │ int64 │         varchar          │   float    │
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- ├───────┼────────────────────────────────────┼───────┼──────────────────────────┼────────────┤
@@ -404,14 +404,14 @@ I didn&rsquo;t particularly care to do this myself, and this is exactly the kind
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- │ 10 rows                                                                          5 columns │
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- └────────────────────────────────────────────────────────────────────────────────────────────┘
 </span></span></span></code></pre></div><p>In fact, since it&rsquo;s kind of the only proper way to see that data, let&rsquo;s make a view of it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">VIEW</span> scores_and_titles <span style="color:#719e07">AS</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">VIEW</span> scores_and_titles <span style="color:#719e07">AS</span>
 </span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> all_s.id, all_s.content, dl.id, dl.content, bm25_score
 </span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> scores <span style="color:#719e07">AS</span> s
 </span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> all_songs <span style="color:#719e07">AS</span> all_s <span style="color:#719e07">ON</span> all_s.id <span style="color:#719e07">=</span> s.all_songs_id
 </span></span><span style="display:flex;"><span><span style="color:#719e07">JOIN</span> downloaded <span style="color:#719e07">AS</span> dl <span style="color:#719e07">ON</span> dl.id <span style="color:#719e07">=</span> s.downloaded_id
 </span></span><span style="display:flex;"><span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> all_s.id <span style="color:#719e07">ASC</span>, bm25_score <span style="color:#719e07">DESC</span>;
 </span></span></code></pre></div><p>I chose to export this back to CSV = Excel-openable spreadsheet for my friend, via DuckDB&rsquo;s export:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">COPY</span> (<span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> scores_and_titles <span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">2</span>)
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">COPY</span> (<span style="color:#719e07">SELECT</span> <span style="color:#719e07">*</span> <span style="color:#719e07">FROM</span> scores_and_titles <span style="color:#719e07">WHERE</span> bm25_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">2</span>)
 </span></span><span style="display:flex;"><span><span style="color:#719e07">TO</span> <span style="color:#2aa198">&#39;scores_above_2.csv&#39;</span> (HEADER, <span style="color:#719e07">DELIMITER</span> <span style="color:#2aa198">&#39;,&#39;</span>);
 </span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>I jumped on an occasion to fuzzy match two sets of data, chose to play with DuckDB, a new tool I&rsquo;ve wanted to use for a while, and continue exploring my growing affection for SQL.</p>

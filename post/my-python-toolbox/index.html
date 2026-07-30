@@ -4,23 +4,23 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>My python toolbox - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:url" content="https://jiby.tech/post/my-python-toolbox/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="My python toolbox">
-  <meta property="og:description" content="The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="My python toolbox">
+	<meta property="og:description" content="The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
 Lately, there’s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
 I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2024-04-01T00:00:00+01:00">
-    <meta property="article:modified_time" content="2024-04-01T00:00:00+01:00">
-    <meta property="article:tag" content="Blog">
-    <meta property="article:tag" content="Python">
-    <meta property="article:tag" content="Tools">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
+		<meta property="article:published_time" content="2024-04-01T00:00:00+01:00">
+		<meta property="article:modified_time" content="2024-04-01T00:00:00+01:00">
+		<meta property="article:tag" content="Blog">
+		<meta property="article:tag" content="Python">
+		<meta property="article:tag" content="Tools">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My python toolbox">
-  <meta name="twitter:description" content="The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="My python toolbox">
+	<meta name="twitter:description" content="The packaging workflow of Python has historically been a bit messy, starting with pip being just good enough, and virtualenvs being a great idea but a bit unwieldy. Installation was difficult, and tools like anaconda filled the gaps.
 Lately, there’s been renaissance of package tooling in Python thanks to other languages innovating in the area, inspiring and pollinating the ecosystem, improving the comfort of development.
 I want to present here the tools that I use to work with Python, usually latest iterations on well known concepts, to show that Python can be both fun to play with, and safe enough if we use modern tools.">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
@@ -127,7 +127,7 @@ it locally from 3.12. Just ensure your CI matches the version of Python you
 target officially to spot any surprises.</p>
 <h2 id="pipx-for-cli-installs-not-pip">Pipx for CLI installs, not pip</h2>
 <p>With the above Python installed, do this one and only <code>pip</code> invocation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip --user install pipx
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip --user install pipx
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1:</span>
   Your last pip command ever
@@ -138,7 +138,7 @@ setting up internally a virtualenv per command/package, ensuring tools never
 conflict with each other.</p>
 <p>Note you will need to run the following to get the commands exposed in shell
 properly:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pipx ensurepath
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pipx ensurepath
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 2:</span>
   Set up the <code>$PATH</code> for pipx
@@ -161,19 +161,19 @@ pinning for free.</p>
 doing the same as <code>cargo</code>, and its TOML file (using <code>pyproject.toml</code>) is very
 similar.</p>
 <p>A few sample commands to get inspired by:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>poetry install
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>poetry install
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 3:</span>
   Installs all dependencies of a project, generating virtualenv if needed
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>poetry shell  <span style="color:#586e75"># Activate the venv</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>poetry shell  <span style="color:#586e75"># Activate the venv</span>
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># Alternatively, just run a single command in venv:</span>
 </span></span><span style="display:flex;"><span>poetry run &lt;mycmd&gt;
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 4:</span>
   Running arbitrary commands, as shell or one-off
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Tree of dependencies incl. transitive:</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Tree of dependencies incl. transitive:</span>
 </span></span><span style="display:flex;"><span>poetry show --tree
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># Table of outdated packages:</span>
 </span></span><span style="display:flex;"><span>poetry show --outdated
@@ -183,7 +183,7 @@ similar.</p>
   <span class="src-block-number">Code Snippet 5:</span>
   Show and manipulate dependencies
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Prints current package version</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#586e75"># Prints current package version</span>
 </span></span><span style="display:flex;"><span>poetry version --short
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># Bump the package:</span>
 </span></span><span style="display:flex;"><span>poetry version &lt;major-minor-patch-or-number&gt;
@@ -199,7 +199,7 @@ order to explicit the need to run this command inside the virtualenv. Once past
 the mental hurdle of adding this prefix, it&rsquo;s really neat.</p>
 <p>There&rsquo;s just one setup thing I <del>recommend</del> force on all my fellow poetry
 users, it&rsquo;s to run the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>poetry config virtualenv.in-project <span style="color:#b58900">true</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>poetry config virtualenv.in-project <span style="color:#b58900">true</span>
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 7:</span>
   Ensures the virtualenv is created in project folder under <code>.venv/</code>, making it easy to play with the venv without <code>poetry</code>, and easy to wipe via <code>find .venv/ -delete</code>
@@ -217,7 +217,8 @@ have plugins for each of them for compatibility with the others.</p>
 [&hellip;]</p>
 <p>Ruff can be used to replace Flake8 (plus dozens of plugins), Black, isort,
 pydocstyle, pyupgrade, autoflake, and more, all while executing tens or hundreds
-of times faster than any individual tool.</p></blockquote>
+of times faster than any individual tool.</p>
+</blockquote>
 <p>There&rsquo;s nothing else to say, install this one tool, learn to tweak some of it
 (like enabling auto-fix mode for most rules) and just forget about linting ever
 again!</p>
@@ -286,7 +287,7 @@ integrating your editor with it.</p>
 exposes in code all the checks that ruff would do when you run it as a
 pre-commit hook, but interactively during your editing for faster feedback.</p>
 <p>Per above, these are python CLIs, so we recommend to install via <code>pipx</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pipx install python-language-server
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pipx install python-language-server
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># Install the ruff plugin inside the LSP&#39;s venv</span>
 </span></span><span style="display:flex;"><span>pipx inject python-language-server python-language-ruff
 </span></span></code></pre></div><div class="src-block-caption">
@@ -385,7 +386,7 @@ chain tasks together and override default values on the fly. The file is also
 handy to show/teach people what the common dev commands are.</p>
 <p>So of course all the above tooling should be wrapped in a Makefile to run
 everything in a simple invocation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cfg" data-lang="cfg"><span style="display:flex;"><span>make
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cfg" data-lang="cfg"><span style="display:flex;"><span>make
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># alias for:</span>
 </span></span><span style="display:flex;"><span>make all
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># which expands to:</span>

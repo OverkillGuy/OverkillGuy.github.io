@@ -4,23 +4,23 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Embrace the Early Exit - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:url" content="https://jiby.tech/post/embrace-early-exit/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="Embrace the Early Exit">
-  <meta property="og:description" content="In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="Embrace the Early Exit">
+	<meta property="og:description" content="In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
 But amongst them all, there’s one pattern I whole-heartedly love, it’s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
 From If&#43;else to ladders and conditionals hell Functions routinely need to check some edge case isn’t hit, usually with more edge cases than actual routine happy-path code lines.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2024-02-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-02-01T00:00:00+00:00">
-    <meta property="article:tag" content="Blog">
-    <meta property="article:tag" content="Early-Exit">
-    <meta property="article:tag" content="Programming">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
+		<meta property="article:published_time" content="2024-02-01T00:00:00+00:00">
+		<meta property="article:modified_time" content="2024-02-01T00:00:00+00:00">
+		<meta property="article:tag" content="Blog">
+		<meta property="article:tag" content="Early-Exit">
+		<meta property="article:tag" content="Programming">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Embrace the Early Exit">
-  <meta name="twitter:description" content="In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Embrace the Early Exit">
+	<meta name="twitter:description" content="In programming, there are patterns everywhere: patterns of building code, patterns for organising components, even patterns for how to test things. A whole industry is looking for patterns to solve all their problems.
 But amongst them all, there’s one pattern I whole-heartedly love, it’s the Early Exit. In this short and sweet post, I want to declare my undying love to the Early Exit, sharing my excitement.
 From If&#43;else to ladders and conditionals hell Functions routinely need to check some edge case isn’t hit, usually with more edge cases than actual routine happy-path code lines.">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
@@ -81,7 +81,7 @@ sharing my excitement.</p>
 edge cases than actual routine happy-path code lines.</p>
 <p>The most obvious way to write this is to have <code>if</code> for the case that is good,
 and <code>else</code> the cases that aren&rsquo;t.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> user<span style="color:#719e07">.</span>is_admin():
 </span></span><span style="display:flex;"><span>        <span style="color:#719e07">return</span> change_content(post, content_change, who<span style="color:#719e07">=</span>user<span style="color:#719e07">.</span>id)
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">else</span>:
@@ -95,7 +95,7 @@ according to plan is inside an <code>if</code>, so it is shifted &ldquo;inwards&
 indentation.</p>
 <p>Of course, with more things to check, this gets more elaborate, an issue
 called various names like if-else ladders, or conditional hell.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> user<span style="color:#719e07">.</span>is_admin():
 </span></span><span style="display:flex;"><span>        <span style="color:#719e07">if</span> post<span style="color:#719e07">.</span>published:
 </span></span><span style="display:flex;"><span>            <span style="color:#586e75"># The main point of this function is here:</span>
@@ -117,7 +117,7 @@ needed, in order to progressively weed out the edge cases, and allow us to focus
 on the happy path.</p>
 <p>Because the bad case has already returned, the further we are in the
 function, the more things we can assert about the current state of the world.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> <span style="color:#719e07">not</span> user<span style="color:#719e07">.</span>is_admin():
 </span></span><span style="display:flex;"><span>        <span style="color:#719e07">raise</span> NotAuthorizedError(<span style="color:#2aa198">&#34;User is not admin&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#586e75"># We KNOW user is admin if we reach here</span>
@@ -126,7 +126,7 @@ function, the more things we can assert about the current state of the world.</p
   <span class="src-block-number">Code Snippet 3:</span>
   First example, rewritten as early exit
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">def</span> <span style="color:#268bd2">change_blogpost</span>(post, user, content_change):
 </span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> <span style="color:#719e07">not</span> user<span style="color:#719e07">.</span>is_admin():
 </span></span><span style="display:flex;"><span>        <span style="color:#719e07">raise</span> NotAuthorizedError(<span style="color:#2aa198">&#34;User is not admin&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#586e75"># We KNOW user is admin if we reach here</span>

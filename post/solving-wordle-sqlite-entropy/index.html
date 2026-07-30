@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Solving Wordle with information theory and SQLite - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:url" content="https://jiby.tech/post/solving-wordle-sqlite-entropy/">
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="Solving Wordle with information theory and SQLite">
+	<meta property="og:description" content="I’ve previously spent some time implementing wordle, and since then enjoyed watching others discuss how to solve the game using programming, especially the solutions based on information theory.
+Naturally, I was interested in trying them out, given my own implementation of the game. Let me show you how I used SQL to solve Wordle, using maths from information theory.
+Wordle? Briefly, Wordle is a daily word game run by the New York Times, where we need to find a secret 5-letter word within 6 attempts. You may know this game from the American/Dutch TV game Lingo, or the French TV game Motus. To guide us, each character of each attempt is scored as either perfect (right letter, right position) = “🟩”, or wrong position (letter is used but elsewhere) = “🟨”, or a miss (character not used at all in the word) = “⬜” (or “⬛” depending on OS).">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
+		<meta property="article:published_time" content="2026-07-30T00:00:00+01:00">
+		<meta property="article:modified_time" content="2026-07-30T00:00:00+01:00">
+		<meta property="article:tag" content="Blog">
+		<meta property="article:tag" content="Sqlite">
+		<meta property="article:tag" content="Wordle">
+		<meta property="article:tag" content="Information-Theory">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Solving Wordle with information theory and SQLite">
+	<meta name="twitter:description" content="I’ve previously spent some time implementing wordle, and since then enjoyed watching others discuss how to solve the game using programming, especially the solutions based on information theory.
+Naturally, I was interested in trying them out, given my own implementation of the game. Let me show you how I used SQL to solve Wordle, using maths from information theory.
+Wordle? Briefly, Wordle is a daily word game run by the New York Times, where we need to find a secret 5-letter word within 6 attempts. You may know this game from the American/Dutch TV game Lingo, or the French TV game Motus. To guide us, each character of each attempt is scored as either perfect (right letter, right position) = “🟩”, or wrong position (letter is used but elsewhere) = “🟨”, or a miss (character not used at all in the word) = “⬜” (or “⬛” depending on OS).">
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title"><a href="/">Jiby&#39;s toolbox</a></h1>
+	<div class="site-description"><h2>Jb Doyon&rsquo;s personal website</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/OverkillGuy" title="Github"><i data-feather="github"></i></a><a href="https://www.linkedin.com/in/jbdoyon/" title="Linkedin"><i data-feather="linkedin"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/tags/project">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Solving Wordle with information theory and SQLite</h1>
+			<div class="meta">Posted on &mdash; Jul 30, 2026</div>
+		</div>
+
+		<div class="markdown">
+			<p>I&rsquo;ve previously spent some time <a href="../../post/literate-wordle">implementing wordle</a>, and since then enjoyed watching others discuss how to solve the game using programming, especially the solutions based on information theory.</p>
+<p>Naturally, I was interested in trying them out, given my own implementation of the game. Let me show you how I used SQL to solve Wordle, using maths from information theory.</p>
+<h2 id="wordle">Wordle?</h2>
+<p>Briefly, <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> is a daily word game run by the New York Times, where we need to find a secret 5-letter word within 6 attempts.
+You may know this game from the American/Dutch TV game Lingo, or the French TV game Motus.
+To guide us, each character of each attempt is scored as either perfect (right letter, right position) = &ldquo;🟩&rdquo;, or wrong position (letter is used but elsewhere) = &ldquo;🟨&rdquo;, or a miss (character not used at all in the word) = &ldquo;⬜&rdquo; (or &ldquo;⬛&rdquo; depending on OS).</p>
+<p>In the past, I&rsquo;ve been interested in this game enough to publish <a href="../../post/literate-wordle">my own from-scratch implementation</a>, using literate-programming and BDD/TDD to demonstrate traceability from requirements all the way to tests. Good stuff.</p>
+<h2 id="solving-the-game-with-information-theory">Solving the game with information theory?</h2>
+<p>Keeping an eye on the discussions around Wordle, I noticed solutions like <a href="https://www.youtube.com/watch?v=v68zYyaEmEA">3Blue1Brown&rsquo;s video</a>, and more recently <a href="https://orb.binghamton.edu/nejcs/vol8/iss1/6/">this paper from Binghamton</a>, both converging on the same approaches.</p>
+<p>I can&rsquo;t do these sources justice, but I&rsquo;d summarize the key idea this way:
+Both rely on statistics, choosing guesses by calculating a metric using the information theory concept of &ldquo;entropy&rdquo;, then picking the guess word that maximizes that metric.</p>
+<p>Entropy here is the &ldquo;distinguishing power&rdquo; of a guess, its capacity to reduce the size of the possible answer pool, computing how much &ldquo;information&rdquo; we&rsquo;d expect to learn once we reveal the score of the guess word. The more the answer pool is cut down by a guess, the better it is. Entropy formalizes this idea into a single number with convenient properties.</p>
+<p>So, with my existing game implementation, I considered how I could implement this.</p>
+<h2 id="a-rainbow-table">A rainbow table?</h2>
+<p>The first thing that occurs to me is that we can do the heavy lifting ahead of time, precomputing all the scores of every possible guess against every possible answer, and storing that result.
+Conceptually, this is kind of a rainbow table<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>: brute-forcing an expensive computation so we can reverse it later, sacrificing a lot of storage along the way.</p>
+<p>How much storage are we talking though?
+Let&rsquo;s consider: the dictionary of accepted word-guesses (downloaded as part of implementing the game long ago) is 12897
+words long, simplifying it down to 10000, that&rsquo;s 10k = 10<sup>4</sup>. Similarly, the answers dictionary has 2315 words<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, so around 2k = 2.10<sup>3</sup>.</p>
+<p>Crossing all guesses against all answers, there would be approximately 10<sup>4</sup> . 2.10<sup>3</sup> = 2.10<sup>7</sup> individual guess/answer combos. We&rsquo;re talking 20 million rows: database-size-wise, that&rsquo;s nothing, barely an inconvenience!</p>
+<p>For each row, let&rsquo;s imagine we (wastefully) store the 5 characters (as ASCII, 5 chars at 1 byte each) of each guess + same for answer, that&rsquo;s 10 bytes per row, plus the size of the score, which is Unicode (experimentally measured) at 4 bytes per character, that&rsquo;s another 5 * 4 = 20 bytes.
+So each row would be 30 bytes if we store everything as is without optimizing.
+That&rsquo;s 30 . 2.10<sup>7</sup> = 6.10<sup>8</sup> bytes, around 572MB.
+Manageable!
+Though very unoptimized (storing full words and scores each time is wasteful, more on that later).</p>
+<p>Half a Gig upper bound for storage is <em>fine</em>, let&rsquo;s store all this in sqlite, and see how far we can go with it!</p>
+<p>So here I go, creating SQL tables to store words, scores etc, then writing a script from my old wordle implementation to generate each guess/answer/score combo, storing the lot.</p>
+<h2 id="filling-the-database">Filling the database</h2>
+<p>To avoid some wasting of storage, we&rsquo;ll dump our dictionaries of words and Unicode scores into some tables first, then we can manipulate row numbers instead of expensive Unicode chars.</p>
+<p>First, we store all the accepted guess words:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Superset of all valid Wordle words = accepted guesses
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> word_index (
+</span></span><span style="display:flex;"><span>    wordidx <span style="color:#b58900">INT</span>,
+</span></span><span style="display:flex;"><span>    word <span style="color:#b58900">TEXT</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  Create a table of words, dictionary of accepted guesses (and answers are a subset thereof)
+</div>
+<p>We also store the list of actual answers, which are just indices in the previous <code>word_index</code> table</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Wordle answers = subset of accepted guesses, referencing word_index
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> answer_index (
+</span></span><span style="display:flex;"><span>    wordidx <span style="color:#b58900">INT</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FOREIGN</span> <span style="color:#719e07">KEY</span> (wordidx) <span style="color:#719e07">REFERENCES</span> word_index (wordidx)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2:</span>
+  Create the table of answers, pointers to the <code>word_index</code> (guesses) table
+</div>
+<p>With guess and answers, next we have all the possible scores:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Wordle scores (Unicode 5 letter strings),
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- 3 possibilities = 3^5 = 243 entries
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> score_index (
+</span></span><span style="display:flex;"><span>    scoreidx <span style="color:#b58900">INT</span>,
+</span></span><span style="display:flex;"><span>    score <span style="color:#b58900">TEXT</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3:</span>
+  Create table of all possible scores (regardless of which guess/answer)
+</div>
+<p>We note that <a href="https://sqlite.org/datatype3.html">sqlite&rsquo;s data type system</a> does not specify the size of the counters, or the size of the text storage.
+So we can&rsquo;t do the obvious storage optimization of using the knowledge that score indexes are bounded to be &lt;&lt; 256, hence could be represented with a <code>uint8</code>.
+A more elaborate tool, like Postgres, would let us refine the type, but sqlite is performing very adequately so far, we don&rsquo;t need to break out bigger guns.</p>
+<p>So, we have tables in which to store individual entities, next we want our &ldquo;rainbow table&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Pre-computed score of a guess (word) against an answer (word), all via index
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CREATE</span> <span style="color:#719e07">TABLE</span> score (
+</span></span><span style="display:flex;"><span>    guessidx <span style="color:#b58900">INT</span>,
+</span></span><span style="display:flex;"><span>    answeridx <span style="color:#b58900">INT</span>,
+</span></span><span style="display:flex;"><span>    scoreidx <span style="color:#b58900">INT</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FOREIGN</span> <span style="color:#719e07">KEY</span> (guessidx) <span style="color:#719e07">REFERENCES</span> word_index (wordidx),
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FOREIGN</span> <span style="color:#719e07">KEY</span> (answeridx) <span style="color:#719e07">REFERENCES</span> answer_index (wordidx),
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FOREIGN</span> <span style="color:#719e07">KEY</span> (scoreidx) <span style="color:#719e07">REFERENCES</span> score_index (scoreidx)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4:</span>
+  Create a table of all scores, referencing indexes of other tables
+</div>
+<p>So now, to populate the database, we flip to Python, writing a script that roughly amounts to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">from</span> literate_wordle.guess <span style="color:#719e07">import</span> score_guess
+</span></span><span style="display:flex;"><span><span style="color:#719e07">from</span> literate_wordle.words <span style="color:#719e07">import</span> GUESS_WORDS, ANSWER_WORDS
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>db <span style="color:#719e07">=</span> sqlite3<span style="color:#719e07">.</span>connect(<span style="color:#2aa198">&#34;wordle_solve.db&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Simplified: real code inserts indices, not raw strings</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">for</span> guess <span style="color:#719e07">in</span> GUESS_WORDS:
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">for</span> answer <span style="color:#719e07">in</span> ANSWER_WORDS:
+</span></span><span style="display:flex;"><span>        score <span style="color:#719e07">=</span> score_guess(guess, answer)
+</span></span><span style="display:flex;"><span>        db<span style="color:#719e07">.</span>execute(<span style="color:#2aa198">&#34;INSERT INTO score (guess, answer, score)&#34;</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#2aa198">&#34;VALUES (?, ?, ?)&#34;</span>,
+</span></span><span style="display:flex;"><span>                   (guess, answer, score))
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5:</span>
+  Simplified script computing the rainbow table of scores
+</div>
+<p>The result is a sqlite database file of 472MB, which, while surprisingly approaching our theoretical worst-case file size, stays usable! If this were for production use, I would try to investigate ways to shave off that storage, but as it is, I am fine with this.</p>
+<p>As an aside: Guided by my <a href="../../post/duckdb-full-text-search-songs">previous foray</a>, I tried importing the same database in DuckDB, to select these specific types, like <code>UINT8</code>, saving storage and widening the available query language.
+But the resulting database file grew to 2GB, 4 times as big as the sqlite file.
+Likely due to indexes being set up for each primary key by default?
+Oh well, I dropped DuckDB for this: sqlite is plenty, and I didn&rsquo;t really need more!</p>
+<h2 id="sql-warmup-filtering-answers-after-guess-score">SQL Warmup: Filtering answers after guess/score</h2>
+<p>So we have filled our database, we&rsquo;re ready to play.
+Let&rsquo;s practice some queries to warm up the SQL muscles.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> wordidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> word_index
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> word <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;crane&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- 2368
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6:</span>
+  Find the word index for "crane" guess
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> scoreidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> score_index
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> score <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;⬜⬜🟨🟩⬜&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- 15
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 7:</span>
+  Find score index returned by Wordle for that guess
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(answeridx)
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> guessidx <span style="color:#719e07">=</span> <span style="color:#2aa198">2368</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">AND</span> scoreidx <span style="color:#719e07">=</span> <span style="color:#2aa198">15</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- 20
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 8:</span>
+  Find how many answers match this guess+score
+</div>
+<p>Of course, we don&rsquo;t want to have to specify index by hand!</p>
+<p><a id="code-snippet--count-answers-after-guess-score"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(s.answeridx)
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> score <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> s.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> score_index <span style="color:#719e07">AS</span> sc
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> s.scoreidx <span style="color:#719e07">=</span> sc.scoreidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> w.word <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;crane&#39;</span> <span style="color:#719e07">AND</span> sc.score <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;⬜⬜🟨🟩⬜&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- 20
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--count-answers-after-guess-score">Code Snippet 9</a>:</span>
+  A more complex query: find how many answers remain, bringing more tables in
+</div>
+<p>And of course, let&rsquo;s see those answers, not just indexes!</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Show me the answer word
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> answer_wi.word
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- From the real word table
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> word_index <span style="color:#719e07">AS</span> answer_wi
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Which we find from the answers (index) table
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> answer_index <span style="color:#719e07">AS</span> answer_ai
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> answer_wi.wordidx <span style="color:#719e07">=</span> answer_ai.wordidx
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- That we find from scores table
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> score <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> answer_ai.wordidx <span style="color:#719e07">=</span> s.answeridx
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- back to using our earlier score query:
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> s.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> score_index <span style="color:#719e07">AS</span> sc
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> s.scoreidx <span style="color:#719e07">=</span> sc.scoreidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">WHERE</span> w.word <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;crane&#39;</span> <span style="color:#719e07">AND</span> sc.score <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;⬜⬜🟨🟩⬜&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- aging
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- agony
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- along
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- among
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- aping
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- daunt
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- faint
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- fanny
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- fauna
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- gaunt
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- haunt
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- jaunt
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- nanny
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- paint
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- saint
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- sauna
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- taint
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- taunt
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tawny
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- vaunt
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 10:</span>
+  Printing the actual answer words, needs even more joins
+</div>
+<p>It&rsquo;s around this point that I realized that in order to solve Wordle, one may never need to leave the comfort of SQL to generate good answers! Why not push a SQL-only solution!?</p>
+<p>Let&rsquo;s first look at the maths behind these solvers, see what the trick is.</p>
+<h2 id="entropy-for-wordle-maths">Entropy for Wordle: maths</h2>
+<p>As mentioned before, solving Wordle means minimizing the number of guesses, which we&rsquo;ll do by picking the best guess words, calculating a metric that a good guess word would maximize.
+Now, let&rsquo;s retrace the path of others, and show how to use information theory.
+Again, please do watch <a href="https://www.youtube.com/watch?v=v68zYyaEmEA">the 3Blue1Brown video</a>, which is likely a better support for learning.</p>
+<p><em>In general</em>, a good guess word would tell us &ldquo;much information&rdquo; about the answer, which we can imagine as &ldquo;how many possible answers have been invalidated by the reveal of this guess&rsquo;s score&rdquo;, whatever the score turns out to be. The more possible answers eliminated, the better the guess was.
+Since we don&rsquo;t know the score ahead of time for a given guess (it&rsquo;s only revealed when we &ldquo;play&rdquo; that guess), we&rsquo;ll need to consider every possible score a guess <em>could</em> have, and compute, in aggregate, how much these different score-outcomes tell us (by affecting how many answers remain after, for each possible score-outcome) for that specific guess.
+So there are two phases to this calculation for each possible guess: first we measure the information-learned metric for each specific score, then we aggregate that metric across all the scores the guess can end up in, weighted by how likely the score is to occur.</p>
+<p>Some notation: For the next few sections, we&rsquo;ll assume we&rsquo;re examining a specific candidate guess word, and want to calculate its expected-information-gained metric, to compare it to other possible guesses to play.
+Of all the possible scores this guess can have, the probability that the score <code>s</code> occurs, is described as:
+P[s] = number of answers that match this guess-score-combo / total number of possible answers at this point. And of course, P[s] sums up to 1 if we check all the possible values of <code>s</code>.</p>
+<p>So if the answer pool started out as 2000 possible answers, and the guess we use scores <code>s</code>, and that guess/score matches 100 possible (remaining) answers, then P[s] = 100 / 2000 = 1/20 = 0.05 = 5%.</p>
+<h3 id="entropy-information">Entropy = Information</h3>
+<p>The first key idea is how to compute the &ldquo;amount of information&rdquo; learned on a specific guess, for a specific score outcome. We introduce &ldquo;entropy&rdquo;, a unit of information, measured in bits (or Shannon).</p>
+<p>Entropy measures information gained by describing how much the number of possible outcomes changed after an event. Specifically,
+how many &ldquo;halvings&rdquo; of the possibility-space, aka the halvings of the answer list, that happened when revealing a score.
+1 bit means we halved the answer pool, 2 bits means we quartered it  (regardless of the pool size before or after, we&rsquo;re measuring ratios).</p>
+<p>In numbers, we <em>calculate</em> entropy as I = - log<sub>2</sub>(P[s]).</p>
+<p>Taking the example from above, then I = - log<sub>2</sub>(P[s]) = - log<sub>2</sub>(100 / 2000) = -log<sub>2</sub>(1/20) = 4.32192809489.
+Interpreting this number, this score cut the answer pool in half 4 times (and a bit). That&rsquo;s the metric for a single guess/single score.</p>
+<h3 id="averaging-weighted-probabilities-expectancy">Averaging weighted probabilities = expectancy</h3>
+<p>For the second key idea, we now want to aggregate this information metric, to get the &ldquo;average&rdquo; amount of information for all possible scores that our guess could end up scoring.</p>
+<p>So we&rsquo;re trying to aggregate a metric that depends on the score, but each score is not equally likely to occur. In the probability toolbag, that&rsquo;s the expectancy.</p>
+<p>The expectancy of a metric I is defined as E[I] = 𝚺 (P[s] * I), that is, the weighted average of the metric according to its probability.</p>
+<p>Injecting in the definition of I from above, we get:
+E[I] =  𝚺 (P[s] * - log<sub>2</sub>(P[s])) = - Σ (P[s] * log₂(P[s])).</p>
+<p>Let&rsquo;s translate that to Python pseudocode for illustration purposes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>entropy: <span style="color:#b58900">dict</span>[<span style="color:#b58900">str</span>, <span style="color:#b58900">float</span>] <span style="color:#719e07">=</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#719e07">for</span> guess <span style="color:#719e07">in</span> GUESS_WORDS:
+</span></span><span style="display:flex;"><span>    entropy_of_guess <span style="color:#719e07">=</span> <span style="color:#2aa198">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">for</span> score <span style="color:#719e07">in</span> POSSIBLE_SCORES:
+</span></span><span style="display:flex;"><span>        num_answers <span style="color:#719e07">=</span> <span style="color:#b58900">len</span>(answers_matching(guess, score))
+</span></span><span style="display:flex;"><span>        proba_score <span style="color:#719e07">=</span> num_answers <span style="color:#719e07">/</span> <span style="color:#b58900">len</span>(ANSWER_WORDS)  <span style="color:#586e75"># P[s]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">if</span> proba_score <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">0</span>:  <span style="color:#586e75"># log2(0) undefined: skip</span>
+</span></span><span style="display:flex;"><span>            entropy_of_guess <span style="color:#719e07">-=</span> proba_score <span style="color:#719e07">*</span> log2(proba_score)
+</span></span><span style="display:flex;"><span>    entropy[guess] <span style="color:#719e07">=</span> entropy_of_guess
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Now find guess that maximizes entropy[guess]</span>
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 11:</span>
+  Python pseudocode calculation of entropy for all guesses
+</div>
+<p>That&rsquo;s it, that&rsquo;s our metric.</p>
+<h3 id="sql-entropy">SQL entropy</h3>
+<p>Let&rsquo;s translate it to SQL.
+We&rsquo;ll use sub-queries, which we&rsquo;ll inject via CTE.
+Starting with the number of total answers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(answeridx) <span style="color:#719e07">AS</span> num_answers
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> answer_index;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 12:</span>
+  Count of all answers (single row)
+</div>
+<p>Next, we&rsquo;ll need the count of answers per guess/score:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    guessidx,
+</span></span><span style="display:flex;"><span>    scoreidx,
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">AS</span> num_occur
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> score
+</span></span><span style="display:flex;"><span><span style="color:#719e07">GROUP</span> <span style="color:#719e07">BY</span> guessidx, scoreidx;
+</span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 13:</span>
+  Count number of answers per each guess and score
+</div>
+<p>And then we bring this together to find the top 10 opener guess words:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">WITH</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Count of all answers
+</span></span></span><span style="display:flex;"><span>answer_count <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">AS</span> num_answers <span style="color:#719e07">FROM</span> answer_index
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Count how many answers for each guess x score combo
+</span></span></span><span style="display:flex;"><span>answers_per_guess_score <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>        guessidx,
+</span></span><span style="display:flex;"><span>        scoreidx,
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">AS</span> num_occur
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> score
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">GROUP</span> <span style="color:#719e07">BY</span> guessidx, scoreidx
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Actual compute to get best guess:
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- Maximizing entropy (&#34;surprise&#34;) per guess
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- for all scores and their count-of-answers
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    w.word <span style="color:#719e07">AS</span> guess,
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75">-- entropy = - Σ [P[s] * log₂(P[s])]
+</span></span></span><span style="display:flex;"><span>    ROUND(
+</span></span><span style="display:flex;"><span>     <span style="color:#719e07">-</span><span style="color:#719e07">SUM</span>(
+</span></span><span style="display:flex;"><span>        (ags.num_occur <span style="color:#719e07">/</span> <span style="color:#719e07">CAST</span>(ac.num_answers <span style="color:#719e07">AS</span> <span style="color:#b58900">REAL</span>)) <span style="color:#586e75">-- P[s]
+</span></span></span><span style="display:flex;"><span>        <span style="color:#719e07">*</span>
+</span></span><span style="display:flex;"><span>        LOG2(ags.num_occur <span style="color:#719e07">/</span> <span style="color:#719e07">CAST</span>(ac.num_answers <span style="color:#719e07">AS</span> <span style="color:#b58900">REAL</span>)) <span style="color:#586e75">-- log2(P[s])
+</span></span></span><span style="display:flex;"><span>    ), <span style="color:#2aa198">4</span>) <span style="color:#719e07">AS</span> entropy,
+</span></span><span style="display:flex;"><span>    ac.num_answers <span style="color:#719e07">AS</span> answer_pool_size
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> answers_per_guess_score <span style="color:#719e07">AS</span> ags
+</span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> ags.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Single row table, crossjoin to get the variable in
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> answer_count <span style="color:#719e07">AS</span> ac
+</span></span><span style="display:flex;"><span><span style="color:#719e07">GROUP</span> <span style="color:#719e07">BY</span> ags.guessidx  <span style="color:#586e75">-- aggregate all scores of each guess
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> entropy <span style="color:#719e07">DESC</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- soare|5.8860|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- roate|5.8828|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- raise|5.8779|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- raile|5.8657|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- reast|5.8655|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- slate|5.8558|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- crate|5.8349|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- salet|5.8346|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- irate|5.8314|2315
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- trace|5.8305|2315
+</span></span></span></code></pre></div><div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 14:</span>
+  Calculate top 10 opener guess words, based on entropy of each guess (for all guess + score, count number of answers, then calculate expectancy of entropy for all scores)
+</div>
+<p>We can intuitively make sense of these &ldquo;best guess&rdquo; picks: a good guess word will likely explore many vowels, justifying the value of &ldquo;soare&rdquo;.</p>
+<p>I found it useful to return the size of the answer pool, just in case:
+Currently it&rsquo;s the whole dictionary (as expected before playing the first guess), but as we&rsquo;ll play guesses, the pool of answers that are compatible given our previous guesses and scores will shrink. At some point, when the pool is less than 10 words, we may want to just lock-in a word!</p>
+<h2 id="extending-to-a-second-guess">Extending to a second guess</h2>
+<p>So we have the theoretically best opener words (for these particular dictionaries! I believe the New York Times changed the dictionaries a tad when they took over tenancy of the game).
+Wonderful.</p>
+<p>Next, we need to know how to pick our second guess after first guess was played, revealing its score.</p>
+<p>We still want to run the same entropy calculation for all guesses, and maximize that number.
+The only thing that has changed is that we revealed the score of the previous guess, so the pool of valid answers to pick from is smaller.</p>
+<p>So we first want to compute the pool of remaining answers given the guess we played.
+This is something we did before in Code Snippet <a href="#code-snippet--count-answers-after-guess-score">9</a>.
+So the overall query is similar to our previous one, but with some early CTE clauses to account for the remaining answer pool:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#586e75">-- Find the best next guess, given a previous scored guess
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- First, compute answers compatible with first guess&#39; received score:
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">WITH</span> remaining_answers <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> s.answeridx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> score <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> score_index <span style="color:#719e07">AS</span> sc
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.scoreidx <span style="color:#719e07">=</span> sc.scoreidx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">WHERE</span> w.word <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;crane&#39;</span> <span style="color:#719e07">AND</span> sc.score <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;⬜⬜🟨🟩⬜&#39;</span>
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Count answers for each guess x score combo (of remaining answer pool)
+</span></span></span><span style="display:flex;"><span>answers_per_guess_score <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>        s.guessidx,
+</span></span><span style="display:flex;"><span>        s.scoreidx,
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">AS</span> num_occur
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> score <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> remaining_answers <span style="color:#719e07">AS</span> ra <span style="color:#586e75">-- from smaller pool
+</span></span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.answeridx <span style="color:#719e07">=</span> ra.answeridx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">GROUP</span> <span style="color:#719e07">BY</span> s.guessidx, s.scoreidx
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Total number of remaining answers
+</span></span></span><span style="display:flex;"><span>answer_count <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> <span style="color:#719e07">COUNT</span>(<span style="color:#719e07">*</span>) <span style="color:#719e07">AS</span> num_answers
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> remaining_answers
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Actual compute to get best guess:
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07">SELECT</span>
+</span></span><span style="display:flex;"><span>    w.word <span style="color:#719e07">AS</span> guess,
+</span></span><span style="display:flex;"><span>    ROUND(
+</span></span><span style="display:flex;"><span>     <span style="color:#719e07">-</span><span style="color:#719e07">SUM</span>(
+</span></span><span style="display:flex;"><span>        (ags.num_occur <span style="color:#719e07">/</span> <span style="color:#719e07">CAST</span>(ac.num_answers <span style="color:#719e07">AS</span> <span style="color:#b58900">REAL</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">*</span>
+</span></span><span style="display:flex;"><span>        LOG2(ags.num_occur <span style="color:#719e07">/</span> <span style="color:#719e07">CAST</span>(ac.num_answers <span style="color:#719e07">AS</span> <span style="color:#b58900">REAL</span>))
+</span></span><span style="display:flex;"><span>    ), <span style="color:#2aa198">4</span>) <span style="color:#719e07">AS</span> entropy,
+</span></span><span style="display:flex;"><span>    ac.num_answers <span style="color:#719e07">AS</span> answer_pool_size
+</span></span><span style="display:flex;"><span><span style="color:#719e07">FROM</span> answers_per_guess_score <span style="color:#719e07">AS</span> ags
+</span></span><span style="display:flex;"><span><span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">ON</span> ags.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">CROSS</span> <span style="color:#719e07">JOIN</span> answer_count <span style="color:#719e07">AS</span> ac
+</span></span><span style="display:flex;"><span><span style="color:#719e07">GROUP</span> <span style="color:#719e07">BY</span> ags.guessidx
+</span></span><span style="display:flex;"><span><span style="color:#719e07">ORDER</span> <span style="color:#719e07">BY</span> entropy <span style="color:#719e07">DESC</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">LIMIT</span> <span style="color:#2aa198">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- tousy|3.3414|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- thigs|3.3087|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tying|3.2842|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tings|3.2842|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tipsy|3.2660|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- twigs|3.2464|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tough|3.2087|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tumpy|3.2037|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- tifos|3.2037|20
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- thugs|3.2037|20
+</span></span></span></code></pre></div><p>Notice the value of the answer pool size before we play that second guess: after only scoring the first guess, the pool of answers is already down to 20.</p>
+<p>And then, the average entropy of these second guesses is around 3 bits, which means we expect &ldquo;3 halvings&rdquo; of the answer pool, cutting by 2<sup>3</sup> = divide by 8 its size.
+That second guess would, <em>on average</em>, leave only 20 / 8 = 2 and a half answers left, after the second guess is played.</p>
+<h2 id="more-guesses">More guesses</h2>
+<p>The next question is how to extend the solution to show how to get 2 or more scored guesses, beyond the one we just showed.</p>
+<p>Turns out, we can merge lists of answers via <code>INTERSECT</code>, so we fall back on a well understood pattern:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#719e07">WITH</span> remaining_answers1 <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> s.answeridx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> score <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> score_index <span style="color:#719e07">AS</span> sc
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.scoreidx <span style="color:#719e07">=</span> sc.scoreidx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">WHERE</span> w.word <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;soare&#39;</span> <span style="color:#719e07">AND</span> sc.score <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;⬜⬜⬜⬜⬜&#39;</span>
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Second set of answers
+</span></span></span><span style="display:flex;"><span>remaining_answers2 <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> s.answeridx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">FROM</span> score <span style="color:#719e07">AS</span> s
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> word_index <span style="color:#719e07">AS</span> w
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.guessidx <span style="color:#719e07">=</span> w.wordidx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INNER</span> <span style="color:#719e07">JOIN</span> score_index <span style="color:#719e07">AS</span> sc
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">ON</span> s.scoreidx <span style="color:#719e07">=</span> sc.scoreidx
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">WHERE</span> w.word <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;dumpy&#39;</span> <span style="color:#719e07">AND</span> sc.score <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;⬜🟨⬜⬜🟩&#39;</span>
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Then we cross-reference all these.
+</span></span></span><span style="display:flex;"><span>remaining_answers <span style="color:#719e07">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> answeridx <span style="color:#719e07">FROM</span> remaining_answers1
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">INTERSECT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">SELECT</span> answeridx <span style="color:#719e07">FROM</span> remaining_answers2
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75">-- Can add more via INTERSECT remaining_answer3 (etc)
+</span></span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#586e75">-- Now back to the same old queries after this
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">-- Elided for brevity
+</span></span></span></code></pre></div><p>The rest of the query is the same all over, cut because it&rsquo;s <em>boring</em> to repeat.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We&rsquo;ve given new life to old Wordle scoring code by brute-forcing scoring, dumping it to a sqlite database, playing with SQL queries to find what answers fit a guess and its score.
+We then took a trip down information theory to find creative ways to discover the solution, and then came back to SQL to calculate these metrics, demonstrating the selection of good guess candidates.</p>
+<p>At the same time, we chose NOT to take the time to optimize these queries, like by designing proper search indexes, nor did we refine our SQL query order using tools like <code>EXPLAIN ANALYZE</code>. Nor did we package the resulting solver, it&rsquo;s just text queries and a hand-rolled database file: we were in research mode, not development!</p>
+<p>I&rsquo;m still glad I was able to breathe fresh life into old code, and that, through SQL, I found my own twist to the information theory idea others have laid out before. In particular, I&rsquo;ve learned a couple of tricks in SQL this time around, like cross-joining a single-row table to inject a pre-computed variable from a CTE, and the subtleties of making a complex <code>INNER JOIN</code>&rsquo;s <code>ON</code> clause, compared to moving that restriction to the <code>WHERE</code> side.</p>
+<p>All this reminds me there&rsquo;s a whole depth to SQL I have yet to play with, around the balance of performance and maintainability.
+For instance, I haven&rsquo;t started making views in SQL to simplify using these tables, or maybe using stored procedures to simplify scoring queries.
+All good things for another day!</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Yes, a rainbow table is about encryption/hashing, whatever, I found the similarity inspiring.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>I&rsquo;ve intentionally simplified the problem by separating the answer-solutions subset from the accepted guesses. It&rsquo;s reduced the answers pool from 12k (all possible guesses can be answers) to 2k, less than one order of magnitude. If you feel like getting a more authentic computation, you&rsquo;d just use the guesses dictionary (superset of answers/solutions) twice, instead of using the smaller &ldquo;answers&rdquo; one, and wait for the slower queries. Exercise left to the reader&hellip;&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/blog">blog</a></li>
+								
+								<li><a href="/tags/sqlite">sqlite</a></li>
+								
+								<li><a href="/tags/wordle">wordle</a></li>
+								
+								<li><a href="/tags/information-theory">information-theory</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a>, <a href="https://github.com/OverkillGuy/ezhil">forked by Jb Doyon</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div><script>feather.replace()</script>
+</body>
+</html>

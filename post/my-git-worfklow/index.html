@@ -4,25 +4,25 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>My git worfklow - Jiby&#39;s toolbox</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:url" content="https://jiby.tech/post/my-git-worfklow/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="My git worfklow">
-  <meta property="og:description" content="Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="My git worfklow">
+	<meta property="og:description" content="Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
 The article is broken down into ideas &#43; recommendations, with recommendations in bold. Obviously, this workflow isn’t applicable to everyone (sorry, Google! This isn’t a free consultation!) as different teams have needs that should get dealt with differently.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2023-06-30T00:00:00+01:00">
-    <meta property="article:modified_time" content="2023-06-30T00:00:00+01:00">
-    <meta property="article:tag" content="Blog">
-    <meta property="article:tag" content="Git">
-    <meta property="article:tag" content="Sdlc">
-    <meta property="article:tag" content="Pre-Commit">
-    <meta property="article:tag" content="Changelog">
-    <meta property="article:tag" content="Versioning">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
+		<meta property="article:published_time" content="2023-06-30T00:00:00+01:00">
+		<meta property="article:modified_time" content="2023-06-30T00:00:00+01:00">
+		<meta property="article:tag" content="Blog">
+		<meta property="article:tag" content="Git">
+		<meta property="article:tag" content="Sdlc">
+		<meta property="article:tag" content="Pre-Commit">
+		<meta property="article:tag" content="Changelog">
+		<meta property="article:tag" content="Versioning">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My git worfklow">
-  <meta name="twitter:description" content="Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="My git worfklow">
+	<meta name="twitter:description" content="Every now and then, at work, I find myself discussing git worfklows, commit messages, branching, releasing, versioning, changelogs etc. Since my opinion has remained fairly consistent for the past few years, I found myself repeating the same points a lot, so I wrote it down. This page is the resulting compilation of my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.
 The article is broken down into ideas &#43; recommendations, with recommendations in bold. Obviously, this workflow isn’t applicable to everyone (sorry, Google! This isn’t a free consultation!) as different teams have needs that should get dealt with differently.">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
@@ -92,7 +92,8 @@ development</a> with heavy (personal) commit message discipline, tag-based
 versioning, and overall adherence to <a href="https://12factor.net/">12 Factors</a>.</p>
 <h2 id="git-commit-guidelines">Git commit guidelines</h2>
 <blockquote>
-<p>Follow Chris Beams&rsquo; git commit message guidelines with self-discipline</p></blockquote>
+<p>Follow Chris Beams&rsquo; git commit message guidelines with self-discipline</p>
+</blockquote>
 <p>A great reference:
 <a href="https://chris.beams.io/posts/git-commit/">https://chris.beams.io/posts/git-commit</a>.
 The post explains the classic &ldquo;Seven Rules&rdquo;:</p>
@@ -130,7 +131,8 @@ that prevent such learning.</p>
 <h2 id="branching-strategy">Branching strategy</h2>
 <blockquote>
 <p>Use trunk-based development, squash-rebasing PRs, staying mindful of the flow from commit
-messages → PR description → commit in master</p></blockquote>
+messages → PR description → commit in master</p>
+</blockquote>
 <p><strong>Consider using &ldquo;main&rdquo; instead of &ldquo;master&rdquo;</strong>, not as much for ideological
 reasons, but because it&rsquo;s shorter to type and is clearer for non-latin speakers.
 Once the dust settled on the main vs master debate, I found &ldquo;main&rdquo; aligns common parlance around &ldquo;the main branch&rdquo;, as we don&rsquo;t do much &ldquo;mastering&rdquo;.</p>
@@ -182,7 +184,8 @@ readability&rdquo;.</p>
 <h2 id="versioning">Versioning</h2>
 <blockquote>
 <p>Use either semantic versioning (libraries) or calendar versioning (apps),
-with git tags for marking the released commit.</p></blockquote>
+with git tags for marking the released commit.</p>
+</blockquote>
 <p>To avoid &ldquo;every commit on main branch may-or-may-not be a release, we don&rsquo;t really know&rdquo;, <strong>use
 git tags on main branch to signify release.</strong> Tag name is the new version after
 bump. Even though every main commit must be <em>deployable</em>, not every main
@@ -214,23 +217,23 @@ branch is a useful restriction for your project.</strong></p>
 adding more info about the release, such as a link to version&rsquo;s documentation or
 release-tracking ticket/workboard as relevant, but this is not always
 needed nor worth it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#586e75"># Set BUMP variable to any of poetry-supported (major, minor, patch)
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#586e75"># Set BUMP variable to any of poetry-supported (major, minor, patch)
 </span></span></span><span style="display:flex;"><span><span style="color:#586e75"># or number (1.2.3 etc), see &#39;poetry version&#39; docs for details
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#268bd2">.PHONY</span><span style="color:#719e07">:</span> release
+</span></span></span><span style="display:flex;"><span><span style="color:#268bd2">.PHONY</span><span style="color:#719e07">:</span> release
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># Default the bump to a patch (v1.2.3 -&gt; v1.2.4)
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#268bd2">release</span><span style="color:#719e07">:</span> BUMP=patch
+</span></span></span><span style="display:flex;"><span><span style="color:#268bd2">release</span><span style="color:#719e07">:</span> BUMP=patch
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">release</span><span style="color:#719e07">:</span>
 </span></span><span style="display:flex;"><span><span style="color:#586e75"># Set the new version Makefile variable after the version bump
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>	<span style="color:#719e07">$(</span><span style="color:#b58900">eval</span> NEW_VERSION :<span style="color:#719e07">=</span> <span style="color:#719e07">$(</span>shell poetry version --short <span style="color:#2aa198">${</span><span style="color:#268bd2">BUMP</span><span style="color:#2aa198">}</span><span style="color:#719e07">))</span>
+</span></span></span><span style="display:flex;"><span>	<span style="color:#719e07">$(</span><span style="color:#b58900">eval</span> NEW_VERSION :<span style="color:#719e07">=</span> <span style="color:#719e07">$(</span>shell poetry version --short <span style="color:#2aa198">${</span><span style="color:#268bd2">BUMP</span><span style="color:#2aa198">}</span><span style="color:#719e07">))</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#719e07">$(</span><span style="color:#b58900">eval</span> TMP_CHANGELOG :<span style="color:#719e07">=</span> <span style="color:#719e07">$(</span>shell mktemp<span style="color:#719e07">))</span>
 </span></span><span style="display:flex;"><span>	sed <span style="color:#cb4b16">\
-</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>		<span style="color:#2aa198">&#34;s/\(## \[Unreleased\]\)/\1\n\n## v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198"> - </span><span style="color:#719e07">$(</span>shell date +%Y-%m-%d<span style="color:#719e07">)</span><span style="color:#2aa198">/&#34;</span> <span style="color:#cb4b16">\
-</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>		CHANGELOG.md &gt; <span style="color:#2aa198">${</span><span style="color:#268bd2">TMP_CHANGELOG</span><span style="color:#2aa198">}</span>
+</span></span></span><span style="display:flex;"><span>		<span style="color:#2aa198">&#34;s/\(## \[Unreleased\]\)/\1\n\n## v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198"> - </span><span style="color:#719e07">$(</span>shell date +%Y-%m-%d<span style="color:#719e07">)</span><span style="color:#2aa198">/&#34;</span> <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span>		CHANGELOG.md &gt; <span style="color:#2aa198">${</span><span style="color:#268bd2">TMP_CHANGELOG</span><span style="color:#2aa198">}</span>
 </span></span><span style="display:flex;"><span>	mv --force <span style="color:#2aa198">${</span><span style="color:#268bd2">TMP_CHANGELOG</span><span style="color:#2aa198">}</span> CHANGELOG.md
 </span></span><span style="display:flex;"><span>	git add CHANGELOG.md pyproject.toml
 </span></span><span style="display:flex;"><span>	git commit -m <span style="color:#2aa198">&#34;Bump to version v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
 </span></span><span style="display:flex;"><span>	git tag --annotate <span style="color:#2aa198">&#34;v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> <span style="color:#cb4b16">\
-</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>		--message <span style="color:#2aa198">&#34;Release v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span></span><span style="display:flex;"><span>		--message <span style="color:#2aa198">&#34;Release v</span><span style="color:#2aa198">${</span><span style="color:#268bd2">NEW_VERSION</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
 </span></span></code></pre></div><div class="src-block-caption">
   <span class="src-block-number">Code Snippet 1:</span>
   Automation, via a <code>Makefile</code> entry for python projects. Running <code>make release BUMP=patch</code> creates a release commit + tag, finalizing the unreleased Changelog.
@@ -260,7 +263,8 @@ techies, increasing differently from Android &ldquo;versions&rdquo; for users.</
 <h2 id="changelog">Changelog</h2>
 <blockquote>
 <p>Have a Changelog file in-repo, commonly updated as part of feature work. Use
-keepachangelog format. No git log dumps or conventional commits.</p></blockquote>
+keepachangelog format. No git log dumps or conventional commits.</p>
+</blockquote>
 <p>To avoid having only <code>git log</code> as reference of &ldquo;what changed in new
 code&rdquo; for user, <strong>have explicit changelogs aimed at (tech-averse)
 &ldquo;customer&rdquo;.</strong></p>
@@ -289,7 +293,8 @@ evaluation of the content of the commits.</p>
 guidelines. Remember a good code review uncovers not just bugs, but knowledge
 gaps, fixing information siloes. Use pre-commit, enforced in CI, to avoid
 talking of petty
-issues of like formatting, linting.</p></blockquote>
+issues of like formatting, linting.</p>
+</blockquote>
 <p>Code review is well known to improve code quality. It encourages standards, it
 shares information about recent code changes, spreading knowledge of the
 codebase to multiple people, reducing risk.</p>

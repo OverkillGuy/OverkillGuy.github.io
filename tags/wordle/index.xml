@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Wordle on Jiby&#39;s toolbox</title>
+		<link>https://jiby.tech/tags/wordle/</link>
+		<description>Recent content in Wordle on Jiby&#39;s toolbox</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 30 Jul 2026 00:00:00 +0100</lastBuildDate>
+		
+			<atom:link href="https://jiby.tech/tags/wordle/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Solving Wordle with information theory and SQLite</title>
+				<link>https://jiby.tech/post/solving-wordle-sqlite-entropy/</link>
+				<pubDate>Thu, 30 Jul 2026 00:00:00 +0100</pubDate>
+				<guid>https://jiby.tech/post/solving-wordle-sqlite-entropy/</guid>
+				<description>&lt;p&gt;I&amp;rsquo;ve previously spent some time &lt;a href=&#34;../../post/literate-wordle&#34;&gt;implementing wordle&lt;/a&gt;, and since then enjoyed watching others discuss how to solve the game using programming, especially the solutions based on information theory.&lt;/p&gt;&#xA;&lt;p&gt;Naturally, I was interested in trying them out, given my own implementation of the game. Let me show you how I used SQL to solve Wordle, using maths from information theory.&lt;/p&gt;&#xA;&lt;h2 id=&#34;wordle&#34;&gt;Wordle?&lt;/h2&gt;&#xA;&lt;p&gt;Briefly, &lt;a href=&#34;https://www.nytimes.com/games/wordle/index.html&#34;&gt;Wordle&lt;/a&gt; is a daily word game run by the New York Times, where we need to find a secret 5-letter word within 6 attempts.&#xA;You may know this game from the American/Dutch TV game Lingo, or the French TV game Motus.&#xA;To guide us, each character of each attempt is scored as either perfect (right letter, right position) = &amp;ldquo;🟩&amp;rdquo;, or wrong position (letter is used but elsewhere) = &amp;ldquo;🟨&amp;rdquo;, or a miss (character not used at all in the word) = &amp;ldquo;⬜&amp;rdquo; (or &amp;ldquo;⬛&amp;rdquo; depending on OS).&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

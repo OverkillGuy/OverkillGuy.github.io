@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.151.0">
+	<meta name="generator" content="Hugo 0.163.3">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Jiby&#39;s toolbox - Jb Doyon&#39;s personal website </title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="alternate" type="application/rss+xml" href="https://jiby.tech/index.xml" title="Jiby's toolbox" />
 	<meta property="og:url" content="https://jiby.tech/">
-  <meta property="og:site_name" content="Jiby&#39;s toolbox">
-  <meta property="og:title" content="Jiby&#39;s toolbox">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+	<meta property="og:site_name" content="Jiby&#39;s toolbox">
+	<meta property="og:title" content="Jiby&#39;s toolbox">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="website">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Jiby&#39;s toolbox">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Jiby&#39;s toolbox">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
 
@@ -62,6 +62,24 @@
 			<div class="posts">
 				
 				
+				
+				<div class="post">
+					<div class="meta">Jun 30, 2023</div>
+					<a class="title" href="/post/my-git-worfklow/">My git worfklow</a> &mdash;
+					<span class="description">
+						
+						<p>Every now and then, at work, I find myself discussing git worfklows, commit
+messages, branching, releasing, versioning, changelogs etc. Since my opinion has
+remained fairly consistent for the past few years, I found myself repeating the
+same points a lot, so I wrote it down. This page is the resulting compilation of
+my opinions on the software development lifecycle (SDLC), without workplace-specific tangeants.</p>
+<p>The article is broken down into ideas + recommendations, with recommendations in
+bold. Obviously, this workflow isn&rsquo;t applicable to everyone (sorry, Google! This
+isn&rsquo;t a free consultation!) as different teams have needs that should get dealt
+with differently.</p>&hellip;
+						
+					</span>
+				</div>
 				
 				<div class="post">
 					<div class="meta">Apr 5, 2023</div>
@@ -207,28 +225,6 @@ aliases&hellip; Since 2016, I have accumulated over <a href="https://github.com/
 packages and folder structures and obscure commands required to set up
 some subsystems needs which config files. Wouldn&rsquo;t it be nice to have
 an all-in-one setup?</p>&hellip;
-						
-					</span>
-				</div>
-				
-				<div class="post">
-					<div class="meta">Nov 16, 2019</div>
-					<a class="title" href="/post/awk-replace-some-lines/">Using Awk to replace only some lines</a> &mdash;
-					<span class="description">
-						
-						<p>I was trying to convert bank-issued CSV files that have a weird data
-layout, for automatic processing by the excellent <a href="https://www.ledger-cli.org/">ledger</a>. This made me
-learn a new thing about <code>awk</code>. Follow me down the UNIXy goodness!</p>
-<p>The data I was getting looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Transaction Date,Transaction Description,Debit Amount,Credit Amount,Balance
-</span></span><span style="display:flex;"><span>29/02/2018,Restaurant,14.5,,1234.2
-</span></span><span style="display:flex;"><span>12/03/2018,ATM withdrawal,50,,1184.2
-</span></span><span style="display:flex;"><span>23/04/2018,Deposited check,,100,1284.2
-</span></span></code></pre></div><p>Note the last line having 100 in a different column: The problem is
-that, when receiving money, the transaction is logged in a separate
-entry (&ldquo;Credit Amount&rdquo;) than the (more common) case of debit, which
-goes to &ldquo;Debit Amount&rdquo; column. My importing tools required a single
-column, so the output must look like this:</p>&hellip;
 						
 					</span>
 				</div>
